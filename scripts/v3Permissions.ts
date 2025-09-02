@@ -21,6 +21,7 @@ import { SVR_ORACLE_STEWARD_ABI } from '../abis/svrOracle.js';
 import { EDGE_RISK_STEWARD_CAPS_ABI } from '../abis/edgeRiskStewardCaps.js';
 import { POOL_EXPOSURE_STEWARD_ABI } from '../abis/poolExposureStewards.js';
 import { Address, Client, getAddress, getContract } from 'viem';
+import { AAVE_STEWARD_INJECTOR_CAPS_ABI } from '../abis/aaveStewardInjectorCaps.js';
 
 const getAddressInfo = async (
   provider: Client,
@@ -704,6 +705,48 @@ export const resolveV3Modifiers = async (
             },
           ],
           functions: roles['EdgeRiskStewardCaps']['onlyRiskCouncil'],
+        },
+      ],
+    };
+  }
+
+  if (addressBook.EDGE_INJECTOR_CAPS) {
+    const aaveStewardInjectorCapsContract = getContract({ address: getAddress(addressBook.EDGE_INJECTOR_CAPS), abi: AAVE_STEWARD_INJECTOR_CAPS_ABI, client: provider });
+    const aaveStewardInjectorOwner = await aaveStewardInjectorCapsContract.read.owner() as Address;
+    const aaveStewardInjectorGuardian = await aaveStewardInjectorCapsContract.read.guardian() as Address;
+
+    obj['AaveStewardInjectorCaps'] = {
+      address: addressBook.EDGE_INJECTOR_CAPS,
+      modifiers: [
+        {
+          modifier: 'onlyOwner',
+          addresses: [
+            {
+              address: aaveStewardInjectorOwner,
+              owners: await getSafeOwners(provider, aaveStewardInjectorOwner),
+              signersThreshold: await getSafeThreshold(
+                provider,
+                aaveStewardInjectorOwner,
+              ),
+            },
+          ],
+          functions: roles['AaveStewardInjectorCaps']['onlyOwner'],
+        },
+        {
+          modifier: 'onlyOwnerOrGuardian',
+          addresses: [
+            {
+              address: aaveStewardInjectorGuardian,
+              owners: await getSafeOwners(provider, aaveStewardInjectorGuardian),
+              signersThreshold: await getSafeThreshold(provider, aaveStewardInjectorGuardian),
+            },
+            {
+              address: aaveStewardInjectorOwner,
+              owners: await getSafeOwners(provider, aaveStewardInjectorOwner),
+              signersThreshold: await getSafeThreshold(provider, aaveStewardInjectorOwner),
+            },
+          ],
+          functions: roles['AaveStewardInjectorCaps']['onlyOwnerOrGuardian'],
         },
       ],
     };
