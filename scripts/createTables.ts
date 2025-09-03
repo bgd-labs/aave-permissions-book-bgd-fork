@@ -129,6 +129,12 @@ export const generateTable = (network: string, pool: string): string => {
       ...mainnetPermissions[Pools.GOV_V2].contracts,
     });
   }
+  if (pool !== Pools.LIDO || pool !== Pools.ETHERFI) {
+    contractsByAddress = generateContractsByAddress({
+      ...(poolPermitsByContract?.contracts || {}),
+      ...getPermissionsByNetwork(network)['V3'].govV3?.contracts,
+    });
+  }
   let v3Contracts;
   if (
     pool === Pools.LIDO ||

@@ -1144,5 +1144,128 @@
         ]
       }
     ]
+  },
+  {
+    "contract": "EdgeRiskStewardEMode",
+    "functions": [
+      {
+        "name": "updateEModeCategories",
+        "roles": [
+          "onlyRiskCouncil"
+        ]
+      },
+      {
+        "name": "setRiskConfig",
+        "roles": [
+          "onlyOwner"
+        ]
+      },
+      {
+        "name": "setAddressRestricted",
+        "roles": [
+          "onlyOwner"
+        ]
+      },
+      {
+        "name": "setEModeCategoryRestricted",
+        "roles": [
+          "onlyOwner"
+        ]
+      },
+      {
+        "name": "renounceOwnership",
+        "roles": [
+          "onlyOwner"
+        ]
+      },
+      {
+        "name": "transferOwnership",
+        "roles": [
+          "onlyOwner"
+        ]
+      }
+    ]
+  },
+  {
+    "contract": "EdgeRiskStewardDiscountRate",
+    "functions": [
+      {
+        "name": "updatePendleDiscountRates",
+        "roles": [
+          "onlyRiskCouncil"
+        ]
+      },
+      {
+        "name": "setRiskConfig",
+        "roles": [
+          "onlyOwner"
+        ]
+      },
+      {
+        "name": "setAddressRestricted",
+        "roles": [
+          "onlyOwner"
+        ]
+      },
+      {
+        "name": "setEModeCategoryRestricted",
+        "roles": [
+          "onlyOwner"
+        ]
+      },
+      {
+        "name": "renounceOwnership",
+        "roles": [
+          "onlyOwner"
+        ]
+      },
+      {
+        "name": "transferOwnership",
+        "roles": [
+          "onlyOwner"
+        ]
+      }
+    ]
+  },
+  {
+    "contract": "EdgeRiskStewardRates",
+    "functions": [
+      {
+        "name": "updateRates",
+        "roles": [
+          "onlyRiskCouncil"
+        ]
+      },
+      {
+        "name": "setRiskConfig",
+        "roles": [
+          "onlyOwner"
+        ]
+      },
+      {
+        "name": "setAddressRestricted",
+        "roles": [
+          "onlyOwner"
+        ]
+      },
+      {
+        "name": "setEModeCategoryRestricted",
+        "roles": [
+          "onlyOwner"
+        ]
+      },
+      {
+        "name": "renounceOwnership",
+        "roles": [
+          "onlyOwner"
+        ]
+      },
+      {
+        "name": "transferOwnership",
+        "roles": [
+          "onlyOwner"
+        ]
+      }
+    ]
   }
 ]

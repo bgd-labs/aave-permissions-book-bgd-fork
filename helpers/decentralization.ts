@@ -12,6 +12,7 @@ export enum Controller {
   MULTI_SIG = 'Multi-sig',
   EOA = 'External Contract',
   PPC_MULTI_SIG = 'PPC Multi-sig',
+  STEWARD = 'Steward',
 }
 
 export const getActionExecutors = (poolInfo: Contracts, govInfo: Contracts, isWhiteLabel: boolean) => {
@@ -42,7 +43,11 @@ export const getActionExecutors = (poolInfo: Contracts, govInfo: Contracts, isWh
           } else {
             modifier.addresses.map((addressInfo) => {
               if (addressInfo.owners.length > 0) {
-                actionsObject[action].add(Controller.MULTI_SIG);
+                if (contractName.toLowerCase().includes('steward') || contractName.toLowerCase().includes('agrs')) {
+                  actionsObject[action].add(Controller.STEWARD);
+                } else {
+                  actionsObject[action].add(Controller.MULTI_SIG);
+                }
               } else {
                 const ownedInfo = isAdministeredAndByWho(
                   addressInfo.address,
@@ -53,6 +58,10 @@ export const getActionExecutors = (poolInfo: Contracts, govInfo: Contracts, isWh
                 if (ownedInfo.owned) {
                   actionsObject[action].add(ownedInfo.ownedBy);
                 } else {
+                  console.log('action', action, ' ', contractName, ' ', addressInfo.address, ' ', addressInfo.chain);
+                  // if (contractName.toLowerCase().includes('steward') || contractName.toLowerCase().includes('agrs')) {
+                  //   actionsObject[action].add(Controller.STEWARD);
+                  // }
                   actionsObject[action].add(Controller.EOA);
                 }
               }

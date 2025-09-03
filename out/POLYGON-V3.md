@@ -53,7 +53,7 @@
 |  adiConfigurations |  Governance | |--------|--------|
 |  retryAndInvalidateMessages |  Multi-sig,Governance | |--------|--------|
 |  configureGovernance |  Governance | |--------|--------|
-|  updateRiskParameters |  Governance,Multi-sig | |--------|--------|
+|  updateRiskParameters |  Governance,Steward | |--------|--------|
 
 ### Contracts
 | contract |proxyAdmin |modifier |permission owner |functions |

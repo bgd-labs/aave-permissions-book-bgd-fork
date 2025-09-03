@@ -41,7 +41,7 @@
 |  protocolUpgradeablity |  Governance | |--------|--------|
 |  adiConfigurations |  Governance | |--------|--------|
 |  retryAndInvalidateMessages |  Multi-sig,Governance | |--------|--------|
-|  updateRiskParameters |  Multi-sig | |--------|--------|
+|  updateRiskParameters |  Steward | |--------|--------|
 
 ### Contracts
 | contract |proxyAdmin |modifier |permission owner |functions |
