@@ -10,7 +10,7 @@
 |  [GSM_USDT-proxyAdmin](https://etherscan.io/address/0x20004c21e23c44adfdd118392c914a31a488f64d) |  not upgradeable | |--------|--------|
 |  [GSMRegistry](https://etherscan.io/address/0x167527DB01325408696326e3580cd8e55D99Dc1A) |  not upgradeable | |--------|--------|
 |  [GhoStewardV2](https://etherscan.io/address/0x8F2411a538381aae2b464499005F0211e867d84f) |  not upgradeable | |--------|--------|
-|  [Gho Core Direct Minter](https://etherscan.io/address/0x593B09afc075B3c326CE2AD7750888645BA8943d) |  External Contract | |--------|--------|
+|  [Gho Core Direct Minter](https://etherscan.io/address/0x593B09afc075B3c326CE2AD7750888645BA8943d) |  Governance | |--------|--------|
 |  [Gho Core Direct Minter-proxyAdmin](https://etherscan.io/address/0xf02d4931e0d5c79af9094cd9dff16ea6e3d9acb8) |  not upgradeable | |--------|--------|
 |  [Gho Lido Direct Minter](https://etherscan.io/address/0x2cE01c87Fec1b71A9041c52CaED46Fc5f4807285) |  Governance | |--------|--------|
 |  [facilitator-5](https://etherscan.io/address/0xe10C78A3AC7f016eD2DE1A89c5479b1039EAB9eA) |  Governance | |--------|--------|
@@ -21,24 +21,10 @@
 ### Actions type
 | type |can be executed by |
 |----------|----------|
-|  updateReserveBorrowSettings |  Steward | |--------|--------|
-|  configureProtocolFees |  Steward | |--------|--------|
-|  updateReserveCaps |  Steward | |--------|--------|
-|  updateReserveSettings |  Steward | |--------|--------|
-|  configureCollateral |  Steward | |--------|--------|
-|  upgradeAaveTokens (a/v/s) |  Steward | |--------|--------|
-|  upgradeAaveOracles |  Steward | |--------|--------|
-|  reserveUpgradeability |  Steward | |--------|--------|
-|  pausePool |  Steward | |--------|--------|
-|  pauseAndFreezeReserve |  Steward | |--------|--------|
-|  reserveListing |  Steward | |--------|--------|
-|  adminsConfiguration |  Steward | |--------|--------|
-|  protocolUpgradeablity |  Steward | |--------|--------|
-|  adiConfigurations |  Steward,Governance | |--------|--------|
-|  retryAndInvalidateMessages |  Steward,Multi-sig,Governance | |--------|--------|
-|  configureGovernance |  Steward,Governance | |--------|--------|
-|  cancelProposal |  Steward,Multi-sig | |--------|--------|
-|  updateRiskParameters |  Steward | |--------|--------|
+|  adiConfigurations |  Governance | |--------|--------|
+|  retryAndInvalidateMessages |  Multi-sig,Governance | |--------|--------|
+|  configureGovernance |  Governance | |--------|--------|
+|  cancelProposal |  Multi-sig | |--------|--------|
 
 ### Contracts
 | contract |proxyAdmin |modifier |permission owner |functions |

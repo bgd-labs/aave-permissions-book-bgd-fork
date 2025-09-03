@@ -26,23 +26,23 @@
 ### Actions type
 | type |can be executed by |
 |----------|----------|
-|  updateReserveBorrowSettings |  Governance,Steward | |--------|--------|
-|  configureProtocolFees |  Governance,Steward | |--------|--------|
-|  updateReserveCaps |  Governance,Steward,Multi-sig | |--------|--------|
-|  updateReserveSettings |  Governance,Steward | |--------|--------|
-|  configureCollateral |  Governance,Steward | |--------|--------|
-|  upgradeAaveTokens (a/v/s) |  Governance,Steward | |--------|--------|
-|  upgradeAaveOracles |  Governance,Steward | |--------|--------|
-|  reserveUpgradeability |  Governance,Steward | |--------|--------|
-|  pausePool |  Governance,Multi-sig,Steward | |--------|--------|
+|  updateReserveBorrowSettings |  Governance | |--------|--------|
+|  configureProtocolFees |  Governance | |--------|--------|
+|  updateReserveCaps |  Governance,Steward | |--------|--------|
+|  updateReserveSettings |  Governance | |--------|--------|
+|  configureCollateral |  Governance | |--------|--------|
+|  upgradeAaveTokens (a/v/s) |  Governance | |--------|--------|
+|  upgradeAaveOracles |  Governance | |--------|--------|
+|  reserveUpgradeability |  Governance | |--------|--------|
+|  pausePool |  Governance,Multi-sig | |--------|--------|
 |  pauseAndFreezeReserve |  Governance,Steward,Multi-sig | |--------|--------|
-|  reserveListing |  Governance,Steward | |--------|--------|
-|  adminsConfiguration |  Governance,Steward | |--------|--------|
-|  protocolUpgradeablity |  Governance,Steward | |--------|--------|
-|  adiConfigurations |  Steward,Governance | |--------|--------|
-|  retryAndInvalidateMessages |  Steward,Multi-sig,Governance | |--------|--------|
-|  configureGovernance |  Steward,Governance | |--------|--------|
-|  cancelProposal |  Steward,Multi-sig | |--------|--------|
+|  reserveListing |  Governance | |--------|--------|
+|  adminsConfiguration |  Governance | |--------|--------|
+|  protocolUpgradeablity |  Governance | |--------|--------|
+|  adiConfigurations |  Governance | |--------|--------|
+|  retryAndInvalidateMessages |  Multi-sig,Governance | |--------|--------|
+|  configureGovernance |  Governance | |--------|--------|
+|  cancelProposal |  Multi-sig | |--------|--------|
 |  updateRiskParameters |  Steward | |--------|--------|
 
 ### Contracts
