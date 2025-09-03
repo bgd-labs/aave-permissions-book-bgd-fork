@@ -20,19 +20,24 @@
 ### Actions type
 | type |can be executed by |
 |----------|----------|
-|  updateReserveBorrowSettings |  Governance | |--------|--------|
-|  updateReserveSettings |  Governance | |--------|--------|
-|  configureCollateral |  Governance | |--------|--------|
-|  upgradeAaveTokens (a/v/s) |  Governance | |--------|--------|
-|  upgradeAaveOracles |  Governance | |--------|--------|
-|  reserveUpgradeability |  Governance | |--------|--------|
-|  pausePool |  Multi-sig | |--------|--------|
-|  reserveListing |  Governance | |--------|--------|
-|  protocolUpgradeablity |  Governance | |--------|--------|
-|  adiConfigurations |  Governance | |--------|--------|
-|  retryAndInvalidateMessages |  Multi-sig,Governance | |--------|--------|
-|  configureGovernance |  Governance | |--------|--------|
-|  cancelProposal |  Multi-sig | |--------|--------|
+|  updateReserveBorrowSettings |  Governance,Steward | |--------|--------|
+|  configureProtocolFees |  Steward | |--------|--------|
+|  updateReserveCaps |  Steward | |--------|--------|
+|  updateReserveSettings |  Governance,Steward | |--------|--------|
+|  configureCollateral |  Governance,Steward | |--------|--------|
+|  upgradeAaveTokens (a/v/s) |  Governance,Steward | |--------|--------|
+|  upgradeAaveOracles |  Governance,Steward | |--------|--------|
+|  reserveUpgradeability |  Governance,Steward | |--------|--------|
+|  pausePool |  Multi-sig,Steward | |--------|--------|
+|  pauseAndFreezeReserve |  Steward | |--------|--------|
+|  reserveListing |  Governance,Steward | |--------|--------|
+|  adminsConfiguration |  Steward | |--------|--------|
+|  protocolUpgradeablity |  Governance,Steward | |--------|--------|
+|  adiConfigurations |  Governance,Steward | |--------|--------|
+|  retryAndInvalidateMessages |  Multi-sig,Governance,Steward | |--------|--------|
+|  configureGovernance |  Governance,Steward | |--------|--------|
+|  cancelProposal |  Multi-sig,Steward | |--------|--------|
+|  updateRiskParameters |  Steward | |--------|--------|
 
 ### Contracts
 | contract |proxyAdmin |modifier |permission owner |functions |

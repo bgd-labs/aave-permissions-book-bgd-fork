@@ -11,10 +11,24 @@
 ### Actions type
 | type |can be executed by |
 |----------|----------|
-|  adiConfigurations |  Governance | |--------|--------|
-|  retryAndInvalidateMessages |  Multi-sig,Governance | |--------|--------|
-|  configureGovernance |  Governance | |--------|--------|
-|  cancelProposal |  Multi-sig | |--------|--------|
+|  updateReserveBorrowSettings |  Steward | |--------|--------|
+|  configureProtocolFees |  Steward | |--------|--------|
+|  updateReserveCaps |  Steward | |--------|--------|
+|  updateReserveSettings |  Steward | |--------|--------|
+|  configureCollateral |  Steward | |--------|--------|
+|  upgradeAaveTokens (a/v/s) |  Steward | |--------|--------|
+|  upgradeAaveOracles |  Steward | |--------|--------|
+|  reserveUpgradeability |  Steward | |--------|--------|
+|  pausePool |  Steward | |--------|--------|
+|  pauseAndFreezeReserve |  Steward | |--------|--------|
+|  reserveListing |  Steward | |--------|--------|
+|  adminsConfiguration |  Steward | |--------|--------|
+|  protocolUpgradeablity |  Steward | |--------|--------|
+|  adiConfigurations |  Governance,Steward | |--------|--------|
+|  retryAndInvalidateMessages |  Multi-sig,Governance,Steward | |--------|--------|
+|  configureGovernance |  Governance,Steward | |--------|--------|
+|  cancelProposal |  Multi-sig,Steward | |--------|--------|
+|  updateRiskParameters |  Steward | |--------|--------|
 
 ### Contracts
 | contract |proxyAdmin |modifier |permission owner |functions |

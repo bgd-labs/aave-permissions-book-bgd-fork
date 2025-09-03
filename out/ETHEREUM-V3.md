@@ -45,23 +45,23 @@
 ### Actions type
 | type |can be executed by |
 |----------|----------|
-|  updateReserveBorrowSettings |  Governance | |--------|--------|
-|  configureProtocolFees |  Governance | |--------|--------|
-|  updateReserveCaps |  Governance,Multi-sig,External Contract | |--------|--------|
-|  updateReserveSettings |  Governance | |--------|--------|
-|  configureCollateral |  Governance | |--------|--------|
-|  upgradeAaveTokens (a/v/s) |  Governance | |--------|--------|
-|  upgradeAaveOracles |  Governance | |--------|--------|
-|  reserveUpgradeability |  Governance | |--------|--------|
-|  pausePool |  Governance,Multi-sig | |--------|--------|
-|  pauseAndFreezeReserve |  Governance,Multi-sig,External Contract | |--------|--------|
-|  reserveListing |  Governance | |--------|--------|
-|  adminsConfiguration |  Governance | |--------|--------|
-|  protocolUpgradeablity |  Governance | |--------|--------|
-|  adiConfigurations |  Governance | |--------|--------|
-|  retryAndInvalidateMessages |  Multi-sig,Governance | |--------|--------|
-|  configureGovernance |  Governance | |--------|--------|
-|  cancelProposal |  Multi-sig | |--------|--------|
+|  updateReserveBorrowSettings |  Governance,Steward | |--------|--------|
+|  configureProtocolFees |  Governance,Steward | |--------|--------|
+|  updateReserveCaps |  Governance,Steward,External Contract,Multi-sig | |--------|--------|
+|  updateReserveSettings |  Governance,Steward | |--------|--------|
+|  configureCollateral |  Governance,Steward | |--------|--------|
+|  upgradeAaveTokens (a/v/s) |  Governance,Steward | |--------|--------|
+|  upgradeAaveOracles |  Governance,Steward | |--------|--------|
+|  reserveUpgradeability |  Governance,Steward | |--------|--------|
+|  pausePool |  Governance,Multi-sig,Steward | |--------|--------|
+|  pauseAndFreezeReserve |  Governance,Steward,External Contract,Multi-sig | |--------|--------|
+|  reserveListing |  Governance,Steward | |--------|--------|
+|  adminsConfiguration |  Governance,Steward | |--------|--------|
+|  protocolUpgradeablity |  Governance,Steward | |--------|--------|
+|  adiConfigurations |  Steward,Governance | |--------|--------|
+|  retryAndInvalidateMessages |  Steward,Multi-sig,Governance | |--------|--------|
+|  configureGovernance |  Steward,Governance | |--------|--------|
+|  cancelProposal |  Steward,Multi-sig | |--------|--------|
 |  updateRiskParameters |  Steward | |--------|--------|
 
 ### Contracts
@@ -89,9 +89,9 @@
 |  [SvrOracleSteward](https://etherscan.io/address/0x8b493f416F5F7933cC146b1899c069F2361cad60) |  - |  onlyOwner |  [Executor_lvl1](https://etherscan.io/address/0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A) |  removeOracle, enableSvrOracles | |--------|--------|--------|--------|--------|
 |  [SvrOracleSteward](https://etherscan.io/address/0x8b493f416F5F7933cC146b1899c069F2361cad60) |  - |  onlyGuardian |  [Aave Protocol Guardian Ethereum](https://etherscan.io/address/0x2CFe3ec4d5a6811f4B8067F0DE7e47DfA938Aa30) |  disableSvrOracle | |--------|--------|--------|--------|--------|
 |  [EdgeRiskStewardDiscountRate](https://etherscan.io/address/0x9F76954f5b55B4908d178f31C07F9537AC8328E7) |  - |  onlyOwner |  [Executor_lvl1](https://etherscan.io/address/0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A) |  setRiskConfig, setAddressRestricted, setEModeCategoryRestricted, renounceOwnership, transferOwnership | |--------|--------|--------|--------|--------|
-|  [EdgeRiskStewardDiscountRate](https://etherscan.io/address/0x9F76954f5b55B4908d178f31C07F9537AC8328E7) |  - |  onlyRiskCouncil |  [0x15885A83936EB943e98EeFFb91e9A49040d93993](https://etherscan.io/address/0x15885A83936EB943e98EeFFb91e9A49040d93993) |  updatePendleDiscountRates | |--------|--------|--------|--------|--------|
+|  [EdgeRiskStewardDiscountRate](https://etherscan.io/address/0x9F76954f5b55B4908d178f31C07F9537AC8328E7) |  - |  onlyRiskCouncil |  [AaveStewardInjectorDiscountRate](https://etherscan.io/address/0x15885A83936EB943e98EeFFb91e9A49040d93993) |  updatePendleDiscountRates | |--------|--------|--------|--------|--------|
 |  [EdgeRiskStewardEMode](https://etherscan.io/address/0xf721bE7AA57a987F3e4D05DAc6fcb5aBF9F7cE9A) |  - |  onlyOwner |  [Executor_lvl1](https://etherscan.io/address/0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A) |  setRiskConfig, setAddressRestricted, setEModeCategoryRestricted, renounceOwnership, transferOwnership | |--------|--------|--------|--------|--------|
-|  [EdgeRiskStewardEMode](https://etherscan.io/address/0xf721bE7AA57a987F3e4D05DAc6fcb5aBF9F7cE9A) |  - |  onlyRiskCouncil |  [0x83ab600cE8a61b43e1757b89C0589928f765c1C4](https://etherscan.io/address/0x83ab600cE8a61b43e1757b89C0589928f765c1C4) |  updateEModeCategories | |--------|--------|--------|--------|--------|
+|  [EdgeRiskStewardEMode](https://etherscan.io/address/0xf721bE7AA57a987F3e4D05DAc6fcb5aBF9F7cE9A) |  - |  onlyRiskCouncil |  [AaveStewardInjectorEMode](https://etherscan.io/address/0x83ab600cE8a61b43e1757b89C0589928f765c1C4) |  updateEModeCategories | |--------|--------|--------|--------|--------|
 |  [PoolExposureSteward](https://etherscan.io/address/0x22aC12a6937BBBC0a301AF9154d08EaD95673122) |  - |  onlyOwner |  [Executor_lvl1](https://etherscan.io/address/0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A) |  approvePool, revokePool | |--------|--------|--------|--------|--------|
 |  [PoolExposureSteward](https://etherscan.io/address/0x22aC12a6937BBBC0a301AF9154d08EaD95673122) |  - |  onlyOwnerOrGuardian |  [Finance Risk Council](https://etherscan.io/address/0x22740deBa78d5a0c24C58C740e3715ec29de1bFa), [Executor_lvl1](https://etherscan.io/address/0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A) |  depositV3, withdrawV3, withdrawV2, migrateV2toV3, migrateBetweenV3 | |--------|--------|--------|--------|--------|
 |  [AavePolEthBridge](https://etherscan.io/address/0x1C2BA5b8ab8e795fF44387ba6d251fa65AD20b36) |  - |  onlyOwner |  [Executor_lvl1](https://etherscan.io/address/0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A) |  bridge | |--------|--------|--------|--------|--------|

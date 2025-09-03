@@ -15,60 +15,76 @@ export enum Controller {
   STEWARD = 'Steward',
 }
 
-export const getActionExecutors = (poolInfo: Contracts, govInfo: Contracts, isWhiteLabel: boolean) => {
+export const getActionExecutors = (poolInfo: Contracts, govInfo: Contracts, isWhiteLabel: boolean, addressesNames: Record<string, string>) => {
   const actionsObject: Record<string, Set<string>> = {};
   Object.keys(actionsConfig).forEach((action) => {
     actionsObject[action] = new Set<string>();
     for (let contractName of Object.keys(poolInfo)) {
-      const contract = poolInfo[contractName];
-      // search all modifiers
-      contract.modifiers.forEach((modifier) => {
-        const hasFunction = modifier.functions.some((functionName: string) =>
-          // @ts-ignore
-          actionsConfig[action].includes(functionName),
-        );
-        if (hasFunction) {
-          if (
-            action === 'updateReserveBorrowSettings' ||
-            action === 'configureCollateral' ||
-            action === 'updateReserveSettings' ||
-            action === 'reserveUpgradeability' ||
-            action === 'configureProtocolFees'
-          ) {
-            if (isWhiteLabel) {
-              actionsObject[action].add(Controller.PPC_MULTI_SIG);
+      if (contractName.toLowerCase().includes('steward') || contractName.toLowerCase().includes('agrs')) {
+        actionsObject[action].add(Controller.STEWARD);
+      } else {
+        const contract = poolInfo[contractName];
+        // search all modifiers
+        contract.modifiers.forEach((modifier) => {
+          const hasFunction = modifier.functions.some((functionName: string) =>
+            // @ts-ignore
+            actionsConfig[action].includes(functionName),
+          );
+          if (hasFunction) {
+            if (
+              action === 'updateReserveBorrowSettings' ||
+              action === 'configureCollateral' ||
+              action === 'updateReserveSettings' ||
+              action === 'reserveUpgradeability' ||
+              action === 'configureProtocolFees'
+            ) {
+              if (isWhiteLabel) {
+                actionsObject[action].add(Controller.PPC_MULTI_SIG);
+              } else {
+                actionsObject[action].add(Controller.GOV_V3);
+              }
             } else {
-              actionsObject[action].add(Controller.GOV_V3);
-            }
-          } else {
-            modifier.addresses.map((addressInfo) => {
-              if (addressInfo.owners.length > 0) {
-                if (contractName.toLowerCase().includes('steward') || contractName.toLowerCase().includes('agrs')) {
+              modifier.addresses.map((addressInfo) => {
+                const addressName = addressesNames[addressInfo.address];
+                if (addressName && (addressName.toLowerCase().includes('steward') || addressName.toLowerCase().includes('agrs'))) {
                   actionsObject[action].add(Controller.STEWARD);
                 } else {
-                  actionsObject[action].add(Controller.MULTI_SIG);
+                  if (addressInfo.owners.length > 0) {
+
+                    actionsObject[action].add(Controller.MULTI_SIG);
+
+                  } else {
+                    const ownedInfo = isAdministeredAndByWho(
+                      addressInfo.address,
+                      poolInfo,
+                      govInfo,
+                      isWhiteLabel,
+                    );
+                    if (ownedInfo.owned) {
+                      console.log('ownedInfo ', ownedInfo.ownedBy, ' ', contractName, ' ', action);
+                      actionsObject[action].add(ownedInfo.ownedBy);
+                    } else {
+                      const addressEOAName = addressesNames[addressInfo.address];
+                      if (contractName.toLowerCase().includes('steward') || contractName.toLowerCase().includes('agrs') || (addressEOAName && addressEOAName.toLowerCase().includes('steward'))) {
+                        actionsObject[action].add(Controller.STEWARD);
+                      } else {
+
+                        console.log('addressName ', addressEOAName, ' ', contractName, ' ', action);
+                        actionsObject[action].add(Controller.EOA);
+                      }
+
+                      // if (contractName.toLowerCase().includes('steward') || contractName.toLowerCase().includes('agrs')) {
+                      //   actionsObject[action].add(Controller.STEWARD);
+                      // }
+                      // actionsObject[action].add(Controller.EOA);
+                    }
+                  }
                 }
-              } else {
-                const ownedInfo = isAdministeredAndByWho(
-                  addressInfo.address,
-                  poolInfo,
-                  govInfo,
-                  isWhiteLabel,
-                );
-                if (ownedInfo.owned) {
-                  actionsObject[action].add(ownedInfo.ownedBy);
-                } else {
-                  console.log('action', action, ' ', contractName, ' ', addressInfo.address, ' ', addressInfo.chain);
-                  // if (contractName.toLowerCase().includes('steward') || contractName.toLowerCase().includes('agrs')) {
-                  //   actionsObject[action].add(Controller.STEWARD);
-                  // }
-                  actionsObject[action].add(Controller.EOA);
-                }
-              }
-            });
+              });
+            }
           }
-        }
-      });
+        });
+      }
     }
   });
 
