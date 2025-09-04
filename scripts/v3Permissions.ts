@@ -22,6 +22,7 @@ import { EDGE_RISK_STEWARD_CAPS_ABI } from '../abis/edgeRiskStewardCaps.js';
 import { POOL_EXPOSURE_STEWARD_ABI } from '../abis/poolExposureStewards.js';
 import { Address, Client, getAddress, getContract } from 'viem';
 import { AAVE_STEWARD_INJECTOR_CAPS_ABI } from '../abis/aaveStewardInjectorCaps.js';
+import { CLINIC_STEWARD_ABI } from '../abis/clinicSteward.js';
 
 const getAddressInfo = async (
   provider: Client,
@@ -705,6 +706,132 @@ export const resolveV3Modifiers = async (
             },
           ],
           functions: roles['EdgeRiskStewardCaps']['onlyRiskCouncil'],
+        },
+      ],
+    };
+  }
+
+  if (addressBook.EDGE_RISK_STEWARD_DISCOUNT_RATE) {
+    const edgeRiskStewardCapsContract = getContract({ address: getAddress(addressBook.EDGE_RISK_STEWARD_DISCOUNT_RATE), abi: EDGE_RISK_STEWARD_CAPS_ABI, client: provider });
+    const edgeRiskStewardOwner = await edgeRiskStewardCapsContract.read.owner() as Address;
+    const edgeRiskStewardCouncil = await edgeRiskStewardCapsContract.read.RISK_COUNCIL() as Address;
+
+
+    obj['EdgeRiskStewardDiscountRate'] = {
+      address: addressBook.EDGE_RISK_STEWARD_DISCOUNT_RATE,
+      modifiers: [
+        {
+          modifier: 'onlyOwner',
+          addresses: [
+            {
+              address: edgeRiskStewardOwner,
+              owners: await getSafeOwners(provider, edgeRiskStewardOwner),
+              signersThreshold: await getSafeThreshold(
+                provider,
+                edgeRiskStewardOwner,
+              ),
+            },
+          ],
+          functions: roles['EdgeRiskStewardDiscountRate']['onlyOwner'],
+        },
+        {
+          modifier: 'onlyRiskCouncil',
+          addresses: [
+            {
+              address: edgeRiskStewardCouncil,
+              owners: await getSafeOwners(provider, edgeRiskStewardCouncil),
+              signersThreshold: await getSafeThreshold(
+                provider,
+                edgeRiskStewardCouncil,
+              ),
+            },
+          ],
+          functions: roles['EdgeRiskStewardDiscountRate']['onlyRiskCouncil'],
+        },
+      ],
+    };
+  }
+
+
+  if (addressBook.EDGE_RISK_STEWARD_RATES) {
+    const edgeRiskStewardCapsContract = getContract({ address: getAddress(addressBook.EDGE_RISK_STEWARD_RATES), abi: EDGE_RISK_STEWARD_CAPS_ABI, client: provider });
+    const edgeRiskStewardOwner = await edgeRiskStewardCapsContract.read.owner() as Address;
+    const edgeRiskStewardCouncil = await edgeRiskStewardCapsContract.read.RISK_COUNCIL() as Address;
+
+
+    obj['EdgeRiskStewardRates'] = {
+      address: addressBook.EDGE_RISK_STEWARD_RATES,
+      modifiers: [
+        {
+          modifier: 'onlyOwner',
+          addresses: [
+            {
+              address: edgeRiskStewardOwner,
+              owners: await getSafeOwners(provider, edgeRiskStewardOwner),
+              signersThreshold: await getSafeThreshold(
+                provider,
+                edgeRiskStewardOwner,
+              ),
+            },
+          ],
+          functions: roles['EdgeRiskStewardRates']['onlyOwner'],
+        },
+        {
+          modifier: 'onlyRiskCouncil',
+          addresses: [
+            {
+              address: edgeRiskStewardCouncil,
+              owners: await getSafeOwners(provider, edgeRiskStewardCouncil),
+              signersThreshold: await getSafeThreshold(
+                provider,
+                edgeRiskStewardCouncil,
+              ),
+            },
+          ],
+          functions: roles['EdgeRiskStewardRates']['onlyRiskCouncil'],
+        },
+      ],
+    };
+  }
+
+
+
+  if (addressBook.EDGE_RISK_STEWARD_PENDLE_EMODE) {
+    const edgeRiskStewardCapsContract = getContract({ address: getAddress(addressBook.EDGE_RISK_STEWARD_PENDLE_EMODE), abi: EDGE_RISK_STEWARD_CAPS_ABI, client: provider });
+    const edgeRiskStewardOwner = await edgeRiskStewardCapsContract.read.owner() as Address;
+    const edgeRiskStewardCouncil = await edgeRiskStewardCapsContract.read.RISK_COUNCIL() as Address;
+
+
+    obj['EdgeRiskStewardEMode'] = {
+      address: addressBook.EDGE_RISK_STEWARD_PENDLE_EMODE,
+      modifiers: [
+        {
+          modifier: 'onlyOwner',
+          addresses: [
+            {
+              address: edgeRiskStewardOwner,
+              owners: await getSafeOwners(provider, edgeRiskStewardOwner),
+              signersThreshold: await getSafeThreshold(
+                provider,
+                edgeRiskStewardOwner,
+              ),
+            },
+          ],
+          functions: roles['EdgeRiskStewardEMode']['onlyOwner'],
+        },
+        {
+          modifier: 'onlyRiskCouncil',
+          addresses: [
+            {
+              address: edgeRiskStewardCouncil,
+              owners: await getSafeOwners(provider, edgeRiskStewardCouncil),
+              signersThreshold: await getSafeThreshold(
+                provider,
+                edgeRiskStewardCouncil,
+              ),
+            },
+          ],
+          functions: roles['EdgeRiskStewardEMode']['onlyRiskCouncil'],
         },
       ],
     };
