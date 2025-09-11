@@ -404,6 +404,91 @@
           }
         ]
       },
+      "EdgeRiskStewardCaps": {
+        "address": "0x35B09a414F6003346cA2E2553b3ea91Cd3524af3",
+        "modifiers": [
+          {
+            "modifier": "onlyOwner",
+            "addresses": [
+              {
+                "address": "0xDf7d0e6454DB638881302729F5ba99936EaAB233",
+                "owners": [],
+                "signersThreshold": 0
+              }
+            ],
+            "functions": [
+              "setRiskConfig",
+              "setAddressRestricted",
+              "setEModeCategoryRestricted",
+              "renounceOwnership",
+              "transferOwnership"
+            ]
+          },
+          {
+            "modifier": "onlyRiskCouncil",
+            "addresses": [
+              {
+                "address": "0x54714FAc85b0bf627288CC3a186dE81A42f1D635",
+                "owners": [],
+                "signersThreshold": 0
+              }
+            ],
+            "functions": [
+              "updateRates",
+              "updateCollateralSide",
+              "updateEModeCategories",
+              "updateLstPriceCaps",
+              "updateStablePriceCaps",
+              "updatePendleDiscountRates",
+              "updateCaps"
+            ]
+          }
+        ]
+      },
+      "AaveStewardInjectorCaps": {
+        "address": "0x54714FAc85b0bf627288CC3a186dE81A42f1D635",
+        "modifiers": [
+          {
+            "modifier": "onlyOwner",
+            "addresses": [
+              {
+                "address": "0xDf7d0e6454DB638881302729F5ba99936EaAB233",
+                "owners": [],
+                "signersThreshold": 0
+              }
+            ],
+            "functions": [
+              "addMarkets",
+              "removeMarkets",
+              "renounceOwnership",
+              "transferOwnership"
+            ]
+          },
+          {
+            "modifier": "onlyOwnerOrGuardian",
+            "addresses": [
+              {
+                "address": "0x7683177b05a92e8B169D833718BDF9d0ce809aA9",
+                "owners": [
+                  "0xe3FD707583932a99513a5c65c8463De769f5DAdF",
+                  "0x246E20bF778b3e16cB71eca535f40f8C4E6c4185"
+                ],
+                "signersThreshold": 1
+              },
+              {
+                "address": "0xDf7d0e6454DB638881302729F5ba99936EaAB233",
+                "owners": [],
+                "signersThreshold": 0
+              }
+            ],
+            "functions": [
+              "disableUpdateById",
+              "pauseInjector",
+              "updateGuardian"
+            ]
+          }
+        ]
+      },
       "PoolExposureSteward": {
         "address": "0xE5b11ab4D36E58C9171e3DB98Ba17336606Cd6ef",
         "modifiers": [
@@ -547,7 +632,7 @@
           "0x460b60565cb73845d56564384ab84BF84c13e47D"
         ]
       },
-      "latestBlockNumber": 76301665
+      "latestBlockNumber": 76335720
     },
     "gsmRoles": {},
     "govV3": {
@@ -563,7 +648,7 @@
             "0xbCEB4f363f2666E2E8E430806F37e97C405c130b"
           ]
         },
-        "latestBlockNumber": 76301666
+        "latestBlockNumber": 76335739
       },
       "contracts": {
         "GranularGuardian": {
@@ -942,7 +1027,7 @@
         "0xc8a2ADC4261c6b669CdFf69E717E77C9cFeB420d",
         "0x44c8b753229006A8047A05b90379A7e92185E97C"
       ],
-      "latestCCCBlockNumber": 76301665
+      "latestCCCBlockNumber": 76335735
     },
     "collector": {
       "contracts": {
@@ -1019,7 +1104,7 @@
             "0xE5b11ab4D36E58C9171e3DB98Ba17336606Cd6ef"
           ]
         },
-        "latestBlockNumber": 76301665
+        "latestBlockNumber": 76335727
       }
     },
     "clinicSteward": {
@@ -1078,7 +1163,7 @@
             "0x3Cbded22F878aFC8d39dCD744d3Fe62086B76193"
           ]
         },
-        "latestBlockNumber": 76301665
+        "latestBlockNumber": 76335732
       }
     },
     "umbrella": {},
@@ -1453,7 +1538,7 @@
             "0xE5b11ab4D36E58C9171e3DB98Ba17336606Cd6ef"
           ]
         },
-        "latestBlockNumber": 76301666
+        "latestBlockNumber": 76335745
       }
     },
     "clinicSteward": {},
