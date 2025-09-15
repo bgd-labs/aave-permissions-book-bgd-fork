@@ -205,7 +205,7 @@ export const networkConfigs: NetworkConfigs = {
       '0x8513e6F37dBc52De87b166980Fa3F50639694B60': 'Gho Risk Council',
       '0x22740deBa78d5a0c24C58C740e3715ec29de1bFa': 'Finance Risk Council',
       '0x6c1DC85f2aE71C3DAcd6E44Bb57DEeF61b540a5A': 'Deficit Offset Clinic Steward',
-      '0x593B09afc075B3c326CE2AD7750888645BA8943d': 'Gho Core Direct Minter',
+      '0x5513224daaEABCa31af5280727878d52097afA05': 'Gho Core Direct Minter',
       '0x46Aa1063e5265b43663E81329333B47c517A5409': 'Gho Bucket Steward',
       '0x29F8c924B7aB50649c9597B8811d08f9Ef0310c3': 'USDC Oracle Swap Freezer',
       '0xD1E856a947CdF56b4f000ee29d34F5808E0A6848': 'Gho Gsm Steward',
