@@ -295,7 +295,7 @@ export const networkConfigs: NetworkConfigs = {
           GSM_USDT: 19037420,
         },
         addresses: {
-          '0x593B09afc075B3c326CE2AD7750888645BA8943d': 'Gho Core Direct Minter',
+          '0x5513224daaEABCa31af5280727878d52097afA05': 'Gho Core Direct Minter',
           '0x2cE01c87Fec1b71A9041c52CaED46Fc5f4807285': 'Gho Lido Direct Minter',
         }
       },
