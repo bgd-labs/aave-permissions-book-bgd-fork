@@ -320,7 +320,7 @@ export const resolveGHOModifiers = async (
         provider,
       );
 
-      let facilitatorName = addresses[facilitator];
+      let facilitatorName = addresses[getAddress(facilitator)];
       if (!facilitatorName) {
         facilitatorName = `facilitator-${index}`;
       }

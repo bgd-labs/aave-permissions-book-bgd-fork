@@ -324,7 +324,7 @@
         "FLASH_BORROWER": [],
         "RISK_ADMIN": []
       },
-      "latestBlockNumber": 24131542
+      "latestBlockNumber": 24509876
     },
     "gsmRoles": {},
     "govV3": {
@@ -403,7 +403,7 @@
             "0x1dF462e2712496373A347f8ad10802a5E95f053D"
           ]
         },
-        "latestBlockNumber": 24131553
+        "latestBlockNumber": 24509878
       }
     },
     "clinicSteward": {},
@@ -569,7 +569,7 @@
             "0x81D251dA015A0C7bD882918Ca1ec6B7B8E094585"
           ]
         },
-        "latestBlockNumber": 24131579
+        "latestBlockNumber": 24509880
       },
       "contracts": {
         "GranularGuardian": {
@@ -871,7 +871,7 @@
         }
       },
       "senders": [],
-      "latestCCCBlockNumber": 24131569
+      "latestCCCBlockNumber": 24509880
     },
     "collector": {},
     "clinicSteward": {},

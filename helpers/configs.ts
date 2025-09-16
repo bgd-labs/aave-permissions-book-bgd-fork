@@ -62,6 +62,9 @@ import {
   MiscInkWhitelabel,
   GovernanceV3Ink,
   MiscInk,
+  AaveV3Plasma,
+  MiscPlasma,
+  GovernanceV3Plasma,
 } from '@bgd-labs/aave-address-book';
 import { NetworkConfigs } from './types.js';
 import { ChainId } from '@bgd-labs/toolbox';
@@ -202,7 +205,7 @@ export const networkConfigs: NetworkConfigs = {
       '0x8513e6F37dBc52De87b166980Fa3F50639694B60': 'Gho Risk Council',
       '0x22740deBa78d5a0c24C58C740e3715ec29de1bFa': 'Finance Risk Council',
       '0x6c1DC85f2aE71C3DAcd6E44Bb57DEeF61b540a5A': 'Deficit Offset Clinic Steward',
-      '0x593B09afc075B3c326CE2AD7750888645BA8943d': 'Gho Core Direct Minter',
+      '0x5513224daaEABCa31af5280727878d52097afA05': 'Gho Core Direct Minter',
       '0x46Aa1063e5265b43663E81329333B47c517A5409': 'Gho Bucket Steward',
       '0x29F8c924B7aB50649c9597B8811d08f9Ef0310c3': 'USDC Oracle Swap Freezer',
       '0xD1E856a947CdF56b4f000ee29d34F5808E0A6848': 'Gho Gsm Steward',
@@ -292,7 +295,7 @@ export const networkConfigs: NetworkConfigs = {
           GSM_USDT: 19037420,
         },
         addresses: {
-          '0x593B09afc075B3c326CE2AD7750888645BA8943d': 'Gho Core Direct Minter',
+          '0x5513224daaEABCa31af5280727878d52097afA05': 'Gho Core Direct Minter',
           '0x2cE01c87Fec1b71A9041c52CaED46Fc5f4807285': 'Gho Lido Direct Minter',
         }
       },
@@ -1093,6 +1096,50 @@ export const networkConfigs: NetworkConfigs = {
           ...MiscInk,
         }
       }
+    },
+  },
+  [ChainId.plasma]: {
+    name: 'Plasma',
+    rpcUrl: process.env.RPC_PLASMA,
+    explorer: 'https://plasmascan.to/',
+    addressesNames: {
+      '0xEf323B194caD8e02D9E5D8F07B34f625f1c088f1':
+        'Aave Protocol Guardian Plasma',
+      '0xdc62E0e65b2251Dc66404ca717FD32dcC365Be3A': 'BGD',
+      '0xEAF6183bAb3eFD3bF856Ac5C058431C8592394d6': 'Deployer',
+      '0x60665b4F4FF7073C5fed2656852dCa271DfE2684':
+        'Aave Granular Guardian Plasma',
+      '0x19CE4363FEA478Aa04B9EA2937cc5A2cbcD44be6':
+        'Aave Governance Guardian Plasma',
+      '0xE71C189C7D8862EfDa0D9E031157199D2F3B4893': 'Risk Council',
+      // '': 'Finance Risk Council'
+    },
+    pools: {
+      [Pools.V3]: {
+        aclBlock: 489190,
+        collectorBlock: 489190,
+        crossChainControllerBlock: 697270,
+        granularGuardianBlock: 698830,
+        crossChainPermissionsJson: './statics/functionsPermissionsGovV3.json',
+        permissionsJson: './statics/functionsPermissionsV3.json',
+        addressBook: {
+          ...AaveV3Plasma,
+          ...MiscPlasma,
+        },
+        governanceAddressBook: {
+          ...GovernanceV3Plasma,
+          ...MiscPlasma
+          // EXECUTOR_LVL_1: '0x47aAdaAE1F05C978E6aBb7568d11B7F6e0FC4d6A',
+          // CROSS_CHAIN_CONTROLLER: '0x643441742f73e270e565619be6DE5f4D55E08cd6',
+          // PAYLOADS_CONTROLLER: '0xe76EB348E65eF163d85ce282125FF5a7F5712A1d',
+          // PC_DATA_HELPER: '0xA806DA549FcB2B4912a7dFFE4c1aA7A1ed0Bd5C9',
+          // GRANULAR_GUARDIAN: '0x60665b4F4FF7073C5fed2656852dCa271DfE2684',
+          // GOVERNANCE_GUARDIAN: '0x19CE4363FEA478Aa04B9EA2937cc5A2cbcD44be6',
+          // CL_EMERGENCY_ORACLE: '0xF61FE74Ec1cFbd9Ee8Bd27592D2EDEe0E2aA85Cf',
+          // TRANSPARENT_PROXY_FACTORY: '0xEB0682d148e874553008730f0686ea89db7DA412',
+          // PROTOCOL_GUARDIAN: '0xEf323B194caD8e02D9E5D8F07B34f625f1c088f1'
+        },
+      },
     },
   },
 };
