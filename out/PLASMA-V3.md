@@ -1,5 +1,5 @@
 # PLASMA 
-## V3 
+## TENDERLY 
 ### Contracts upgradeability
 | contract |upgradeable by |
 |----------|----------|
@@ -15,7 +15,6 @@
 |  [Manual AGRS](https://plasmascan.to//address/0x98F756B77D6Fde14E08bb064b248ec7512F9f8ba) |  not upgradeable | |--------|--------|
 |  [Collector](https://plasmascan.to//address/0x5E2d083417D12d4B0824E14Ecd48D26831F4Da7D) |  Governance | |--------|--------|
 |  [CollectorProxyAdmin](https://plasmascan.to//address/0xd5dc085ffd52bbc19a934fcf67d56a998e0f9472) |  not upgradeable | |--------|--------|
-|  Aave a/v/s tokens |  Governance | |--------|--------|
 |  [GranularGuardian](https://plasmascan.to//address/0x60665b4F4FF7073C5fed2656852dCa271DfE2684) |  not upgradeable | |--------|--------|
 |  [PayloadsController](https://plasmascan.to//address/0xe76EB348E65eF163d85ce282125FF5a7F5712A1d) |  Governance | |--------|--------|
 |  [PayloadsControllerProxyAdmin](https://plasmascan.to//address/0x4a195262caf35d94832458fd7b8d2c92bd355482) |  not upgradeable | |--------|--------|
