@@ -1147,7 +1147,7 @@ export const networkConfigs: NetworkConfigs = {
           ...MiscPlasma
         },
         tenderlyBasePool: Pools.V3,
-        tenderlyBlock: 1255983,
+        tenderlyBlock: 1255982,
         tenderlyRpcUrl:
           'https://virtual.plasma.eu.rpc.tenderly.co/a7087e66-b1bb-42c0-b2db-bd6790350e0e',
       },
