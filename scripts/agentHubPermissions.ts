@@ -1,17 +1,22 @@
 import { Address, Client, getAddress, getContract } from "viem";
-import { Contracts, PermissionsJson } from "../helpers/types.js";
+import { AgentHubRiskOracleInfo, Contracts, PermissionsJson } from "../helpers/types.js";
 import { generateRoles } from "../helpers/jsonParsers.js";
 import { getSafeOwners, getSafeThreshold } from "../helpers/guardian.js";
 import { getProxyAdmin } from "../helpers/proxyAdmin.js";
 import { uniqueAddresses } from "../helpers/utils.js";
+import { getAuthorizedSenders } from "../helpers/hubRiskOracle.js";
+import { ChainId } from "@bgd-labs/toolbox";
 
 
 export const resolveAgentHubModifiers = async (
   addressBook: any,
   provider: Client,
   permissionsObject: PermissionsJson,
-  // chainId: typeof ChainId | number,
-): Promise<Contracts> => {
+  chainId: number,
+  agentHubRiskOracleInfo: Record<string, AgentHubRiskOracleInfo>,
+  agentHubBlock: number,
+  tenderlyBlock?: number,
+): Promise<{ agentHubPermissions: Contracts, agentHubRiskOracleInfo: Record<string, AgentHubRiskOracleInfo> }> => {
   let obj: Contracts = {};
   const roles = generateRoles(permissionsObject);
 
@@ -140,7 +145,29 @@ export const resolveAgentHubModifiers = async (
 
         const riskOracleContract = getContract({ address: getAddress(riskOracle), abi: riskOracleABI, client: provider });
         const riskOracleOwner = await riskOracleContract.read.owner() as Address;
-        const authorizedSenders = await riskOracleContract.read.getAuthorizedSenders() as Address[];
+
+        const onlyAuthorized: { address: Address, owners: string[], signersThreshold: number }[] = [];
+
+        const { authorizedSenders, latestBlockNumber } = await getAuthorizedSenders(
+          provider,
+          agentHubRiskOracleInfo[riskOracle] || { address: riskOracle, authorizedSenders: [], latestBlockNumber: agentHubBlock } as AgentHubRiskOracleInfo,
+          chainId,
+          tenderlyBlock,
+        );
+        agentHubRiskOracleInfo[riskOracle] = {
+          authorizedSenders: authorizedSenders,
+          latestBlockNumber: latestBlockNumber,
+          address: riskOracle,
+        };
+
+        for (const authorizedSender of authorizedSenders) {
+          onlyAuthorized.push({
+            address: getAddress(authorizedSender),
+            owners: await getSafeOwners(provider, authorizedSender),
+            signersThreshold: await getSafeThreshold(provider, authorizedSender),
+          });
+        }
+
         obj[`${riskOracle}-${index}`] = {
           address: riskOracle,
           modifiers: [
@@ -158,7 +185,7 @@ export const resolveAgentHubModifiers = async (
             {
               modifier: 'onlyAuthorized',
               addresses: [
-                ,
+                ...onlyAuthorized,
               ],
               functions: roles['RiskOracle']['onlyAuthorized'],
             },
@@ -173,5 +200,5 @@ export const resolveAgentHubModifiers = async (
 
 
 
-  return obj;
+  return { agentHubPermissions: obj, agentHubRiskOracleInfo: agentHubRiskOracleInfo };
 };
