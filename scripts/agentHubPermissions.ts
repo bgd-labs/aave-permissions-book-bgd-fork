@@ -6,6 +6,7 @@ import { getProxyAdmin } from "../helpers/proxyAdmin.js";
 import { uniqueAddresses } from "../helpers/utils.js";
 import { getAuthorizedSenders } from "../helpers/hubRiskOracle.js";
 import { ChainId } from "@bgd-labs/toolbox";
+import { onlyOwnerAbi } from "../abis/onlyOwnerAbi.js";
 
 
 export const resolveAgentHubModifiers = async (
@@ -112,6 +113,26 @@ export const resolveAgentHubModifiers = async (
             },
           ]),
           functions: roles['AgentHub']['onlyOwnerOrAgentAdmin'],
+        },
+      ],
+    };
+
+    const proxyAdminContract = getContract({ address: getAddress(hubProxyAdmin), abi: onlyOwnerAbi, client: provider });
+    const proxyAdminOwner = await proxyAdminContract.read.owner() as Address;
+
+    obj['AgentHubProxyAdmin'] = {
+      address: hubProxyAdmin,
+      modifiers: [
+        {
+          modifier: 'onlyOwner',
+          addresses: [
+            {
+              address: proxyAdminOwner,
+              owners: await getSafeOwners(provider, proxyAdminOwner),
+              signersThreshold: await getSafeThreshold(provider, proxyAdminOwner),
+            },
+          ],
+          functions: roles['ProxyAdmin']['onlyOwner'],
         },
       ],
     };
