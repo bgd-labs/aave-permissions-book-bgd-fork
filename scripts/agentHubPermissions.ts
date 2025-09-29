@@ -45,7 +45,8 @@ export const resolveAgentHubModifiers = async (
         // get agent info
         const agentContract = getContract({ address: getAddress(agentAddress), abi: agentABI, client: provider });
         const rangeValidatorModule = await agentContract.read.RANGE_VALIDATION_MODULE() as Address;
-        const agentName = await agentContract.read.getName() as string; // TODO: provably method to get name will be different
+        const agentUpdateType = await hubContract.read.getUpdateType(i) as string;
+        const agentName = agentUpdateType.replace('Update', '');
 
         validationModules.add(rangeValidatorModule);
 
