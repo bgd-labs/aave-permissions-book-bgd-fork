@@ -1142,7 +1142,7 @@ export const networkConfigs: NetworkConfigs = {
   [ChainId.bob]: {
     name: 'Bob',
     rpcUrl: process.env.RPC_BOB,
-    explorer: 'https://plasmascan.to/',
+    explorer: 'https://explorer.gobob.xyz/',
     addressesNames: {
       '0xEf323B194caD8e02D9E5D8F07B34f625f1c088f1':
         'Aave Protocol Guardian Bob',
