@@ -151,7 +151,6 @@
                   "0x26de2b9E15886b21dd86ec57C2f4983A98458FCe",
                   "0xaFe7AB320A37b731D5cA37Ba85802f26F3b75469",
                   "0x13e42804884a2da5874fB2a615adC2d81C710B36",
-                  "0x22E13B9A650D75dfA8cAB4170f93fDFA5E3c8220",
                   "0xf27e36cFfACE56E6acBCf0Acf0229147d57647AB"
                 ],
                 "signersThreshold": 4
@@ -180,7 +179,6 @@
                   "0x26de2b9E15886b21dd86ec57C2f4983A98458FCe",
                   "0xaFe7AB320A37b731D5cA37Ba85802f26F3b75469",
                   "0x13e42804884a2da5874fB2a615adC2d81C710B36",
-                  "0x22E13B9A650D75dfA8cAB4170f93fDFA5E3c8220",
                   "0xf27e36cFfACE56E6acBCf0Acf0229147d57647AB"
                 ],
                 "signersThreshold": 4
@@ -326,7 +324,7 @@
         "FLASH_BORROWER": [],
         "RISK_ADMIN": []
       },
-      "latestBlockNumber": 25134369
+      "latestBlockNumber": 26851791
     },
     "gsmRoles": {},
     "govV3": {
@@ -405,7 +403,7 @@
             "0x1dF462e2712496373A347f8ad10802a5E95f053D"
           ]
         },
-        "latestBlockNumber": 25134379
+        "latestBlockNumber": 26851823
       }
     },
     "clinicSteward": {},
@@ -446,7 +444,6 @@
                     "0x26de2b9E15886b21dd86ec57C2f4983A98458FCe",
                     "0xaFe7AB320A37b731D5cA37Ba85802f26F3b75469",
                     "0x13e42804884a2da5874fB2a615adC2d81C710B36",
-                    "0x22E13B9A650D75dfA8cAB4170f93fDFA5E3c8220",
                     "0xf27e36cFfACE56E6acBCf0Acf0229147d57647AB",
                     "0xE1436888Ae97c44D92eC13bc96D4915055aB4340",
                     "0x2746F3BA4F69Ac0B4462208aC1B5c1e5a981dCcA"
@@ -487,7 +484,6 @@
                     "0x26de2b9E15886b21dd86ec57C2f4983A98458FCe",
                     "0xaFe7AB320A37b731D5cA37Ba85802f26F3b75469",
                     "0x13e42804884a2da5874fB2a615adC2d81C710B36",
-                    "0x22E13B9A650D75dfA8cAB4170f93fDFA5E3c8220",
                     "0xf27e36cFfACE56E6acBCf0Acf0229147d57647AB",
                     "0xE1436888Ae97c44D92eC13bc96D4915055aB4340",
                     "0x2746F3BA4F69Ac0B4462208aC1B5c1e5a981dCcA"
@@ -501,7 +497,6 @@
                     "0x26de2b9E15886b21dd86ec57C2f4983A98458FCe",
                     "0xaFe7AB320A37b731D5cA37Ba85802f26F3b75469",
                     "0x13e42804884a2da5874fB2a615adC2d81C710B36",
-                    "0x22E13B9A650D75dfA8cAB4170f93fDFA5E3c8220",
                     "0xf27e36cFfACE56E6acBCf0Acf0229147d57647AB",
                     "0xE1436888Ae97c44D92eC13bc96D4915055aB4340",
                     "0x2746F3BA4F69Ac0B4462208aC1B5c1e5a981dCcA"
@@ -523,7 +518,6 @@
                     "0x26de2b9E15886b21dd86ec57C2f4983A98458FCe",
                     "0xaFe7AB320A37b731D5cA37Ba85802f26F3b75469",
                     "0x13e42804884a2da5874fB2a615adC2d81C710B36",
-                    "0x22E13B9A650D75dfA8cAB4170f93fDFA5E3c8220",
                     "0xf27e36cFfACE56E6acBCf0Acf0229147d57647AB",
                     "0xE1436888Ae97c44D92eC13bc96D4915055aB4340",
                     "0x2746F3BA4F69Ac0B4462208aC1B5c1e5a981dCcA"
@@ -575,7 +569,7 @@
             "0x81D251dA015A0C7bD882918Ca1ec6B7B8E094585"
           ]
         },
-        "latestBlockNumber": 25134403
+        "latestBlockNumber": 26851885
       },
       "contracts": {
         "GranularGuardian": {
@@ -877,7 +871,7 @@
         }
       },
       "senders": [],
-      "latestCCCBlockNumber": 25134393
+      "latestCCCBlockNumber": 26851855
     },
     "collector": {},
     "clinicSteward": {},
