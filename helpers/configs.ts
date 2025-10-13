@@ -65,6 +65,8 @@ import {
   AaveV3Plasma,
   MiscPlasma,
   GovernanceV3Plasma,
+  GovernanceV3Bob,
+  MiscBob,
 } from '@bgd-labs/aave-address-book';
 import { NetworkConfigs } from './types.js';
 import { ChainId } from '@bgd-labs/toolbox';
@@ -1133,15 +1135,37 @@ export const networkConfigs: NetworkConfigs = {
         governanceAddressBook: {
           ...GovernanceV3Plasma,
           ...MiscPlasma
-          // EXECUTOR_LVL_1: '0x47aAdaAE1F05C978E6aBb7568d11B7F6e0FC4d6A',
-          // CROSS_CHAIN_CONTROLLER: '0x643441742f73e270e565619be6DE5f4D55E08cd6',
-          // PAYLOADS_CONTROLLER: '0xe76EB348E65eF163d85ce282125FF5a7F5712A1d',
-          // PC_DATA_HELPER: '0xA806DA549FcB2B4912a7dFFE4c1aA7A1ed0Bd5C9',
-          // GRANULAR_GUARDIAN: '0x60665b4F4FF7073C5fed2656852dCa271DfE2684',
-          // GOVERNANCE_GUARDIAN: '0x19CE4363FEA478Aa04B9EA2937cc5A2cbcD44be6',
-          // CL_EMERGENCY_ORACLE: '0xF61FE74Ec1cFbd9Ee8Bd27592D2EDEe0E2aA85Cf',
-          // TRANSPARENT_PROXY_FACTORY: '0xEB0682d148e874553008730f0686ea89db7DA412',
-          // PROTOCOL_GUARDIAN: '0xEf323B194caD8e02D9E5D8F07B34f625f1c088f1'
+        },
+      },
+    },
+  },
+  [ChainId.bob]: {
+    name: 'Bob',
+    rpcUrl: process.env.RPC_BOB,
+    explorer: 'https://explorer.gobob.xyz/',
+    addressesNames: {
+      '0xEf323B194caD8e02D9E5D8F07B34f625f1c088f1':
+        'Aave Protocol Guardian Bob',
+      '0xdc62E0e65b2251Dc66404ca717FD32dcC365Be3A': 'BGD',
+      '0xEAF6183bAb3eFD3bF856Ac5C058431C8592394d6': 'Deployer',
+      '0x60665b4F4FF7073C5fed2656852dCa271DfE2684':
+        'Aave Granular Guardian Bob',
+      '0x19CE4363FEA478Aa04B9EA2937cc5A2cbcD44be6':
+        'Aave Governance Guardian Bob',
+      '0xE71C189C7D8862EfDa0D9E031157199D2F3B4893': 'Risk Council',
+      // '': 'Finance Risk Council'
+    },
+    pools: {
+      [Pools.V3]: {
+        crossChainControllerBlock: 18092370,
+        granularGuardianBlock: 18092370,
+        crossChainPermissionsJson: './statics/functionsPermissionsGovV3.json',
+        permissionsJson: './statics/functionsPermissionsV3.json',
+        addressBook: {
+        },
+        governanceAddressBook: {
+          ...GovernanceV3Bob,
+          ...MiscBob
         },
       },
     },
