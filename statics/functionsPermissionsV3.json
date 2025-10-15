@@ -1267,5 +1267,146 @@
         ]
       }
     ]
+  },
+  {
+    "contract": "EdgeInjectorPendleEMode",
+    "functions": [
+      {
+        "name": "disableUpdateById",
+        "roles": [
+          "onlyOwnerOrGuardian"
+        ]
+      },
+      {
+        "name": "pauseInjector",
+        "roles": [
+          "onlyOwnerOrGuardian"
+        ]
+      },
+      {
+        "name": "updateGuardian",
+        "roles": [
+          "onlyOwnerOrGuardian"
+        ]
+      },
+      {
+        "name": "addMarkets",
+        "roles": [
+          "onlyOwner"
+        ]
+      },
+      {
+        "name": "removeMarkets",
+        "roles": [
+          "onlyOwner"
+        ]
+      },
+      {
+        "name": "renounceOwnership",
+        "roles": [
+          "onlyOwner"
+        ]
+      },
+      {
+        "name": "transferOwnership",
+        "roles": [
+          "onlyOwner"
+        ]
+      }
+    ]
+  },
+  {
+    "contract": "EdgeInjectorDiscountRate",
+    "functions": [
+      {
+        "name": "disableUpdateById",
+        "roles": [
+          "onlyOwnerOrGuardian"
+        ]
+      },
+      {
+        "name": "pauseInjector",
+        "roles": [
+          "onlyOwnerOrGuardian"
+        ]
+      },
+      {
+        "name": "updateGuardian",
+        "roles": [
+          "onlyOwnerOrGuardian"
+        ]
+      },
+      {
+        "name": "addMarkets",
+        "roles": [
+          "onlyOwner"
+        ]
+      },
+      {
+        "name": "removeMarkets",
+        "roles": [
+          "onlyOwner"
+        ]
+      },
+      {
+        "name": "renounceOwnership",
+        "roles": [
+          "onlyOwner"
+        ]
+      },
+      {
+        "name": "transferOwnership",
+        "roles": [
+          "onlyOwner"
+        ]
+      }
+    ]
+  },
+  {
+    "contract": "EdgeInjectorRates",
+    "functions": [
+      {
+        "name": "disableUpdateById",
+        "roles": [
+          "onlyOwnerOrGuardian"
+        ]
+      },
+      {
+        "name": "pauseInjector",
+        "roles": [
+          "onlyOwnerOrGuardian"
+        ]
+      },
+      {
+        "name": "updateGuardian",
+        "roles": [
+          "onlyOwnerOrGuardian"
+        ]
+      },
+      {
+        "name": "addMarkets",
+        "roles": [
+          "onlyOwner"
+        ]
+      },
+      {
+        "name": "removeMarkets",
+        "roles": [
+          "onlyOwner"
+        ]
+      },
+      {
+        "name": "renounceOwnership",
+        "roles": [
+          "onlyOwner"
+        ]
+      },
+      {
+        "name": "transferOwnership",
+        "roles": [
+          "onlyOwner"
+        ]
+      }
+    ]
   }
 ]

@@ -291,7 +291,7 @@ const generateNetworkPermissions = async (network: string) => {
         }
       }
     } else {
-      console.log(`pool not supported: ${poolKey}`);
+      console.log(`pool not supported: ${poolKey} for network: ${network}`);
     }
 
     if (pool.collectorBlock && pool.addressBook.COLLECTOR) {
@@ -625,7 +625,16 @@ async function main() {
     generateNetworkPermissions(network),
   );
 
-  const results = await Promise.allSettled(permissions);
+  // const permissions = [];
+  // for (const network of networks) {
+  //   console.log(`Generating permissions for network: ${network}`);
+  //   const result = await generateNetworkPermissions(network);
+  //   permissions.push(result);
+  //   console.log(`Permissions generated for network: ${network}`);
+  // }
+
+
+  await Promise.allSettled(permissions);
   console.log('--------------FINISHED--------------')
 }
 

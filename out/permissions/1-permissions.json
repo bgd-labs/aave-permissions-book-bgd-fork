@@ -1024,6 +1024,138 @@
           }
         ]
       },
+      "EdgeInjectorPendleEMode": {
+        "address": "0x83ab600cE8a61b43e1757b89C0589928f765c1C4",
+        "modifiers": [
+          {
+            "modifier": "onlyOwner",
+            "addresses": [
+              {
+                "address": "0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A",
+                "owners": [],
+                "signersThreshold": 0
+              }
+            ],
+            "functions": [
+              "addMarkets",
+              "removeMarkets",
+              "renounceOwnership",
+              "transferOwnership"
+            ]
+          },
+          {
+            "modifier": "onlyOwnerOrGuardian",
+            "addresses": [
+              {
+                "address": "0xff37939808EcF199A2D599ef91D699Fb13dab7F7",
+                "owners": [
+                  "0xe3FD707583932a99513a5c65c8463De769f5DAdF",
+                  "0x246E20bF778b3e16cB71eca535f40f8C4E6c4185"
+                ],
+                "signersThreshold": 1
+              },
+              {
+                "address": "0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A",
+                "owners": [],
+                "signersThreshold": 0
+              }
+            ],
+            "functions": [
+              "disableUpdateById",
+              "pauseInjector",
+              "updateGuardian"
+            ]
+          }
+        ]
+      },
+      "EdgeInjectorDiscountRate": {
+        "address": "0x15885A83936EB943e98EeFFb91e9A49040d93993",
+        "modifiers": [
+          {
+            "modifier": "onlyOwner",
+            "addresses": [
+              {
+                "address": "0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A",
+                "owners": [],
+                "signersThreshold": 0
+              }
+            ],
+            "functions": [
+              "addMarkets",
+              "removeMarkets",
+              "renounceOwnership",
+              "transferOwnership"
+            ]
+          },
+          {
+            "modifier": "onlyOwnerOrGuardian",
+            "addresses": [
+              {
+                "address": "0xff37939808EcF199A2D599ef91D699Fb13dab7F7",
+                "owners": [
+                  "0xe3FD707583932a99513a5c65c8463De769f5DAdF",
+                  "0x246E20bF778b3e16cB71eca535f40f8C4E6c4185"
+                ],
+                "signersThreshold": 1
+              },
+              {
+                "address": "0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A",
+                "owners": [],
+                "signersThreshold": 0
+              }
+            ],
+            "functions": [
+              "disableUpdateById",
+              "pauseInjector",
+              "updateGuardian"
+            ]
+          }
+        ]
+      },
+      "EdgeInjectorRates": {
+        "address": "0x74dc6321A338420238CBD77abA5fEa8679393A66",
+        "modifiers": [
+          {
+            "modifier": "onlyOwner",
+            "addresses": [
+              {
+                "address": "0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A",
+                "owners": [],
+                "signersThreshold": 0
+              }
+            ],
+            "functions": [
+              "addMarkets",
+              "removeMarkets",
+              "renounceOwnership",
+              "transferOwnership"
+            ]
+          },
+          {
+            "modifier": "onlyOwnerOrGuardian",
+            "addresses": [
+              {
+                "address": "0xff37939808EcF199A2D599ef91D699Fb13dab7F7",
+                "owners": [
+                  "0xe3FD707583932a99513a5c65c8463De769f5DAdF",
+                  "0x246E20bF778b3e16cB71eca535f40f8C4E6c4185"
+                ],
+                "signersThreshold": 1
+              },
+              {
+                "address": "0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A",
+                "owners": [],
+                "signersThreshold": 0
+              }
+            ],
+            "functions": [
+              "disableUpdateById",
+              "pauseInjector",
+              "updateGuardian"
+            ]
+          }
+        ]
+      },
       "PoolExposureSteward": {
         "address": "0x22aC12a6937BBBC0a301AF9154d08EaD95673122",
         "modifiers": [
@@ -1178,7 +1310,7 @@
           "0x8b493f416F5F7933cC146b1899c069F2361cad60"
         ]
       },
-      "latestBlockNumber": 23582123
+      "latestBlockNumber": 23583705
     },
     "gsmRoles": {},
     "govV3": {
@@ -1194,7 +1326,7 @@
             "0xb812d0944f8F581DfAA3a93Dda0d22EcEf51A9CF"
           ]
         },
-        "latestBlockNumber": 23582124
+        "latestBlockNumber": 23583705
       },
       "contracts": {
         "GranularGuardian": {
@@ -1774,7 +1906,7 @@
         "0x9Ded9406f088C10621BE628EEFf40c1DF396c172",
         "0xFe4683C18aaad791B6AFDF0a8e1Ed5C6e2c9ecD6"
       ],
-      "latestCCCBlockNumber": 23582124
+      "latestCCCBlockNumber": 23583705
     },
     "collector": {
       "contracts": {
@@ -1895,7 +2027,7 @@
             "0xb7D402138Cb01BfE97d95181C849379d6AD14d19"
           ]
         },
-        "latestBlockNumber": 23582124
+        "latestBlockNumber": 23583705
       }
     },
     "clinicSteward": {
@@ -1955,7 +2087,7 @@
             "0x3Cbded22F878aFC8d39dCD744d3Fe62086B76193"
           ]
         },
-        "latestBlockNumber": 23582124
+        "latestBlockNumber": 23583705
       }
     },
     "umbrella": {
@@ -2219,7 +2351,7 @@
             "0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A"
           ]
         },
-        "latestBlockNumber": 23582124
+        "latestBlockNumber": 23583705
       },
       "umbrellaIncentivesRoles": {
         "role": {
@@ -2231,7 +2363,7 @@
             "0x2759de67aD133C747C9f41d56F1b8A343cE679a1"
           ]
         },
-        "latestBlockNumber": 23582124
+        "latestBlockNumber": 23583705
       }
     },
     "ppc": {
@@ -2799,7 +2931,7 @@
             "0xb7D402138Cb01BfE97d95181C849379d6AD14d19"
           ]
         },
-        "latestBlockNumber": 23582126
+        "latestBlockNumber": 23583707
       }
     },
     "clinicSteward": {},
@@ -3132,7 +3264,7 @@
             "0xb7D402138Cb01BfE97d95181C849379d6AD14d19"
           ]
         },
-        "latestBlockNumber": 23582126
+        "latestBlockNumber": 23583707
       }
     },
     "clinicSteward": {},
@@ -3982,6 +4114,48 @@
           }
         ]
       },
+      "EdgeInjectorRates": {
+        "address": "0x834a5aC6e9D05b92F599A031941262F761c34859",
+        "modifiers": [
+          {
+            "modifier": "onlyOwner",
+            "addresses": [
+              {
+                "address": "0xff37939808EcF199A2D599ef91D699Fb13dab7F7",
+                "owners": [
+                  "0xe3FD707583932a99513a5c65c8463De769f5DAdF",
+                  "0x246E20bF778b3e16cB71eca535f40f8C4E6c4185"
+                ],
+                "signersThreshold": 1
+              }
+            ],
+            "functions": [
+              "addMarkets",
+              "removeMarkets",
+              "renounceOwnership",
+              "transferOwnership"
+            ]
+          },
+          {
+            "modifier": "onlyOwnerOrGuardian",
+            "addresses": [
+              {
+                "address": "0xff37939808EcF199A2D599ef91D699Fb13dab7F7",
+                "owners": [
+                  "0xe3FD707583932a99513a5c65c8463De769f5DAdF",
+                  "0x246E20bF778b3e16cB71eca535f40f8C4E6c4185"
+                ],
+                "signersThreshold": 1
+              }
+            ],
+            "functions": [
+              "disableUpdateById",
+              "pauseInjector",
+              "updateGuardian"
+            ]
+          }
+        ]
+      },
       "AavePolEthBridge": {
         "address": "0x1C2BA5b8ab8e795fF44387ba6d251fa65AD20b36",
         "modifiers": [
@@ -4081,7 +4255,7 @@
           "0x7e6a6B115D31d4A837E3C737c49Cf6Fafe6112C3"
         ]
       },
-      "latestBlockNumber": 23582124
+      "latestBlockNumber": 23583706
     },
     "gsmRoles": {},
     "govV3": {
@@ -4206,7 +4380,7 @@
             "0xb7D402138Cb01BfE97d95181C849379d6AD14d19"
           ]
         },
-        "latestBlockNumber": 23582124
+        "latestBlockNumber": 23583706
       }
     },
     "clinicSteward": {
@@ -4266,7 +4440,7 @@
             "0x3Cbded22F878aFC8d39dCD744d3Fe62086B76193"
           ]
         },
-        "latestBlockNumber": 23582125
+        "latestBlockNumber": 23583706
       }
     },
     "umbrella": {},
@@ -4791,7 +4965,7 @@
           "0xBF79d8339303148E345277a994Eb2cD5d82F0067"
         ]
       },
-      "latestBlockNumber": 23582125
+      "latestBlockNumber": 23583706
     },
     "gsmRoles": {},
     "govV3": {
@@ -4916,7 +5090,7 @@
             "0xb7D402138Cb01BfE97d95181C849379d6AD14d19"
           ]
         },
-        "latestBlockNumber": 23582125
+        "latestBlockNumber": 23583706
       }
     },
     "clinicSteward": {},
@@ -7856,7 +8030,7 @@
           "0x46Aa1063e5265b43663E81329333B47c517A5409"
         ]
       },
-      "latestBlockNumber": 23582125
+      "latestBlockNumber": 23583706
     },
     "gsmRoles": {
       "GSM_USDC": {
@@ -7876,7 +8050,7 @@
           "TOKEN_RESCUER_ROLE": [],
           "LIQUIDATOR_ROLE": []
         },
-        "latestBlockNumber": 23582125
+        "latestBlockNumber": 23583706
       },
       "GSM_USDT": {
         "role": {
@@ -7895,7 +8069,7 @@
           "TOKEN_RESCUER_ROLE": [],
           "LIQUIDATOR_ROLE": []
         },
-        "latestBlockNumber": 23582125
+        "latestBlockNumber": 23583706
       }
     },
     "govV3": {

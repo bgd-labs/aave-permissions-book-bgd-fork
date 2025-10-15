@@ -463,6 +463,94 @@
           }
         ]
       },
+      "EdgeInjectorPendleEMode": {
+        "address": "0xdD56dE44d2d79eC97cEa1A0049c767A4ce97953e",
+        "modifiers": [
+          {
+            "modifier": "onlyOwner",
+            "addresses": [
+              {
+                "address": "0x47aAdaAE1F05C978E6aBb7568d11B7F6e0FC4d6A",
+                "owners": [],
+                "signersThreshold": 0
+              }
+            ],
+            "functions": [
+              "addMarkets",
+              "removeMarkets",
+              "renounceOwnership",
+              "transferOwnership"
+            ]
+          },
+          {
+            "modifier": "onlyOwnerOrGuardian",
+            "addresses": [
+              {
+                "address": "0x1cF16B4e76D4919bD939e12C650b8F6eb9e02916",
+                "owners": [
+                  "0xe3FD707583932a99513a5c65c8463De769f5DAdF",
+                  "0x246E20bF778b3e16cB71eca535f40f8C4E6c4185"
+                ],
+                "signersThreshold": 1
+              },
+              {
+                "address": "0x47aAdaAE1F05C978E6aBb7568d11B7F6e0FC4d6A",
+                "owners": [],
+                "signersThreshold": 0
+              }
+            ],
+            "functions": [
+              "disableUpdateById",
+              "pauseInjector",
+              "updateGuardian"
+            ]
+          }
+        ]
+      },
+      "EdgeInjectorDiscountRate": {
+        "address": "0x6E3748B753D38e33CC476aF63C9d220Af65b7fc4",
+        "modifiers": [
+          {
+            "modifier": "onlyOwner",
+            "addresses": [
+              {
+                "address": "0x47aAdaAE1F05C978E6aBb7568d11B7F6e0FC4d6A",
+                "owners": [],
+                "signersThreshold": 0
+              }
+            ],
+            "functions": [
+              "addMarkets",
+              "removeMarkets",
+              "renounceOwnership",
+              "transferOwnership"
+            ]
+          },
+          {
+            "modifier": "onlyOwnerOrGuardian",
+            "addresses": [
+              {
+                "address": "0x1cF16B4e76D4919bD939e12C650b8F6eb9e02916",
+                "owners": [
+                  "0xe3FD707583932a99513a5c65c8463De769f5DAdF",
+                  "0x246E20bF778b3e16cB71eca535f40f8C4E6c4185"
+                ],
+                "signersThreshold": 1
+              },
+              {
+                "address": "0x47aAdaAE1F05C978E6aBb7568d11B7F6e0FC4d6A",
+                "owners": [],
+                "signersThreshold": 0
+              }
+            ],
+            "functions": [
+              "disableUpdateById",
+              "pauseInjector",
+              "updateGuardian"
+            ]
+          }
+        ]
+      },
       "Manual AGRS": {
         "address": "0x98F756B77D6Fde14E08bb064b248ec7512F9f8ba",
         "modifiers": [
@@ -521,7 +609,7 @@
           "0x98F756B77D6Fde14E08bb064b248ec7512F9f8ba"
         ]
       },
-      "latestBlockNumber": 3590220
+      "latestBlockNumber": 3609330
     },
     "gsmRoles": {},
     "govV3": {
@@ -537,7 +625,7 @@
             "0xdc62E0e65b2251Dc66404ca717FD32dcC365Be3A"
           ]
         },
-        "latestBlockNumber": 3590220
+        "latestBlockNumber": 3609330
       },
       "contracts": {
         "GranularGuardian": {
@@ -883,7 +971,7 @@
         }
       },
       "senders": [],
-      "latestCCCBlockNumber": 3590220
+      "latestCCCBlockNumber": 3609330
     },
     "collector": {
       "contracts": {
@@ -958,7 +1046,7 @@
             "0x47aAdaAE1F05C978E6aBb7568d11B7F6e0FC4d6A"
           ]
         },
-        "latestBlockNumber": 3590220
+        "latestBlockNumber": 3609330
       }
     },
     "clinicSteward": {},
