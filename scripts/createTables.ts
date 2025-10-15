@@ -105,7 +105,6 @@ export const generateTable = (network: string, pool: string): string => {
 
   const poolGuardians: PoolGuardians = {};
   let poolPermitsByContract = networkPermits[pool];
-
   poolPermitsByContract.contracts = {
     ...networkPermits[pool].contracts,
     ...getPermissionsByNetwork(network)[pool].collector?.contracts,
