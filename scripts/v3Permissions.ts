@@ -20,7 +20,7 @@ import { RISK_STEWARDS_ABI } from '../abis/riskStewards.js';
 import { SVR_ORACLE_STEWARD_ABI } from '../abis/svrOracle.js';
 import { EDGE_RISK_STEWARD_CAPS_ABI } from '../abis/edgeRiskStewardCaps.js';
 import { POOL_EXPOSURE_STEWARD_ABI } from '../abis/poolExposureStewards.js';
-import { Address, Client, getAddress, getContract } from 'viem';
+import { Address, Client, getAddress, getContract, zeroAddress } from 'viem';
 import { AAVE_STEWARD_INJECTOR_CAPS_ABI } from '../abis/aaveStewardInjectorCaps.js';
 import { CLINIC_STEWARD_ABI } from '../abis/clinicSteward.js';
 
@@ -859,17 +859,6 @@ export const resolveV3Modifiers = async (
           functions: roles['EdgeInjectorPendleEMode']['onlyOwner'],
         },
         {
-          modifier: 'onlyGuardian',
-          addresses: [
-            {
-              address: aaveEdgeInjectorPendleEModeGuardian,
-              owners: await getSafeOwners(provider, aaveEdgeInjectorPendleEModeGuardian),
-              signersThreshold: await getSafeThreshold(provider, aaveEdgeInjectorPendleEModeGuardian),
-            },
-          ],
-          functions: roles['EdgeInjectorPendleEMode']['onlyGuardian'],
-        },
-        {
           modifier: 'onlyOwnerOrGuardian',
           addresses: [
             {
@@ -910,17 +899,6 @@ export const resolveV3Modifiers = async (
           functions: roles['EdgeInjectorDiscountRate']['onlyOwner'],
         },
         {
-          modifier: 'onlyGuardian',
-          addresses: [
-            {
-              address: aaveEdgeInjectorDiscountRateGuardian,
-              owners: await getSafeOwners(provider, aaveEdgeInjectorDiscountRateGuardian),
-              signersThreshold: await getSafeThreshold(provider, aaveEdgeInjectorDiscountRateGuardian),
-            },
-          ],
-          functions: roles['EdgeInjectorDiscountRate']['onlyGuardian'],
-        },
-        {
           modifier: 'onlyOwnerOrGuardian',
           addresses: [
             {
@@ -942,7 +920,14 @@ export const resolveV3Modifiers = async (
   if (addressBook.EDGE_INJECTOR_RATES) {
     const aaveEdgeInjectorRatesContract = getContract({ address: getAddress(addressBook.EDGE_INJECTOR_RATES), abi: AAVE_STEWARD_INJECTOR_CAPS_ABI, client: provider });
     const aaveEdgeInjectorRatesOwner = await aaveEdgeInjectorRatesContract.read.owner() as Address;
-    const aaveEdgeInjectorRatesGuardian = await aaveEdgeInjectorRatesContract.read.guardian() as Address;
+    let aaveEdgeInjectorRatesGuardian;
+    try {
+
+      aaveEdgeInjectorRatesGuardian = await aaveEdgeInjectorRatesContract.read.guardian() as Address;
+    } catch (error) {
+      aaveEdgeInjectorRatesGuardian = zeroAddress;
+      console.log(`EdgeInjectorRates guardian not found for network: ${chainId} and address: ${addressBook.EDGE_INJECTOR_RATES}`);
+    }
     obj['EdgeInjectorRates'] = {
       address: addressBook.EDGE_INJECTOR_RATES,
       modifiers: [
@@ -961,24 +946,14 @@ export const resolveV3Modifiers = async (
           functions: roles['EdgeInjectorRates']['onlyOwner'],
         },
         {
-          modifier: 'onlyGuardian',
-          addresses: [
-            {
-              address: aaveEdgeInjectorRatesGuardian,
-              owners: await getSafeOwners(provider, aaveEdgeInjectorRatesGuardian),
-              signersThreshold: await getSafeThreshold(provider, aaveEdgeInjectorRatesGuardian),
-            },
-          ],
-          functions: roles['EdgeInjectorRates']['onlyGuardian'],
-        },
-        {
           modifier: 'onlyOwnerOrGuardian',
           addresses: [
-            {
+            // Only add guardian if it's not zero address
+            ...(aaveEdgeInjectorRatesGuardian !== zeroAddress ? [{
               address: aaveEdgeInjectorRatesGuardian,
               owners: await getSafeOwners(provider, aaveEdgeInjectorRatesGuardian),
               signersThreshold: await getSafeThreshold(provider, aaveEdgeInjectorRatesGuardian),
-            },
+            }] : []),
             {
               address: aaveEdgeInjectorRatesOwner,
               owners: await getSafeOwners(provider, aaveEdgeInjectorRatesOwner),
