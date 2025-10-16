@@ -23,6 +23,7 @@ import { POOL_EXPOSURE_STEWARD_ABI } from '../abis/poolExposureStewards.js';
 import { Address, Client, getAddress, getContract, zeroAddress } from 'viem';
 import { AAVE_STEWARD_INJECTOR_CAPS_ABI } from '../abis/aaveStewardInjectorCaps.js';
 import { CLINIC_STEWARD_ABI } from '../abis/clinicSteward.js';
+import { COLLECTOR_SWAP_STEWARD_ABI } from '../abis/collectorSwapSteward.js';
 
 const getAddressInfo = async (
   provider: Client,
@@ -1119,6 +1120,45 @@ export const resolveV3Modifiers = async (
             },
           ],
           functions: roles['Manual_AGRS']['onlyRiskCouncil'],
+        },
+      ],
+    };
+  }
+
+  if (addressBook.COLLECTOR_SWAP_STEWARD) {
+    const collectorSwapStewardContract = getContract({ address: getAddress(addressBook.COLLECTOR_SWAP_STEWARD), abi: COLLECTOR_SWAP_STEWARD_ABI, client: provider });
+    const collectorSwapStewardOwner = await collectorSwapStewardContract.read.owner() as Address;
+    const collectorSwapStewardGuardian = await collectorSwapStewardContract.read.guardian() as Address;
+
+    obj['CollectorSwapSteward'] = {
+      address: addressBook.COLLECTOR_SWAP_STEWARD,
+      modifiers: [
+        {
+          modifier: 'onlyOwner',
+          addresses: [
+            {
+              address: collectorSwapStewardOwner,
+              owners: await getSafeOwners(provider, collectorSwapStewardOwner),
+              signersThreshold: await getSafeThreshold(provider, collectorSwapStewardOwner),
+            },
+          ],
+          functions: roles['CollectorSwapSteward']['onlyOwner'],
+        },
+        {
+          modifier: 'onlyOwnerOrGuardian',
+          addresses: [
+            {
+              address: collectorSwapStewardGuardian,
+              owners: await getSafeOwners(provider, collectorSwapStewardGuardian),
+              signersThreshold: await getSafeThreshold(provider, collectorSwapStewardGuardian),
+            },
+            {
+              address: collectorSwapStewardOwner,
+              owners: await getSafeOwners(provider, collectorSwapStewardOwner),
+              signersThreshold: await getSafeThreshold(provider, collectorSwapStewardOwner),
+            },
+          ],
+          functions: roles['CollectorSwapSteward']['onlyOwnerOrGuardian'],
         },
       ],
     };
