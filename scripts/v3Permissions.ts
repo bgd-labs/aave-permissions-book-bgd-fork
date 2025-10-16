@@ -1152,6 +1152,11 @@ export const resolveV3Modifiers = async (
               owners: await getSafeOwners(provider, collectorSwapStewardGuardian),
               signersThreshold: await getSafeThreshold(provider, collectorSwapStewardGuardian),
             },
+            {
+              address: collectorSwapStewardOwner,
+              owners: await getSafeOwners(provider, collectorSwapStewardOwner),
+              signersThreshold: await getSafeThreshold(provider, collectorSwapStewardOwner),
+            },
           ],
           functions: roles['CollectorSwapSteward']['onlyOwnerOrGuardian'],
         },
