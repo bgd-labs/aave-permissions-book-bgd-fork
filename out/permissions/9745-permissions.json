@@ -176,6 +176,16 @@
                 "address": "0x98F756B77D6Fde14E08bb064b248ec7512F9f8ba",
                 "owners": [],
                 "signersThreshold": 0
+              },
+              {
+                "address": "0x530034d1A739Afd261291B86A5c3b95eC30c4b44",
+                "owners": [],
+                "signersThreshold": 0
+              },
+              {
+                "address": "0xe1472037C9f17Ac00bf5336272ab74e423B9254d",
+                "owners": [],
+                "signersThreshold": 0
               }
             ],
             "functions": [
@@ -222,6 +232,16 @@
               },
               {
                 "address": "0x98F756B77D6Fde14E08bb064b248ec7512F9f8ba",
+                "owners": [],
+                "signersThreshold": 0
+              },
+              {
+                "address": "0x530034d1A739Afd261291B86A5c3b95eC30c4b44",
+                "owners": [],
+                "signersThreshold": 0
+              },
+              {
+                "address": "0xe1472037C9f17Ac00bf5336272ab74e423B9254d",
                 "owners": [],
                 "signersThreshold": 0
               }
@@ -606,10 +626,12 @@
         "ASSET_LISTING_ADMIN": [],
         "FLASH_BORROWER": [],
         "RISK_ADMIN": [
-          "0x98F756B77D6Fde14E08bb064b248ec7512F9f8ba"
+          "0x98F756B77D6Fde14E08bb064b248ec7512F9f8ba",
+          "0x530034d1A739Afd261291B86A5c3b95eC30c4b44",
+          "0xe1472037C9f17Ac00bf5336272ab74e423B9254d"
         ]
       },
-      "latestBlockNumber": 3992717
+      "latestBlockNumber": 4078944
     },
     "gsmRoles": {},
     "govV3": {
@@ -625,7 +647,7 @@
             "0xdc62E0e65b2251Dc66404ca717FD32dcC365Be3A"
           ]
         },
-        "latestBlockNumber": 3992717
+        "latestBlockNumber": 4078944
       },
       "contracts": {
         "GranularGuardian": {
@@ -971,7 +993,7 @@
         }
       },
       "senders": [],
-      "latestCCCBlockNumber": 3992717
+      "latestCCCBlockNumber": 4078944
     },
     "collector": {
       "contracts": {
@@ -1046,7 +1068,7 @@
             "0x47aAdaAE1F05C978E6aBb7568d11B7F6e0FC4d6A"
           ]
         },
-        "latestBlockNumber": 3992717
+        "latestBlockNumber": 4078944
       }
     },
     "clinicSteward": {},
