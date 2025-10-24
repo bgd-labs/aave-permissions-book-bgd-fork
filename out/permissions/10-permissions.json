@@ -445,6 +445,36 @@
           }
         ]
       },
+      "RiskOracle": {
+        "address": "0x9f6aA2aB14bFF53e4b79A81ce1554F1DFdbb6608",
+        "modifiers": [
+          {
+            "modifier": "onlyOwner",
+            "addresses": [
+              {
+                "address": "0xDe841Bf4B67970f5a19165443B0e9ec808E1cC85",
+                "owners": [
+                  "0xE328bd9b85A127C5fbb71070d17a2d26d2615dEa",
+                  "0x4DB9f12c891A64Ef80C6f8047a2D9a651d16f849",
+                  "0xdBf59fD74bd98Fc50F7952E916BB57F26037ddC9",
+                  "0x50842854e40914A8e0745310B47fC22B98112B7A",
+                  "0x5Df7e094f52436040A5a37D5C9A9A80586D35823",
+                  "0x5d49dBcdd300aECc2C311cFB56593E71c445d60d",
+                  "0x753de005261e9Ff910B541A07282544Ec433d08c"
+                ],
+                "signersThreshold": 3
+              }
+            ],
+            "functions": [
+              "addAuthorizedSender",
+              "removeAuthorizedSender",
+              "addUpdateType",
+              "renounceOwnership",
+              "transferOwnership"
+            ]
+          }
+        ]
+      },
       "AaveStewardInjectorCaps": {
         "address": "0x54714FAc85b0bf627288CC3a186dE81A42f1D635",
         "modifiers": [
@@ -613,7 +643,7 @@
           "0x59bAbc14Dd73761e38E5bdA171b2298DC14da92d"
         ]
       },
-      "latestBlockNumber": 142834258
+      "latestBlockNumber": 142861062
     },
     "gsmRoles": {},
     "govV3": {
@@ -629,7 +659,7 @@
             "0x3A800fbDeAC82a4d9c68A9FA0a315e095129CDBF"
           ]
         },
-        "latestBlockNumber": 142834263
+        "latestBlockNumber": 142861064
       },
       "contracts": {
         "GranularGuardian": {
@@ -895,7 +925,7 @@
         }
       },
       "senders": [],
-      "latestCCCBlockNumber": 142834263
+      "latestCCCBlockNumber": 142861064
     },
     "collector": {
       "contracts": {
@@ -972,7 +1002,7 @@
             "0x4684b645386525057526EB85854045914Fe389d6"
           ]
         },
-        "latestBlockNumber": 142834261
+        "latestBlockNumber": 142861064
       }
     },
     "clinicSteward": {
@@ -1031,7 +1061,7 @@
             "0x3Cbded22F878aFC8d39dCD744d3Fe62086B76193"
           ]
         },
-        "latestBlockNumber": 142834263
+        "latestBlockNumber": 142861064
       }
     },
     "umbrella": {},
