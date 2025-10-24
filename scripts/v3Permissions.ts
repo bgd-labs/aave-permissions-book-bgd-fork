@@ -24,6 +24,7 @@ import { Address, Client, getAddress, getContract, zeroAddress } from 'viem';
 import { AAVE_STEWARD_INJECTOR_CAPS_ABI } from '../abis/aaveStewardInjectorCaps.js';
 import { CLINIC_STEWARD_ABI } from '../abis/clinicSteward.js';
 import { COLLECTOR_SWAP_STEWARD_ABI } from '../abis/collectorSwapSteward.js';
+import { RISK_ORACLE_ABI } from '../abis/riskoracle.js';
 
 const getAddressInfo = async (
   provider: Client,
@@ -963,6 +964,28 @@ export const resolveV3Modifiers = async (
           ],
           functions: roles['EdgeInjectorRates']['onlyOwnerOrGuardian'],
         },
+      ],
+    };
+  }
+
+  if (addressBook.EDGE_RISK_ORACLE) {
+    const riskOracleContract = getContract({ address: getAddress(addressBook.EDGE_RISK_ORACLE), abi: RISK_ORACLE_ABI, client: provider });
+    const riskOracleOwner = await riskOracleContract.read.owner() as Address;
+
+    obj['RiskOracle'] = {
+      address: addressBook.EDGE_RISK_ORACLE,
+      modifiers: [
+        {
+          modifier: 'onlyOwner',
+          addresses: [
+            {
+              address: riskOracleOwner,
+              owners: await getSafeOwners(provider, riskOracleOwner),
+              signersThreshold: await getSafeThreshold(provider, riskOracleOwner),
+            },
+          ],
+          functions: roles['RiskOracle']['onlyOwner'],
+        }
       ],
     };
   }
