@@ -116,6 +116,11 @@
                 "address": "0xBDF2e1A49894A306Eb76b89504928b3f509A3a16",
                 "owners": [],
                 "signersThreshold": 0
+              },
+              {
+                "address": "0xdDE20B20E21a6F3b7080e740b684CDf5b764B80D",
+                "owners": [],
+                "signersThreshold": 0
               }
             ],
             "functions": [
@@ -147,6 +152,11 @@
               },
               {
                 "address": "0xBDF2e1A49894A306Eb76b89504928b3f509A3a16",
+                "owners": [],
+                "signersThreshold": 0
+              },
+              {
+                "address": "0xdDE20B20E21a6F3b7080e740b684CDf5b764B80D",
                 "owners": [],
                 "signersThreshold": 0
               },
@@ -547,10 +557,11 @@
         "ASSET_LISTING_ADMIN": [],
         "FLASH_BORROWER": [],
         "RISK_ADMIN": [
-          "0xBDF2e1A49894A306Eb76b89504928b3f509A3a16"
+          "0xBDF2e1A49894A306Eb76b89504928b3f509A3a16",
+          "0xdDE20B20E21a6F3b7080e740b684CDf5b764B80D"
         ]
       },
-      "latestBlockNumber": 24869327
+      "latestBlockNumber": 25266468
     },
     "gsmRoles": {},
     "govV3": {
@@ -566,7 +577,7 @@
             "0xfD3a6E65e470a7D7D730FFD5D36a9354E8F9F4Ea"
           ]
         },
-        "latestBlockNumber": 24869328
+        "latestBlockNumber": 25266476
       },
       "contracts": {
         "GranularGuardian": {
@@ -828,7 +839,7 @@
         }
       },
       "senders": [],
-      "latestCCCBlockNumber": 24869328
+      "latestCCCBlockNumber": 25266475
     },
     "collector": {
       "contracts": {
@@ -905,7 +916,7 @@
             "0x07Fc6Fa43Cf6b08d24679ebf8060386b4D41B702"
           ]
         },
-        "latestBlockNumber": 24869328
+        "latestBlockNumber": 25266472
       }
     },
     "clinicSteward": {
@@ -960,7 +971,7 @@
             "0x3Cbded22F878aFC8d39dCD744d3Fe62086B76193"
           ]
         },
-        "latestBlockNumber": 24869328
+        "latestBlockNumber": 25266473
       }
     },
     "umbrella": {},

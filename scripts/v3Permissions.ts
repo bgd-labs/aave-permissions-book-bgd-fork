@@ -24,7 +24,7 @@ import { Address, Client, getAddress, getContract, zeroAddress } from 'viem';
 import { AAVE_STEWARD_INJECTOR_CAPS_ABI } from '../abis/aaveStewardInjectorCaps.js';
 import { CLINIC_STEWARD_ABI } from '../abis/clinicSteward.js';
 import { COLLECTOR_SWAP_STEWARD_ABI } from '../abis/collectorSwapSteward.js';
-import { RISK_ORACLE_ABI } from '../abis/riskoracle.js';
+import { RISK_ORACLE_ABI } from '../abis/riskOracle.js';
 
 const getAddressInfo = async (
   provider: Client,
