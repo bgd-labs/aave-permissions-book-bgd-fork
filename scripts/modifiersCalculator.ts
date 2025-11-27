@@ -491,7 +491,7 @@ const generateNetworkPermissions = async (network: string) => {
       }
     }
 
-    if (pool.agentHubAddressBook && pool.agentHubBlock) {
+    if (pool.agentHubBlock && pool.functionsPermissionsAgentHubJson) {
       if (pool.tenderlyBasePool) {
         await overwriteBaseTenderlyPool(
           poolKey,
@@ -509,19 +509,18 @@ const generateNetworkPermissions = async (network: string) => {
           Agent Hub Table
         ------------------------------------
         `);
-      fullJson[poolKey]?.agentHub?.agentHubRiskOracleInfo || {} as Record<string, AgentHubRiskOracleInfo>;
-
       const { agentHubPermissions, agentHubRiskOracleInfo } = await resolveAgentHubModifiers(
-        pool.agentHubAddressBook,
+        pool.addressBook,
         poolKey === Pools.TENDERLY
           ? getRpcClientFromUrl(pool.tenderlyRpcUrl!)
           : provider,
-        permissionsJson,
+        getStaticPermissionsJson(pool.functionsPermissionsAgentHubJson),
         Number(network),
         fullJson[poolKey]?.agentHub?.agentHubRiskOracleInfo || {} as Record<string, AgentHubRiskOracleInfo>,
         pool.agentHubBlock,
         pool.tenderlyBlock
       );
+
       agentHub.contracts = agentHubPermissions;
       agentHub.agentHubRiskOracleInfo = agentHubRiskOracleInfo;
     }

@@ -7,6 +7,9 @@ import { uniqueAddresses } from "../helpers/utils.js";
 import { getAuthorizedSenders } from "../helpers/hubRiskOracle.js";
 import { ChainId } from "@bgd-labs/toolbox";
 import { onlyOwnerAbi } from "../abis/onlyOwnerAbi.js";
+import { AGENT_HUB_ABI } from "../abis/agentHub.js";
+import { AGENT_ABI } from "../abis/agent.js";
+import { RISK_ORACLE_ABI } from "../abis/riskOracle.js";
 
 
 export const resolveAgentHubModifiers = async (
@@ -20,12 +23,10 @@ export const resolveAgentHubModifiers = async (
 ): Promise<{ agentHubPermissions: Contracts, agentHubRiskOracleInfo: Record<string, AgentHubRiskOracleInfo> }> => {
   let obj: Contracts = {};
   const roles = generateRoles(permissionsObject);
-
   // hub
-  if (addressBook.HUB) {
-    const hubContract = getContract({ address: getAddress(addressBook.HUB), abi: HUB_ABI, client: provider });
+  if (addressBook.AGENT_HUB) {
+    const hubContract = getContract({ address: getAddress(addressBook.AGENT_HUB), abi: AGENT_HUB_ABI, client: provider });
     const hubOwner = await hubContract.read.owner() as Address;
-
 
     const agentCount = Number(await hubContract.read.getAgentCount() as bigint);
     const agentAdmins: Set<Address> = new Set();
@@ -33,19 +34,19 @@ export const resolveAgentHubModifiers = async (
     const riskOracles: Set<Address> = new Set();
 
     for (let i = 0; i < agentCount; i++) {
-      const agentEnabled = await hubContract.read.isAgentEnabled(i) as boolean;
+      const agentEnabled = await hubContract.read.isAgentEnabled([i]) as boolean;
       if (agentEnabled) {
-        const agentAdmin = await hubContract.read.getAgentAdmin(i) as Address;
-        const agentAddress = await hubContract.read.getAgentAddress(i) as Address;
-        const agentRiskOracle = await hubContract.read.getRiskOracle(i) as Address;
+        const agentAdmin = await hubContract.read.getAgentAdmin([i]) as Address;
+        const agentAddress = await hubContract.read.getAgentAddress([i]) as Address;
+        const agentRiskOracle = await hubContract.read.getRiskOracle([i]) as Address;
 
         riskOracles.add(agentRiskOracle);
         agentAdmins.add(agentAdmin);
 
         // get agent info
-        const agentContract = getContract({ address: getAddress(agentAddress), abi: agentABI, client: provider });
+        const agentContract = getContract({ address: getAddress(agentAddress), abi: AGENT_ABI, client: provider });
         const rangeValidatorModule = await agentContract.read.RANGE_VALIDATION_MODULE() as Address;
-        const agentUpdateType = await hubContract.read.getUpdateType(i) as string;
+        const agentUpdateType = await hubContract.read.getUpdateType([i]) as string;
         const agentName = agentUpdateType.replace('Update', '');
 
         validationModules.add(rangeValidatorModule);
@@ -57,11 +58,11 @@ export const resolveAgentHubModifiers = async (
               modifier: 'onlyAgentHub',
               addresses: [
                 {
-                  address: addressBook.HUB,
-                  owners: await getSafeOwners(provider, addressBook.HUB),
+                  address: addressBook.AGENT_HUB,
+                  owners: await getSafeOwners(provider, addressBook.AGENT_HUB),
                   signersThreshold: await getSafeThreshold(
                     provider,
-                    addressBook.HUB,
+                    addressBook.AGENT_HUB,
                   ),
                 },
               ],
@@ -75,7 +76,7 @@ export const resolveAgentHubModifiers = async (
     // get proxy admin from new transparent proxy factory
 
     const hubProxyAdmin = await getProxyAdmin(
-      addressBook.HUB,
+      addressBook.AGENT_HUB,
       provider,
     );
 
@@ -89,7 +90,7 @@ export const resolveAgentHubModifiers = async (
     }
 
     obj['AgentHub'] = {
-      address: addressBook.HUB,
+      address: addressBook.AGENT_HUB,
       proxyAdmin: hubProxyAdmin,
       modifiers: [
         {
@@ -165,7 +166,7 @@ export const resolveAgentHubModifiers = async (
     if (riskOracles.size > 0) {
       for (const [index, riskOracle] of riskOracles.entries()) {
 
-        const riskOracleContract = getContract({ address: getAddress(riskOracle), abi: riskOracleABI, client: provider });
+        const riskOracleContract = getContract({ address: getAddress(riskOracle), abi: RISK_ORACLE_ABI, client: provider });
         const riskOracleOwner = await riskOracleContract.read.owner() as Address;
 
         const onlyAuthorized: { address: Address, owners: string[], signersThreshold: number }[] = [];

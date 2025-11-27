@@ -109,8 +109,8 @@ export type PoolConfigs = {
   ppcPermissionsJson?: string;
   ppcAddressBook?: any;
 
-  agentHubAddressBook?: any;
   agentHubBlock?: number;
+  functionsPermissionsAgentHubJson?: string;
 };
 export type Network = {
   name: string;
