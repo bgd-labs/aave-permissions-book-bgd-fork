@@ -26,6 +26,7 @@ export const getRPCClient = (chainId: number): Client => {
       return getRpcClientFromUrl(`https://${env.QUICKNODE_ENDPOINT_NAME}.avalanche-mainnet.quiknode.pro/${env.QUICKNODE_TOKEN}/ext/bc/C/rpc`);
     }
   }
+
   return getClient(chainId, {
     httpConfig: getHttpConfig(),
     clientConfig: {
@@ -75,7 +76,6 @@ export const getEvents = async ({
   limit: number,
   maxBlock?: number,
 }) => {
-
   const currentBlock = maxBlock ?? Number(await getBlockNumber(client));
   const eventsAbis = eventTypes.map(getEventTypeAbi);
 

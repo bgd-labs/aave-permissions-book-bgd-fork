@@ -1267,5 +1267,294 @@
         ]
       }
     ]
+  },
+  {
+    "contract": "EdgeInjectorPendleEMode",
+    "functions": [
+      {
+        "name": "disableUpdateById",
+        "roles": [
+          "onlyOwnerOrGuardian"
+        ]
+      },
+      {
+        "name": "pauseInjector",
+        "roles": [
+          "onlyOwnerOrGuardian"
+        ]
+      },
+      {
+        "name": "updateGuardian",
+        "roles": [
+          "onlyOwnerOrGuardian"
+        ]
+      },
+      {
+        "name": "addMarkets",
+        "roles": [
+          "onlyOwner"
+        ]
+      },
+      {
+        "name": "removeMarkets",
+        "roles": [
+          "onlyOwner"
+        ]
+      },
+      {
+        "name": "renounceOwnership",
+        "roles": [
+          "onlyOwner"
+        ]
+      },
+      {
+        "name": "transferOwnership",
+        "roles": [
+          "onlyOwner"
+        ]
+      }
+    ]
+  },
+  {
+    "contract": "EdgeInjectorDiscountRate",
+    "functions": [
+      {
+        "name": "disableUpdateById",
+        "roles": [
+          "onlyOwnerOrGuardian"
+        ]
+      },
+      {
+        "name": "pauseInjector",
+        "roles": [
+          "onlyOwnerOrGuardian"
+        ]
+      },
+      {
+        "name": "updateGuardian",
+        "roles": [
+          "onlyOwnerOrGuardian"
+        ]
+      },
+      {
+        "name": "addMarkets",
+        "roles": [
+          "onlyOwner"
+        ]
+      },
+      {
+        "name": "removeMarkets",
+        "roles": [
+          "onlyOwner"
+        ]
+      },
+      {
+        "name": "renounceOwnership",
+        "roles": [
+          "onlyOwner"
+        ]
+      },
+      {
+        "name": "transferOwnership",
+        "roles": [
+          "onlyOwner"
+        ]
+      }
+    ]
+  },
+  {
+    "contract": "EdgeInjectorRates",
+    "functions": [
+      {
+        "name": "disableUpdateById",
+        "roles": [
+          "onlyOwnerOrGuardian"
+        ]
+      },
+      {
+        "name": "pauseInjector",
+        "roles": [
+          "onlyOwnerOrGuardian"
+        ]
+      },
+      {
+        "name": "updateGuardian",
+        "roles": [
+          "onlyOwnerOrGuardian"
+        ]
+      },
+      {
+        "name": "addMarkets",
+        "roles": [
+          "onlyOwner"
+        ]
+      },
+      {
+        "name": "removeMarkets",
+        "roles": [
+          "onlyOwner"
+        ]
+      },
+      {
+        "name": "renounceOwnership",
+        "roles": [
+          "onlyOwner"
+        ]
+      },
+      {
+        "name": "transferOwnership",
+        "roles": [
+          "onlyOwner"
+        ]
+      }
+    ]
+  },
+  {
+    "contract": "CollectorSwapSteward",
+    "functions": [
+      {
+        "name": "swap",
+        "roles": [
+          "onlyOwnerOrGuardian"
+        ]
+      },
+      {
+        "name": "twapSwap",
+        "roles": [
+          "onlyOwnerOrGuardian"
+        ]
+      },
+      {
+        "name": "cancelSwap",
+        "roles": [
+          "onlyOwnerOrGuardian"
+        ]
+      },
+      {
+        "name": "cancelLimitSwap",
+        "roles": [
+          "onlyOwnerOrGuardian"
+        ]
+      },
+      {
+        "name": "cancelTwapSwap",
+        "roles": [
+          "onlyOwnerOrGuardian"
+        ]
+      },
+      {
+        "name": "increaseTokenBudget",
+        "roles": [
+          "onlyOwner"
+        ]
+      },
+      {
+        "name": "decreaseTokenBudget",
+        "roles": [
+          "onlyOwner"
+        ]
+      },
+      {
+        "name": "rescueToken",
+        "roles": [
+          "onlyOwnerOrGuardian"
+        ]
+      },
+      {
+        "name": "setSwappablePair",
+        "roles": [
+          "onlyOwner"
+        ]
+      },
+      {
+        "name": "setTokenOracle",
+        "roles": [
+          "onlyOwner"
+        ]
+      },
+      {
+        "name": "setLimitOrderPriceChecker",
+        "roles": [
+          "onlyOwner"
+        ]
+      },
+      {
+        "name": "setMilkman",
+        "roles": [
+          "onlyOwner"
+        ]
+      },
+      {
+        "name": "setRelayer",
+        "roles": [
+          "onlyOwner"
+        ]
+      },
+      {
+        "name": "updateGuardian",
+        "roles": [
+          "onlyOwnerOrGuardian"
+        ]
+      },
+      {
+        "name": "renounceOwnership",
+        "roles": [
+          "onlyOwner"
+        ]
+      },
+      {
+        "name": "transferOwnership",
+        "roles": [
+          "onlyOwner"
+        ]
+      }
+    ]
+  },
+  {
+    "contract": "RiskOracle",
+    "functions": [
+      {
+        "name": "addAuthorizedSender",
+        "roles": [
+          "onlyOwner"
+        ]
+      },
+      {
+        "name": "removeAuthorizedSender",
+        "roles": [
+          "onlyOwner"
+        ]
+      },
+      {
+        "name": "addUpdateType",
+        "roles": [
+          "onlyOwner"
+        ]
+      },
+      {
+        "name": "publishRiskParameterUpdate",
+        "roles": [
+          "onlyAuthorized"
+        ]
+      },
+      {
+        "name": "publishBulkRiskParameterUpdates",
+        "roles": [
+          "onlyAuthorized"
+        ]
+      },
+      {
+        "name": "renounceOwnership",
+        "roles": [
+          "onlyOwner"
+        ]
+      },
+      {
+        "name": "transferOwnership",
+        "roles": [
+          "onlyOwner"
+        ]
+      }
+    ]
   }
 ]

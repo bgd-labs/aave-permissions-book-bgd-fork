@@ -219,7 +219,9 @@ export const networkConfigs: NetworkConfigs = {
       '0x15885A83936EB943e98EeFFb91e9A49040d93993': 'AaveStewardInjectorDiscountRate',
       '0x83ab600cE8a61b43e1757b89C0589928f765c1C4': 'AaveStewardInjectorEMode',
       '0x6A14eBe9A934c8EFE15C3811a999149472876b56': 'ClinicStewardV2',
-      '0xE1e62c3ee0c581F715fBb0e23CDA536Fc29eeB2c': 'ClinicStewardV2 AMM'
+      '0xE1e62c3ee0c581F715fBb0e23CDA536Fc29eeB2c': 'ClinicStewardV2 AMM',
+      '0xff37939808EcF199A2D599ef91D699Fb13dab7F7': 'BGD Injector Guardian',
+      '0xDe841Bf4B67970f5a19165443B0e9ec808E1cC85': 'Risk Oracle Guardian'
     },
     pools: {
       [Pools.V3]: {
@@ -404,7 +406,8 @@ export const networkConfigs: NetworkConfigs = {
       '0xc8a2ADC4261c6b669CdFf69E717E77C9cFeB420d': 'Old VotingMachine',
       '0x22740deBa78d5a0c24C58C740e3715ec29de1bFa': 'Finance Risk Council',
       '0x7683177b05a92e8B169D833718BDF9d0ce809aA9': 'BGD Steward Injector Guardian',
-      '0xF93b565c96446afdf8C3D37E6B4781D5d5EDef1C': 'ClinicStewardV2'
+      '0xF93b565c96446afdf8C3D37E6B4781D5d5EDef1C': 'ClinicStewardV2',
+      '0xDe841Bf4B67970f5a19165443B0e9ec808E1cC85': 'Risk Oracle Guardian'
     },
     pools: {
       [Pools.V3]: {
@@ -466,7 +469,8 @@ export const networkConfigs: NetworkConfigs = {
       '0xdeadD8aB03075b7FBA81864202a2f59EE25B312b': 'CleanUp Admin',
       '0x3Cbded22F878aFC8d39dCD744d3Fe62086B76193': 'ACI Automation',
       '0x22740deBa78d5a0c24C58C740e3715ec29de1bFa': 'Finance Risk Council',
-      '0xB5ABc2BcB050bE70EF53338E547d87d06F7c877d': 'BGD Steward Injector Guardian'
+      '0xB5ABc2BcB050bE70EF53338E547d87d06F7c877d': 'BGD Steward Injector Guardian',
+      '0xDe841Bf4B67970f5a19165443B0e9ec808E1cC85': 'Risk Oracle Guardian'
     },
     pools: {
       [Pools.V3]: {
@@ -524,7 +528,8 @@ export const networkConfigs: NetworkConfigs = {
       '0x22740deBa78d5a0c24C58C740e3715ec29de1bFa': 'Finance Risk Council',
       '0xA5Ba213867E175A182a5dd6A9193C6158738105A': 'Gho Aave Steward',
       '0xD68c00a1A4a33876C5EC71A2Bf7bBd8676d72BF6': 'BGD Steward Injector Guardian',
-      '0xA28820b8af102fAABAAAdaf94224353Dc772DC99': 'ClinicStewardV2'
+      '0xA28820b8af102fAABAAAdaf94224353Dc772DC99': 'ClinicStewardV2',
+      '0xDe841Bf4B67970f5a19165443B0e9ec808E1cC85': 'Risk Oracle Guardian'
     },
     pools: {
       [Pools.V3]: {
@@ -592,7 +597,8 @@ export const networkConfigs: NetworkConfigs = {
       '0xdeadD8aB03075b7FBA81864202a2f59EE25B312b': 'CleanUp Admin',
       '0x3Cbded22F878aFC8d39dCD744d3Fe62086B76193': 'ACI Automation',
       '0x22740deBa78d5a0c24C58C740e3715ec29de1bFa': 'Finance Risk Council',
-      '0x9867Ce43D2a574a152fE6b134F64c9578ce3cE03': 'BGD Steward Injector Guardian'
+      '0x9867Ce43D2a574a152fE6b134F64c9578ce3cE03': 'BGD Steward Injector Guardian',
+      '0xDe841Bf4B67970f5a19165443B0e9ec808E1cC85': 'Risk Oracle Guardian'
     },
     pools: {
       [Pools.V3]: {
@@ -642,7 +648,8 @@ export const networkConfigs: NetworkConfigs = {
       '0x8513e6F37dBc52De87b166980Fa3F50639694B60': 'Gho Risk Council',
       '0x22740deBa78d5a0c24C58C740e3715ec29de1bFa': 'Finance Risk Council',
       '0xd2D586f849620ef042FE3aF52eAa10e9b78bf7De': 'Arbitrum Gho Aave Steward',
-      '0x87dFb794364f2B117C8dbaE29EA622938b3Ce465': 'BGD Steward Injector Guardian'
+      '0x87dFb794364f2B117C8dbaE29EA622938b3Ce465': 'BGD Steward Injector Guardian',
+      '0x14C3fe96adf6068C2D5616D239fc93f61D85dF85': 'Risk Oracle Guardian'
     },
     pools: {
       [Pools.V3]: {
@@ -732,7 +739,8 @@ export const networkConfigs: NetworkConfigs = {
       '0x22740deBa78d5a0c24C58C740e3715ec29de1bFa': 'Finance Risk Council',
       '0xA9F30e6ED4098e9439B2ac8aEA2d3fc26BcEbb45': 'Bridge Executor',
       '0xC5BcC58BE6172769ca1a78B8A45752E3C5059c39': 'Base Gho Aave Steward',
-      '0x1B7e7b282Dff5661704E32838CAE4677FEB4C1F2': 'BGD Steward Injector Guardian'
+      '0x1B7e7b282Dff5661704E32838CAE4677FEB4C1F2': 'BGD Steward Injector Guardian',
+      '0xDe841Bf4B67970f5a19165443B0e9ec808E1cC85': 'Risk Oracle Guardian'
     },
     pools: {
       [Pools.V3]: {
@@ -785,7 +793,8 @@ export const networkConfigs: NetworkConfigs = {
       '0x3Cbded22F878aFC8d39dCD744d3Fe62086B76193': 'ACI Automation',
       '0x22740deBa78d5a0c24C58C740e3715ec29de1bFa': 'Finance Risk Council',
       '0x6e637e1E48025E51315d50ab96d5b3be1971A715': 'Gnosis Gho Aave Steward',
-      '0x4bBBcfF03E94B2B661c5cA9c3BD34f6504591764': 'BGD Steward Injector Guardian'
+      '0x4bBBcfF03E94B2B661c5cA9c3BD34f6504591764': 'BGD Steward Injector Guardian',
+      '0xDe841Bf4B67970f5a19165443B0e9ec808E1cC85': 'Risk Oracle Guardian'
     },
     pools: {
       [Pools.V3]: {
@@ -901,7 +910,9 @@ export const networkConfigs: NetworkConfigs = {
       '0xF092A5aC5E284E7c433dAFE5b8B138bFcA53a4Ee': 'Risk Council',
       '0xdeadD8aB03075b7FBA81864202a2f59EE25B312b': 'CleanUp Admin',
       '0x3Cbded22F878aFC8d39dCD744d3Fe62086B76193': 'ACI Automation',
-      '0x22740deBa78d5a0c24C58C740e3715ec29de1bFa': 'Finance Risk Council'
+      '0x22740deBa78d5a0c24C58C740e3715ec29de1bFa': 'Finance Risk Council',
+      '0x0c28C535CE08345851F150dFC9c737978d726aEc': 'BGD Injector Guardian',
+      '0xDe841Bf4B67970f5a19165443B0e9ec808E1cC85': 'Risk Oracle Guardian'
     },
     pools: {
       [Pools.V3]: {
@@ -1118,6 +1129,8 @@ export const networkConfigs: NetworkConfigs = {
       '0x19CE4363FEA478Aa04B9EA2937cc5A2cbcD44be6':
         'Aave Governance Guardian Plasma',
       '0xE71C189C7D8862EfDa0D9E031157199D2F3B4893': 'Risk Council',
+      '0x1cF16B4e76D4919bD939e12C650b8F6eb9e02916': 'BGD Injector Guardian',
+      '0xDe841Bf4B67970f5a19165443B0e9ec808E1cC85': 'Risk Oracle Guardian'
       // '': 'Finance Risk Council'
     },
     pools: {

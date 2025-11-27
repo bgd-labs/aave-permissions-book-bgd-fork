@@ -20,9 +20,11 @@ import { RISK_STEWARDS_ABI } from '../abis/riskStewards.js';
 import { SVR_ORACLE_STEWARD_ABI } from '../abis/svrOracle.js';
 import { EDGE_RISK_STEWARD_CAPS_ABI } from '../abis/edgeRiskStewardCaps.js';
 import { POOL_EXPOSURE_STEWARD_ABI } from '../abis/poolExposureStewards.js';
-import { Address, Client, getAddress, getContract } from 'viem';
+import { Address, Client, getAddress, getContract, zeroAddress } from 'viem';
 import { AAVE_STEWARD_INJECTOR_CAPS_ABI } from '../abis/aaveStewardInjectorCaps.js';
 import { CLINIC_STEWARD_ABI } from '../abis/clinicSteward.js';
+import { COLLECTOR_SWAP_STEWARD_ABI } from '../abis/collectorSwapSteward.js';
+import { RISK_ORACLE_ABI } from '../abis/riskOracle.js';
 
 const getAddressInfo = async (
   provider: Client,
@@ -837,6 +839,157 @@ export const resolveV3Modifiers = async (
     };
   }
 
+  if (addressBook.EDGE_INJECTOR_PENDLE_EMODE) {
+    const aaveEdgeInjectorPendleEModeContract = getContract({ address: getAddress(addressBook.EDGE_INJECTOR_PENDLE_EMODE), abi: AAVE_STEWARD_INJECTOR_CAPS_ABI, client: provider });
+    const aaveEdgeInjectorPendleEModeOwner = await aaveEdgeInjectorPendleEModeContract.read.owner() as Address;
+    const aaveEdgeInjectorPendleEModeGuardian = await aaveEdgeInjectorPendleEModeContract.read.guardian() as Address;
+    obj['EdgeInjectorPendleEMode'] = {
+      address: addressBook.EDGE_INJECTOR_PENDLE_EMODE,
+      modifiers: [
+        {
+          modifier: 'onlyOwner',
+          addresses: [
+            {
+              address: aaveEdgeInjectorPendleEModeOwner,
+              owners: await getSafeOwners(provider, aaveEdgeInjectorPendleEModeOwner),
+              signersThreshold: await getSafeThreshold(
+                provider,
+                aaveEdgeInjectorPendleEModeOwner,
+              ),
+            },
+          ],
+          functions: roles['EdgeInjectorPendleEMode']['onlyOwner'],
+        },
+        {
+          modifier: 'onlyOwnerOrGuardian',
+          addresses: [
+            {
+              address: aaveEdgeInjectorPendleEModeGuardian,
+              owners: await getSafeOwners(provider, aaveEdgeInjectorPendleEModeGuardian),
+              signersThreshold: await getSafeThreshold(provider, aaveEdgeInjectorPendleEModeGuardian),
+            },
+            {
+              address: aaveEdgeInjectorPendleEModeOwner,
+              owners: await getSafeOwners(provider, aaveEdgeInjectorPendleEModeOwner),
+              signersThreshold: await getSafeThreshold(provider, aaveEdgeInjectorPendleEModeOwner),
+            },
+          ],
+          functions: roles['EdgeInjectorPendleEMode']['onlyOwnerOrGuardian'],
+        },
+      ],
+    };
+  }
+  if (addressBook.EDGE_INJECTOR_DISCOUNT_RATE) {
+    const aaveEdgeInjectorDiscountRateContract = getContract({ address: getAddress(addressBook.EDGE_INJECTOR_DISCOUNT_RATE), abi: AAVE_STEWARD_INJECTOR_CAPS_ABI, client: provider });
+    const aaveEdgeInjectorDiscountRateOwner = await aaveEdgeInjectorDiscountRateContract.read.owner() as Address;
+    const aaveEdgeInjectorDiscountRateGuardian = await aaveEdgeInjectorDiscountRateContract.read.guardian() as Address;
+    obj['EdgeInjectorDiscountRate'] = {
+      address: addressBook.EDGE_INJECTOR_DISCOUNT_RATE,
+      modifiers: [
+        {
+          modifier: 'onlyOwner',
+          addresses: [
+            {
+              address: aaveEdgeInjectorDiscountRateOwner,
+              owners: await getSafeOwners(provider, aaveEdgeInjectorDiscountRateOwner),
+              signersThreshold: await getSafeThreshold(
+                provider,
+                aaveEdgeInjectorDiscountRateOwner,
+              ),
+            },
+          ],
+          functions: roles['EdgeInjectorDiscountRate']['onlyOwner'],
+        },
+        {
+          modifier: 'onlyOwnerOrGuardian',
+          addresses: [
+            {
+              address: aaveEdgeInjectorDiscountRateGuardian,
+              owners: await getSafeOwners(provider, aaveEdgeInjectorDiscountRateGuardian),
+              signersThreshold: await getSafeThreshold(provider, aaveEdgeInjectorDiscountRateGuardian),
+            },
+            {
+              address: aaveEdgeInjectorDiscountRateOwner,
+              owners: await getSafeOwners(provider, aaveEdgeInjectorDiscountRateOwner),
+              signersThreshold: await getSafeThreshold(provider, aaveEdgeInjectorDiscountRateOwner),
+            },
+          ],
+          functions: roles['EdgeInjectorDiscountRate']['onlyOwnerOrGuardian'],
+        },
+      ],
+    };
+  }
+  if (addressBook.EDGE_INJECTOR_RATES) {
+    const aaveEdgeInjectorRatesContract = getContract({ address: getAddress(addressBook.EDGE_INJECTOR_RATES), abi: AAVE_STEWARD_INJECTOR_CAPS_ABI, client: provider });
+    const aaveEdgeInjectorRatesOwner = await aaveEdgeInjectorRatesContract.read.owner() as Address;
+    let aaveEdgeInjectorRatesGuardian;
+    try {
+
+      aaveEdgeInjectorRatesGuardian = await aaveEdgeInjectorRatesContract.read.guardian() as Address;
+    } catch (error) {
+      aaveEdgeInjectorRatesGuardian = zeroAddress;
+      console.log(`EdgeInjectorRates guardian not found for network: ${chainId} and address: ${addressBook.EDGE_INJECTOR_RATES}`);
+    }
+    obj['EdgeInjectorRates'] = {
+      address: addressBook.EDGE_INJECTOR_RATES,
+      modifiers: [
+        {
+          modifier: 'onlyOwner',
+          addresses: [
+            {
+              address: aaveEdgeInjectorRatesOwner,
+              owners: await getSafeOwners(provider, aaveEdgeInjectorRatesOwner),
+              signersThreshold: await getSafeThreshold(
+                provider,
+                aaveEdgeInjectorRatesOwner,
+              ),
+            },
+          ],
+          functions: roles['EdgeInjectorRates']['onlyOwner'],
+        },
+        {
+          modifier: 'onlyOwnerOrGuardian',
+          addresses: [
+            // Only add guardian if it's not zero address
+            ...(aaveEdgeInjectorRatesGuardian !== zeroAddress ? [{
+              address: aaveEdgeInjectorRatesGuardian,
+              owners: await getSafeOwners(provider, aaveEdgeInjectorRatesGuardian),
+              signersThreshold: await getSafeThreshold(provider, aaveEdgeInjectorRatesGuardian),
+            }] : []),
+            {
+              address: aaveEdgeInjectorRatesOwner,
+              owners: await getSafeOwners(provider, aaveEdgeInjectorRatesOwner),
+              signersThreshold: await getSafeThreshold(provider, aaveEdgeInjectorRatesOwner),
+            },
+          ],
+          functions: roles['EdgeInjectorRates']['onlyOwnerOrGuardian'],
+        },
+      ],
+    };
+  }
+
+  if (addressBook.EDGE_RISK_ORACLE) {
+    const riskOracleContract = getContract({ address: getAddress(addressBook.EDGE_RISK_ORACLE), abi: RISK_ORACLE_ABI, client: provider });
+    const riskOracleOwner = await riskOracleContract.read.owner() as Address;
+
+    obj['RiskOracle'] = {
+      address: addressBook.EDGE_RISK_ORACLE,
+      modifiers: [
+        {
+          modifier: 'onlyOwner',
+          addresses: [
+            {
+              address: riskOracleOwner,
+              owners: await getSafeOwners(provider, riskOracleOwner),
+              signersThreshold: await getSafeThreshold(provider, riskOracleOwner),
+            },
+          ],
+          functions: roles['RiskOracle']['onlyOwner'],
+        }
+      ],
+    };
+  }
+
   if (addressBook.EDGE_INJECTOR_CAPS) {
     const aaveStewardInjectorCapsContract = getContract({ address: getAddress(addressBook.EDGE_INJECTOR_CAPS), abi: AAVE_STEWARD_INJECTOR_CAPS_ABI, client: provider });
     const aaveStewardInjectorOwner = await aaveStewardInjectorCapsContract.read.owner() as Address;
@@ -990,6 +1143,45 @@ export const resolveV3Modifiers = async (
             },
           ],
           functions: roles['Manual_AGRS']['onlyRiskCouncil'],
+        },
+      ],
+    };
+  }
+
+  if (addressBook.COLLECTOR_SWAP_STEWARD) {
+    const collectorSwapStewardContract = getContract({ address: getAddress(addressBook.COLLECTOR_SWAP_STEWARD), abi: COLLECTOR_SWAP_STEWARD_ABI, client: provider });
+    const collectorSwapStewardOwner = await collectorSwapStewardContract.read.owner() as Address;
+    const collectorSwapStewardGuardian = await collectorSwapStewardContract.read.guardian() as Address;
+
+    obj['CollectorSwapSteward'] = {
+      address: addressBook.COLLECTOR_SWAP_STEWARD,
+      modifiers: [
+        {
+          modifier: 'onlyOwner',
+          addresses: [
+            {
+              address: collectorSwapStewardOwner,
+              owners: await getSafeOwners(provider, collectorSwapStewardOwner),
+              signersThreshold: await getSafeThreshold(provider, collectorSwapStewardOwner),
+            },
+          ],
+          functions: roles['CollectorSwapSteward']['onlyOwner'],
+        },
+        {
+          modifier: 'onlyOwnerOrGuardian',
+          addresses: [
+            {
+              address: collectorSwapStewardGuardian,
+              owners: await getSafeOwners(provider, collectorSwapStewardGuardian),
+              signersThreshold: await getSafeThreshold(provider, collectorSwapStewardGuardian),
+            },
+            {
+              address: collectorSwapStewardOwner,
+              owners: await getSafeOwners(provider, collectorSwapStewardOwner),
+              signersThreshold: await getSafeThreshold(provider, collectorSwapStewardOwner),
+            },
+          ],
+          functions: roles['CollectorSwapSteward']['onlyOwnerOrGuardian'],
         },
       ],
     };
