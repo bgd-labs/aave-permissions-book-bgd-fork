@@ -20,6 +20,7 @@ export const resolveAgentHubModifiers = async (
   agentHubRiskOracleInfo: Record<string, AgentHubRiskOracleInfo>,
   agentHubBlock: number,
   tenderlyBlock?: number,
+  poolName?: string,
 ): Promise<{ agentHubPermissions: Contracts, agentHubRiskOracleInfo: Record<string, AgentHubRiskOracleInfo> }> => {
   let obj: Contracts = {};
   const roles = generateRoles(permissionsObject);
@@ -51,6 +52,10 @@ export const resolveAgentHubModifiers = async (
 
         validationModules.add(rangeValidatorModule);
 
+        if (agentName.toLowerCase().includes('prime') && !(poolName === 'LIDO' || poolName === 'LIDO_TENDERLY')) {
+          continue;
+        }
+
         obj[`${agentName}`] = {
           address: agentAddress,
           modifiers: [
@@ -71,6 +76,9 @@ export const resolveAgentHubModifiers = async (
           ],
         };
       }
+
+
+
     }
 
     // get proxy admin from new transparent proxy factory
@@ -141,8 +149,10 @@ export const resolveAgentHubModifiers = async (
 
     // module
     if (validationModules.size > 0) {
-      for (const [index, validationModule] of validationModules.entries()) {
-        obj[`${validationModule}-${index}`] = {
+      const validationModulesArray = Array.from(validationModules);
+      for (let index = 0; index < validationModulesArray.length; index++) {
+        const validationModule = validationModulesArray[index];
+        obj[`RangeValidationModule${validationModulesArray.length > 1 ? `-${index}` : ''}`] = {
           address: validationModule,
           modifiers: [
             {
@@ -164,7 +174,9 @@ export const resolveAgentHubModifiers = async (
 
     // risk oracle
     if (riskOracles.size > 0) {
-      for (const [index, riskOracle] of riskOracles.entries()) {
+      const riskOraclesArray = Array.from(riskOracles);
+      for (let index = 0; index < riskOraclesArray.length; index++) {
+        const riskOracle = riskOraclesArray[index];
 
         const riskOracleContract = getContract({ address: getAddress(riskOracle), abi: RISK_ORACLE_ABI, client: provider });
         const riskOracleOwner = await riskOracleContract.read.owner() as Address;
@@ -191,7 +203,7 @@ export const resolveAgentHubModifiers = async (
           });
         }
 
-        obj[`${riskOracle}-${index}`] = {
+        obj[`RiskOracle${riskOracles.size > 1 ? `-${index}` : ''}`] = {
           address: riskOracle,
           modifiers: [
             {
