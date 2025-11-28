@@ -336,7 +336,7 @@ export const generateTable = (network: string, pool: string): string => {
         ...getPermissionsByNetwork(network)['V3'].agentHub?.contracts,
       },
     pool === Pools.V3_WHITE_LABEL ? true : false,
-    networkConfigs[Number(network)].addressesNames
+    networkConfigs[Number(network)].addressesNames || {} as Record<string, string>
   );
   for (let actionName of Object.keys(actionExecutors)) {
     if (Array.from(actionExecutors[actionName]).length > 0) {
@@ -635,7 +635,7 @@ export const generateTable = (network: string, pool: string): string => {
     Object.keys(poolPermitsByContract.agentHub).length > 0 &&
     poolPermitsByContract.agentHub.contracts) {
 
-    let agentHubTable = `### Agent Hub Contracts \n`;
+    let agentHubTable = `### Risk Agent Contracts \n`;
     const agentHubHeaderTitles = [
       'contract',
       'proxyAdmin',

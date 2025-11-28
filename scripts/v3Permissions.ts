@@ -930,42 +930,44 @@ export const resolveV3Modifiers = async (
       aaveEdgeInjectorRatesGuardian = zeroAddress;
       console.log(`EdgeInjectorRates guardian not found for network: ${chainId} and address: ${addressBook.EDGE_INJECTOR_RATES}`);
     }
-    obj['EdgeInjectorRates'] = {
-      address: addressBook.EDGE_INJECTOR_RATES,
-      modifiers: [
-        {
-          modifier: 'onlyOwner',
-          addresses: [
-            {
-              address: aaveEdgeInjectorRatesOwner,
-              owners: await getSafeOwners(provider, aaveEdgeInjectorRatesOwner),
-              signersThreshold: await getSafeThreshold(
-                provider,
-                aaveEdgeInjectorRatesOwner,
-              ),
-            },
-          ],
-          functions: roles['EdgeInjectorRates']['onlyOwner'],
-        },
-        {
-          modifier: 'onlyOwnerOrGuardian',
-          addresses: [
-            // Only add guardian if it's not zero address
-            ...(aaveEdgeInjectorRatesGuardian !== zeroAddress ? [{
-              address: aaveEdgeInjectorRatesGuardian,
-              owners: await getSafeOwners(provider, aaveEdgeInjectorRatesGuardian),
-              signersThreshold: await getSafeThreshold(provider, aaveEdgeInjectorRatesGuardian),
-            }] : []),
-            {
-              address: aaveEdgeInjectorRatesOwner,
-              owners: await getSafeOwners(provider, aaveEdgeInjectorRatesOwner),
-              signersThreshold: await getSafeThreshold(provider, aaveEdgeInjectorRatesOwner),
-            },
-          ],
-          functions: roles['EdgeInjectorRates']['onlyOwnerOrGuardian'],
-        },
-      ],
-    };
+    if (aaveEdgeInjectorRatesGuardian) {
+      obj['EdgeInjectorRates'] = {
+        address: addressBook.EDGE_INJECTOR_RATES,
+        modifiers: [
+          {
+            modifier: 'onlyOwner',
+            addresses: [
+              {
+                address: aaveEdgeInjectorRatesOwner,
+                owners: await getSafeOwners(provider, aaveEdgeInjectorRatesOwner),
+                signersThreshold: await getSafeThreshold(
+                  provider,
+                  aaveEdgeInjectorRatesOwner,
+                ),
+              },
+            ],
+            functions: roles['EdgeInjectorRates']['onlyOwner'],
+          },
+          {
+            modifier: 'onlyOwnerOrGuardian',
+            addresses: [
+              // Only add guardian if it's not zero address
+              ...(aaveEdgeInjectorRatesGuardian !== zeroAddress ? [{
+                address: aaveEdgeInjectorRatesGuardian,
+                owners: await getSafeOwners(provider, aaveEdgeInjectorRatesGuardian),
+                signersThreshold: await getSafeThreshold(provider, aaveEdgeInjectorRatesGuardian),
+              }] : []),
+              {
+                address: aaveEdgeInjectorRatesOwner,
+                owners: await getSafeOwners(provider, aaveEdgeInjectorRatesOwner),
+                signersThreshold: await getSafeThreshold(provider, aaveEdgeInjectorRatesOwner),
+              },
+            ],
+            functions: roles['EdgeInjectorRates']['onlyOwnerOrGuardian'],
+          },
+        ],
+      };
+    }
   }
 
   if (addressBook.EDGE_RISK_ORACLE) {

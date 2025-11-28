@@ -35,7 +35,6 @@ These documents contain tables with the following information:
 | Network |System type |Tables |
 |----------|----------|----------|
 |  ETHEREUM |  LIDO_TENDERLY |  [Permissions](./out/ETHEREUM-LIDO_TENDERLY.md#contracts) | |--------|--------|--------|
-|  ETHEREUM |  TENDERLY |  [Permissions](./out/ETHEREUM-TENDERLY.md#contracts) | |--------|--------|--------|
        
     
 ## Usage

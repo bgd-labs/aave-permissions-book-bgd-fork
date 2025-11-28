@@ -19,11 +19,12 @@ export const resolveAgentHubModifiers = async (
   chainId: number,
   agentHubRiskOracleInfo: Record<string, AgentHubRiskOracleInfo>,
   agentHubBlock: number,
+  poolName: string,
   tenderlyBlock?: number,
-  poolName?: string,
 ): Promise<{ agentHubPermissions: Contracts, agentHubRiskOracleInfo: Record<string, AgentHubRiskOracleInfo> }> => {
   let obj: Contracts = {};
   const roles = generateRoles(permissionsObject);
+
   // hub
   if (addressBook.AGENT_HUB) {
     const hubContract = getContract({ address: getAddress(addressBook.AGENT_HUB), abi: AGENT_HUB_ABI, client: provider });
@@ -52,7 +53,10 @@ export const resolveAgentHubModifiers = async (
 
         validationModules.add(rangeValidatorModule);
 
-        if (agentName.toLowerCase().includes('prime') && !(poolName === 'LIDO' || poolName === 'LIDO_TENDERLY')) {
+        const isPrime = agentName.toLowerCase().includes('prime');
+        const isLido = poolName === 'LIDO' || poolName === 'LIDO_TENDERLY';
+        const shouldSkip = isPrime !== isLido; // Skip if prime XOR lido (one true, one false)
+        if (shouldSkip) {
           continue;
         }
 
@@ -76,9 +80,6 @@ export const resolveAgentHubModifiers = async (
           ],
         };
       }
-
-
-
     }
 
     // get proxy admin from new transparent proxy factory
@@ -180,13 +181,13 @@ export const resolveAgentHubModifiers = async (
 
         const riskOracleContract = getContract({ address: getAddress(riskOracle), abi: RISK_ORACLE_ABI, client: provider });
         const riskOracleOwner = await riskOracleContract.read.owner() as Address;
-
         const onlyAuthorized: { address: Address, owners: string[], signersThreshold: number }[] = [];
 
         const { authorizedSenders, latestBlockNumber } = await getAuthorizedSenders(
           provider,
           agentHubRiskOracleInfo[riskOracle] || { address: riskOracle, authorizedSenders: [], latestBlockNumber: agentHubBlock } as AgentHubRiskOracleInfo,
           chainId,
+          poolName,
           tenderlyBlock,
         );
         agentHubRiskOracleInfo[riskOracle] = {
@@ -229,11 +230,6 @@ export const resolveAgentHubModifiers = async (
       }
     }
   }
-
-
-
-
-
 
   return { agentHubPermissions: obj, agentHubRiskOracleInfo: agentHubRiskOracleInfo };
 };

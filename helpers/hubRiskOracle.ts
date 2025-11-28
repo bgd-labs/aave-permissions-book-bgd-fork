@@ -57,7 +57,7 @@ export function getAuthorizedSenderAddresses({
   return [...finalSet];
 }
 
-export const getAuthorizedSenders = async (client: Client, oldAgentHubRiskOracleInfo: AgentHubRiskOracleInfo, chainId: number, tenderlyBlock?: number) => {
+export const getAuthorizedSenders = async (client: Client, oldAgentHubRiskOracleInfo: AgentHubRiskOracleInfo, chainId: number, poolName: string, tenderlyBlock?: number) => {
   let fromBlock = oldAgentHubRiskOracleInfo.latestBlockNumber;
   if (tenderlyBlock) {
     fromBlock = tenderlyBlock;
@@ -79,9 +79,8 @@ export const getAuthorizedSenders = async (client: Client, oldAgentHubRiskOracle
       maxBlock: tenderlyBlock,
       limit
     });
-
     const tenderlyProvider = getRpcClientFromUrl(
-      networkConfigs[Number(chainId)].pools[Pools.TENDERLY].tenderlyRpcUrl!,
+      networkConfigs[Number(chainId)].pools[poolName].tenderlyRpcUrl!,
     );
 
 
@@ -93,7 +92,6 @@ export const getAuthorizedSenders = async (client: Client, oldAgentHubRiskOracle
       limit: 999
     });
     events = [...preTenderlyForkEvents, ...tenderlyForkEvents];
-
     latestBlockNumber = preTenderlyForkCurrentBlock;
   } else {
     const { logs: networkEvents, currentBlock: eventsCurrentBlock } = await getEvents({
