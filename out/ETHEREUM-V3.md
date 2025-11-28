@@ -165,7 +165,7 @@
 |  [PermissionedPayloadsController](https://etherscan.io/address/0xF86F77F7531B3374274E3f725E0A81D60bC4bB67) |  [PermissionedPayloadsControllerProxyAdmin](https://etherscan.io/address/0x1C7B0090bADF16EDCbd11cD1d20dDc403ed43D17) |  onlyPayloadsManager |  [Finance Risk Council](https://etherscan.io/address/0x22740deBa78d5a0c24C58C740e3715ec29de1bFa) |  createPayload | |--------|--------|--------|--------|--------|
 |  [PermissionedExecutor](https://etherscan.io/address/0x2759de67aD133C747C9f41d56F1b8A343cE679a1) |  - |  onlyOwner |  [PermissionedPayloadsController](https://etherscan.io/address/0xF86F77F7531B3374274E3f725E0A81D60bC4bB67) |  executeTransaction | |--------|--------|--------|--------|--------|
 
-### Agent Hub Contracts 
+### Risk Agent Contracts 
 | contract |proxyAdmin |modifier |permission owner |functions |
 |----------|----------|----------|----------|----------|
 |  [EModeCategory_Core](https://etherscan.io/address/0x30D5F4Fe1fa3E5913AC88a4f62E74e750dFA33Fe) |  - |  onlyAgentHub |  [AgentHub](https://etherscan.io/address/0x95E3015c67EF62B866cC28ca5A9AB5017A55e336) |  inject | |--------|--------|--------|--------|--------|

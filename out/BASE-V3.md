@@ -1,5 +1,5 @@
 # BASE 
-## V3 
+## TENDERLY 
 ### Contracts upgradeability
 | contract |upgradeable by |
 |----------|----------|
@@ -20,9 +20,6 @@
 |  [AaveStewardInjectorCaps](https://basescan.org/address/0x4f84A364B66Eb6280350da011829a6BD02B4712f) |  not upgradeable | |--------|--------|
 |  [PoolExposureSteward](https://basescan.org/address/0x4f1F3E32f20847a4c9F002882eB607aD750b6115) |  not upgradeable | |--------|--------|
 |  [Manual AGRS](https://basescan.org/address/0x085E34722e04567Df9E6d2c32e82fd74f3342e79) |  not upgradeable | |--------|--------|
-|  [Collector](https://basescan.org/address/0xBA9424d650A4F5c80a0dA641254d1AcCE2A37057) |  Governance | |--------|--------|
-|  [ClinicSteward](https://basescan.org/address/0x1a79098C3149020ACdEfb3EE44AA1d9509305530) |  not upgradeable | |--------|--------|
-|  Aave a/v/s tokens |  Governance | |--------|--------|
 |  [GranularGuardian](https://basescan.org/address/0xa1c6aF35E0205f42256382C05243C543FEDBf4bB) |  not upgradeable | |--------|--------|
 |  [PayloadsController](https://basescan.org/address/0x2DC219E716793fb4b21548C0f009Ba3Af753ab01) |  Governance | |--------|--------|
 |  [Executor_lvl1](https://basescan.org/address/0x9390B1735def18560c509E2d0bc090E9d6BA257a) |  not upgradeable | |--------|--------|
@@ -78,10 +75,6 @@
 |  [PoolExposureSteward](https://basescan.org/address/0x4f1F3E32f20847a4c9F002882eB607aD750b6115) |  - |  onlyOwnerOrGuardian |  [Finance Risk Council](https://basescan.org/address/0x22740deBa78d5a0c24C58C740e3715ec29de1bFa), [Executor_lvl1](https://basescan.org/address/0x9390B1735def18560c509E2d0bc090E9d6BA257a) |  depositV3, withdrawV3, withdrawV2, migrateV2toV3, migrateBetweenV3 | |--------|--------|--------|--------|--------|
 |  [Manual AGRS](https://basescan.org/address/0x085E34722e04567Df9E6d2c32e82fd74f3342e79) |  - |  onlyOwner |  [Executor_lvl1](https://basescan.org/address/0x9390B1735def18560c509E2d0bc090E9d6BA257a) |  setRiskConfig, setAddressRestricted | |--------|--------|--------|--------|--------|
 |  [Manual AGRS](https://basescan.org/address/0x085E34722e04567Df9E6d2c32e82fd74f3342e79) |  - |  onlyRiskCouncil |  [Risk Council](https://basescan.org/address/0xfbeB4AcB31340bA4de9C87B11dfBf7e2bc8C0bF1) |  updateCaps, updateRates, updateCollateralSide, updateLstPriceCaps, updateStablePriceCaps | |--------|--------|--------|--------|--------|
-|  [Collector](https://basescan.org/address/0xBA9424d650A4F5c80a0dA641254d1AcCE2A37057) |  [ProxyAdmin](https://basescan.org/address/0xc85b1E333aecc99340b2320493Fe2d22b8734795) |  onlyFundsAdmin |  [Executor_lvl1](https://basescan.org/address/0x9390B1735def18560c509E2d0bc090E9d6BA257a), [ClinicSteward](https://basescan.org/address/0x1a79098C3149020ACdEfb3EE44AA1d9509305530), [PoolExposureSteward](https://basescan.org/address/0x4f1F3E32f20847a4c9F002882eB607aD750b6115) |  approve, transfer, setFundsAdmin, createStream | |--------|--------|--------|--------|--------|
-|  [Collector](https://basescan.org/address/0xBA9424d650A4F5c80a0dA641254d1AcCE2A37057) |  [ProxyAdmin](https://basescan.org/address/0xc85b1E333aecc99340b2320493Fe2d22b8734795) |  onlyAdminOrRecipient |  [ProxyAdmin](https://basescan.org/address/0xc85b1E333aecc99340b2320493Fe2d22b8734795), [Executor_lvl1](https://basescan.org/address/0x9390B1735def18560c509E2d0bc090E9d6BA257a), [ClinicSteward](https://basescan.org/address/0x1a79098C3149020ACdEfb3EE44AA1d9509305530), [PoolExposureSteward](https://basescan.org/address/0x4f1F3E32f20847a4c9F002882eB607aD750b6115) |  withdrawFromStream, cancelStream | |--------|--------|--------|--------|--------|
-|  [ClinicSteward](https://basescan.org/address/0x1a79098C3149020ACdEfb3EE44AA1d9509305530) |  - |  onlyCleanUpRole |  [CleanUp Admin](https://basescan.org/address/0xdeadD8aB03075b7FBA81864202a2f59EE25B312b), [ACI Automation](https://basescan.org/address/0x3Cbded22F878aFC8d39dCD744d3Fe62086B76193) |  renewAllowance, batchRepayBadDebt, batchLiquidate, batchRepayBadDebt | |--------|--------|--------|--------|--------|
-|  [ClinicSteward](https://basescan.org/address/0x1a79098C3149020ACdEfb3EE44AA1d9509305530) |  - |  onlyAdmin |  [Executor_lvl1](https://basescan.org/address/0x9390B1735def18560c509E2d0bc090E9d6BA257a) |  setAvailableBudget | |--------|--------|--------|--------|--------|
 
 ### Governance V3 Contracts 
 | contract |proxyAdmin |modifier |permission owner |functions |
@@ -101,7 +94,7 @@
 |  [CrossChainController](https://basescan.org/address/0x529467C76f234F2bD359d7ecF7c660A2846b04e2) |  [ProxyAdmin](https://basescan.org/address/0xc85b1E333aecc99340b2320493Fe2d22b8734795) |  onlyApprovedSenders |   |  forwardMessage | |--------|--------|--------|--------|--------|
 |  [CrossChainController](https://basescan.org/address/0x529467C76f234F2bD359d7ecF7c660A2846b04e2) |  [ProxyAdmin](https://basescan.org/address/0xc85b1E333aecc99340b2320493Fe2d22b8734795) |  onlyApprovedBridges |  [Base native adapter](https://basescan.org/address/0x7120b1f8e5b73c0C0DC99C6e52Fe4937E7EA11e0) |  receiveCrossChainMessage | |--------|--------|--------|--------|--------|
 
-### Agent Hub Contracts 
+### Risk Agent Contracts 
 | contract |proxyAdmin |modifier |permission owner |functions |
 |----------|----------|----------|----------|----------|
 |  [AgentHub](https://basescan.org/address/0x115E662Fa3f0b83014eB3f6F86F3D94BeC5eB411) |  [AgentHubProxyAdmin](https://basescan.org/address/0x62a2B5219010bDfD035cf1eAf6FB070e30F651B8) |  onlyOwner |  [Executor_lvl1](https://basescan.org/address/0x9390B1735def18560c509E2d0bc090E9d6BA257a) |  registerAgent, setAgentAdmin, setMaxBatchSize, setAgentAddress, renounceOwnership, transferOwnership | |--------|--------|--------|--------|--------|
@@ -135,16 +128,4 @@
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://basescan.org/address/0x9390B1735def18560c509E2d0bc090E9d6BA257a) | |--------|--------|
 |  SOLVE_EMERGENCY_ROLE |  [Aave Governance Guardian Base](https://basescan.org/address/0x360c0a69Ed2912351227a0b745f890CB2eBDbcFe) | |--------|--------|
 |  RETRY_ROLE |  [BGD](https://basescan.org/address/0x7FDA7C3528ad8f05e62148a700D456898b55f8d2) | |--------|--------|
-
-### Collector Admins 
-| Role |Contract |
-|----------|----------|
-|  DEFAULT_ADMIN |  [Executor_lvl1](https://basescan.org/address/0x9390B1735def18560c509E2d0bc090E9d6BA257a) | |--------|--------|
-|  FUNDS_ADMIN_ROLE |  [Executor_lvl1](https://basescan.org/address/0x9390B1735def18560c509E2d0bc090E9d6BA257a), [ClinicSteward](https://basescan.org/address/0x1a79098C3149020ACdEfb3EE44AA1d9509305530), [PoolExposureSteward](https://basescan.org/address/0x4f1F3E32f20847a4c9F002882eB607aD750b6115) | |--------|--------|
-
-### Clinic Steward Admins 
-| Role |Contract |
-|----------|----------|
-|  DEFAULT_ADMIN |  [Executor_lvl1](https://basescan.org/address/0x9390B1735def18560c509E2d0bc090E9d6BA257a) | |--------|--------|
-|  CLEANUP_ROLE |  [CleanUp Admin](https://basescan.org/address/0xdeadD8aB03075b7FBA81864202a2f59EE25B312b), [ACI Automation](https://basescan.org/address/0x3Cbded22F878aFC8d39dCD744d3Fe62086B76193) | |--------|--------|
 
