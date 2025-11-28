@@ -663,7 +663,7 @@
           "0xe1472037C9f17Ac00bf5336272ab74e423B9254d"
         ]
       },
-      "latestBlockNumber": 7274524
+      "latestBlockNumber": 7396235
     },
     "gsmRoles": {},
     "govV3": {
@@ -679,7 +679,7 @@
             "0xdc62E0e65b2251Dc66404ca717FD32dcC365Be3A"
           ]
         },
-        "latestBlockNumber": 7274530
+        "latestBlockNumber": 7396240
       },
       "contracts": {
         "GranularGuardian": {
@@ -1025,7 +1025,7 @@
         }
       },
       "senders": [],
-      "latestCCCBlockNumber": 7274530
+      "latestCCCBlockNumber": 7396240
     },
     "collector": {
       "contracts": {
@@ -1100,11 +1100,86 @@
             "0x47aAdaAE1F05C978E6aBb7568d11B7F6e0FC4d6A"
           ]
         },
-        "latestBlockNumber": 7274530
+        "latestBlockNumber": 7396235
       }
     },
     "clinicSteward": {},
     "umbrella": {},
-    "ppc": {}
+    "ppc": {},
+    "agentHub": {
+      "contracts": {
+        "AgentHub": {
+          "address": "0x5F29ACbFB6de4282bB4DD2017930cDA730eD864D",
+          "proxyAdmin": "0xc3ba7a3b8357b32df987ddefb6baf9dcc0bd8791",
+          "modifiers": [
+            {
+              "modifier": "onlyOwner",
+              "addresses": [
+                {
+                  "address": "0x47aAdaAE1F05C978E6aBb7568d11B7F6e0FC4d6A",
+                  "owners": [],
+                  "signersThreshold": 0
+                }
+              ],
+              "functions": [
+                "registerAgent",
+                "setAgentAdmin",
+                "setMaxBatchSize",
+                "setAgentAddress",
+                "renounceOwnership",
+                "transferOwnership"
+              ]
+            },
+            {
+              "modifier": "onlyOwnerOrAgentAdmin",
+              "addresses": [
+                {
+                  "address": "0x47aAdaAE1F05C978E6aBb7568d11B7F6e0FC4d6A",
+                  "owners": [],
+                  "signersThreshold": 0
+                }
+              ],
+              "functions": [
+                "setAgentAsPermissioned",
+                "addPermissionedSender",
+                "removePermissionedSender",
+                "addAllowedMarket",
+                "removeAllowedMarket",
+                "addRestrictedMarket",
+                "removeRestrictedMarket",
+                "setExpirationPeriod",
+                "setAgentEnabled",
+                "setMinimumDelay",
+                "setAgentContext",
+                "setMarketsFromAgentEnabled",
+                "addAllowedMarket",
+                "addAllowedMarket"
+              ]
+            }
+          ]
+        },
+        "AgentHubProxyAdmin": {
+          "address": "0xc3ba7a3b8357b32df987ddefb6baf9dcc0bd8791",
+          "modifiers": [
+            {
+              "modifier": "onlyOwner",
+              "addresses": [
+                {
+                  "address": "0x47aAdaAE1F05C978E6aBb7568d11B7F6e0FC4d6A",
+                  "owners": [],
+                  "signersThreshold": 0
+                }
+              ],
+              "functions": [
+                "changeProxyAdmin",
+                "upgrade",
+                "upgradeAndCall"
+              ]
+            }
+          ]
+        }
+      },
+      "agentHubRiskOracleInfo": {}
+    }
   }
 }

@@ -103,6 +103,13 @@
 |  [CrossChainController](https://arbiscan.io/address/0xCbFB78a3Eeaa611b826E37c80E4126c8787D29f0) |  [ProxyAdmin](https://arbiscan.io/address/0xD3cF979e676265e4f6379749DECe4708B9A22476) |  onlyApprovedSenders |   |  forwardMessage | |--------|--------|--------|--------|--------|
 |  [CrossChainController](https://arbiscan.io/address/0xCbFB78a3Eeaa611b826E37c80E4126c8787D29f0) |  [ProxyAdmin](https://arbiscan.io/address/0xD3cF979e676265e4f6379749DECe4708B9A22476) |  onlyApprovedBridges |  [Arbitrum native adapter](https://arbiscan.io/address/0xc8a2ADC4261c6b669CdFf69E717E77C9cFeB420d) |  receiveCrossChainMessage | |--------|--------|--------|--------|--------|
 
+### Agent Hub Contracts 
+| contract |proxyAdmin |modifier |permission owner |functions |
+|----------|----------|----------|----------|----------|
+|  [AgentHub](https://arbiscan.io/address/0xf4F2bc657abe96863dC1Ae17C9e9fFfc2B420e7B) |  [AgentHubProxyAdmin](https://arbiscan.io/address/0xADc0C2eF92dADb421466F10254922A7F65A71F2B) |  onlyOwner |  [Executor_lvl1](https://arbiscan.io/address/0xFF1137243698CaA18EE364Cc966CF0e02A4e6327) |  registerAgent, setAgentAdmin, setMaxBatchSize, setAgentAddress, renounceOwnership, transferOwnership | |--------|--------|--------|--------|--------|
+|  [AgentHub](https://arbiscan.io/address/0xf4F2bc657abe96863dC1Ae17C9e9fFfc2B420e7B) |  [AgentHubProxyAdmin](https://arbiscan.io/address/0xADc0C2eF92dADb421466F10254922A7F65A71F2B) |  onlyOwnerOrAgentAdmin |  [Executor_lvl1](https://arbiscan.io/address/0xFF1137243698CaA18EE364Cc966CF0e02A4e6327) |  setAgentAsPermissioned, addPermissionedSender, removePermissionedSender, addAllowedMarket, removeAllowedMarket, addRestrictedMarket, removeRestrictedMarket, setExpirationPeriod, setAgentEnabled, setMinimumDelay, setAgentContext, setMarketsFromAgentEnabled, addAllowedMarket, addAllowedMarket | |--------|--------|--------|--------|--------|
+|  [AgentHubProxyAdmin](https://arbiscan.io/address/0xadc0c2ef92dadb421466f10254922a7f65a71f2b) |  - |  onlyOwner |  [Executor_lvl1](https://arbiscan.io/address/0xFF1137243698CaA18EE364Cc966CF0e02A4e6327) |  changeProxyAdmin, upgrade, upgradeAndCall | |--------|--------|--------|--------|--------|
+
 ### Guardians 
 | Guardian |Threshold |Address |Owners |
 |----------|----------|----------|----------|

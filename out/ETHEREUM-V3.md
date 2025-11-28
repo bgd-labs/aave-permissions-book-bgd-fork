@@ -166,6 +166,13 @@
 |  [PermissionedPayloadsController](https://etherscan.io/address/0xF86F77F7531B3374274E3f725E0A81D60bC4bB67) |  [PermissionedPayloadsControllerProxyAdmin](https://etherscan.io/address/0x1C7B0090bADF16EDCbd11cD1d20dDc403ed43D17) |  onlyPayloadsManager |  [Finance Risk Council](https://etherscan.io/address/0x22740deBa78d5a0c24C58C740e3715ec29de1bFa) |  createPayload | |--------|--------|--------|--------|--------|
 |  [PermissionedExecutor](https://etherscan.io/address/0x2759de67aD133C747C9f41d56F1b8A343cE679a1) |  - |  onlyOwner |  [PermissionedPayloadsController](https://etherscan.io/address/0xF86F77F7531B3374274E3f725E0A81D60bC4bB67) |  executeTransaction | |--------|--------|--------|--------|--------|
 
+### Agent Hub Contracts 
+| contract |proxyAdmin |modifier |permission owner |functions |
+|----------|----------|----------|----------|----------|
+|  [AgentHub](https://etherscan.io/address/0x95E3015c67EF62B866cC28ca5A9AB5017A55e336) |  [AgentHubProxyAdmin](https://etherscan.io/address/0xD26dcF055E16ed3048a17b37006082779CF0297c) |  onlyOwner |  [Executor_lvl1](https://etherscan.io/address/0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A) |  registerAgent, setAgentAdmin, setMaxBatchSize, setAgentAddress, renounceOwnership, transferOwnership | |--------|--------|--------|--------|--------|
+|  [AgentHub](https://etherscan.io/address/0x95E3015c67EF62B866cC28ca5A9AB5017A55e336) |  [AgentHubProxyAdmin](https://etherscan.io/address/0xD26dcF055E16ed3048a17b37006082779CF0297c) |  onlyOwnerOrAgentAdmin |  [Executor_lvl1](https://etherscan.io/address/0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A) |  setAgentAsPermissioned, addPermissionedSender, removePermissionedSender, addAllowedMarket, removeAllowedMarket, addRestrictedMarket, removeRestrictedMarket, setExpirationPeriod, setAgentEnabled, setMinimumDelay, setAgentContext, setMarketsFromAgentEnabled, addAllowedMarket, addAllowedMarket | |--------|--------|--------|--------|--------|
+|  [AgentHubProxyAdmin](https://etherscan.io/address/0xd26dcf055e16ed3048a17b37006082779cf0297c) |  - |  onlyOwner |  [Executor_lvl1](https://etherscan.io/address/0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A) |  changeProxyAdmin, upgrade, upgradeAndCall | |--------|--------|--------|--------|--------|
+
 ### Permissioned Payloads Controller Contracts 
 | contract |proxyAdmin |modifier |permission owner |functions |
 |----------|----------|----------|----------|----------|

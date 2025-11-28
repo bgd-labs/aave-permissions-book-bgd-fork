@@ -103,6 +103,13 @@
 |  [CrossChainController](https://optimistic.etherscan.io/address/0x48A9FE90bce5EEd790f3F4Ce192d1C0B351fd4Ca) |  [ProxyAdmin](https://optimistic.etherscan.io/address/0xD3cF979e676265e4f6379749DECe4708B9A22476) |  onlyApprovedSenders |   |  forwardMessage | |--------|--------|--------|--------|--------|
 |  [CrossChainController](https://optimistic.etherscan.io/address/0x48A9FE90bce5EEd790f3F4Ce192d1C0B351fd4Ca) |  [ProxyAdmin](https://optimistic.etherscan.io/address/0xD3cF979e676265e4f6379749DECe4708B9A22476) |  onlyApprovedBridges |  [Optimism native adapter](https://optimistic.etherscan.io/address/0xAE93BEa44dcbE52B625169588574d31e36fb3A67) |  receiveCrossChainMessage | |--------|--------|--------|--------|--------|
 
+### Agent Hub Contracts 
+| contract |proxyAdmin |modifier |permission owner |functions |
+|----------|----------|----------|----------|----------|
+|  [AgentHub](https://optimistic.etherscan.io/address/0x1aCEC7abbcFE6dD10EA4bB50894908406FfE8719) |  [AgentHubProxyAdmin](https://optimistic.etherscan.io/address/0x558E6bb4399a3F405ba6D1263dC4870487Cc3589) |  onlyOwner |  [Executor_lvl1](https://optimistic.etherscan.io/address/0x746c675dAB49Bcd5BB9Dc85161f2d7Eb435009bf) |  registerAgent, setAgentAdmin, setMaxBatchSize, setAgentAddress, renounceOwnership, transferOwnership | |--------|--------|--------|--------|--------|
+|  [AgentHub](https://optimistic.etherscan.io/address/0x1aCEC7abbcFE6dD10EA4bB50894908406FfE8719) |  [AgentHubProxyAdmin](https://optimistic.etherscan.io/address/0x558E6bb4399a3F405ba6D1263dC4870487Cc3589) |  onlyOwnerOrAgentAdmin |  [Executor_lvl1](https://optimistic.etherscan.io/address/0x746c675dAB49Bcd5BB9Dc85161f2d7Eb435009bf) |  setAgentAsPermissioned, addPermissionedSender, removePermissionedSender, addAllowedMarket, removeAllowedMarket, addRestrictedMarket, removeRestrictedMarket, setExpirationPeriod, setAgentEnabled, setMinimumDelay, setAgentContext, setMarketsFromAgentEnabled, addAllowedMarket, addAllowedMarket | |--------|--------|--------|--------|--------|
+|  [AgentHubProxyAdmin](https://optimistic.etherscan.io/address/0x558e6bb4399a3f405ba6d1263dc4870487cc3589) |  - |  onlyOwner |  [Executor_lvl1](https://optimistic.etherscan.io/address/0x746c675dAB49Bcd5BB9Dc85161f2d7Eb435009bf) |  changeProxyAdmin, upgrade, upgradeAndCall | |--------|--------|--------|--------|--------|
+
 ### Guardians 
 | Guardian |Threshold |Address |Owners |
 |----------|----------|----------|----------|

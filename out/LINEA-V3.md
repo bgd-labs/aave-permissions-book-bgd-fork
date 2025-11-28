@@ -97,6 +97,13 @@
 |  [CrossChainController](https://lineascan.build//address/0x0D3f821e9741C8a8Bcac231162320251Db0cdf52) |  [ProxyAdmin](https://lineascan.build//address/0x160E35e28fEE90F3656420584e0a990276219b5A) |  onlyApprovedSenders |   |  forwardMessage | |--------|--------|--------|--------|--------|
 |  [CrossChainController](https://lineascan.build//address/0x0D3f821e9741C8a8Bcac231162320251Db0cdf52) |  [ProxyAdmin](https://lineascan.build//address/0x160E35e28fEE90F3656420584e0a990276219b5A) |  onlyApprovedBridges |  [Linea native adapter](https://lineascan.build//address/0xB3332d31ECFC3ef3BF6Cda79833D11d1A53f5cE6) |  receiveCrossChainMessage | |--------|--------|--------|--------|--------|
 
+### Agent Hub Contracts 
+| contract |proxyAdmin |modifier |permission owner |functions |
+|----------|----------|----------|----------|----------|
+|  [AgentHub](https://lineascan.build//address/0xa1e306dfB12270b02960d5a612539fc587108eD7) |  [AgentHubProxyAdmin](https://lineascan.build//address/0x0A6834AC11c66D1CDBE1a2B4A3A3D20C5C43aD3a) |  onlyOwner |  [Executor_lvl1](https://lineascan.build//address/0x8c2d95FE7aeB57b86961F3abB296A54f0ADb7F88) |  registerAgent, setAgentAdmin, setMaxBatchSize, setAgentAddress, renounceOwnership, transferOwnership | |--------|--------|--------|--------|--------|
+|  [AgentHub](https://lineascan.build//address/0xa1e306dfB12270b02960d5a612539fc587108eD7) |  [AgentHubProxyAdmin](https://lineascan.build//address/0x0A6834AC11c66D1CDBE1a2B4A3A3D20C5C43aD3a) |  onlyOwnerOrAgentAdmin |  [Executor_lvl1](https://lineascan.build//address/0x8c2d95FE7aeB57b86961F3abB296A54f0ADb7F88) |  setAgentAsPermissioned, addPermissionedSender, removePermissionedSender, addAllowedMarket, removeAllowedMarket, addRestrictedMarket, removeRestrictedMarket, setExpirationPeriod, setAgentEnabled, setMinimumDelay, setAgentContext, setMarketsFromAgentEnabled, addAllowedMarket, addAllowedMarket | |--------|--------|--------|--------|--------|
+|  [AgentHubProxyAdmin](https://lineascan.build//address/0x0a6834ac11c66d1cdbe1a2b4a3a3d20c5c43ad3a) |  - |  onlyOwner |  [Executor_lvl1](https://lineascan.build//address/0x8c2d95FE7aeB57b86961F3abB296A54f0ADb7F88) |  changeProxyAdmin, upgrade, upgradeAndCall | |--------|--------|--------|--------|--------|
+
 ### Guardians 
 | Guardian |Threshold |Address |Owners |
 |----------|----------|----------|----------|

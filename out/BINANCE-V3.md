@@ -106,6 +106,13 @@
 |  [CrossChainController](https://bscscan.com/address/0x9d33ee6543C9b2C8c183b8fb58fB089266cffA19) |  [ProxyAdmin](https://bscscan.com/address/0x39EBFfc7679c62Dfcc4A3E2c09Bcb0be255Ae63c) |  onlyApprovedBridges |  [CCIP adapter](https://bscscan.com/address/0xAE93BEa44dcbE52B625169588574d31e36fb3A67), [LayerZero adapter](https://bscscan.com/address/0xa5cc218513305221201f196760E9e64e9D49d98A), [Hyperlane adapter](https://bscscan.com/address/0x3F006299eC88985c18E6e885EeA29A49eC579882) |  receiveCrossChainMessage | |--------|--------|--------|--------|--------|
 |  [CrossChainController](https://bscscan.com/address/0x9d33ee6543C9b2C8c183b8fb58fB089266cffA19) |  [ProxyAdmin](https://bscscan.com/address/0x39EBFfc7679c62Dfcc4A3E2c09Bcb0be255Ae63c) |  onlyGuardian |  [BGD](https://bscscan.com/address/0xE8C5ab722d0b1B7316Cc4034f2BE91A5B1d29964) |  solveEmergency | |--------|--------|--------|--------|--------|
 
+### Agent Hub Contracts 
+| contract |proxyAdmin |modifier |permission owner |functions |
+|----------|----------|----------|----------|----------|
+|  [AgentHub](https://bscscan.com/address/0x115E662Fa3f0b83014eB3f6F86F3D94BeC5eB411) |  [AgentHubProxyAdmin](https://bscscan.com/address/0x62a2B5219010bDfD035cf1eAf6FB070e30F651B8) |  onlyOwner |  [Executor_lvl1](https://bscscan.com/address/0x9390B1735def18560c509E2d0bc090E9d6BA257a) |  registerAgent, setAgentAdmin, setMaxBatchSize, setAgentAddress, renounceOwnership, transferOwnership | |--------|--------|--------|--------|--------|
+|  [AgentHub](https://bscscan.com/address/0x115E662Fa3f0b83014eB3f6F86F3D94BeC5eB411) |  [AgentHubProxyAdmin](https://bscscan.com/address/0x62a2B5219010bDfD035cf1eAf6FB070e30F651B8) |  onlyOwnerOrAgentAdmin |  [Executor_lvl1](https://bscscan.com/address/0x9390B1735def18560c509E2d0bc090E9d6BA257a) |  setAgentAsPermissioned, addPermissionedSender, removePermissionedSender, addAllowedMarket, removeAllowedMarket, addRestrictedMarket, removeRestrictedMarket, setExpirationPeriod, setAgentEnabled, setMinimumDelay, setAgentContext, setMarketsFromAgentEnabled, addAllowedMarket, addAllowedMarket | |--------|--------|--------|--------|--------|
+|  [AgentHubProxyAdmin](https://bscscan.com/address/0x62a2b5219010bdfd035cf1eaf6fb070e30f651b8) |  - |  onlyOwner |  [Executor_lvl1](https://bscscan.com/address/0x9390B1735def18560c509E2d0bc090E9d6BA257a) |  changeProxyAdmin, upgrade, upgradeAndCall | |--------|--------|--------|--------|--------|
+
 ### Guardians 
 | Guardian |Threshold |Address |Owners |
 |----------|----------|----------|----------|

@@ -101,6 +101,13 @@
 |  [CrossChainController](https://basescan.org/address/0x529467C76f234F2bD359d7ecF7c660A2846b04e2) |  [ProxyAdmin](https://basescan.org/address/0xc85b1E333aecc99340b2320493Fe2d22b8734795) |  onlyApprovedSenders |   |  forwardMessage | |--------|--------|--------|--------|--------|
 |  [CrossChainController](https://basescan.org/address/0x529467C76f234F2bD359d7ecF7c660A2846b04e2) |  [ProxyAdmin](https://basescan.org/address/0xc85b1E333aecc99340b2320493Fe2d22b8734795) |  onlyApprovedBridges |  [Base native adapter](https://basescan.org/address/0x7120b1f8e5b73c0C0DC99C6e52Fe4937E7EA11e0) |  receiveCrossChainMessage | |--------|--------|--------|--------|--------|
 
+### Agent Hub Contracts 
+| contract |proxyAdmin |modifier |permission owner |functions |
+|----------|----------|----------|----------|----------|
+|  [AgentHub](https://basescan.org/address/0x115E662Fa3f0b83014eB3f6F86F3D94BeC5eB411) |  [AgentHubProxyAdmin](https://basescan.org/address/0x62a2B5219010bDfD035cf1eAf6FB070e30F651B8) |  onlyOwner |  [Executor_lvl1](https://basescan.org/address/0x9390B1735def18560c509E2d0bc090E9d6BA257a) |  registerAgent, setAgentAdmin, setMaxBatchSize, setAgentAddress, renounceOwnership, transferOwnership | |--------|--------|--------|--------|--------|
+|  [AgentHub](https://basescan.org/address/0x115E662Fa3f0b83014eB3f6F86F3D94BeC5eB411) |  [AgentHubProxyAdmin](https://basescan.org/address/0x62a2B5219010bDfD035cf1eAf6FB070e30F651B8) |  onlyOwnerOrAgentAdmin |  [Executor_lvl1](https://basescan.org/address/0x9390B1735def18560c509E2d0bc090E9d6BA257a) |  setAgentAsPermissioned, addPermissionedSender, removePermissionedSender, addAllowedMarket, removeAllowedMarket, addRestrictedMarket, removeRestrictedMarket, setExpirationPeriod, setAgentEnabled, setMinimumDelay, setAgentContext, setMarketsFromAgentEnabled, addAllowedMarket, addAllowedMarket | |--------|--------|--------|--------|--------|
+|  [AgentHubProxyAdmin](https://basescan.org/address/0x62a2b5219010bdfd035cf1eaf6fb070e30f651b8) |  - |  onlyOwner |  [Executor_lvl1](https://basescan.org/address/0x9390B1735def18560c509E2d0bc090E9d6BA257a) |  changeProxyAdmin, upgrade, upgradeAndCall | |--------|--------|--------|--------|--------|
+
 ### Guardians 
 | Guardian |Threshold |Address |Owners |
 |----------|----------|----------|----------|
