@@ -518,7 +518,8 @@ const generateNetworkPermissions = async (network: string) => {
         Number(network),
         fullJson[poolKey]?.agentHub?.agentHubRiskOracleInfo || {} as Record<string, AgentHubRiskOracleInfo>,
         pool.agentHubBlock,
-        pool.tenderlyBlock
+        pool.tenderlyBlock,
+        poolKey
       );
 
       agentHub.contracts = agentHubPermissions;
