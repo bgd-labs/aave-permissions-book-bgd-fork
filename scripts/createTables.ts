@@ -109,6 +109,7 @@ export const generateTable = (network: string, pool: string): string => {
     ...networkPermits[pool].contracts,
     ...getPermissionsByNetwork(network)[pool].collector?.contracts,
     ...getPermissionsByNetwork(network)[pool].clinicSteward?.contracts,
+    // ...getPermissionsByNetwork(network)[pool].agentHub?.contracts,
     // ...getPermissionsByNetwork(network)[pool].umbrella?.contracts,
     // ...getPermissionsByNetwork(network)[pool].ppc?.contracts,
   }
@@ -139,9 +140,7 @@ export const generateTable = (network: string, pool: string): string => {
   let v3Contracts;
   if (
     pool === Pools.LIDO ||
-    pool === Pools.ETHERFI ||
-    pool === Pools.ETHERFI_TENDERLY ||
-    pool === Pools.LIDO_TENDERLY
+    pool === Pools.ETHERFI
   ) {
     v3Contracts = generateContractsByAddress({
       ...(poolPermitsByContract?.contracts || {}),
@@ -151,6 +150,42 @@ export const generateTable = (network: string, pool: string): string => {
       ...getPermissionsByNetwork(network)['V3'].umbrella?.contracts,
       ...getPermissionsByNetwork(network)['V3'].ppc?.contracts,
       ...getPermissionsByNetwork(network)['V3'].agentHub?.contracts,
+    });
+  } else if (
+    pool === Pools.TENDERLY
+  ) {
+    v3Contracts = generateContractsByAddress({
+      ...(poolPermitsByContract?.contracts || {}),
+      ...getPermissionsByNetwork(network)['TENDERLY'].govV3?.contracts,
+      ...getPermissionsByNetwork(network)['TENDERLY'].collector?.contracts,
+      ...getPermissionsByNetwork(network)['TENDERLY'].clinicSteward?.contracts,
+      ...getPermissionsByNetwork(network)['TENDERLY'].umbrella?.contracts,
+      ...getPermissionsByNetwork(network)['TENDERLY'].ppc?.contracts,
+      ...getPermissionsByNetwork(network)['TENDERLY'].agentHub?.contracts,
+    });
+  } else if (
+    pool === Pools.LIDO_TENDERLY
+  ) {
+    v3Contracts = generateContractsByAddress({
+      ...(poolPermitsByContract?.contracts || {}),
+      ...getPermissionsByNetwork(network)['LIDO_TENDERLY'].govV3?.contracts,
+      ...getPermissionsByNetwork(network)['LIDO_TENDERLY'].collector?.contracts,
+      ...getPermissionsByNetwork(network)['LIDO_TENDERLY'].clinicSteward?.contracts,
+      ...getPermissionsByNetwork(network)['LIDO_TENDERLY'].umbrella?.contracts,
+      ...getPermissionsByNetwork(network)['LIDO_TENDERLY'].ppc?.contracts,
+      ...getPermissionsByNetwork(network)['LIDO_TENDERLY'].agentHub?.contracts,
+    });
+  } else if (
+    pool === Pools.ETHERFI_TENDERLY
+  ) {
+    v3Contracts = generateContractsByAddress({
+      ...(poolPermitsByContract?.contracts || {}),
+      ...getPermissionsByNetwork(network)['ETHERFI_TENDERLY'].govV3?.contracts,
+      ...getPermissionsByNetwork(network)['ETHERFI_TENDERLY'].collector?.contracts,
+      ...getPermissionsByNetwork(network)['ETHERFI_TENDERLY'].clinicSteward?.contracts,
+      ...getPermissionsByNetwork(network)['ETHERFI_TENDERLY'].umbrella?.contracts,
+      ...getPermissionsByNetwork(network)['ETHERFI_TENDERLY'].ppc?.contracts,
+      ...getPermissionsByNetwork(network)['ETHERFI_TENDERLY'].agentHub?.contracts,
     });
   } else if (pool === Pools.V3_WHITE_LABEL) {
     v3Contracts = generateContractsByAddress({

@@ -10,6 +10,7 @@ import { onlyOwnerAbi } from "../abis/onlyOwnerAbi.js";
 import { AGENT_HUB_ABI } from "../abis/agentHub.js";
 import { AGENT_ABI } from "../abis/agent.js";
 import { RISK_ORACLE_ABI } from "../abis/riskOracle.js";
+import { networkConfigs } from "../helpers/configs.js";
 
 
 export const resolveAgentHubModifiers = async (
@@ -34,6 +35,7 @@ export const resolveAgentHubModifiers = async (
     const agentAdmins: Set<Address> = new Set();
     const validationModules: Set<Address> = new Set();
     const riskOracles: Set<Address> = new Set();
+    const agents: Record<Address, string> = {};
 
     for (let i = 0; i < agentCount; i++) {
       const agentEnabled = await hubContract.read.isAgentEnabled([i]) as boolean;
@@ -59,27 +61,34 @@ export const resolveAgentHubModifiers = async (
         if (shouldSkip) {
           continue;
         }
-
-        obj[`${agentName}`] = {
-          address: agentAddress,
-          modifiers: [
-            {
-              modifier: 'onlyAgentHub',
-              addresses: [
-                {
-                  address: addressBook.AGENT_HUB,
-                  owners: await getSafeOwners(provider, addressBook.AGENT_HUB),
-                  signersThreshold: await getSafeThreshold(
-                    provider,
-                    addressBook.AGENT_HUB,
-                  ),
-                },
-              ],
-              functions: roles['Agent']['onlyAgentHub'],
-            },
-          ],
-        };
+        if (!agents[agentAddress]) {
+          agents[agentAddress] = `${agentName}Agent`;
+        } else {
+          agents[agentAddress] = `${agents[agentAddress]}-${agentName}Agent`;
+        }
       }
+    }
+
+    for (const agentAddress of Object.keys(agents)) {
+      obj[agents[getAddress(agentAddress)]] = {
+        address: agentAddress,
+        modifiers: [
+          {
+            modifier: 'onlyAgentHub',
+            addresses: [
+              {
+                address: addressBook.AGENT_HUB,
+                owners: await getSafeOwners(provider, addressBook.AGENT_HUB),
+                signersThreshold: await getSafeThreshold(
+                  provider,
+                  addressBook.AGENT_HUB,
+                ),
+              },
+            ],
+            functions: roles['Agent']['onlyAgentHub'],
+          },
+        ],
+      };
     }
 
     // get proxy admin from new transparent proxy factory
@@ -183,18 +192,26 @@ export const resolveAgentHubModifiers = async (
         const riskOracleOwner = await riskOracleContract.read.owner() as Address;
         const onlyAuthorized: { address: Address, owners: string[], signersThreshold: number }[] = [];
 
+        let preAuthorizedSenders: string[] = [];
+        if (!agentHubRiskOracleInfo[riskOracle] || Object.keys(agentHubRiskOracleInfo[riskOracle]).length === 0) {
+          preAuthorizedSenders = networkConfigs[Number(chainId)].pools[poolName].hubRiskOracleInitialSenders ?? [];
+        }
+
         const { authorizedSenders, latestBlockNumber } = await getAuthorizedSenders(
           provider,
-          agentHubRiskOracleInfo[riskOracle] || { address: riskOracle, authorizedSenders: [], latestBlockNumber: agentHubBlock } as AgentHubRiskOracleInfo,
+          agentHubRiskOracleInfo[riskOracle] || { address: riskOracle, authorizedSenders: preAuthorizedSenders, latestBlockNumber: agentHubBlock } as AgentHubRiskOracleInfo,
           chainId,
           poolName,
           tenderlyBlock,
         );
+
         agentHubRiskOracleInfo[riskOracle] = {
           authorizedSenders: authorizedSenders,
           latestBlockNumber: latestBlockNumber,
           address: riskOracle,
         };
+
+        console.log('authorizedSenders', authorizedSenders);
 
         for (const authorizedSender of authorizedSenders) {
           onlyAuthorized.push({

@@ -91,6 +91,7 @@ export const getAuthorizedSenders = async (client: Client, oldAgentHubRiskOracle
       eventTypes: ['AuthorizedSenderAdded', 'AuthorizedSenderRemoved'],
       limit: 999
     });
+    console.log('tenderlyForkEvents', tenderlyForkEvents);
     events = [...preTenderlyForkEvents, ...tenderlyForkEvents];
     latestBlockNumber = preTenderlyForkCurrentBlock;
   } else {
