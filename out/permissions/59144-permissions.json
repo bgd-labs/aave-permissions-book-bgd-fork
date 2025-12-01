@@ -2031,7 +2031,7 @@
     "ppc": {},
     "agentHub": {
       "contracts": {
-        "RateStrategy": {
+        "RateStrategyAgent": {
           "address": "0x963C0b3dFF5C35b171CcC11DAC006a605E42BeD2",
           "modifiers": [
             {
@@ -2168,7 +2168,13 @@
             },
             {
               "modifier": "onlyAuthorized",
-              "addresses": [],
+              "addresses": [
+                {
+                  "address": "0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9",
+                  "owners": [],
+                  "signersThreshold": 0
+                }
+              ],
               "functions": [
                 "publishRiskParameterUpdate",
                 "publishBulkRiskParameterUpdates"
@@ -2179,7 +2185,9 @@
       },
       "agentHubRiskOracleInfo": {
         "0xa6C229d3a1D4D31708B16C0ad2f14337aE4E7893": {
-          "authorizedSenders": [],
+          "authorizedSenders": [
+            "0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9"
+          ],
           "latestBlockNumber": 26124543,
           "address": "0xa6C229d3a1D4D31708B16C0ad2f14337aE4E7893"
         }

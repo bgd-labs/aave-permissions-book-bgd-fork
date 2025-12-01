@@ -156,6 +156,12 @@ export const generateTable = (network: string, pool: string): string => {
   ) {
     v3Contracts = generateContractsByAddress({
       ...(poolPermitsByContract?.contracts || {}),
+      ...getPermissionsByNetwork(network)['V3'].govV3?.contracts,
+      ...getPermissionsByNetwork(network)['V3'].collector?.contracts,
+      ...getPermissionsByNetwork(network)['V3'].clinicSteward?.contracts,
+      ...getPermissionsByNetwork(network)['V3'].umbrella?.contracts,
+      ...getPermissionsByNetwork(network)['V3'].ppc?.contracts,
+      ...getPermissionsByNetwork(network)['V3'].agentHub?.contracts,
       ...getPermissionsByNetwork(network)['TENDERLY'].govV3?.contracts,
       ...getPermissionsByNetwork(network)['TENDERLY'].collector?.contracts,
       ...getPermissionsByNetwork(network)['TENDERLY'].clinicSteward?.contracts,
@@ -168,6 +174,12 @@ export const generateTable = (network: string, pool: string): string => {
   ) {
     v3Contracts = generateContractsByAddress({
       ...(poolPermitsByContract?.contracts || {}),
+      ...getPermissionsByNetwork(network)['V3'].govV3?.contracts,
+      ...getPermissionsByNetwork(network)['V3'].collector?.contracts,
+      ...getPermissionsByNetwork(network)['V3'].clinicSteward?.contracts,
+      ...getPermissionsByNetwork(network)['V3'].umbrella?.contracts,
+      ...getPermissionsByNetwork(network)['V3'].ppc?.contracts,
+      ...getPermissionsByNetwork(network)['V3'].agentHub?.contracts,
       ...getPermissionsByNetwork(network)['LIDO_TENDERLY'].govV3?.contracts,
       ...getPermissionsByNetwork(network)['LIDO_TENDERLY'].collector?.contracts,
       ...getPermissionsByNetwork(network)['LIDO_TENDERLY'].clinicSteward?.contracts,
@@ -180,6 +192,12 @@ export const generateTable = (network: string, pool: string): string => {
   ) {
     v3Contracts = generateContractsByAddress({
       ...(poolPermitsByContract?.contracts || {}),
+      ...getPermissionsByNetwork(network)['V3'].govV3?.contracts,
+      ...getPermissionsByNetwork(network)['V3'].collector?.contracts,
+      ...getPermissionsByNetwork(network)['V3'].clinicSteward?.contracts,
+      ...getPermissionsByNetwork(network)['V3'].umbrella?.contracts,
+      ...getPermissionsByNetwork(network)['V3'].ppc?.contracts,
+      ...getPermissionsByNetwork(network)['V3'].agentHub?.contracts,
       ...getPermissionsByNetwork(network)['ETHERFI_TENDERLY'].govV3?.contracts,
       ...getPermissionsByNetwork(network)['ETHERFI_TENDERLY'].collector?.contracts,
       ...getPermissionsByNetwork(network)['ETHERFI_TENDERLY'].clinicSteward?.contracts,

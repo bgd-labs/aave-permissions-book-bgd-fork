@@ -7481,7 +7481,7 @@
     },
     "agentHub": {
       "contracts": {
-        "EModeCategory_Core": {
+        "EModeCategory_CoreAgent": {
           "address": "0x30D5F4Fe1fa3E5913AC88a4f62E74e750dFA33Fe",
           "modifiers": [
             {
@@ -7499,7 +7499,7 @@
             }
           ]
         },
-        "PendleDiscountRate_Core": {
+        "PendleDiscountRate_CoreAgent": {
           "address": "0x3cF290876E7789e598Fa20277B48B14AA3D03834",
           "modifiers": [
             {
@@ -7517,7 +7517,7 @@
             }
           ]
         },
-        "RateStrategy_Core": {
+        "RateStrategy_CoreAgent": {
           "address": "0x395Ea9C2547f3EEAE3fF8aE66b7c019024A50D76",
           "modifiers": [
             {
@@ -7654,7 +7654,13 @@
             },
             {
               "modifier": "onlyAuthorized",
-              "addresses": [],
+              "addresses": [
+                {
+                  "address": "0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9",
+                  "owners": [],
+                  "signersThreshold": 0
+                }
+              ],
               "functions": [
                 "publishRiskParameterUpdate",
                 "publishBulkRiskParameterUpdates"
@@ -7665,7 +7671,9 @@
       },
       "agentHubRiskOracleInfo": {
         "0x7ABB46C690C52E919687D19ebF89C81A6136C1F2": {
-          "authorizedSenders": [],
+          "authorizedSenders": [
+            "0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9"
+          ],
           "latestBlockNumber": 23896552,
           "address": "0x7ABB46C690C52E919687D19ebF89C81A6136C1F2"
         }

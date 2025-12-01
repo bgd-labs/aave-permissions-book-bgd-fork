@@ -1065,82 +1065,7 @@
       }
     },
     "umbrella": {},
-    "ppc": {},
-    "agentHub": {
-      "contracts": {
-        "AgentHub": {
-          "address": "0x1aCEC7abbcFE6dD10EA4bB50894908406FfE8719",
-          "proxyAdmin": "0x558e6bb4399a3f405ba6d1263dc4870487cc3589",
-          "modifiers": [
-            {
-              "modifier": "onlyOwner",
-              "addresses": [
-                {
-                  "address": "0x746c675dAB49Bcd5BB9Dc85161f2d7Eb435009bf",
-                  "owners": [],
-                  "signersThreshold": 0
-                }
-              ],
-              "functions": [
-                "registerAgent",
-                "setAgentAdmin",
-                "setMaxBatchSize",
-                "setAgentAddress",
-                "renounceOwnership",
-                "transferOwnership"
-              ]
-            },
-            {
-              "modifier": "onlyOwnerOrAgentAdmin",
-              "addresses": [
-                {
-                  "address": "0x746c675dAB49Bcd5BB9Dc85161f2d7Eb435009bf",
-                  "owners": [],
-                  "signersThreshold": 0
-                }
-              ],
-              "functions": [
-                "setAgentAsPermissioned",
-                "addPermissionedSender",
-                "removePermissionedSender",
-                "addAllowedMarket",
-                "removeAllowedMarket",
-                "addRestrictedMarket",
-                "removeRestrictedMarket",
-                "setExpirationPeriod",
-                "setAgentEnabled",
-                "setMinimumDelay",
-                "setAgentContext",
-                "setMarketsFromAgentEnabled",
-                "addAllowedMarket",
-                "addAllowedMarket"
-              ]
-            }
-          ]
-        },
-        "AgentHubProxyAdmin": {
-          "address": "0x558e6bb4399a3f405ba6d1263dc4870487cc3589",
-          "modifiers": [
-            {
-              "modifier": "onlyOwner",
-              "addresses": [
-                {
-                  "address": "0x746c675dAB49Bcd5BB9Dc85161f2d7Eb435009bf",
-                  "owners": [],
-                  "signersThreshold": 0
-                }
-              ],
-              "functions": [
-                "changeProxyAdmin",
-                "upgrade",
-                "upgradeAndCall"
-              ]
-            }
-          ]
-        }
-      },
-      "agentHubRiskOracleInfo": {}
-    }
+    "ppc": {}
   },
   "TENDERLY": {
     "contracts": {
@@ -2076,25 +2001,7 @@
     "ppc": {},
     "agentHub": {
       "contracts": {
-        "SupplyCap": {
-          "address": "0xAD83c71619368390c4C4fd1Aa472235FD4Ea3F32",
-          "modifiers": [
-            {
-              "modifier": "onlyAgentHub",
-              "addresses": [
-                {
-                  "address": "0x1aCEC7abbcFE6dD10EA4bB50894908406FfE8719",
-                  "owners": [],
-                  "signersThreshold": 0
-                }
-              ],
-              "functions": [
-                "inject"
-              ]
-            }
-          ]
-        },
-        "BorrowCap": {
+        "SupplyCapAgent-BorrowCapAgent": {
           "address": "0xAD83c71619368390c4C4fd1Aa472235FD4Ea3F32",
           "modifiers": [
             {
@@ -2231,7 +2138,13 @@
             },
             {
               "modifier": "onlyAuthorized",
-              "addresses": [],
+              "addresses": [
+                {
+                  "address": "0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9",
+                  "owners": [],
+                  "signersThreshold": 0
+                }
+              ],
               "functions": [
                 "publishRiskParameterUpdate",
                 "publishBulkRiskParameterUpdates"
@@ -2242,7 +2155,9 @@
       },
       "agentHubRiskOracleInfo": {
         "0x9f6aA2aB14bFF53e4b79A81ce1554F1DFdbb6608": {
-          "authorizedSenders": [],
+          "authorizedSenders": [
+            "0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9"
+          ],
           "latestBlockNumber": 144373809,
           "address": "0x9f6aA2aB14bFF53e4b79A81ce1554F1DFdbb6608"
         }

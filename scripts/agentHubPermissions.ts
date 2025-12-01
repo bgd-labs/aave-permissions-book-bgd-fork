@@ -211,14 +211,17 @@ export const resolveAgentHubModifiers = async (
           address: riskOracle,
         };
 
-        console.log('authorizedSenders', authorizedSenders);
-
         for (const authorizedSender of authorizedSenders) {
-          onlyAuthorized.push({
-            address: getAddress(authorizedSender),
-            owners: await getSafeOwners(provider, authorizedSender),
-            signersThreshold: await getSafeThreshold(provider, authorizedSender),
-          });
+          const isAuthorized = await riskOracleContract.read.isAuthorized([authorizedSender]);
+          if (isAuthorized) {
+            onlyAuthorized.push({
+              address: getAddress(authorizedSender),
+              owners: await getSafeOwners(provider, authorizedSender),
+              signersThreshold: await getSafeThreshold(provider, authorizedSender),
+            });
+          } else {
+            console.error(`Authorized sender ${authorizedSender} is not authorized for risk oracle ${riskOracle} on chainId ${chainId}`);
+          }
         }
 
         obj[`RiskOracle${riskOracles.size > 1 ? `-${index}` : ''}`] = {

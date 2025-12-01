@@ -2056,25 +2056,7 @@
     "ppc": {},
     "agentHub": {
       "contracts": {
-        "SupplyCap": {
-          "address": "0x1ADC79f7731b52f2e92Fd21192006c8944a7Fa9d",
-          "modifiers": [
-            {
-              "modifier": "onlyAgentHub",
-              "addresses": [
-                {
-                  "address": "0xf4F2bc657abe96863dC1Ae17C9e9fFfc2B420e7B",
-                  "owners": [],
-                  "signersThreshold": 0
-                }
-              ],
-              "functions": [
-                "inject"
-              ]
-            }
-          ]
-        },
-        "BorrowCap": {
+        "SupplyCapAgent-BorrowCapAgent": {
           "address": "0x1ADC79f7731b52f2e92Fd21192006c8944a7Fa9d",
           "modifiers": [
             {
@@ -2208,7 +2190,13 @@
             },
             {
               "modifier": "onlyAuthorized",
-              "addresses": [],
+              "addresses": [
+                {
+                  "address": "0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9",
+                  "owners": [],
+                  "signersThreshold": 0
+                }
+              ],
               "functions": [
                 "publishRiskParameterUpdate",
                 "publishBulkRiskParameterUpdates"
@@ -2219,7 +2207,9 @@
       },
       "agentHubRiskOracleInfo": {
         "0x861eeAdB55E41f161F31Acb1BFD4c70E3a964Aed": {
-          "authorizedSenders": [],
+          "authorizedSenders": [
+            "0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9"
+          ],
           "latestBlockNumber": 405060517,
           "address": "0x861eeAdB55E41f161F31Acb1BFD4c70E3a964Aed"
         }
