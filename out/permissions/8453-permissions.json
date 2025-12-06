@@ -627,7 +627,7 @@
           "0x085E34722e04567Df9E6d2c32e82fd74f3342e79"
         ]
       },
-      "latestBlockNumber": 39053594
+      "latestBlockNumber": 39096713
     },
     "gsmRoles": {},
     "govV3": {
@@ -643,7 +643,7 @@
             "0x7FDA7C3528ad8f05e62148a700D456898b55f8d2"
           ]
         },
-        "latestBlockNumber": 39053605
+        "latestBlockNumber": 39096722
       },
       "contracts": {
         "GranularGuardian": {
@@ -909,7 +909,7 @@
         }
       },
       "senders": [],
-      "latestCCCBlockNumber": 39053602
+      "latestCCCBlockNumber": 39096721
     },
     "collector": {
       "contracts": {
@@ -986,7 +986,7 @@
             "0x4f1F3E32f20847a4c9F002882eB607aD750b6115"
           ]
         },
-        "latestBlockNumber": 39053597
+        "latestBlockNumber": 39096716
       }
     },
     "clinicSteward": {
@@ -1041,7 +1041,7 @@
             "0x3Cbded22F878aFC8d39dCD744d3Fe62086B76193"
           ]
         },
-        "latestBlockNumber": 39053600
+        "latestBlockNumber": 39096718
       }
     },
     "umbrella": {},
