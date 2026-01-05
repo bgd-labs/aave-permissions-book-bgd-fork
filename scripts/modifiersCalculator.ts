@@ -509,18 +509,19 @@ const generateNetworkPermissions = async (network: string) => {
           Agent Hub Table
         ------------------------------------
         `);
+
       const { agentHubPermissions, agentHubRiskOracleInfo } = await resolveAgentHubModifiers(
         pool.addressBook,
-        poolKey === Pools.TENDERLY
+        poolKey === Pools.TENDERLY || poolKey === Pools.LIDO_TENDERLY
           ? getRpcClientFromUrl(pool.tenderlyRpcUrl!)
           : provider,
         getStaticPermissionsJson(pool.functionsPermissionsAgentHubJson),
         Number(network),
         fullJson[poolKey]?.agentHub?.agentHubRiskOracleInfo || {} as Record<string, AgentHubRiskOracleInfo>,
         pool.agentHubBlock,
-        pool.tenderlyBlock
+        poolKey,
+        pool.tenderlyBlock,
       );
-
       agentHub.contracts = agentHubPermissions;
       agentHub.agentHubRiskOracleInfo = agentHubRiskOracleInfo;
     }

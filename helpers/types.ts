@@ -111,6 +111,7 @@ export type PoolConfigs = {
 
   agentHubBlock?: number;
   functionsPermissionsAgentHubJson?: string;
+  hubRiskOracleInitialSenders?: string[];
 };
 export type Network = {
   name: string;
