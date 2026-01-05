@@ -115,6 +115,13 @@
 |  [CrossChainController](https://snowscan.xyz/address/0x27FC7D54C893dA63C0AE6d57e1B2B13A70690928) |  [ProxyAdmin](https://snowscan.xyz/address/0xD3cF979e676265e4f6379749DECe4708B9A22476) |  onlyApprovedBridges |  [LayerZero adapter](https://snowscan.xyz/address/0x10f02995a399C0dC0FaF29914220E9C1bCdE8640), [CCIP adapter](https://snowscan.xyz/address/0x2b88C83727B0E290B76EB3F6133994fF81B7f355), [Hyperlane adapter](https://snowscan.xyz/address/0x617332a777780F546261247F621051d0b98975Eb) |  receiveCrossChainMessage | |--------|--------|--------|--------|--------|
 |  [CrossChainController](https://snowscan.xyz/address/0x27FC7D54C893dA63C0AE6d57e1B2B13A70690928) |  [ProxyAdmin](https://snowscan.xyz/address/0xD3cF979e676265e4f6379749DECe4708B9A22476) |  onlyGuardian |  [BGD](https://snowscan.xyz/address/0x3DBA1c4094BC0eE4772A05180B7E0c2F1cFD9c36) |  solveEmergency | |--------|--------|--------|--------|--------|
 
+### Risk Agent Contracts 
+| contract |proxyAdmin |modifier |permission owner |functions |
+|----------|----------|----------|----------|----------|
+|  [AgentHub](https://snowscan.xyz/address/0x556bBE96f04b4610E48EE003DAcEE1C74de7AC6a) |  [AgentHubProxyAdmin](https://snowscan.xyz/address/0xAaf37B0c469d61064f278ff2A397E6Ec619Ec9ae) |  onlyOwner |  [Executor_lvl1](https://snowscan.xyz/address/0x3C06dce358add17aAf230f2234bCCC4afd50d090) |  registerAgent, setAgentAdmin, setMaxBatchSize, setAgentAddress, renounceOwnership, transferOwnership | |--------|--------|--------|--------|--------|
+|  [AgentHub](https://snowscan.xyz/address/0x556bBE96f04b4610E48EE003DAcEE1C74de7AC6a) |  [AgentHubProxyAdmin](https://snowscan.xyz/address/0xAaf37B0c469d61064f278ff2A397E6Ec619Ec9ae) |  onlyOwnerOrAgentAdmin |  [Executor_lvl1](https://snowscan.xyz/address/0x3C06dce358add17aAf230f2234bCCC4afd50d090) |  setAgentAsPermissioned, addPermissionedSender, removePermissionedSender, addAllowedMarket, removeAllowedMarket, addRestrictedMarket, removeRestrictedMarket, setExpirationPeriod, setAgentEnabled, setMinimumDelay, setAgentContext, setMarketsFromAgentEnabled, addAllowedMarket, addAllowedMarket | |--------|--------|--------|--------|--------|
+|  [AgentHubProxyAdmin](https://snowscan.xyz/address/0xaaf37b0c469d61064f278ff2a397e6ec619ec9ae) |  - |  onlyOwner |  [Executor_lvl1](https://snowscan.xyz/address/0x3C06dce358add17aAf230f2234bCCC4afd50d090) |  changeProxyAdmin, upgrade, upgradeAndCall | |--------|--------|--------|--------|--------|
+
 ### Guardians 
 | Guardian |Threshold |Address |Owners |
 |----------|----------|----------|----------|

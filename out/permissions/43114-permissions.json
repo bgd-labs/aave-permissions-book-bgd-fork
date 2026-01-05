@@ -687,7 +687,7 @@
           "0x352423e2fA5D5c99343d371C9e3bC56C87723Cc7"
         ]
       },
-      "latestBlockNumber": 75079870
+      "latestBlockNumber": 75104596
     },
     "gsmRoles": {},
     "govV3": {
@@ -703,7 +703,7 @@
             "0x3DBA1c4094BC0eE4772A05180B7E0c2F1cFD9c36"
           ]
         },
-        "latestBlockNumber": 75079873
+        "latestBlockNumber": 75104598
       },
       "contracts": {
         "GranularGuardian": {
@@ -1060,7 +1060,7 @@
         "0x9b6f5ef589A3DD08670Dd146C11C4Fb33E04494F",
         "0x4D1863d22D0ED8579f8999388BCC833CB057C2d6"
       ],
-      "latestCCCBlockNumber": 75079873
+      "latestCCCBlockNumber": 75104598
     },
     "collector": {
       "contracts": {
@@ -1148,7 +1148,7 @@
             "0xA28820b8af102fAABAAAdaf94224353Dc772DC99"
           ]
         },
-        "latestBlockNumber": 75079872
+        "latestBlockNumber": 75104596
       }
     },
     "clinicSteward": {
@@ -1203,11 +1203,86 @@
             "0x3Cbded22F878aFC8d39dCD744d3Fe62086B76193"
           ]
         },
-        "latestBlockNumber": 75079872
+        "latestBlockNumber": 75104598
       }
     },
     "umbrella": {},
-    "ppc": {}
+    "ppc": {},
+    "agentHub": {
+      "contracts": {
+        "AgentHub": {
+          "address": "0x556bBE96f04b4610E48EE003DAcEE1C74de7AC6a",
+          "proxyAdmin": "0xaaf37b0c469d61064f278ff2a397e6ec619ec9ae",
+          "modifiers": [
+            {
+              "modifier": "onlyOwner",
+              "addresses": [
+                {
+                  "address": "0x3C06dce358add17aAf230f2234bCCC4afd50d090",
+                  "owners": [],
+                  "signersThreshold": 0
+                }
+              ],
+              "functions": [
+                "registerAgent",
+                "setAgentAdmin",
+                "setMaxBatchSize",
+                "setAgentAddress",
+                "renounceOwnership",
+                "transferOwnership"
+              ]
+            },
+            {
+              "modifier": "onlyOwnerOrAgentAdmin",
+              "addresses": [
+                {
+                  "address": "0x3C06dce358add17aAf230f2234bCCC4afd50d090",
+                  "owners": [],
+                  "signersThreshold": 0
+                }
+              ],
+              "functions": [
+                "setAgentAsPermissioned",
+                "addPermissionedSender",
+                "removePermissionedSender",
+                "addAllowedMarket",
+                "removeAllowedMarket",
+                "addRestrictedMarket",
+                "removeRestrictedMarket",
+                "setExpirationPeriod",
+                "setAgentEnabled",
+                "setMinimumDelay",
+                "setAgentContext",
+                "setMarketsFromAgentEnabled",
+                "addAllowedMarket",
+                "addAllowedMarket"
+              ]
+            }
+          ]
+        },
+        "AgentHubProxyAdmin": {
+          "address": "0xaaf37b0c469d61064f278ff2a397e6ec619ec9ae",
+          "modifiers": [
+            {
+              "modifier": "onlyOwner",
+              "addresses": [
+                {
+                  "address": "0x3C06dce358add17aAf230f2234bCCC4afd50d090",
+                  "owners": [],
+                  "signersThreshold": 0
+                }
+              ],
+              "functions": [
+                "changeProxyAdmin",
+                "upgrade",
+                "upgradeAndCall"
+              ]
+            }
+          ]
+        }
+      },
+      "agentHubRiskOracleInfo": {}
+    }
   },
   "V2": {
     "contracts": {
@@ -1646,12 +1721,13 @@
             "0xA28820b8af102fAABAAAdaf94224353Dc772DC99"
           ]
         },
-        "latestBlockNumber": 75079875
+        "latestBlockNumber": 75104602
       }
     },
     "clinicSteward": {},
     "umbrella": {},
-    "ppc": {}
+    "ppc": {},
+    "agentHub": {}
   },
   "V2_TENDERLY": {
     "contracts": {
@@ -2082,14 +2158,6 @@
             "functions": [
               "rescueTokens"
             ]
-          },
-          {
-            "modifier": "onlyBridge",
-            "addresses": [],
-            "functions": [
-              "mintUnbacked",
-              "backUnbacked"
-            ]
           }
         ]
       },
@@ -2140,17 +2208,27 @@
                 "signersThreshold": 0
               },
               {
-                "address": "0xD2C92b5A793e196aB11dBefBe3Af6BddeD6c3DD5",
-                "owners": [],
-                "signersThreshold": 0
-              },
-              {
-                "address": "0x6d4F341d8Bb3Dc5ABe822Aa940F1884508C13f99",
-                "owners": [],
-                "signersThreshold": 0
-              },
-              {
                 "address": "0xB94e515615c244Ab25f7A6e592e3Cb7EE31E99F4",
+                "owners": [],
+                "signersThreshold": 0
+              },
+              {
+                "address": "0xA5Ba213867E175A182a5dd6A9193C6158738105A",
+                "owners": [],
+                "signersThreshold": 0
+              },
+              {
+                "address": "0x23AceD103f5E22bD22B9272c82f29C0E51abC5c2",
+                "owners": [],
+                "signersThreshold": 0
+              },
+              {
+                "address": "0x38753B4D5116b12bC3524e334bC76AE57fA42fFB",
+                "owners": [],
+                "signersThreshold": 0
+              },
+              {
+                "address": "0xb57C37F48d1De2DACBefed69679Ba0b7DC43A394",
                 "owners": [],
                 "signersThreshold": 0
               }
@@ -2160,7 +2238,6 @@
               "setReserveBorrowing",
               "configureReserveAsCollateral",
               "setReserveStableRateBorrowing",
-              "setReserveFreeze",
               "setBorrowableInIsolation",
               "setReserveFactor",
               "setDebtCeiling",
@@ -2173,6 +2250,59 @@
               "setUnbackedMintCap",
               "setReserveInterestRateStrategyAddress",
               "setReserveFlashLoaning"
+            ]
+          },
+          {
+            "modifier": "onlyRiskOrPoolOrEmergencyAdmins",
+            "addresses": [
+              {
+                "address": "0x3C06dce358add17aAf230f2234bCCC4afd50d090",
+                "owners": [],
+                "signersThreshold": 0
+              },
+              {
+                "address": "0xB94e515615c244Ab25f7A6e592e3Cb7EE31E99F4",
+                "owners": [],
+                "signersThreshold": 0
+              },
+              {
+                "address": "0xA5Ba213867E175A182a5dd6A9193C6158738105A",
+                "owners": [],
+                "signersThreshold": 0
+              },
+              {
+                "address": "0x23AceD103f5E22bD22B9272c82f29C0E51abC5c2",
+                "owners": [],
+                "signersThreshold": 0
+              },
+              {
+                "address": "0x38753B4D5116b12bC3524e334bC76AE57fA42fFB",
+                "owners": [],
+                "signersThreshold": 0
+              },
+              {
+                "address": "0xb57C37F48d1De2DACBefed69679Ba0b7DC43A394",
+                "owners": [],
+                "signersThreshold": 0
+              },
+              {
+                "address": "0x56C1a4b54921DEA9A344967a8693C7E661D72968",
+                "owners": [
+                  "0x5d49dBcdd300aECc2C311cFB56593E71c445d60d",
+                  "0xbA037E4746ff58c55dc8F27a328C428F258DDACb",
+                  "0x818C277dBE886b934e60aa047250A73529E26A99",
+                  "0x4f96743057482a2E10253AFDacDA3fd9CF2C1DC9",
+                  "0xb647055A9915bF9c8021a684E175A353525b9890",
+                  "0x57ab7ee15cE5ECacB1aB84EE42D5A9d0d8112922",
+                  "0xC5bE5c0134857B4b96F45AA6f6B77DB96Ac1487e",
+                  "0xd4af2E86a27F8F77B0556E081F97B215C9cA8f2E",
+                  "0xf71fc92e2949ccF6A5Fd369a0b402ba80Bc61E02"
+                ],
+                "signersThreshold": 5
+              }
+            ],
+            "functions": [
+              "setReserveFreeze"
             ]
           },
           {
@@ -2207,7 +2337,7 @@
         ]
       },
       "ProofOfReserveExecutorV3": {
-        "address": "0xab22988D93d5F942fC6B6c6Ea285744809D1d9Cc",
+        "address": "0xB94e515615c244Ab25f7A6e592e3Cb7EE31E99F4",
         "modifiers": [
           {
             "modifier": "onlyOwner",
@@ -2264,47 +2394,6 @@
           }
         ]
       },
-      "Collector": {
-        "address": "0x5ba7fd868c40c16f7aDfAe6CF87121E13FC2F7a0",
-        "modifiers": [
-          {
-            "modifier": "onlyFundsAdmin",
-            "addresses": [
-              {
-                "address": "0x3C06dce358add17aAf230f2234bCCC4afd50d090",
-                "owners": [],
-                "signersThreshold": 0
-              }
-            ],
-            "functions": [
-              "approve",
-              "transfer",
-              "setFundsAdmin",
-              "createStream"
-            ]
-          },
-          {
-            "modifier": "onlyAdminOrRecipient",
-            "addresses": [
-              {
-                "address": "0xd3cf979e676265e4f6379749dece4708b9a22476",
-                "owners": [],
-                "signersThreshold": 0
-              },
-              {
-                "address": "0x3C06dce358add17aAf230f2234bCCC4afd50d090",
-                "owners": [],
-                "signersThreshold": 0
-              }
-            ],
-            "functions": [
-              "withdrawFromStream",
-              "cancelStream"
-            ]
-          }
-        ],
-        "proxyAdmin": "0xd3cf979e676265e4f6379749dece4708b9a22476"
-      },
       "RewardsController": {
         "address": "0x929EC64c34a17401F460460D4B9390518E5B473e",
         "proxyAdmin": "0xa97684ead0e402dC232d5A977953DF7ECBaB3CDb",
@@ -2328,7 +2417,7 @@
         ]
       },
       "WrappedTokenGatewayV3": {
-        "address": "0xCf3045a03F83ADfBCbA1f19Cb2cF4E19075F8668",
+        "address": "0x2825cE5921538d17cc15Ae00a8B24fF759C6CDaE",
         "modifiers": [
           {
             "modifier": "onlyOwner",
@@ -2459,54 +2548,6 @@
           }
         ]
       },
-      "CapPlusRiskSteward": {
-        "address": "0xD2C92b5A793e196aB11dBefBe3Af6BddeD6c3DD5",
-        "modifiers": [
-          {
-            "modifier": "onlyRiskCouncil",
-            "addresses": [
-              {
-                "address": "0xCa66149425E7DC8f81276F6D80C4b486B9503D1a",
-                "owners": [
-                  "0x5d49dBcdd300aECc2C311cFB56593E71c445d60d"
-                ],
-                "signersThreshold": 1
-              }
-            ],
-            "functions": [
-              "updateCaps"
-            ]
-          }
-        ]
-      },
-      "FreezeSteward": {
-        "address": "0x6d4F341d8Bb3Dc5ABe822Aa940F1884508C13f99",
-        "modifiers": [
-          {
-            "modifier": "onlyEmergencyAdmin",
-            "addresses": [
-              {
-                "address": "0x56C1a4b54921DEA9A344967a8693C7E661D72968",
-                "owners": [
-                  "0x5d49dBcdd300aECc2C311cFB56593E71c445d60d",
-                  "0xbA037E4746ff58c55dc8F27a328C428F258DDACb",
-                  "0x818C277dBE886b934e60aa047250A73529E26A99",
-                  "0x4f96743057482a2E10253AFDacDA3fd9CF2C1DC9",
-                  "0xb647055A9915bF9c8021a684E175A353525b9890",
-                  "0x57ab7ee15cE5ECacB1aB84EE42D5A9d0d8112922",
-                  "0xC5bE5c0134857B4b96F45AA6f6B77DB96Ac1487e",
-                  "0xd4af2E86a27F8F77B0556E081F97B215C9cA8f2E",
-                  "0xf71fc92e2949ccF6A5Fd369a0b402ba80Bc61E02"
-                ],
-                "signersThreshold": 5
-              }
-            ],
-            "functions": [
-              "setFreeze"
-            ]
-          }
-        ]
-      },
       "AaveMerkleDistributor": {
         "address": "0xA065d5A299E618CD84a87641d5eEbC7916Fdf32E",
         "modifiers": [
@@ -2526,6 +2567,206 @@
             ]
           }
         ]
+      },
+      "EdgeRiskStewardCaps": {
+        "address": "0x57218F3aB422A39115951c3Eb06881a7A719DfdD",
+        "modifiers": [
+          {
+            "modifier": "onlyOwner",
+            "addresses": [
+              {
+                "address": "0x3C06dce358add17aAf230f2234bCCC4afd50d090",
+                "owners": [],
+                "signersThreshold": 0
+              }
+            ],
+            "functions": [
+              "setRiskConfig",
+              "setAddressRestricted",
+              "setEModeCategoryRestricted",
+              "renounceOwnership",
+              "transferOwnership"
+            ]
+          },
+          {
+            "modifier": "onlyRiskCouncil",
+            "addresses": [
+              {
+                "address": "0x54714FAc85b0bf627288CC3a186dE81A42f1D635",
+                "owners": [],
+                "signersThreshold": 0
+              }
+            ],
+            "functions": [
+              "updateRates",
+              "updateCollateralSide",
+              "updateEModeCategories",
+              "updateLstPriceCaps",
+              "updateStablePriceCaps",
+              "updatePendleDiscountRates",
+              "updateCaps"
+            ]
+          }
+        ]
+      },
+      "RiskOracle": {
+        "address": "0x1273f29204fC102bD4620485B13cFE27a794fF32",
+        "modifiers": [
+          {
+            "modifier": "onlyOwner",
+            "addresses": [
+              {
+                "address": "0xDe841Bf4B67970f5a19165443B0e9ec808E1cC85",
+                "owners": [
+                  "0xdBf59fD74bd98Fc50F7952E916BB57F26037ddC9",
+                  "0xE328bd9b85A127C5fbb71070d17a2d26d2615dEa",
+                  "0x4DB9f12c891A64Ef80C6f8047a2D9a651d16f849",
+                  "0x50842854e40914A8e0745310B47fC22B98112B7A",
+                  "0x5Df7e094f52436040A5a37D5C9A9A80586D35823",
+                  "0x5d49dBcdd300aECc2C311cFB56593E71c445d60d",
+                  "0x753de005261e9Ff910B541A07282544Ec433d08c"
+                ],
+                "signersThreshold": 3
+              }
+            ],
+            "functions": [
+              "addAuthorizedSender",
+              "removeAuthorizedSender",
+              "addUpdateType",
+              "renounceOwnership",
+              "transferOwnership"
+            ]
+          }
+        ]
+      },
+      "AaveStewardInjectorCaps": {
+        "address": "0x54714FAc85b0bf627288CC3a186dE81A42f1D635",
+        "modifiers": [
+          {
+            "modifier": "onlyOwner",
+            "addresses": [
+              {
+                "address": "0x3C06dce358add17aAf230f2234bCCC4afd50d090",
+                "owners": [],
+                "signersThreshold": 0
+              }
+            ],
+            "functions": [
+              "addMarkets",
+              "removeMarkets",
+              "renounceOwnership",
+              "transferOwnership"
+            ]
+          },
+          {
+            "modifier": "onlyOwnerOrGuardian",
+            "addresses": [
+              {
+                "address": "0xD68c00a1A4a33876C5EC71A2Bf7bBd8676d72BF6",
+                "owners": [
+                  "0xe3FD707583932a99513a5c65c8463De769f5DAdF",
+                  "0x246E20bF778b3e16cB71eca535f40f8C4E6c4185"
+                ],
+                "signersThreshold": 1
+              },
+              {
+                "address": "0x3C06dce358add17aAf230f2234bCCC4afd50d090",
+                "owners": [],
+                "signersThreshold": 0
+              }
+            ],
+            "functions": [
+              "disableUpdateById",
+              "pauseInjector",
+              "updateGuardian"
+            ]
+          }
+        ]
+      },
+      "PoolExposureSteward": {
+        "address": "0x0d68D50DB848dfE6012456781c1D79A11eD12a2e",
+        "modifiers": [
+          {
+            "modifier": "onlyOwner",
+            "addresses": [
+              {
+                "address": "0x3C06dce358add17aAf230f2234bCCC4afd50d090",
+                "owners": [],
+                "signersThreshold": 0
+              }
+            ],
+            "functions": [
+              "approvePool",
+              "revokePool"
+            ]
+          },
+          {
+            "modifier": "onlyOwnerOrGuardian",
+            "addresses": [
+              {
+                "address": "0x22740deBa78d5a0c24C58C740e3715ec29de1bFa",
+                "owners": [
+                  "0xCAC616Fffb687cBDDD250b2aE6F672449462985C",
+                  "0x329c54289Ff5D6B7b7daE13592C6B1EDA1543eD4",
+                  "0xb647055A9915bF9c8021a684E175A353525b9890",
+                  "0x5d49dBcdd300aECc2C311cFB56593E71c445d60d"
+                ],
+                "signersThreshold": 3
+              },
+              {
+                "address": "0x3C06dce358add17aAf230f2234bCCC4afd50d090",
+                "owners": [],
+                "signersThreshold": 0
+              }
+            ],
+            "functions": [
+              "depositV3",
+              "withdrawV3",
+              "withdrawV2",
+              "migrateV2toV3",
+              "migrateBetweenV3"
+            ]
+          }
+        ]
+      },
+      "Manual AGRS": {
+        "address": "0x23AceD103f5E22bD22B9272c82f29C0E51abC5c2",
+        "modifiers": [
+          {
+            "modifier": "onlyOwner",
+            "addresses": [
+              {
+                "address": "0x3C06dce358add17aAf230f2234bCCC4afd50d090",
+                "owners": [],
+                "signersThreshold": 0
+              }
+            ],
+            "functions": [
+              "setRiskConfig",
+              "setAddressRestricted"
+            ]
+          },
+          {
+            "modifier": "onlyRiskCouncil",
+            "addresses": [
+              {
+                "address": "0xCa66149425E7DC8f81276F6D80C4b486B9503D1a",
+                "owners": [
+                  "0xc2cf0387f2a83A7F5C6675F4CDe7F367ea1B989a",
+                  "0x5d49dBcdd300aECc2C311cFB56593E71c445d60d"
+                ],
+                "signersThreshold": 2
+              }
+            ],
+            "functions": [
+              "updateCaps",
+              "updateRates",
+              "updateCollateralSide",
+              "updateLstPriceCaps",
+              "updateStablePriceCaps"
+            ]
+          }
+        ]
       }
     },
     "roles": {
@@ -2541,15 +2782,18 @@
         ],
         "ASSET_LISTING_ADMIN": [],
         "RISK_ADMIN": [
-          "0xD2C92b5A793e196aB11dBefBe3Af6BddeD6c3DD5",
-          "0x6d4F341d8Bb3Dc5ABe822Aa940F1884508C13f99",
-          "0xB94e515615c244Ab25f7A6e592e3Cb7EE31E99F4"
+          "0xB94e515615c244Ab25f7A6e592e3Cb7EE31E99F4",
+          "0xA5Ba213867E175A182a5dd6A9193C6158738105A",
+          "0x23AceD103f5E22bD22B9272c82f29C0E51abC5c2",
+          "0x38753B4D5116b12bC3524e334bC76AE57fA42fFB",
+          "0xb57C37F48d1De2DACBefed69679Ba0b7DC43A394"
         ],
         "FLASH_BORROWER": [
-          "0x14F8e5Fe35b2d0D67dBcE9329f1b5d09f60c06C3"
+          "0x14F8e5Fe35b2d0D67dBcE9329f1b5d09f60c06C3",
+          "0x352423e2fA5D5c99343d371C9e3bC56C87723Cc7"
         ]
       },
-      "latestBlockNumber": 51885151
+      "latestBlockNumber": 75099073
     },
     "gsmRoles": {},
     "govV3": {
@@ -2565,7 +2809,7 @@
             "0x3DBA1c4094BC0eE4772A05180B7E0c2F1cFD9c36"
           ]
         },
-        "latestBlockNumber": 51885151
+        "latestBlockNumber": 75099073
       },
       "contracts": {
         "GranularGuardian": {
@@ -2596,9 +2840,9 @@
                   "address": "0x360c0a69Ed2912351227a0b745f890CB2eBDbcFe",
                   "owners": [
                     "0xDA5Ae43e179987a66B9831F92223567e1F38BE7D",
-                    "0xA1C9CEeD5Ff78f700dC4930514621843b5fAc272",
+                    "0x1e3804357eD445251FfECbb6e40107bf03888885",
                     "0x4f96743057482a2E10253AFDacDA3fd9CF2C1DC9",
-                    "0xfd639f49Da6cadc98f01B60900C8BE30C38c4B27",
+                    "0xebED04E9137AfeBFF6a1B97aC0adf61a544eFE29",
                     "0xbd4DCfA978c6D0d342cE36809AfFFa49d4B7f1F7",
                     "0xA3103D0ED00d24795Faa2d641ACf6A320EeD7396",
                     "0x936CD9654271083cCF93A975919Da0aB3Bc99EF3",
@@ -2650,9 +2894,9 @@
                   "address": "0x360c0a69Ed2912351227a0b745f890CB2eBDbcFe",
                   "owners": [
                     "0xDA5Ae43e179987a66B9831F92223567e1F38BE7D",
-                    "0xA1C9CEeD5Ff78f700dC4930514621843b5fAc272",
+                    "0x1e3804357eD445251FfECbb6e40107bf03888885",
                     "0x4f96743057482a2E10253AFDacDA3fd9CF2C1DC9",
-                    "0xfd639f49Da6cadc98f01B60900C8BE30C38c4B27",
+                    "0xebED04E9137AfeBFF6a1B97aC0adf61a544eFE29",
                     "0xbd4DCfA978c6D0d342cE36809AfFFa49d4B7f1F7",
                     "0xA3103D0ED00d24795Faa2d641ACf6A320EeD7396",
                     "0x936CD9654271083cCF93A975919Da0aB3Bc99EF3",
@@ -2673,9 +2917,9 @@
                   "address": "0x360c0a69Ed2912351227a0b745f890CB2eBDbcFe",
                   "owners": [
                     "0xDA5Ae43e179987a66B9831F92223567e1F38BE7D",
-                    "0xA1C9CEeD5Ff78f700dC4930514621843b5fAc272",
+                    "0x1e3804357eD445251FfECbb6e40107bf03888885",
                     "0x4f96743057482a2E10253AFDacDA3fd9CF2C1DC9",
-                    "0xfd639f49Da6cadc98f01B60900C8BE30C38c4B27",
+                    "0xebED04E9137AfeBFF6a1B97aC0adf61a544eFE29",
                     "0xbd4DCfA978c6D0d342cE36809AfFFa49d4B7f1F7",
                     "0xA3103D0ED00d24795Faa2d641ACf6A320EeD7396",
                     "0x936CD9654271083cCF93A975919Da0aB3Bc99EF3",
@@ -2712,7 +2956,7 @@
           "proxyAdmin": "0xd3cf979e676265e4f6379749dece4708b9a22476"
         },
         "VotingMachine": {
-          "address": "0x9b6f5ef589A3DD08670Dd146C11C4Fb33E04494F",
+          "address": "0x4D1863d22D0ED8579f8999388BCC833CB057C2d6",
           "modifiers": [
             {
               "modifier": "onlyOwner",
@@ -2867,6 +3111,10 @@
                 {
                   "address": "0x9b6f5ef589A3DD08670Dd146C11C4Fb33E04494F",
                   "owners": []
+                },
+                {
+                  "address": "0x4D1863d22D0ED8579f8999388BCC833CB057C2d6",
+                  "owners": []
                 }
               ],
               "functions": [
@@ -2915,9 +3163,196 @@
         }
       },
       "senders": [
-        "0x9b6f5ef589A3DD08670Dd146C11C4Fb33E04494F"
+        "0x9b6f5ef589A3DD08670Dd146C11C4Fb33E04494F",
+        "0x4D1863d22D0ED8579f8999388BCC833CB057C2d6"
       ],
-      "latestCCCBlockNumber": 51885151
+      "latestCCCBlockNumber": 75099073
+    },
+    "collector": {},
+    "clinicSteward": {},
+    "umbrella": {},
+    "ppc": {},
+    "agentHub": {
+      "contracts": {
+        "SupplyCapAgent": {
+          "address": "0x38753B4D5116b12bC3524e334bC76AE57fA42fFB",
+          "modifiers": [
+            {
+              "modifier": "onlyAgentHub",
+              "addresses": [
+                {
+                  "address": "0x556bBE96f04b4610E48EE003DAcEE1C74de7AC6a",
+                  "owners": [],
+                  "signersThreshold": 0
+                }
+              ],
+              "functions": [
+                "inject"
+              ]
+            }
+          ]
+        },
+        "BorrowCapAgent": {
+          "address": "0xb57C37F48d1De2DACBefed69679Ba0b7DC43A394",
+          "modifiers": [
+            {
+              "modifier": "onlyAgentHub",
+              "addresses": [
+                {
+                  "address": "0x556bBE96f04b4610E48EE003DAcEE1C74de7AC6a",
+                  "owners": [],
+                  "signersThreshold": 0
+                }
+              ],
+              "functions": [
+                "inject"
+              ]
+            }
+          ]
+        },
+        "AgentHub": {
+          "address": "0x556bBE96f04b4610E48EE003DAcEE1C74de7AC6a",
+          "proxyAdmin": "0xaaf37b0c469d61064f278ff2a397e6ec619ec9ae",
+          "modifiers": [
+            {
+              "modifier": "onlyOwner",
+              "addresses": [
+                {
+                  "address": "0x3C06dce358add17aAf230f2234bCCC4afd50d090",
+                  "owners": [],
+                  "signersThreshold": 0
+                }
+              ],
+              "functions": [
+                "registerAgent",
+                "setAgentAdmin",
+                "setMaxBatchSize",
+                "setAgentAddress",
+                "renounceOwnership",
+                "transferOwnership"
+              ]
+            },
+            {
+              "modifier": "onlyOwnerOrAgentAdmin",
+              "addresses": [
+                {
+                  "address": "0x3C06dce358add17aAf230f2234bCCC4afd50d090",
+                  "owners": [],
+                  "signersThreshold": 0
+                }
+              ],
+              "functions": [
+                "setAgentAsPermissioned",
+                "addPermissionedSender",
+                "removePermissionedSender",
+                "addAllowedMarket",
+                "removeAllowedMarket",
+                "addRestrictedMarket",
+                "removeRestrictedMarket",
+                "setExpirationPeriod",
+                "setAgentEnabled",
+                "setMinimumDelay",
+                "setAgentContext",
+                "setMarketsFromAgentEnabled",
+                "addAllowedMarket",
+                "addAllowedMarket"
+              ]
+            }
+          ]
+        },
+        "AgentHubProxyAdmin": {
+          "address": "0xaaf37b0c469d61064f278ff2a397e6ec619ec9ae",
+          "modifiers": [
+            {
+              "modifier": "onlyOwner",
+              "addresses": [
+                {
+                  "address": "0x3C06dce358add17aAf230f2234bCCC4afd50d090",
+                  "owners": [],
+                  "signersThreshold": 0
+                }
+              ],
+              "functions": [
+                "changeProxyAdmin",
+                "upgrade",
+                "upgradeAndCall"
+              ]
+            }
+          ]
+        },
+        "RangeValidationModule": {
+          "address": "0x9240a6669CC4782FC98620212862DF5CB2e0Df10",
+          "modifiers": [
+            {
+              "modifier": "onlyHubOwnerOrAgentAdmin",
+              "addresses": [
+                {
+                  "address": "0x3C06dce358add17aAf230f2234bCCC4afd50d090",
+                  "owners": [],
+                  "signersThreshold": 0
+                }
+              ],
+              "functions": [
+                "setDefaultRangeConfig",
+                "setRangeConfigByMarket"
+              ]
+            }
+          ]
+        },
+        "RiskOracle": {
+          "address": "0x1273f29204fC102bD4620485B13cFE27a794fF32",
+          "modifiers": [
+            {
+              "modifier": "onlyOwner",
+              "addresses": [
+                {
+                  "address": "0xDe841Bf4B67970f5a19165443B0e9ec808E1cC85",
+                  "owners": [
+                    "0xdBf59fD74bd98Fc50F7952E916BB57F26037ddC9",
+                    "0xE328bd9b85A127C5fbb71070d17a2d26d2615dEa",
+                    "0x4DB9f12c891A64Ef80C6f8047a2D9a651d16f849",
+                    "0x50842854e40914A8e0745310B47fC22B98112B7A",
+                    "0x5Df7e094f52436040A5a37D5C9A9A80586D35823",
+                    "0x5d49dBcdd300aECc2C311cFB56593E71c445d60d",
+                    "0x753de005261e9Ff910B541A07282544Ec433d08c"
+                  ],
+                  "signersThreshold": 3
+                }
+              ],
+              "functions": [
+                "addAuthorizedSender",
+                "removeAuthorizedSender",
+                "addUpdateType",
+                "renounceOwnership",
+                "transferOwnership"
+              ]
+            },
+            {
+              "modifier": "onlyAuthorized",
+              "addresses": [
+                {
+                  "address": "0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9",
+                  "owners": [],
+                  "signersThreshold": 0
+                }
+              ],
+              "functions": [
+                "publishRiskParameterUpdate",
+                "publishBulkRiskParameterUpdates"
+              ]
+            }
+          ]
+        }
+      },
+      "agentHubRiskOracleInfo": {
+        "0x1273f29204fC102bD4620485B13cFE27a794fF32": {
+          "authorizedSenders": [
+            "0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9"
+          ],
+          "latestBlockNumber": 75099073,
+          "address": "0x1273f29204fC102bD4620485B13cFE27a794fF32"
+        }
+      }
     }
   },
   "GHO": {

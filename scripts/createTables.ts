@@ -109,6 +109,7 @@ export const generateTable = (network: string, pool: string): string => {
     ...networkPermits[pool].contracts,
     ...getPermissionsByNetwork(network)[pool].collector?.contracts,
     ...getPermissionsByNetwork(network)[pool].clinicSteward?.contracts,
+    // ...getPermissionsByNetwork(network)[pool].agentHub?.contracts,
     // ...getPermissionsByNetwork(network)[pool].umbrella?.contracts,
     // ...getPermissionsByNetwork(network)[pool].ppc?.contracts,
   }
@@ -139,8 +140,36 @@ export const generateTable = (network: string, pool: string): string => {
   let v3Contracts;
   if (
     pool === Pools.LIDO ||
-    pool === Pools.ETHERFI ||
-    pool === Pools.ETHERFI_TENDERLY ||
+    pool === Pools.ETHERFI
+  ) {
+    v3Contracts = generateContractsByAddress({
+      ...(poolPermitsByContract?.contracts || {}),
+      ...getPermissionsByNetwork(network)['V3'].govV3?.contracts,
+      ...getPermissionsByNetwork(network)['V3'].collector?.contracts,
+      ...getPermissionsByNetwork(network)['V3'].clinicSteward?.contracts,
+      ...getPermissionsByNetwork(network)['V3'].umbrella?.contracts,
+      ...getPermissionsByNetwork(network)['V3'].ppc?.contracts,
+      ...getPermissionsByNetwork(network)['V3'].agentHub?.contracts,
+    });
+  } else if (
+    pool === Pools.TENDERLY
+  ) {
+    v3Contracts = generateContractsByAddress({
+      ...(poolPermitsByContract?.contracts || {}),
+      ...getPermissionsByNetwork(network)['V3'].govV3?.contracts,
+      ...getPermissionsByNetwork(network)['V3'].collector?.contracts,
+      ...getPermissionsByNetwork(network)['V3'].clinicSteward?.contracts,
+      ...getPermissionsByNetwork(network)['V3'].umbrella?.contracts,
+      ...getPermissionsByNetwork(network)['V3'].ppc?.contracts,
+      ...getPermissionsByNetwork(network)['V3'].agentHub?.contracts,
+      ...getPermissionsByNetwork(network)['TENDERLY'].govV3?.contracts,
+      ...getPermissionsByNetwork(network)['TENDERLY'].collector?.contracts,
+      ...getPermissionsByNetwork(network)['TENDERLY'].clinicSteward?.contracts,
+      ...getPermissionsByNetwork(network)['TENDERLY'].umbrella?.contracts,
+      ...getPermissionsByNetwork(network)['TENDERLY'].ppc?.contracts,
+      ...getPermissionsByNetwork(network)['TENDERLY'].agentHub?.contracts,
+    });
+  } else if (
     pool === Pools.LIDO_TENDERLY
   ) {
     v3Contracts = generateContractsByAddress({
@@ -150,6 +179,31 @@ export const generateTable = (network: string, pool: string): string => {
       ...getPermissionsByNetwork(network)['V3'].clinicSteward?.contracts,
       ...getPermissionsByNetwork(network)['V3'].umbrella?.contracts,
       ...getPermissionsByNetwork(network)['V3'].ppc?.contracts,
+      ...getPermissionsByNetwork(network)['V3'].agentHub?.contracts,
+      ...getPermissionsByNetwork(network)['LIDO_TENDERLY'].govV3?.contracts,
+      ...getPermissionsByNetwork(network)['LIDO_TENDERLY'].collector?.contracts,
+      ...getPermissionsByNetwork(network)['LIDO_TENDERLY'].clinicSteward?.contracts,
+      ...getPermissionsByNetwork(network)['LIDO_TENDERLY'].umbrella?.contracts,
+      ...getPermissionsByNetwork(network)['LIDO_TENDERLY'].ppc?.contracts,
+      ...getPermissionsByNetwork(network)['LIDO_TENDERLY'].agentHub?.contracts,
+    });
+  } else if (
+    pool === Pools.ETHERFI_TENDERLY
+  ) {
+    v3Contracts = generateContractsByAddress({
+      ...(poolPermitsByContract?.contracts || {}),
+      ...getPermissionsByNetwork(network)['V3'].govV3?.contracts,
+      ...getPermissionsByNetwork(network)['V3'].collector?.contracts,
+      ...getPermissionsByNetwork(network)['V3'].clinicSteward?.contracts,
+      ...getPermissionsByNetwork(network)['V3'].umbrella?.contracts,
+      ...getPermissionsByNetwork(network)['V3'].ppc?.contracts,
+      ...getPermissionsByNetwork(network)['V3'].agentHub?.contracts,
+      ...getPermissionsByNetwork(network)['ETHERFI_TENDERLY'].govV3?.contracts,
+      ...getPermissionsByNetwork(network)['ETHERFI_TENDERLY'].collector?.contracts,
+      ...getPermissionsByNetwork(network)['ETHERFI_TENDERLY'].clinicSteward?.contracts,
+      ...getPermissionsByNetwork(network)['ETHERFI_TENDERLY'].umbrella?.contracts,
+      ...getPermissionsByNetwork(network)['ETHERFI_TENDERLY'].ppc?.contracts,
+      ...getPermissionsByNetwork(network)['ETHERFI_TENDERLY'].agentHub?.contracts,
     });
   } else if (pool === Pools.V3_WHITE_LABEL) {
     v3Contracts = generateContractsByAddress({
@@ -160,6 +214,7 @@ export const generateTable = (network: string, pool: string): string => {
       ...getPermissionsByNetwork(network)['V3_WHITE_LABEL']?.clinicSteward?.contracts,
       ...getPermissionsByNetwork(network)['V3_WHITE_LABEL']?.umbrella?.contracts,
       ...getPermissionsByNetwork(network)['V3_WHITE_LABEL']?.ppc?.contracts,
+      ...getPermissionsByNetwork(network)['V3_WHITE_LABEL']?.agentHub?.contracts,
     });
   } else {
     v3Contracts = generateContractsByAddress({
@@ -171,7 +226,7 @@ export const generateTable = (network: string, pool: string): string => {
       ...getPermissionsByNetwork(network)['V3'].clinicSteward?.contracts,
       ...getPermissionsByNetwork(network)['V3'].ppc?.contracts,
       ...getPermissionsByNetwork(network)['V3'].umbrella?.contracts,
-
+      ...getPermissionsByNetwork(network)['V3'].agentHub?.contracts,
     });
   }
   contractsByAddress = { ...contractsByAddress, ...v3Contracts };
@@ -211,6 +266,7 @@ export const generateTable = (network: string, pool: string): string => {
             ...getPermissionsByNetwork(network)['V3'].clinicSteward?.contracts,
             ...getPermissionsByNetwork(network)['V3'].umbrella?.contracts,
             ...getPermissionsByNetwork(network)['V3'].ppc?.contracts,
+            ...getPermissionsByNetwork(network)['V3'].agentHub?.contracts,
           }
           : pool === Pools.V3_WHITE_LABEL ?
             {
@@ -221,6 +277,7 @@ export const generateTable = (network: string, pool: string): string => {
               ...getPermissionsByNetwork(network)['V3_WHITE_LABEL']?.clinicSteward?.contracts,
               ...getPermissionsByNetwork(network)['V3_WHITE_LABEL']?.umbrella?.contracts,
               ...getPermissionsByNetwork(network)['V3_WHITE_LABEL']?.ppc?.contracts,
+              ...getPermissionsByNetwork(network)['V3_WHITE_LABEL']?.agentHub?.contracts,
             } :
             {
               ...poolPermitsByContract.contracts,
@@ -230,6 +287,7 @@ export const generateTable = (network: string, pool: string): string => {
               ...getPermissionsByNetwork(network)['V3'].clinicSteward?.contracts,
               ...getPermissionsByNetwork(network)['V3'].umbrella?.contracts,
               ...getPermissionsByNetwork(network)['V3'].ppc?.contracts,
+              ...getPermissionsByNetwork(network)['V3'].agentHub?.contracts,
             },
         govPermissions,
         pool === Pools.V3_WHITE_LABEL ? true : false,
@@ -308,6 +366,7 @@ export const generateTable = (network: string, pool: string): string => {
         ...getPermissionsByNetwork(network)['V3_WHITE_LABEL']?.clinicSteward?.contracts,
         ...getPermissionsByNetwork(network)['V3_WHITE_LABEL']?.umbrella?.contracts,
         ...getPermissionsByNetwork(network)['V3_WHITE_LABEL']?.ppc?.contracts,
+        ...getPermissionsByNetwork(network)['V3_WHITE_LABEL']?.agentHub?.contracts,
       } :
       {
         ...poolPermitsByContract.contracts,
@@ -315,6 +374,7 @@ export const generateTable = (network: string, pool: string): string => {
         ...getPermissionsByNetwork(network)['V3'].collector?.contracts,
         ...getPermissionsByNetwork(network)['V3'].clinicSteward?.contracts,
         ...getPermissionsByNetwork(ChainId.mainnet)['GHO'].contracts,
+        ...getPermissionsByNetwork(network)['V3'].agentHub?.contracts,
       },
     pool === Pools.V3_WHITE_LABEL ?
       {
@@ -326,9 +386,10 @@ export const generateTable = (network: string, pool: string): string => {
         ...getPermissionsByNetwork(network)['V3'].ppc?.contracts,
         ...getPermissionsByNetwork(network)['V3'].clinicSteward?.contracts,
         ...getPermissionsByNetwork(ChainId.mainnet)['GHO'].contracts,
+        ...getPermissionsByNetwork(network)['V3'].agentHub?.contracts,
       },
     pool === Pools.V3_WHITE_LABEL ? true : false,
-    networkConfigs[Number(network)].addressesNames
+    networkConfigs[Number(network)].addressesNames || {} as Record<string, string>
   );
   for (let actionName of Object.keys(actionExecutors)) {
     if (Array.from(actionExecutors[actionName]).length > 0) {
@@ -621,7 +682,98 @@ export const generateTable = (network: string, pool: string): string => {
 
   }
 
-  // Umbrella Table
+  // Agent Hub Table
+
+  if (poolPermitsByContract.agentHub &&
+    Object.keys(poolPermitsByContract.agentHub).length > 0 &&
+    poolPermitsByContract.agentHub.contracts) {
+
+    let agentHubTable = `### Risk Agent Contracts \n`;
+    const agentHubHeaderTitles = [
+      'contract',
+      'proxyAdmin',
+      'modifier',
+      'permission owner',
+      'functions',
+    ];
+    const agentHubHeader = getTableHeader(agentHubHeaderTitles);
+    agentHubTable += agentHubHeader;
+
+    let agentHubTableBody = '';
+    for (let contractName of Object.keys(
+      poolPermitsByContract.agentHub.contracts,
+    )) {
+      const contract = poolPermitsByContract.agentHub.contracts[contractName];
+
+      if (contract.modifiers.length === 0) {
+        agentHubTableBody += getTableBody([
+          `[${contractName}](${explorerAddressUrlComposer(
+            contract.address,
+            network,
+          )})`,
+          `${generateTableAddress(
+            contract.proxyAdmin,
+            addressesNames,
+            contractsByAddress,
+            poolGuardians,
+            network,
+          )}`,
+          `-`,
+          `-`,
+          '-',
+        ]);
+        agentHubTableBody += getLineSeparator(
+          agentHubHeaderTitles.length,
+        );
+      }
+      for (let modifier of contract.modifiers) {
+        for (let modifierAddress of modifier.addresses) {
+          if (!poolGuardians[modifierAddress.address]) {
+            if (modifierAddress.owners.length > 0) {
+              poolGuardians[modifierAddress.address] = {
+                owners: modifierAddress.owners,
+                threshold: modifierAddress.signersThreshold,
+              };
+            }
+          }
+        }
+        agentHubTableBody += getTableBody([
+          `[${contractName}](${explorerAddressUrlComposer(
+            contract.address,
+            network,
+          )})`,
+          `${generateTableAddress(
+            contract.proxyAdmin,
+            addressesNames,
+            contractsByAddress,
+            poolGuardians,
+            network,
+          )}`,
+          `${modifier.modifier}`,
+          `${modifier.addresses
+            .map((modifierAddress: AddressInfo) =>
+              generateTableAddress(
+                modifierAddress.address,
+                addressesNames,
+                contractsByAddress,
+                poolGuardians,
+                network,
+                modifierAddress.chain,
+              ),
+            )
+            .join(', ')}`,
+          modifier?.functions ? modifier.functions.join(', ') : '',
+        ]);
+        agentHubTableBody += getLineSeparator(
+          agentHubHeaderTitles.length,
+        );
+      }
+    }
+    agentHubTable += agentHubTableBody;
+    readmeByNetwork += agentHubTable + '\n';
+  }
+
+  // PPC Table
   if (poolPermitsByContract.ppc &&
     Object.keys(poolPermitsByContract.ppc).length > 0 &&
     poolPermitsByContract.ppc.contracts) {

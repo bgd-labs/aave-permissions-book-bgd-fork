@@ -105,6 +105,13 @@
 |  [CrossChainController](https://plasmascan.to//address/0x643441742f73e270e565619be6DE5f4D55E08cd6) |  [CrossChainControllerProxyAdmin](https://plasmascan.to//address/0x4B58BD6163c7020333b6e33a6E6495F308f420B9) |  onlyApprovedBridges |  [LayerZero adapter](https://plasmascan.to//address/0x99950E7C7eB320A8551916e8676a42b90b058d5D), [Hyperlane adapter](https://plasmascan.to//address/0x13Dc9eBb19bb1A14aa56215b443B2703A07ba2D5), [CCIP adapter](https://plasmascan.to//address/0x719e23D7B48Fc5AEa65Cff1bc58865C2b8d89A34) |  receiveCrossChainMessage | |--------|--------|--------|--------|--------|
 |  [CrossChainControllerProxyAdmin](https://plasmascan.to//address/0x4b58bd6163c7020333b6e33a6e6495f308f420b9) |  - |  onlyOwner |  [Executor_lvl1](https://plasmascan.to//address/0x47aAdaAE1F05C978E6aBb7568d11B7F6e0FC4d6A) |  changeProxyAdmin, upgrade, upgradeAndCall | |--------|--------|--------|--------|--------|
 
+### Risk Agent Contracts 
+| contract |proxyAdmin |modifier |permission owner |functions |
+|----------|----------|----------|----------|----------|
+|  [AgentHub](https://plasmascan.to//address/0x5F29ACbFB6de4282bB4DD2017930cDA730eD864D) |  [AgentHubProxyAdmin](https://plasmascan.to//address/0xC3ba7a3b8357b32df987ddEfb6bAf9dcc0bD8791) |  onlyOwner |  [Executor_lvl1](https://plasmascan.to//address/0x47aAdaAE1F05C978E6aBb7568d11B7F6e0FC4d6A) |  registerAgent, setAgentAdmin, setMaxBatchSize, setAgentAddress, renounceOwnership, transferOwnership | |--------|--------|--------|--------|--------|
+|  [AgentHub](https://plasmascan.to//address/0x5F29ACbFB6de4282bB4DD2017930cDA730eD864D) |  [AgentHubProxyAdmin](https://plasmascan.to//address/0xC3ba7a3b8357b32df987ddEfb6bAf9dcc0bD8791) |  onlyOwnerOrAgentAdmin |  [Executor_lvl1](https://plasmascan.to//address/0x47aAdaAE1F05C978E6aBb7568d11B7F6e0FC4d6A) |  setAgentAsPermissioned, addPermissionedSender, removePermissionedSender, addAllowedMarket, removeAllowedMarket, addRestrictedMarket, removeRestrictedMarket, setExpirationPeriod, setAgentEnabled, setMinimumDelay, setAgentContext, setMarketsFromAgentEnabled, addAllowedMarket, addAllowedMarket | |--------|--------|--------|--------|--------|
+|  [AgentHubProxyAdmin](https://plasmascan.to//address/0xc3ba7a3b8357b32df987ddefb6baf9dcc0bd8791) |  - |  onlyOwner |  [Executor_lvl1](https://plasmascan.to//address/0x47aAdaAE1F05C978E6aBb7568d11B7F6e0FC4d6A) |  changeProxyAdmin, upgrade, upgradeAndCall | |--------|--------|--------|--------|--------|
+
 ### Guardians 
 | Guardian |Threshold |Address |Owners |
 |----------|----------|----------|----------|

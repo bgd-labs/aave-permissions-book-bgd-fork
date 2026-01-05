@@ -106,6 +106,13 @@
 |  [CrossChainController](https://gnosisscan.io//address/0x8Dc5310fc9D3D7D1Bb3D1F686899c8F082316c9F) |  [ProxyAdmin](https://gnosisscan.io//address/0xe892E40C92c2E4D281Be59b2E6300F271d824E75) |  onlyApprovedBridges |  [Gnosis native adapter](https://gnosisscan.io//address/0x3C06dce358add17aAf230f2234bCCC4afd50d090), [LayerZero adapter](https://gnosisscan.io//address/0x9b6f5ef589A3DD08670Dd146C11C4Fb33E04494F), [Hyperlane adapter](https://gnosisscan.io//address/0xA806DA549FcB2B4912a7dFFE4c1aA7A1ed0Bd5C9) |  receiveCrossChainMessage | |--------|--------|--------|--------|--------|
 |  [CrossChainController](https://gnosisscan.io//address/0x8Dc5310fc9D3D7D1Bb3D1F686899c8F082316c9F) |  [ProxyAdmin](https://gnosisscan.io//address/0xe892E40C92c2E4D281Be59b2E6300F271d824E75) |  onlyGuardian |  [BGD](https://gnosisscan.io//address/0xcb8a3E864D12190eD2b03cbA0833b15f2c314Ed8) |  solveEmergency | |--------|--------|--------|--------|--------|
 
+### Risk Agent Contracts 
+| contract |proxyAdmin |modifier |permission owner |functions |
+|----------|----------|----------|----------|----------|
+|  [AgentHub](https://gnosisscan.io//address/0x7520bb9c237c864957e9a9881821bF882491bc5C) |  [AgentHubProxyAdmin](https://gnosisscan.io//address/0xF033C35340552e9b1824D69A217Bef91273c156d) |  onlyOwner |  [Executor_lvl1](https://gnosisscan.io//address/0x1dF462e2712496373A347f8ad10802a5E95f053D) |  registerAgent, setAgentAdmin, setMaxBatchSize, setAgentAddress, renounceOwnership, transferOwnership | |--------|--------|--------|--------|--------|
+|  [AgentHub](https://gnosisscan.io//address/0x7520bb9c237c864957e9a9881821bF882491bc5C) |  [AgentHubProxyAdmin](https://gnosisscan.io//address/0xF033C35340552e9b1824D69A217Bef91273c156d) |  onlyOwnerOrAgentAdmin |  [Executor_lvl1](https://gnosisscan.io//address/0x1dF462e2712496373A347f8ad10802a5E95f053D) |  setAgentAsPermissioned, addPermissionedSender, removePermissionedSender, addAllowedMarket, removeAllowedMarket, addRestrictedMarket, removeRestrictedMarket, setExpirationPeriod, setAgentEnabled, setMinimumDelay, setAgentContext, setMarketsFromAgentEnabled, addAllowedMarket, addAllowedMarket | |--------|--------|--------|--------|--------|
+|  [AgentHubProxyAdmin](https://gnosisscan.io//address/0xf033c35340552e9b1824d69a217bef91273c156d) |  - |  onlyOwner |  [Executor_lvl1](https://gnosisscan.io//address/0x1dF462e2712496373A347f8ad10802a5E95f053D) |  changeProxyAdmin, upgrade, upgradeAndCall | |--------|--------|--------|--------|--------|
+
 ### Guardians 
 | Guardian |Threshold |Address |Owners |
 |----------|----------|----------|----------|
