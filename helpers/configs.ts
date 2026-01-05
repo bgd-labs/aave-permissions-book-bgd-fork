@@ -703,7 +703,7 @@ export const networkConfigs: NetworkConfigs = {
       '0x22740deBa78d5a0c24C58C740e3715ec29de1bFa': 'Finance Risk Council',
       '0xd2D586f849620ef042FE3aF52eAa10e9b78bf7De': 'Arbitrum Gho Aave Steward',
       '0x87dFb794364f2B117C8dbaE29EA622938b3Ce465': 'BGD Steward Injector Guardian',
-      '0x14C3fe96adf6068C2D5616D239fc93f61D85dF85': 'Risk Oracle Guardian'
+      '0xDe841Bf4B67970f5a19165443B0e9ec808E1cC85': 'Risk Oracle Guardian'
     },
     pools: {
       [Pools.V3]: {
