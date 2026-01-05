@@ -221,7 +221,10 @@ export const networkConfigs: NetworkConfigs = {
       '0x6A14eBe9A934c8EFE15C3811a999149472876b56': 'ClinicStewardV2',
       '0xE1e62c3ee0c581F715fBb0e23CDA536Fc29eeB2c': 'ClinicStewardV2 AMM',
       '0xff37939808EcF199A2D599ef91D699Fb13dab7F7': 'BGD Injector Guardian',
-      '0xDe841Bf4B67970f5a19165443B0e9ec808E1cC85': 'Risk Oracle Guardian'
+      '0xDe841Bf4B67970f5a19165443B0e9ec808E1cC85': 'Risk Oracle Guardian',
+      '0x22aC12a6937BBBC0a301AF9154d08EaD95673122': 'PoolExposureSteward',
+      '0xf00E2de0E78DFf055A92AD4719a179CE275b6Ef7': 'ClinicSteward',
+      '0xb7D402138Cb01BfE97d95181C849379d6AD14d19': 'SwapSteward'
     },
     pools: {
       // [Pools.V3]: {
