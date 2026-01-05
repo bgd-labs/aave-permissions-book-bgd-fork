@@ -324,7 +324,7 @@
         "FLASH_BORROWER": [],
         "RISK_ADMIN": []
       },
-      "latestBlockNumber": 31105600
+      "latestBlockNumber": 34077099
     },
     "gsmRoles": {},
     "govV3": {
@@ -403,7 +403,7 @@
             "0x1dF462e2712496373A347f8ad10802a5E95f053D"
           ]
         },
-        "latestBlockNumber": 31106182
+        "latestBlockNumber": 34077099
       }
     },
     "clinicSteward": {},
@@ -440,6 +440,7 @@
                 {
                   "address": "0x2e8090716C5a25332cf963d454250B88bf04E6dC",
                   "owners": [
+                    "0x56A0f31BB43Bcc938dbDa07381221DA9075a4D53",
                     "0x82f8025E7f483Af96c2938C9930D1a9D8B6C6e5e",
                     "0x26de2b9E15886b21dd86ec57C2f4983A98458FCe",
                     "0xaFe7AB320A37b731D5cA37Ba85802f26F3b75469",
@@ -480,6 +481,7 @@
                 {
                   "address": "0x2e8090716C5a25332cf963d454250B88bf04E6dC",
                   "owners": [
+                    "0x56A0f31BB43Bcc938dbDa07381221DA9075a4D53",
                     "0x82f8025E7f483Af96c2938C9930D1a9D8B6C6e5e",
                     "0x26de2b9E15886b21dd86ec57C2f4983A98458FCe",
                     "0xaFe7AB320A37b731D5cA37Ba85802f26F3b75469",
@@ -493,6 +495,7 @@
                 {
                   "address": "0x2e8090716C5a25332cf963d454250B88bf04E6dC",
                   "owners": [
+                    "0x56A0f31BB43Bcc938dbDa07381221DA9075a4D53",
                     "0x82f8025E7f483Af96c2938C9930D1a9D8B6C6e5e",
                     "0x26de2b9E15886b21dd86ec57C2f4983A98458FCe",
                     "0xaFe7AB320A37b731D5cA37Ba85802f26F3b75469",
@@ -514,6 +517,7 @@
                 {
                   "address": "0x2e8090716C5a25332cf963d454250B88bf04E6dC",
                   "owners": [
+                    "0x56A0f31BB43Bcc938dbDa07381221DA9075a4D53",
                     "0x82f8025E7f483Af96c2938C9930D1a9D8B6C6e5e",
                     "0x26de2b9E15886b21dd86ec57C2f4983A98458FCe",
                     "0xaFe7AB320A37b731D5cA37Ba85802f26F3b75469",
@@ -570,7 +574,7 @@
             "0x81D251dA015A0C7bD882918Ca1ec6B7B8E094585"
           ]
         },
-        "latestBlockNumber": 31107348
+        "latestBlockNumber": 34077101
       },
       "contracts": {
         "GranularGuardian": {
@@ -872,7 +876,7 @@
         }
       },
       "senders": [],
-      "latestCCCBlockNumber": 31106766
+      "latestCCCBlockNumber": 34077101
     },
     "collector": {},
     "clinicSteward": {},
