@@ -271,6 +271,8 @@ export const networkConfigs: NetworkConfigs = {
       [Pools.LIDO_TENDERLY]: {
         permissionsJson: './statics/functionsPermissionsV3.json',
         aclBlock: 20262410,
+        collectorBlock: 21765718,
+        clinicStewardBlock: 21967120,
         addressBook: {
           ...AaveV3EthereumLido,
           ...MiscEthereum,

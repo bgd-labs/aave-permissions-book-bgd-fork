@@ -1135,6 +1135,31 @@
       "agentHubRiskOracleInfo": {}
     }
   },
+  "GHO": {
+    "contracts": {},
+    "roles": {
+      "role": {
+        "DEFAULT_ADMIN": [
+          "0xFF1137243698CaA18EE364Cc966CF0e02A4e6327"
+        ],
+        "FACILITATOR_MANAGER_ROLE": [
+          "0xFF1137243698CaA18EE364Cc966CF0e02A4e6327"
+        ],
+        "BUCKET_MANAGER_ROLE": [
+          "0xFF1137243698CaA18EE364Cc966CF0e02A4e6327",
+          "0xa9afaE6A53E90f9E4CE0717162DF5Bc3d9aBe7B2"
+        ]
+      },
+      "latestBlockNumber": 363535734
+    },
+    "gsmRoles": {},
+    "govV3": {
+      "ggRoles": {}
+    },
+    "collector": {},
+    "clinicSteward": {},
+    "umbrella": {}
+  },
   "TENDERLY": {
     "contracts": {
       "PoolAddressesProvider": {
@@ -2253,30 +2278,5 @@
         }
       }
     }
-  },
-  "GHO": {
-    "contracts": {},
-    "roles": {
-      "role": {
-        "DEFAULT_ADMIN": [
-          "0xFF1137243698CaA18EE364Cc966CF0e02A4e6327"
-        ],
-        "FACILITATOR_MANAGER_ROLE": [
-          "0xFF1137243698CaA18EE364Cc966CF0e02A4e6327"
-        ],
-        "BUCKET_MANAGER_ROLE": [
-          "0xFF1137243698CaA18EE364Cc966CF0e02A4e6327",
-          "0xa9afaE6A53E90f9E4CE0717162DF5Bc3d9aBe7B2"
-        ]
-      },
-      "latestBlockNumber": 363535734
-    },
-    "gsmRoles": {},
-    "govV3": {
-      "ggRoles": {}
-    },
-    "collector": {},
-    "clinicSteward": {},
-    "umbrella": {}
   }
 }
