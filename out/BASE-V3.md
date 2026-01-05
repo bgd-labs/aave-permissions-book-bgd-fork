@@ -1,5 +1,5 @@
 # BASE 
-## TENDERLY 
+## V3 
 ### Contracts upgradeability
 | contract |upgradeable by |
 |----------|----------|
@@ -20,6 +20,9 @@
 |  [AaveStewardInjectorCaps](https://basescan.org/address/0x4f84A364B66Eb6280350da011829a6BD02B4712f) |  not upgradeable | |--------|--------|
 |  [PoolExposureSteward](https://basescan.org/address/0x4f1F3E32f20847a4c9F002882eB607aD750b6115) |  not upgradeable | |--------|--------|
 |  [Manual AGRS](https://basescan.org/address/0x085E34722e04567Df9E6d2c32e82fd74f3342e79) |  not upgradeable | |--------|--------|
+|  [Collector](https://basescan.org/address/0xBA9424d650A4F5c80a0dA641254d1AcCE2A37057) |  Governance | |--------|--------|
+|  [ClinicSteward](https://basescan.org/address/0x1a79098C3149020ACdEfb3EE44AA1d9509305530) |  not upgradeable | |--------|--------|
+|  Aave a/v/s tokens |  Governance | |--------|--------|
 |  [GranularGuardian](https://basescan.org/address/0xa1c6aF35E0205f42256382C05243C543FEDBf4bB) |  not upgradeable | |--------|--------|
 |  [PayloadsController](https://basescan.org/address/0x2DC219E716793fb4b21548C0f009Ba3Af753ab01) |  Governance | |--------|--------|
 |  [Executor_lvl1](https://basescan.org/address/0x9390B1735def18560c509E2d0bc090E9d6BA257a) |  not upgradeable | |--------|--------|
@@ -31,14 +34,14 @@
 |----------|----------|
 |  updateReserveBorrowSettings |  Governance | |--------|--------|
 |  configureProtocolFees |  Governance | |--------|--------|
-|  updateReserveCaps |  Governance,Steward,External Contract | |--------|--------|
+|  updateReserveCaps |  Governance,Steward | |--------|--------|
 |  updateReserveSettings |  Governance | |--------|--------|
 |  configureCollateral |  Governance | |--------|--------|
 |  upgradeAaveTokens (a/v/s) |  Governance | |--------|--------|
 |  upgradeAaveOracles |  Governance | |--------|--------|
 |  reserveUpgradeability |  Governance | |--------|--------|
 |  pausePool |  Governance,Multi-sig | |--------|--------|
-|  pauseAndFreezeReserve |  Governance,Steward,External Contract,Multi-sig | |--------|--------|
+|  pauseAndFreezeReserve |  Governance,Steward,Multi-sig | |--------|--------|
 |  reserveListing |  Governance | |--------|--------|
 |  adminsConfiguration |  Governance | |--------|--------|
 |  protocolUpgradeablity |  Governance | |--------|--------|
@@ -54,8 +57,8 @@
 |  [Pool](https://basescan.org/address/0xA238Dd80C259a72e81d7e4664a9801593F98d1c5) |  [PoolAddressesProvider](https://basescan.org/address/0xe20fCBdBfFC4Dd138cE8b2E6FBb6CB49777ad64D) |  onlyPoolAdmin |  [Executor_lvl1](https://basescan.org/address/0x9390B1735def18560c509E2d0bc090E9d6BA257a) |  rescueTokens | |--------|--------|--------|--------|--------|
 |  [PoolConfigurator](https://basescan.org/address/0x5731a04B1E775f0fdd454Bf70f3335886e9A96be) |  [PoolAddressesProvider](https://basescan.org/address/0xe20fCBdBfFC4Dd138cE8b2E6FBb6CB49777ad64D) |  onlyPoolAdmin |  [Executor_lvl1](https://basescan.org/address/0x9390B1735def18560c509E2d0bc090E9d6BA257a) |  dropReserve, dropReserve, updateAToken, updateStableDebtToken, updateVariableDebtToken, setReserveActive, updateBridgeProtocolFee, updateFlashloanPremiumTotal, updateFlashloanPremiumToProtocol | |--------|--------|--------|--------|--------|
 |  [PoolConfigurator](https://basescan.org/address/0x5731a04B1E775f0fdd454Bf70f3335886e9A96be) |  [PoolAddressesProvider](https://basescan.org/address/0xe20fCBdBfFC4Dd138cE8b2E6FBb6CB49777ad64D) |  onlyAssetListingOrPoolAdmins |  [Executor_lvl1](https://basescan.org/address/0x9390B1735def18560c509E2d0bc090E9d6BA257a) |  initReserves | |--------|--------|--------|--------|--------|
-|  [PoolConfigurator](https://basescan.org/address/0x5731a04B1E775f0fdd454Bf70f3335886e9A96be) |  [PoolAddressesProvider](https://basescan.org/address/0xe20fCBdBfFC4Dd138cE8b2E6FBb6CB49777ad64D) |  onlyRiskOrPoolAdmins |  [Executor_lvl1](https://basescan.org/address/0x9390B1735def18560c509E2d0bc090E9d6BA257a), [Base Gho Aave Steward](https://basescan.org/address/0xC5BcC58BE6172769ca1a78B8A45752E3C5059c39), [Manual AGRS](https://basescan.org/address/0x085E34722e04567Df9E6d2c32e82fd74f3342e79), [SupplyCapAgent](https://basescan.org/address/0x42ca9E62C9B61d01Bb222d6E69f095eE98e61cE8), [BorrowCapAgent](https://basescan.org/address/0x0ae2815b1f607EfEe34C15E63c72Cd6C99d1D6fa) |  setReserveBorrowing, setReserveBorrowing, configureReserveAsCollateral, setReserveStableRateBorrowing, setBorrowableInIsolation, setReserveFactor, setDebtCeiling, setSiloedBorrowing, setBorrowCap, setSupplyCap, setLiquidationProtocolFee, setEModeCategory, setAssetEModeCategory, setUnbackedMintCap, setReserveInterestRateStrategyAddress, setReserveFlashLoaning | |--------|--------|--------|--------|--------|
-|  [PoolConfigurator](https://basescan.org/address/0x5731a04B1E775f0fdd454Bf70f3335886e9A96be) |  [PoolAddressesProvider](https://basescan.org/address/0xe20fCBdBfFC4Dd138cE8b2E6FBb6CB49777ad64D) |  onlyRiskOrPoolOrEmergencyAdmins |  [Executor_lvl1](https://basescan.org/address/0x9390B1735def18560c509E2d0bc090E9d6BA257a), [Base Gho Aave Steward](https://basescan.org/address/0xC5BcC58BE6172769ca1a78B8A45752E3C5059c39), [Manual AGRS](https://basescan.org/address/0x085E34722e04567Df9E6d2c32e82fd74f3342e79), [SupplyCapAgent](https://basescan.org/address/0x42ca9E62C9B61d01Bb222d6E69f095eE98e61cE8), [BorrowCapAgent](https://basescan.org/address/0x0ae2815b1f607EfEe34C15E63c72Cd6C99d1D6fa), [Aave Protocol Guardian Base](https://basescan.org/address/0x56C1a4b54921DEA9A344967a8693C7E661D72968) |  setReserveFreeze | |--------|--------|--------|--------|--------|
+|  [PoolConfigurator](https://basescan.org/address/0x5731a04B1E775f0fdd454Bf70f3335886e9A96be) |  [PoolAddressesProvider](https://basescan.org/address/0xe20fCBdBfFC4Dd138cE8b2E6FBb6CB49777ad64D) |  onlyRiskOrPoolAdmins |  [Executor_lvl1](https://basescan.org/address/0x9390B1735def18560c509E2d0bc090E9d6BA257a), [Base Gho Aave Steward](https://basescan.org/address/0xC5BcC58BE6172769ca1a78B8A45752E3C5059c39), [EdgeRiskStewardCaps](https://basescan.org/address/0xB892202d9Ce2C16C565A492a5168689b215Eb269), [Manual AGRS](https://basescan.org/address/0x085E34722e04567Df9E6d2c32e82fd74f3342e79) |  setReserveBorrowing, setReserveBorrowing, configureReserveAsCollateral, setReserveStableRateBorrowing, setBorrowableInIsolation, setReserveFactor, setDebtCeiling, setSiloedBorrowing, setBorrowCap, setSupplyCap, setLiquidationProtocolFee, setEModeCategory, setAssetEModeCategory, setUnbackedMintCap, setReserveInterestRateStrategyAddress, setReserveFlashLoaning | |--------|--------|--------|--------|--------|
+|  [PoolConfigurator](https://basescan.org/address/0x5731a04B1E775f0fdd454Bf70f3335886e9A96be) |  [PoolAddressesProvider](https://basescan.org/address/0xe20fCBdBfFC4Dd138cE8b2E6FBb6CB49777ad64D) |  onlyRiskOrPoolOrEmergencyAdmins |  [Executor_lvl1](https://basescan.org/address/0x9390B1735def18560c509E2d0bc090E9d6BA257a), [Base Gho Aave Steward](https://basescan.org/address/0xC5BcC58BE6172769ca1a78B8A45752E3C5059c39), [EdgeRiskStewardCaps](https://basescan.org/address/0xB892202d9Ce2C16C565A492a5168689b215Eb269), [Manual AGRS](https://basescan.org/address/0x085E34722e04567Df9E6d2c32e82fd74f3342e79), [Aave Protocol Guardian Base](https://basescan.org/address/0x56C1a4b54921DEA9A344967a8693C7E661D72968) |  setReserveFreeze | |--------|--------|--------|--------|--------|
 |  [PoolConfigurator](https://basescan.org/address/0x5731a04B1E775f0fdd454Bf70f3335886e9A96be) |  [PoolAddressesProvider](https://basescan.org/address/0xe20fCBdBfFC4Dd138cE8b2E6FBb6CB49777ad64D) |  onlyEmergencyOrPoolAdmin |  [Executor_lvl1](https://basescan.org/address/0x9390B1735def18560c509E2d0bc090E9d6BA257a), [Aave Protocol Guardian Base](https://basescan.org/address/0x56C1a4b54921DEA9A344967a8693C7E661D72968) |  setPoolPause, setReservePause | |--------|--------|--------|--------|--------|
 |  [AaveOracle](https://basescan.org/address/0x2Cc0Fc26eD4563A5ce5e8bdcfe1A2878676Ae156) |  - |  onlyAssetListingOrPoolAdmins |  [Executor_lvl1](https://basescan.org/address/0x9390B1735def18560c509E2d0bc090E9d6BA257a) |  setAssetSources, setFallbackOracle | |--------|--------|--------|--------|--------|
 |  [RewardsController](https://basescan.org/address/0xf9cc4F0D883F1a1eb2c253bdb46c254Ca51E1F44) |  [PoolAddressesProvider](https://basescan.org/address/0xe20fCBdBfFC4Dd138cE8b2E6FBb6CB49777ad64D) |  onlyEmissionManager |  [EmissionManager](https://basescan.org/address/0x6533A273F3aC84Df91DCD654D6EBAbA73687e246) |  configureAssets, setTransferStrategy, setRewardOracle, setClaimer | |--------|--------|--------|--------|--------|
@@ -75,6 +78,10 @@
 |  [PoolExposureSteward](https://basescan.org/address/0x4f1F3E32f20847a4c9F002882eB607aD750b6115) |  - |  onlyOwnerOrGuardian |  [Finance Risk Council](https://basescan.org/address/0x22740deBa78d5a0c24C58C740e3715ec29de1bFa), [Executor_lvl1](https://basescan.org/address/0x9390B1735def18560c509E2d0bc090E9d6BA257a) |  depositV3, withdrawV3, withdrawV2, migrateV2toV3, migrateBetweenV3 | |--------|--------|--------|--------|--------|
 |  [Manual AGRS](https://basescan.org/address/0x085E34722e04567Df9E6d2c32e82fd74f3342e79) |  - |  onlyOwner |  [Executor_lvl1](https://basescan.org/address/0x9390B1735def18560c509E2d0bc090E9d6BA257a) |  setRiskConfig, setAddressRestricted | |--------|--------|--------|--------|--------|
 |  [Manual AGRS](https://basescan.org/address/0x085E34722e04567Df9E6d2c32e82fd74f3342e79) |  - |  onlyRiskCouncil |  [Risk Council](https://basescan.org/address/0xfbeB4AcB31340bA4de9C87B11dfBf7e2bc8C0bF1) |  updateCaps, updateRates, updateCollateralSide, updateLstPriceCaps, updateStablePriceCaps | |--------|--------|--------|--------|--------|
+|  [Collector](https://basescan.org/address/0xBA9424d650A4F5c80a0dA641254d1AcCE2A37057) |  [ProxyAdmin](https://basescan.org/address/0xc85b1E333aecc99340b2320493Fe2d22b8734795) |  onlyFundsAdmin |  [Executor_lvl1](https://basescan.org/address/0x9390B1735def18560c509E2d0bc090E9d6BA257a), [ClinicSteward](https://basescan.org/address/0x1a79098C3149020ACdEfb3EE44AA1d9509305530), [PoolExposureSteward](https://basescan.org/address/0x4f1F3E32f20847a4c9F002882eB607aD750b6115) |  approve, transfer, setFundsAdmin, createStream | |--------|--------|--------|--------|--------|
+|  [Collector](https://basescan.org/address/0xBA9424d650A4F5c80a0dA641254d1AcCE2A37057) |  [ProxyAdmin](https://basescan.org/address/0xc85b1E333aecc99340b2320493Fe2d22b8734795) |  onlyAdminOrRecipient |  [ProxyAdmin](https://basescan.org/address/0xc85b1E333aecc99340b2320493Fe2d22b8734795), [Executor_lvl1](https://basescan.org/address/0x9390B1735def18560c509E2d0bc090E9d6BA257a), [ClinicSteward](https://basescan.org/address/0x1a79098C3149020ACdEfb3EE44AA1d9509305530), [PoolExposureSteward](https://basescan.org/address/0x4f1F3E32f20847a4c9F002882eB607aD750b6115) |  withdrawFromStream, cancelStream | |--------|--------|--------|--------|--------|
+|  [ClinicSteward](https://basescan.org/address/0x1a79098C3149020ACdEfb3EE44AA1d9509305530) |  - |  onlyCleanUpRole |  [CleanUp Admin](https://basescan.org/address/0xdeadD8aB03075b7FBA81864202a2f59EE25B312b), [ACI Automation](https://basescan.org/address/0x3Cbded22F878aFC8d39dCD744d3Fe62086B76193) |  renewAllowance, batchRepayBadDebt, batchLiquidate, batchRepayBadDebt | |--------|--------|--------|--------|--------|
+|  [ClinicSteward](https://basescan.org/address/0x1a79098C3149020ACdEfb3EE44AA1d9509305530) |  - |  onlyAdmin |  [Executor_lvl1](https://basescan.org/address/0x9390B1735def18560c509E2d0bc090E9d6BA257a) |  setAvailableBudget | |--------|--------|--------|--------|--------|
 
 ### Governance V3 Contracts 
 | contract |proxyAdmin |modifier |permission owner |functions |
@@ -97,14 +104,9 @@
 ### Risk Agent Contracts 
 | contract |proxyAdmin |modifier |permission owner |functions |
 |----------|----------|----------|----------|----------|
-|  [SupplyCapAgent](https://basescan.org/address/0x42ca9E62C9B61d01Bb222d6E69f095eE98e61cE8) |  - |  onlyAgentHub |  [AgentHub](https://basescan.org/address/0x115E662Fa3f0b83014eB3f6F86F3D94BeC5eB411) |  inject | |--------|--------|--------|--------|--------|
-|  [BorrowCapAgent](https://basescan.org/address/0x0ae2815b1f607EfEe34C15E63c72Cd6C99d1D6fa) |  - |  onlyAgentHub |  [AgentHub](https://basescan.org/address/0x115E662Fa3f0b83014eB3f6F86F3D94BeC5eB411) |  inject | |--------|--------|--------|--------|--------|
 |  [AgentHub](https://basescan.org/address/0x115E662Fa3f0b83014eB3f6F86F3D94BeC5eB411) |  [AgentHubProxyAdmin](https://basescan.org/address/0x62a2B5219010bDfD035cf1eAf6FB070e30F651B8) |  onlyOwner |  [Executor_lvl1](https://basescan.org/address/0x9390B1735def18560c509E2d0bc090E9d6BA257a) |  registerAgent, setAgentAdmin, setMaxBatchSize, setAgentAddress, renounceOwnership, transferOwnership | |--------|--------|--------|--------|--------|
 |  [AgentHub](https://basescan.org/address/0x115E662Fa3f0b83014eB3f6F86F3D94BeC5eB411) |  [AgentHubProxyAdmin](https://basescan.org/address/0x62a2B5219010bDfD035cf1eAf6FB070e30F651B8) |  onlyOwnerOrAgentAdmin |  [Executor_lvl1](https://basescan.org/address/0x9390B1735def18560c509E2d0bc090E9d6BA257a) |  setAgentAsPermissioned, addPermissionedSender, removePermissionedSender, addAllowedMarket, removeAllowedMarket, addRestrictedMarket, removeRestrictedMarket, setExpirationPeriod, setAgentEnabled, setMinimumDelay, setAgentContext, setMarketsFromAgentEnabled, addAllowedMarket, addAllowedMarket | |--------|--------|--------|--------|--------|
 |  [AgentHubProxyAdmin](https://basescan.org/address/0x62a2b5219010bdfd035cf1eaf6fb070e30f651b8) |  - |  onlyOwner |  [Executor_lvl1](https://basescan.org/address/0x9390B1735def18560c509E2d0bc090E9d6BA257a) |  changeProxyAdmin, upgrade, upgradeAndCall | |--------|--------|--------|--------|--------|
-|  [RangeValidationModule](https://basescan.org/address/0x9240a6669CC4782FC98620212862DF5CB2e0Df10) |  - |  onlyHubOwnerOrAgentAdmin |  [Executor_lvl1](https://basescan.org/address/0x9390B1735def18560c509E2d0bc090E9d6BA257a) |  setDefaultRangeConfig, setRangeConfigByMarket | |--------|--------|--------|--------|--------|
-|  [RiskOracle](https://basescan.org/address/0x239d3Bc5fa247337287cb03f53B8bc63DBBc332D) |  - |  onlyOwner |  [Risk Oracle Guardian](https://basescan.org/address/0xDe841Bf4B67970f5a19165443B0e9ec808E1cC85) |  addAuthorizedSender, removeAuthorizedSender, addUpdateType, renounceOwnership, transferOwnership | |--------|--------|--------|--------|--------|
-|  [RiskOracle](https://basescan.org/address/0x239d3Bc5fa247337287cb03f53B8bc63DBBc332D) |  - |  onlyAuthorized |  [0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9](https://basescan.org/address/0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9) |  publishRiskParameterUpdate, publishBulkRiskParameterUpdates | |--------|--------|--------|--------|--------|
 
 ### Guardians 
 | Guardian |Threshold |Address |Owners |
@@ -125,7 +127,7 @@
 |  EMERGENCY_ADMIN |  [Aave Protocol Guardian Base](https://basescan.org/address/0x56C1a4b54921DEA9A344967a8693C7E661D72968) | |--------|--------|
 |  ASSET_LISTING_ADMIN |   | |--------|--------|
 |  FLASH_BORROWER |  [0xab515542d621574f9b5212d50593cD0C07e641bD](https://basescan.org/address/0xab515542d621574f9b5212d50593cD0C07e641bD), [0xA672e882aCBB96486393D43E0efdab5EBEbDDC1d](https://basescan.org/address/0xA672e882aCBB96486393D43E0efdab5EBEbDDC1d), [0x15E2F06138aed58ca2A6AfB5A1333bBC5f728f80](https://basescan.org/address/0x15E2F06138aed58ca2A6AfB5A1333bBC5f728f80), [0xbA5F6A0D2AC21a3feC7a6C40FACd23407AA84663](https://basescan.org/address/0xbA5F6A0D2AC21a3feC7a6C40FACd23407AA84663), [0xC1E02884AF4A283cA25ab63C45360d220d69DA52](https://basescan.org/address/0xC1E02884AF4A283cA25ab63C45360d220d69DA52), [0x1c980456751AE40315Ff73CaaC0843Be643321Be](https://basescan.org/address/0x1c980456751AE40315Ff73CaaC0843Be643321Be), [0xeDE61eefa4850b459E3B09Fe6d8d371480D6fF00](https://basescan.org/address/0xeDE61eefa4850b459E3B09Fe6d8d371480D6fF00), [0x53a4716a8f7DBC9543ebf9cd711952033cC64d43](https://basescan.org/address/0x53a4716a8f7DBC9543ebf9cd711952033cC64d43), [0xd2f23773bF5e2d59F6bB925c2232F6e83f3f79e0](https://basescan.org/address/0xd2f23773bF5e2d59F6bB925c2232F6e83f3f79e0), [0x9e0501537723c71250307F5B1A8eE60e167D21C9](https://basescan.org/address/0x9e0501537723c71250307F5B1A8eE60e167D21C9), [0xCAF08BF08D0c87e2c74dd9EBEC9C776037bD7e8E](https://basescan.org/address/0xCAF08BF08D0c87e2c74dd9EBEC9C776037bD7e8E), [0x352423e2fA5D5c99343d371C9e3bC56C87723Cc7](https://basescan.org/address/0x352423e2fA5D5c99343d371C9e3bC56C87723Cc7) | |--------|--------|
-|  RISK_ADMIN |  [Base Gho Aave Steward](https://basescan.org/address/0xC5BcC58BE6172769ca1a78B8A45752E3C5059c39), [Manual AGRS](https://basescan.org/address/0x085E34722e04567Df9E6d2c32e82fd74f3342e79), [SupplyCapAgent](https://basescan.org/address/0x42ca9E62C9B61d01Bb222d6E69f095eE98e61cE8), [BorrowCapAgent](https://basescan.org/address/0x0ae2815b1f607EfEe34C15E63c72Cd6C99d1D6fa) | |--------|--------|
+|  RISK_ADMIN |  [Base Gho Aave Steward](https://basescan.org/address/0xC5BcC58BE6172769ca1a78B8A45752E3C5059c39), [EdgeRiskStewardCaps](https://basescan.org/address/0xB892202d9Ce2C16C565A492a5168689b215Eb269), [Manual AGRS](https://basescan.org/address/0x085E34722e04567Df9E6d2c32e82fd74f3342e79) | |--------|--------|
 
 ### Granular Guardian Admins 
 | Role |Contract |
@@ -133,4 +135,16 @@
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://basescan.org/address/0x9390B1735def18560c509E2d0bc090E9d6BA257a) | |--------|--------|
 |  SOLVE_EMERGENCY_ROLE |  [Aave Governance Guardian Base](https://basescan.org/address/0x360c0a69Ed2912351227a0b745f890CB2eBDbcFe) | |--------|--------|
 |  RETRY_ROLE |  [BGD](https://basescan.org/address/0x7FDA7C3528ad8f05e62148a700D456898b55f8d2) | |--------|--------|
+
+### Collector Admins 
+| Role |Contract |
+|----------|----------|
+|  DEFAULT_ADMIN |  [Executor_lvl1](https://basescan.org/address/0x9390B1735def18560c509E2d0bc090E9d6BA257a) | |--------|--------|
+|  FUNDS_ADMIN_ROLE |  [Executor_lvl1](https://basescan.org/address/0x9390B1735def18560c509E2d0bc090E9d6BA257a), [ClinicSteward](https://basescan.org/address/0x1a79098C3149020ACdEfb3EE44AA1d9509305530), [PoolExposureSteward](https://basescan.org/address/0x4f1F3E32f20847a4c9F002882eB607aD750b6115) | |--------|--------|
+
+### Clinic Steward Admins 
+| Role |Contract |
+|----------|----------|
+|  DEFAULT_ADMIN |  [Executor_lvl1](https://basescan.org/address/0x9390B1735def18560c509E2d0bc090E9d6BA257a) | |--------|--------|
+|  CLEANUP_ROLE |  [CleanUp Admin](https://basescan.org/address/0xdeadD8aB03075b7FBA81864202a2f59EE25B312b), [ACI Automation](https://basescan.org/address/0x3Cbded22F878aFC8d39dCD744d3Fe62086B76193) | |--------|--------|
 

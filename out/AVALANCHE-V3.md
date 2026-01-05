@@ -1,5 +1,5 @@
 # AVALANCHE 
-## TENDERLY 
+## V3 
 ### Contracts upgradeability
 | contract |upgradeable by |
 |----------|----------|
@@ -23,6 +23,9 @@
 |  [AaveStewardInjectorCaps](https://snowscan.xyz/address/0x54714FAc85b0bf627288CC3a186dE81A42f1D635) |  not upgradeable | |--------|--------|
 |  [PoolExposureSteward](https://snowscan.xyz/address/0x0d68D50DB848dfE6012456781c1D79A11eD12a2e) |  not upgradeable | |--------|--------|
 |  [Manual AGRS](https://snowscan.xyz/address/0x23AceD103f5E22bD22B9272c82f29C0E51abC5c2) |  not upgradeable | |--------|--------|
+|  [Collector](https://snowscan.xyz/address/0x5ba7fd868c40c16f7aDfAe6CF87121E13FC2F7a0) |  Governance | |--------|--------|
+|  [ClinicSteward](https://snowscan.xyz/address/0x6c2B732cB368322E460D718df3CD4F553d5fbAde) |  not upgradeable | |--------|--------|
+|  Aave a/v/s tokens |  Governance | |--------|--------|
 |  [GranularGuardian](https://snowscan.xyz/address/0xc1162BCb2E5E3ca4725512008c7522dF8C8B7B65) |  not upgradeable | |--------|--------|
 |  [PayloadsController](https://snowscan.xyz/address/0x1140CB7CAfAcC745771C2Ea31e7B5C653c5d0B80) |  Governance | |--------|--------|
 |  [VotingMachine](https://snowscan.xyz/address/0x4D1863d22D0ED8579f8999388BCC833CB057C2d6) |  not upgradeable | |--------|--------|
@@ -37,14 +40,14 @@
 |----------|----------|
 |  updateReserveBorrowSettings |  Governance | |--------|--------|
 |  configureProtocolFees |  Governance | |--------|--------|
-|  updateReserveCaps |  Governance,Steward,External Contract | |--------|--------|
+|  updateReserveCaps |  Governance,Steward | |--------|--------|
 |  updateReserveSettings |  Governance | |--------|--------|
 |  configureCollateral |  Governance | |--------|--------|
 |  upgradeAaveTokens (a/v/s) |  Governance | |--------|--------|
 |  upgradeAaveOracles |  Governance | |--------|--------|
 |  reserveUpgradeability |  Governance | |--------|--------|
 |  pausePool |  Governance,Multi-sig | |--------|--------|
-|  pauseAndFreezeReserve |  Governance,Steward,External Contract,Multi-sig | |--------|--------|
+|  pauseAndFreezeReserve |  Governance,Steward,Multi-sig | |--------|--------|
 |  reserveListing |  Governance | |--------|--------|
 |  adminsConfiguration |  Governance | |--------|--------|
 |  protocolUpgradeablity |  Governance | |--------|--------|
@@ -61,8 +64,8 @@
 |  [Pool](https://snowscan.xyz/address/0x794a61358D6845594F94dc1DB02A252b5b4814aD) |  [PoolAddressesProvider](https://snowscan.xyz/address/0xa97684ead0e402dC232d5A977953DF7ECBaB3CDb) |  onlyPoolAdmin |  [Executor_lvl1](https://snowscan.xyz/address/0x3C06dce358add17aAf230f2234bCCC4afd50d090) |  rescueTokens | |--------|--------|--------|--------|--------|
 |  [PoolConfigurator](https://snowscan.xyz/address/0x8145eddDf43f50276641b55bd3AD95944510021E) |  [PoolAddressesProvider](https://snowscan.xyz/address/0xa97684ead0e402dC232d5A977953DF7ECBaB3CDb) |  onlyPoolAdmin |  [Executor_lvl1](https://snowscan.xyz/address/0x3C06dce358add17aAf230f2234bCCC4afd50d090) |  dropReserve, dropReserve, updateAToken, updateStableDebtToken, updateVariableDebtToken, setReserveActive, updateBridgeProtocolFee, updateFlashloanPremiumTotal, updateFlashloanPremiumToProtocol | |--------|--------|--------|--------|--------|
 |  [PoolConfigurator](https://snowscan.xyz/address/0x8145eddDf43f50276641b55bd3AD95944510021E) |  [PoolAddressesProvider](https://snowscan.xyz/address/0xa97684ead0e402dC232d5A977953DF7ECBaB3CDb) |  onlyAssetListingOrPoolAdmins |  [Executor_lvl1](https://snowscan.xyz/address/0x3C06dce358add17aAf230f2234bCCC4afd50d090) |  initReserves | |--------|--------|--------|--------|--------|
-|  [PoolConfigurator](https://snowscan.xyz/address/0x8145eddDf43f50276641b55bd3AD95944510021E) |  [PoolAddressesProvider](https://snowscan.xyz/address/0xa97684ead0e402dC232d5A977953DF7ECBaB3CDb) |  onlyRiskOrPoolAdmins |  [Executor_lvl1](https://snowscan.xyz/address/0x3C06dce358add17aAf230f2234bCCC4afd50d090), [Proof Of Reserve Executor V3](https://snowscan.xyz/address/0xB94e515615c244Ab25f7A6e592e3Cb7EE31E99F4), [Gho Aave Steward](https://snowscan.xyz/address/0xA5Ba213867E175A182a5dd6A9193C6158738105A), [Manual AGRS](https://snowscan.xyz/address/0x23AceD103f5E22bD22B9272c82f29C0E51abC5c2), [SupplyCapAgent](https://snowscan.xyz/address/0x38753B4D5116b12bC3524e334bC76AE57fA42fFB), [BorrowCapAgent](https://snowscan.xyz/address/0xb57C37F48d1De2DACBefed69679Ba0b7DC43A394) |  setReserveBorrowing, setReserveBorrowing, configureReserveAsCollateral, setReserveStableRateBorrowing, setBorrowableInIsolation, setReserveFactor, setDebtCeiling, setSiloedBorrowing, setBorrowCap, setSupplyCap, setLiquidationProtocolFee, setEModeCategory, setAssetEModeCategory, setUnbackedMintCap, setReserveInterestRateStrategyAddress, setReserveFlashLoaning | |--------|--------|--------|--------|--------|
-|  [PoolConfigurator](https://snowscan.xyz/address/0x8145eddDf43f50276641b55bd3AD95944510021E) |  [PoolAddressesProvider](https://snowscan.xyz/address/0xa97684ead0e402dC232d5A977953DF7ECBaB3CDb) |  onlyRiskOrPoolOrEmergencyAdmins |  [Executor_lvl1](https://snowscan.xyz/address/0x3C06dce358add17aAf230f2234bCCC4afd50d090), [Proof Of Reserve Executor V3](https://snowscan.xyz/address/0xB94e515615c244Ab25f7A6e592e3Cb7EE31E99F4), [Gho Aave Steward](https://snowscan.xyz/address/0xA5Ba213867E175A182a5dd6A9193C6158738105A), [Manual AGRS](https://snowscan.xyz/address/0x23AceD103f5E22bD22B9272c82f29C0E51abC5c2), [SupplyCapAgent](https://snowscan.xyz/address/0x38753B4D5116b12bC3524e334bC76AE57fA42fFB), [BorrowCapAgent](https://snowscan.xyz/address/0xb57C37F48d1De2DACBefed69679Ba0b7DC43A394), [Aave Protocol Guardian Avalanche](https://snowscan.xyz/address/0x56C1a4b54921DEA9A344967a8693C7E661D72968) |  setReserveFreeze | |--------|--------|--------|--------|--------|
+|  [PoolConfigurator](https://snowscan.xyz/address/0x8145eddDf43f50276641b55bd3AD95944510021E) |  [PoolAddressesProvider](https://snowscan.xyz/address/0xa97684ead0e402dC232d5A977953DF7ECBaB3CDb) |  onlyRiskOrPoolAdmins |  [Executor_lvl1](https://snowscan.xyz/address/0x3C06dce358add17aAf230f2234bCCC4afd50d090), [Proof Of Reserve Executor V3](https://snowscan.xyz/address/0xB94e515615c244Ab25f7A6e592e3Cb7EE31E99F4), [EdgeRiskStewardCaps](https://snowscan.xyz/address/0x57218F3aB422A39115951c3Eb06881a7A719DfdD), [Gho Aave Steward](https://snowscan.xyz/address/0xA5Ba213867E175A182a5dd6A9193C6158738105A), [Manual AGRS](https://snowscan.xyz/address/0x23AceD103f5E22bD22B9272c82f29C0E51abC5c2) |  setReserveBorrowing, setReserveBorrowing, configureReserveAsCollateral, setReserveStableRateBorrowing, setBorrowableInIsolation, setReserveFactor, setDebtCeiling, setSiloedBorrowing, setBorrowCap, setSupplyCap, setLiquidationProtocolFee, setEModeCategory, setAssetEModeCategory, setUnbackedMintCap, setReserveInterestRateStrategyAddress, setReserveFlashLoaning | |--------|--------|--------|--------|--------|
+|  [PoolConfigurator](https://snowscan.xyz/address/0x8145eddDf43f50276641b55bd3AD95944510021E) |  [PoolAddressesProvider](https://snowscan.xyz/address/0xa97684ead0e402dC232d5A977953DF7ECBaB3CDb) |  onlyRiskOrPoolOrEmergencyAdmins |  [Executor_lvl1](https://snowscan.xyz/address/0x3C06dce358add17aAf230f2234bCCC4afd50d090), [Proof Of Reserve Executor V3](https://snowscan.xyz/address/0xB94e515615c244Ab25f7A6e592e3Cb7EE31E99F4), [EdgeRiskStewardCaps](https://snowscan.xyz/address/0x57218F3aB422A39115951c3Eb06881a7A719DfdD), [Gho Aave Steward](https://snowscan.xyz/address/0xA5Ba213867E175A182a5dd6A9193C6158738105A), [Manual AGRS](https://snowscan.xyz/address/0x23AceD103f5E22bD22B9272c82f29C0E51abC5c2), [Aave Protocol Guardian Avalanche](https://snowscan.xyz/address/0x56C1a4b54921DEA9A344967a8693C7E661D72968) |  setReserveFreeze | |--------|--------|--------|--------|--------|
 |  [PoolConfigurator](https://snowscan.xyz/address/0x8145eddDf43f50276641b55bd3AD95944510021E) |  [PoolAddressesProvider](https://snowscan.xyz/address/0xa97684ead0e402dC232d5A977953DF7ECBaB3CDb) |  onlyEmergencyOrPoolAdmin |  [Executor_lvl1](https://snowscan.xyz/address/0x3C06dce358add17aAf230f2234bCCC4afd50d090), [Aave Protocol Guardian Avalanche](https://snowscan.xyz/address/0x56C1a4b54921DEA9A344967a8693C7E661D72968) |  setPoolPause, setReservePause | |--------|--------|--------|--------|--------|
 |  [ProofOfReserveExecutorV3](https://snowscan.xyz/address/0xB94e515615c244Ab25f7A6e592e3Cb7EE31E99F4) |  - |  onlyOwner |  [Executor_lvl1](https://snowscan.xyz/address/0x3C06dce358add17aAf230f2234bCCC4afd50d090) |  enableAssets, disableAssets | |--------|--------|--------|--------|--------|
 |  [ProofOfReserveAggregatorV3](https://snowscan.xyz/address/0x80f2c02224a2E548FC67c0bF705eBFA825dd5439) |  - |  onlyOwner |  [Executor_lvl1](https://snowscan.xyz/address/0x3C06dce358add17aAf230f2234bCCC4afd50d090) |  enableProofOfReserveFeed, enableProofOfReserveFeedWithBridgeWrapper, disableProofOfReserveFeed | |--------|--------|--------|--------|--------|
@@ -85,6 +88,10 @@
 |  [PoolExposureSteward](https://snowscan.xyz/address/0x0d68D50DB848dfE6012456781c1D79A11eD12a2e) |  - |  onlyOwnerOrGuardian |  [Finance Risk Council](https://snowscan.xyz/address/0x22740deBa78d5a0c24C58C740e3715ec29de1bFa), [Executor_lvl1](https://snowscan.xyz/address/0x3C06dce358add17aAf230f2234bCCC4afd50d090) |  depositV3, withdrawV3, withdrawV2, migrateV2toV3, migrateBetweenV3 | |--------|--------|--------|--------|--------|
 |  [Manual AGRS](https://snowscan.xyz/address/0x23AceD103f5E22bD22B9272c82f29C0E51abC5c2) |  - |  onlyOwner |  [Executor_lvl1](https://snowscan.xyz/address/0x3C06dce358add17aAf230f2234bCCC4afd50d090) |  setRiskConfig, setAddressRestricted | |--------|--------|--------|--------|--------|
 |  [Manual AGRS](https://snowscan.xyz/address/0x23AceD103f5E22bD22B9272c82f29C0E51abC5c2) |  - |  onlyRiskCouncil |  [Risk Council](https://snowscan.xyz/address/0xCa66149425E7DC8f81276F6D80C4b486B9503D1a) |  updateCaps, updateRates, updateCollateralSide, updateLstPriceCaps, updateStablePriceCaps | |--------|--------|--------|--------|--------|
+|  [Collector](https://snowscan.xyz/address/0x5ba7fd868c40c16f7aDfAe6CF87121E13FC2F7a0) |  [ProxyAdmin](https://snowscan.xyz/address/0xD3cF979e676265e4f6379749DECe4708B9A22476) |  onlyFundsAdmin |  [Executor_lvl1](https://snowscan.xyz/address/0x3C06dce358add17aAf230f2234bCCC4afd50d090), [ClinicSteward](https://snowscan.xyz/address/0x6c2B732cB368322E460D718df3CD4F553d5fbAde), [PoolExposureSteward](https://snowscan.xyz/address/0x0d68D50DB848dfE6012456781c1D79A11eD12a2e), [ClinicStewardV2](https://snowscan.xyz/address/0xA28820b8af102fAABAAAdaf94224353Dc772DC99) |  approve, transfer, setFundsAdmin, createStream | |--------|--------|--------|--------|--------|
+|  [Collector](https://snowscan.xyz/address/0x5ba7fd868c40c16f7aDfAe6CF87121E13FC2F7a0) |  [ProxyAdmin](https://snowscan.xyz/address/0xD3cF979e676265e4f6379749DECe4708B9A22476) |  onlyAdminOrRecipient |  [ProxyAdmin](https://snowscan.xyz/address/0xD3cF979e676265e4f6379749DECe4708B9A22476), [Executor_lvl1](https://snowscan.xyz/address/0x3C06dce358add17aAf230f2234bCCC4afd50d090), [ClinicSteward](https://snowscan.xyz/address/0x6c2B732cB368322E460D718df3CD4F553d5fbAde), [PoolExposureSteward](https://snowscan.xyz/address/0x0d68D50DB848dfE6012456781c1D79A11eD12a2e), [ClinicStewardV2](https://snowscan.xyz/address/0xA28820b8af102fAABAAAdaf94224353Dc772DC99) |  withdrawFromStream, cancelStream | |--------|--------|--------|--------|--------|
+|  [ClinicSteward](https://snowscan.xyz/address/0x6c2B732cB368322E460D718df3CD4F553d5fbAde) |  - |  onlyCleanUpRole |  [CleanUp Admin](https://snowscan.xyz/address/0xdeadD8aB03075b7FBA81864202a2f59EE25B312b), [ACI Automation](https://snowscan.xyz/address/0x3Cbded22F878aFC8d39dCD744d3Fe62086B76193) |  renewAllowance, batchRepayBadDebt, batchLiquidate, batchRepayBadDebt | |--------|--------|--------|--------|--------|
+|  [ClinicSteward](https://snowscan.xyz/address/0x6c2B732cB368322E460D718df3CD4F553d5fbAde) |  - |  onlyAdmin |  [Executor_lvl1](https://snowscan.xyz/address/0x3C06dce358add17aAf230f2234bCCC4afd50d090) |  setAvailableBudget | |--------|--------|--------|--------|--------|
 
 ### Governance V3 Contracts 
 | contract |proxyAdmin |modifier |permission owner |functions |
@@ -111,14 +118,9 @@
 ### Risk Agent Contracts 
 | contract |proxyAdmin |modifier |permission owner |functions |
 |----------|----------|----------|----------|----------|
-|  [SupplyCapAgent](https://snowscan.xyz/address/0x38753B4D5116b12bC3524e334bC76AE57fA42fFB) |  - |  onlyAgentHub |  [AgentHub](https://snowscan.xyz/address/0x556bBE96f04b4610E48EE003DAcEE1C74de7AC6a) |  inject | |--------|--------|--------|--------|--------|
-|  [BorrowCapAgent](https://snowscan.xyz/address/0xb57C37F48d1De2DACBefed69679Ba0b7DC43A394) |  - |  onlyAgentHub |  [AgentHub](https://snowscan.xyz/address/0x556bBE96f04b4610E48EE003DAcEE1C74de7AC6a) |  inject | |--------|--------|--------|--------|--------|
 |  [AgentHub](https://snowscan.xyz/address/0x556bBE96f04b4610E48EE003DAcEE1C74de7AC6a) |  [AgentHubProxyAdmin](https://snowscan.xyz/address/0xAaf37B0c469d61064f278ff2A397E6Ec619Ec9ae) |  onlyOwner |  [Executor_lvl1](https://snowscan.xyz/address/0x3C06dce358add17aAf230f2234bCCC4afd50d090) |  registerAgent, setAgentAdmin, setMaxBatchSize, setAgentAddress, renounceOwnership, transferOwnership | |--------|--------|--------|--------|--------|
 |  [AgentHub](https://snowscan.xyz/address/0x556bBE96f04b4610E48EE003DAcEE1C74de7AC6a) |  [AgentHubProxyAdmin](https://snowscan.xyz/address/0xAaf37B0c469d61064f278ff2A397E6Ec619Ec9ae) |  onlyOwnerOrAgentAdmin |  [Executor_lvl1](https://snowscan.xyz/address/0x3C06dce358add17aAf230f2234bCCC4afd50d090) |  setAgentAsPermissioned, addPermissionedSender, removePermissionedSender, addAllowedMarket, removeAllowedMarket, addRestrictedMarket, removeRestrictedMarket, setExpirationPeriod, setAgentEnabled, setMinimumDelay, setAgentContext, setMarketsFromAgentEnabled, addAllowedMarket, addAllowedMarket | |--------|--------|--------|--------|--------|
 |  [AgentHubProxyAdmin](https://snowscan.xyz/address/0xaaf37b0c469d61064f278ff2a397e6ec619ec9ae) |  - |  onlyOwner |  [Executor_lvl1](https://snowscan.xyz/address/0x3C06dce358add17aAf230f2234bCCC4afd50d090) |  changeProxyAdmin, upgrade, upgradeAndCall | |--------|--------|--------|--------|--------|
-|  [RangeValidationModule](https://snowscan.xyz/address/0x9240a6669CC4782FC98620212862DF5CB2e0Df10) |  - |  onlyHubOwnerOrAgentAdmin |  [Executor_lvl1](https://snowscan.xyz/address/0x3C06dce358add17aAf230f2234bCCC4afd50d090) |  setDefaultRangeConfig, setRangeConfigByMarket | |--------|--------|--------|--------|--------|
-|  [RiskOracle](https://snowscan.xyz/address/0x1273f29204fC102bD4620485B13cFE27a794fF32) |  - |  onlyOwner |  [Risk Oracle Guardian](https://snowscan.xyz/address/0xDe841Bf4B67970f5a19165443B0e9ec808E1cC85) |  addAuthorizedSender, removeAuthorizedSender, addUpdateType, renounceOwnership, transferOwnership | |--------|--------|--------|--------|--------|
-|  [RiskOracle](https://snowscan.xyz/address/0x1273f29204fC102bD4620485B13cFE27a794fF32) |  - |  onlyAuthorized |  [0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9](https://snowscan.xyz/address/0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9) |  publishRiskParameterUpdate, publishBulkRiskParameterUpdates | |--------|--------|--------|--------|--------|
 
 ### Guardians 
 | Guardian |Threshold |Address |Owners |
@@ -138,7 +140,7 @@
 |  POOL_ADMIN |  [Executor_lvl1](https://snowscan.xyz/address/0x3C06dce358add17aAf230f2234bCCC4afd50d090) | |--------|--------|
 |  EMERGENCY_ADMIN |  [Aave Protocol Guardian Avalanche](https://snowscan.xyz/address/0x56C1a4b54921DEA9A344967a8693C7E661D72968) | |--------|--------|
 |  ASSET_LISTING_ADMIN |   | |--------|--------|
-|  RISK_ADMIN |  [Proof Of Reserve Executor V3](https://snowscan.xyz/address/0xB94e515615c244Ab25f7A6e592e3Cb7EE31E99F4), [Gho Aave Steward](https://snowscan.xyz/address/0xA5Ba213867E175A182a5dd6A9193C6158738105A), [Manual AGRS](https://snowscan.xyz/address/0x23AceD103f5E22bD22B9272c82f29C0E51abC5c2), [SupplyCapAgent](https://snowscan.xyz/address/0x38753B4D5116b12bC3524e334bC76AE57fA42fFB), [BorrowCapAgent](https://snowscan.xyz/address/0xb57C37F48d1De2DACBefed69679Ba0b7DC43A394) | |--------|--------|
+|  RISK_ADMIN |  [Proof Of Reserve Executor V3](https://snowscan.xyz/address/0xB94e515615c244Ab25f7A6e592e3Cb7EE31E99F4), [EdgeRiskStewardCaps](https://snowscan.xyz/address/0x57218F3aB422A39115951c3Eb06881a7A719DfdD), [Gho Aave Steward](https://snowscan.xyz/address/0xA5Ba213867E175A182a5dd6A9193C6158738105A), [Manual AGRS](https://snowscan.xyz/address/0x23AceD103f5E22bD22B9272c82f29C0E51abC5c2) | |--------|--------|
 |  FLASH_BORROWER |  [0x14F8e5Fe35b2d0D67dBcE9329f1b5d09f60c06C3](https://snowscan.xyz/address/0x14F8e5Fe35b2d0D67dBcE9329f1b5d09f60c06C3), [0x352423e2fA5D5c99343d371C9e3bC56C87723Cc7](https://snowscan.xyz/address/0x352423e2fA5D5c99343d371C9e3bC56C87723Cc7) | |--------|--------|
 
 ### Granular Guardian Admins 
@@ -147,4 +149,16 @@
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://snowscan.xyz/address/0x3C06dce358add17aAf230f2234bCCC4afd50d090) | |--------|--------|
 |  SOLVE_EMERGENCY_ROLE |  [Aave Governance Guardian Avalanche](https://snowscan.xyz/address/0x360c0a69Ed2912351227a0b745f890CB2eBDbcFe) | |--------|--------|
 |  RETRY_ROLE |  [BGD](https://snowscan.xyz/address/0x3DBA1c4094BC0eE4772A05180B7E0c2F1cFD9c36) | |--------|--------|
+
+### Collector Admins 
+| Role |Contract |
+|----------|----------|
+|  DEFAULT_ADMIN |  [Executor_lvl1](https://snowscan.xyz/address/0x3C06dce358add17aAf230f2234bCCC4afd50d090) | |--------|--------|
+|  FUNDS_ADMIN_ROLE |  [Executor_lvl1](https://snowscan.xyz/address/0x3C06dce358add17aAf230f2234bCCC4afd50d090), [ClinicSteward](https://snowscan.xyz/address/0x6c2B732cB368322E460D718df3CD4F553d5fbAde), [PoolExposureSteward](https://snowscan.xyz/address/0x0d68D50DB848dfE6012456781c1D79A11eD12a2e), [ClinicStewardV2](https://snowscan.xyz/address/0xA28820b8af102fAABAAAdaf94224353Dc772DC99) | |--------|--------|
+
+### Clinic Steward Admins 
+| Role |Contract |
+|----------|----------|
+|  DEFAULT_ADMIN |  [Executor_lvl1](https://snowscan.xyz/address/0x3C06dce358add17aAf230f2234bCCC4afd50d090) | |--------|--------|
+|  CLEANUP_ROLE |  [CleanUp Admin](https://snowscan.xyz/address/0xdeadD8aB03075b7FBA81864202a2f59EE25B312b), [ACI Automation](https://snowscan.xyz/address/0x3Cbded22F878aFC8d39dCD744d3Fe62086B76193) | |--------|--------|
 
