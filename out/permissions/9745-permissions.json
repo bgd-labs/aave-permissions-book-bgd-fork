@@ -1361,12 +1361,12 @@
                 "signersThreshold": 0
               },
               {
-                "address": "0x1ADD95d62E2B49AF12dDf112B8D4D3B912421087",
+                "address": "0x3999d49Bbad3A7375B0376BDF2bA4f2e3c9F5177",
                 "owners": [],
                 "signersThreshold": 0
               },
               {
-                "address": "0xdb93e2712a8B36835078f8D28c70fCC95FD6d37c",
+                "address": "0x4e8984D11A47Ff89CD67c7651eCaB6C00a74B4A9",
                 "owners": [],
                 "signersThreshold": 0
               }
@@ -1419,12 +1419,12 @@
                 "signersThreshold": 0
               },
               {
-                "address": "0x1ADD95d62E2B49AF12dDf112B8D4D3B912421087",
+                "address": "0x3999d49Bbad3A7375B0376BDF2bA4f2e3c9F5177",
                 "owners": [],
                 "signersThreshold": 0
               },
               {
-                "address": "0xdb93e2712a8B36835078f8D28c70fCC95FD6d37c",
+                "address": "0x4e8984D11A47Ff89CD67c7651eCaB6C00a74B4A9",
                 "owners": [],
                 "signersThreshold": 0
               }
@@ -1842,11 +1842,11 @@
         ],
         "RISK_ADMIN": [
           "0x98F756B77D6Fde14E08bb064b248ec7512F9f8ba",
-          "0x1ADD95d62E2B49AF12dDf112B8D4D3B912421087",
-          "0xdb93e2712a8B36835078f8D28c70fCC95FD6d37c"
+          "0x3999d49Bbad3A7375B0376BDF2bA4f2e3c9F5177",
+          "0x4e8984D11A47Ff89CD67c7651eCaB6C00a74B4A9"
         ]
       },
-      "latestBlockNumber": 7416381
+      "latestBlockNumber": 10671654
     },
     "gsmRoles": {},
     "govV3": {
@@ -1862,7 +1862,7 @@
             "0xdc62E0e65b2251Dc66404ca717FD32dcC365Be3A"
           ]
         },
-        "latestBlockNumber": 7416381
+        "latestBlockNumber": 10671654
       },
       "contracts": {
         "GranularGuardian": {
@@ -2208,7 +2208,7 @@
         }
       },
       "senders": [],
-      "latestCCCBlockNumber": 7416381
+      "latestCCCBlockNumber": 10671654
     },
     "collector": {
       "contracts": {
@@ -2283,7 +2283,7 @@
             "0x47aAdaAE1F05C978E6aBb7568d11B7F6e0FC4d6A"
           ]
         },
-        "latestBlockNumber": 7416381
+        "latestBlockNumber": 10671654
       }
     },
     "clinicSteward": {},
@@ -2292,7 +2292,7 @@
     "agentHub": {
       "contracts": {
         "EModeCategoryAgent": {
-          "address": "0x1ADD95d62E2B49AF12dDf112B8D4D3B912421087",
+          "address": "0x3999d49Bbad3A7375B0376BDF2bA4f2e3c9F5177",
           "modifiers": [
             {
               "modifier": "onlyAgentHub",
@@ -2310,7 +2310,7 @@
           ]
         },
         "PendleDiscountRateAgent": {
-          "address": "0xdb93e2712a8B36835078f8D28c70fCC95FD6d37c",
+          "address": "0x4e8984D11A47Ff89CD67c7651eCaB6C00a74B4A9",
           "modifiers": [
             {
               "modifier": "onlyAgentHub",
@@ -2466,7 +2466,7 @@
           "authorizedSenders": [
             "0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9"
           ],
-          "latestBlockNumber": 7416381,
+          "latestBlockNumber": 10671654,
           "address": "0xAe48F22903d43f13f66Cc650F57Bd4654ac222cb"
         }
       }

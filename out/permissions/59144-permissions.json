@@ -1171,7 +1171,7 @@
                 "signersThreshold": 0
               },
               {
-                "address": "0x963C0b3dFF5C35b171CcC11DAC006a605E42BeD2",
+                "address": "0x58226D26658F19724cB881E9F747EeDC846BB1c9",
                 "owners": [],
                 "signersThreshold": 0
               }
@@ -1209,7 +1209,7 @@
                 "signersThreshold": 0
               },
               {
-                "address": "0x963C0b3dFF5C35b171CcC11DAC006a605E42BeD2",
+                "address": "0x58226D26658F19724cB881E9F747EeDC846BB1c9",
                 "owners": [],
                 "signersThreshold": 0
               },
@@ -1611,10 +1611,10 @@
         "FLASH_BORROWER": [],
         "RISK_ADMIN": [
           "0xBDF2e1A49894A306Eb76b89504928b3f509A3a16",
-          "0x963C0b3dFF5C35b171CcC11DAC006a605E42BeD2"
+          "0x58226D26658F19724cB881E9F747EeDC846BB1c9"
         ]
       },
-      "latestBlockNumber": 26124543
+      "latestBlockNumber": 27445993
     },
     "gsmRoles": {},
     "govV3": {
@@ -1630,7 +1630,7 @@
             "0xfD3a6E65e470a7D7D730FFD5D36a9354E8F9F4Ea"
           ]
         },
-        "latestBlockNumber": 26124543
+        "latestBlockNumber": 27445993
       },
       "contracts": {
         "GranularGuardian": {
@@ -1892,7 +1892,7 @@
         }
       },
       "senders": [],
-      "latestCCCBlockNumber": 26124543
+      "latestCCCBlockNumber": 27445993
     },
     "collector": {
       "contracts": {
@@ -1969,7 +1969,7 @@
             "0x07Fc6Fa43Cf6b08d24679ebf8060386b4D41B702"
           ]
         },
-        "latestBlockNumber": 26124543
+        "latestBlockNumber": 27445993
       }
     },
     "clinicSteward": {
@@ -2024,7 +2024,7 @@
             "0x3Cbded22F878aFC8d39dCD744d3Fe62086B76193"
           ]
         },
-        "latestBlockNumber": 26124543
+        "latestBlockNumber": 27445993
       }
     },
     "umbrella": {},
@@ -2032,7 +2032,7 @@
     "agentHub": {
       "contracts": {
         "RateStrategyAgent": {
-          "address": "0x963C0b3dFF5C35b171CcC11DAC006a605E42BeD2",
+          "address": "0x58226D26658F19724cB881E9F747EeDC846BB1c9",
           "modifiers": [
             {
               "modifier": "onlyAgentHub",
@@ -2188,7 +2188,7 @@
           "authorizedSenders": [
             "0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9"
           ],
-          "latestBlockNumber": 26124543,
+          "latestBlockNumber": 27445993,
           "address": "0xa6C229d3a1D4D31708B16C0ad2f14337aE4E7893"
         }
       }

@@ -1259,7 +1259,12 @@
                 "signersThreshold": 0
               },
               {
-                "address": "0x1ADC79f7731b52f2e92Fd21192006c8944a7Fa9d",
+                "address": "0xeBe545478709d4388e36Bb706CF11e2f89898541",
+                "owners": [],
+                "signersThreshold": 0
+              },
+              {
+                "address": "0x8963Abfb008A668346B18d0BeE82b171F3b2Be24",
                 "owners": [],
                 "signersThreshold": 0
               }
@@ -1302,7 +1307,12 @@
                 "signersThreshold": 0
               },
               {
-                "address": "0x1ADC79f7731b52f2e92Fd21192006c8944a7Fa9d",
+                "address": "0xeBe545478709d4388e36Bb706CF11e2f89898541",
+                "owners": [],
+                "signersThreshold": 0
+              },
+              {
+                "address": "0x8963Abfb008A668346B18d0BeE82b171F3b2Be24",
                 "owners": [],
                 "signersThreshold": 0
               },
@@ -1583,14 +1593,17 @@
             "modifier": "onlyOwner",
             "addresses": [
               {
-                "address": "0x14C3fe96adf6068C2D5616D239fc93f61D85dF85",
+                "address": "0xDe841Bf4B67970f5a19165443B0e9ec808E1cC85",
                 "owners": [
-                  "0x5Df7e094f52436040A5a37D5C9A9A80586D35823",
+                  "0xE328bd9b85A127C5fbb71070d17a2d26d2615dEa",
+                  "0xdBf59fD74bd98Fc50F7952E916BB57F26037ddC9",
+                  "0x4DB9f12c891A64Ef80C6f8047a2D9a651d16f849",
                   "0x50842854e40914A8e0745310B47fC22B98112B7A",
-                  "0x59ae72113cA122d1f7452f7086c9b43CCa4f7410",
-                  "0x5d49dBcdd300aECc2C311cFB56593E71c445d60d"
+                  "0x5Df7e094f52436040A5a37D5C9A9A80586D35823",
+                  "0x5d49dBcdd300aECc2C311cFB56593E71c445d60d",
+                  "0x753de005261e9Ff910B541A07282544Ec433d08c"
                 ],
-                "signersThreshold": 2
+                "signersThreshold": 3
               }
             ],
             "functions": [
@@ -1670,10 +1683,10 @@
               {
                 "address": "0x22740deBa78d5a0c24C58C740e3715ec29de1bFa",
                 "owners": [
+                  "0xCAC616Fffb687cBDDD250b2aE6F672449462985C",
                   "0x329c54289Ff5D6B7b7daE13592C6B1EDA1543eD4",
                   "0xb647055A9915bF9c8021a684E175A353525b9890",
-                  "0x5d49dBcdd300aECc2C311cFB56593E71c445d60d",
-                  "0xbA037E4746ff58c55dc8F27a328C428F258DDACb"
+                  "0x5d49dBcdd300aECc2C311cFB56593E71c445d60d"
                 ],
                 "signersThreshold": 3
               },
@@ -1748,7 +1761,8 @@
         "RISK_ADMIN": [
           "0xd2D586f849620ef042FE3aF52eAa10e9b78bf7De",
           "0x365d47ceD3D7Eb6a9bdB3814aA23cc06B2D33Ef8",
-          "0x1ADC79f7731b52f2e92Fd21192006c8944a7Fa9d"
+          "0xeBe545478709d4388e36Bb706CF11e2f89898541",
+          "0x8963Abfb008A668346B18d0BeE82b171F3b2Be24"
         ],
         "FLASH_BORROWER": [
           "0x219ac6dA971dE6d943cffD1BD62abde71525d382",
@@ -1769,7 +1783,7 @@
           "0x352423e2fA5D5c99343d371C9e3bC56C87723Cc7"
         ]
       },
-      "latestBlockNumber": 405060517
+      "latestBlockNumber": 418099902
     },
     "gsmRoles": {},
     "govV3": {
@@ -1785,7 +1799,7 @@
             "0x1Fcd437D8a9a6ea68da858b78b6cf10E8E0bF959"
           ]
         },
-        "latestBlockNumber": 405060517
+        "latestBlockNumber": 418099902
       },
       "contracts": {
         "GranularGuardian": {
@@ -2051,7 +2065,7 @@
         }
       },
       "senders": [],
-      "latestCCCBlockNumber": 405060517
+      "latestCCCBlockNumber": 418099902
     },
     "collector": {},
     "clinicSteward": {},
@@ -2059,8 +2073,26 @@
     "ppc": {},
     "agentHub": {
       "contracts": {
-        "SupplyCapAgent-BorrowCapAgent": {
-          "address": "0x1ADC79f7731b52f2e92Fd21192006c8944a7Fa9d",
+        "SupplyCapAgent": {
+          "address": "0xeBe545478709d4388e36Bb706CF11e2f89898541",
+          "modifiers": [
+            {
+              "modifier": "onlyAgentHub",
+              "addresses": [
+                {
+                  "address": "0xf4F2bc657abe96863dC1Ae17C9e9fFfc2B420e7B",
+                  "owners": [],
+                  "signersThreshold": 0
+                }
+              ],
+              "functions": [
+                "inject"
+              ]
+            }
+          ]
+        },
+        "BorrowCapAgent": {
+          "address": "0x8963Abfb008A668346B18d0BeE82b171F3b2Be24",
           "modifiers": [
             {
               "modifier": "onlyAgentHub",
@@ -2173,14 +2205,17 @@
               "modifier": "onlyOwner",
               "addresses": [
                 {
-                  "address": "0x14C3fe96adf6068C2D5616D239fc93f61D85dF85",
+                  "address": "0xDe841Bf4B67970f5a19165443B0e9ec808E1cC85",
                   "owners": [
-                    "0x5Df7e094f52436040A5a37D5C9A9A80586D35823",
+                    "0xE328bd9b85A127C5fbb71070d17a2d26d2615dEa",
+                    "0xdBf59fD74bd98Fc50F7952E916BB57F26037ddC9",
+                    "0x4DB9f12c891A64Ef80C6f8047a2D9a651d16f849",
                     "0x50842854e40914A8e0745310B47fC22B98112B7A",
-                    "0x59ae72113cA122d1f7452f7086c9b43CCa4f7410",
-                    "0x5d49dBcdd300aECc2C311cFB56593E71c445d60d"
+                    "0x5Df7e094f52436040A5a37D5C9A9A80586D35823",
+                    "0x5d49dBcdd300aECc2C311cFB56593E71c445d60d",
+                    "0x753de005261e9Ff910B541A07282544Ec433d08c"
                   ],
-                  "signersThreshold": 2
+                  "signersThreshold": 3
                 }
               ],
               "functions": [
@@ -2213,7 +2248,7 @@
           "authorizedSenders": [
             "0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9"
           ],
-          "latestBlockNumber": 405060517,
+          "latestBlockNumber": 418099902,
           "address": "0x861eeAdB55E41f161F31Acb1BFD4c70E3a964Aed"
         }
       }

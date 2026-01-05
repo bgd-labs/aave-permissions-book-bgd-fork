@@ -5408,17 +5408,17 @@
                 "signersThreshold": 0
               },
               {
-                "address": "0x30D5F4Fe1fa3E5913AC88a4f62E74e750dFA33Fe",
+                "address": "0x4F2858d4A4e4464b34Aa4a22C41B2Ef540a59BF4",
                 "owners": [],
                 "signersThreshold": 0
               },
               {
-                "address": "0x3cF290876E7789e598Fa20277B48B14AA3D03834",
+                "address": "0x1B3bD355c43d2247946b8e0889d4b4e701bf430d",
                 "owners": [],
                 "signersThreshold": 0
               },
               {
-                "address": "0x395Ea9C2547f3EEAE3fF8aE66b7c019024A50D76",
+                "address": "0xdA626E64f34f24e0236E0C9cD2F11ce4549a08c6",
                 "owners": [],
                 "signersThreshold": 0
               }
@@ -5466,17 +5466,17 @@
                 "signersThreshold": 0
               },
               {
-                "address": "0x30D5F4Fe1fa3E5913AC88a4f62E74e750dFA33Fe",
+                "address": "0x4F2858d4A4e4464b34Aa4a22C41B2Ef540a59BF4",
                 "owners": [],
                 "signersThreshold": 0
               },
               {
-                "address": "0x3cF290876E7789e598Fa20277B48B14AA3D03834",
+                "address": "0x1B3bD355c43d2247946b8e0889d4b4e701bf430d",
                 "owners": [],
                 "signersThreshold": 0
               },
               {
-                "address": "0x395Ea9C2547f3EEAE3fF8aE66b7c019024A50D76",
+                "address": "0xdA626E64f34f24e0236E0C9cD2F11ce4549a08c6",
                 "owners": [],
                 "signersThreshold": 0
               },
@@ -6081,10 +6081,10 @@
               {
                 "address": "0x22740deBa78d5a0c24C58C740e3715ec29de1bFa",
                 "owners": [
+                  "0xCAC616Fffb687cBDDD250b2aE6F672449462985C",
                   "0x329c54289Ff5D6B7b7daE13592C6B1EDA1543eD4",
                   "0xb647055A9915bF9c8021a684E175A353525b9890",
-                  "0x5d49dBcdd300aECc2C311cFB56593E71c445d60d",
-                  "0xbA037E4746ff58c55dc8F27a328C428F258DDACb"
+                  "0x5d49dBcdd300aECc2C311cFB56593E71c445d60d"
                 ],
                 "signersThreshold": 3
               },
@@ -6205,10 +6205,10 @@
               {
                 "address": "0x22740deBa78d5a0c24C58C740e3715ec29de1bFa",
                 "owners": [
+                  "0xCAC616Fffb687cBDDD250b2aE6F672449462985C",
                   "0x329c54289Ff5D6B7b7daE13592C6B1EDA1543eD4",
                   "0xb647055A9915bF9c8021a684E175A353525b9890",
-                  "0x5d49dBcdd300aECc2C311cFB56593E71c445d60d",
-                  "0xbA037E4746ff58c55dc8F27a328C428F258DDACb"
+                  "0x5d49dBcdd300aECc2C311cFB56593E71c445d60d"
                 ],
                 "signersThreshold": 3
               },
@@ -6260,15 +6260,15 @@
           "0x98217A06721Ebf727f2C8d9aD7718ec28b7aAe34",
           "0xFCE597866Ffaf617EFdcA1C1Ad50eBCB16B5171E",
           "0x5513224daaEABCa31af5280727878d52097afA05",
-          "0x30D5F4Fe1fa3E5913AC88a4f62E74e750dFA33Fe",
-          "0x3cF290876E7789e598Fa20277B48B14AA3D03834",
-          "0x395Ea9C2547f3EEAE3fF8aE66b7c019024A50D76"
+          "0x4F2858d4A4e4464b34Aa4a22C41B2Ef540a59BF4",
+          "0x1B3bD355c43d2247946b8e0889d4b4e701bf430d",
+          "0xdA626E64f34f24e0236E0C9cD2F11ce4549a08c6"
         ],
         "ASSET_LISTING_ADMIN": [
           "0x8b493f416F5F7933cC146b1899c069F2361cad60"
         ]
       },
-      "latestBlockNumber": 23896552
+      "latestBlockNumber": 24167154
     },
     "gsmRoles": {},
     "govV3": {
@@ -6284,7 +6284,7 @@
             "0xb812d0944f8F581DfAA3a93Dda0d22EcEf51A9CF"
           ]
         },
-        "latestBlockNumber": 23896552
+        "latestBlockNumber": 24167154
       },
       "contracts": {
         "GranularGuardian": {
@@ -6864,7 +6864,7 @@
         "0x9Ded9406f088C10621BE628EEFf40c1DF396c172",
         "0xFe4683C18aaad791B6AFDF0a8e1Ed5C6e2c9ecD6"
       ],
-      "latestCCCBlockNumber": 23896552
+      "latestCCCBlockNumber": 24167154
     },
     "collector": {
       "contracts": {
@@ -6985,7 +6985,7 @@
             "0xb7D402138Cb01BfE97d95181C849379d6AD14d19"
           ]
         },
-        "latestBlockNumber": 23896552
+        "latestBlockNumber": 24167154
       }
     },
     "clinicSteward": {
@@ -6999,8 +6999,8 @@
                 {
                   "address": "0xdeadD8aB03075b7FBA81864202a2f59EE25B312b",
                   "owners": [
+                    "0xCAC616Fffb687cBDDD250b2aE6F672449462985C",
                     "0x5d49dBcdd300aECc2C311cFB56593E71c445d60d",
-                    "0xbA037E4746ff58c55dc8F27a328C428F258DDACb",
                     "0x329c54289Ff5D6B7b7daE13592C6B1EDA1543eD4",
                     "0xb647055A9915bF9c8021a684E175A353525b9890"
                   ],
@@ -7045,7 +7045,7 @@
             "0x3Cbded22F878aFC8d39dCD744d3Fe62086B76193"
           ]
         },
-        "latestBlockNumber": 23896552
+        "latestBlockNumber": 24167154
       }
     },
     "umbrella": {
@@ -7242,10 +7242,10 @@
                 {
                   "address": "0x22740deBa78d5a0c24C58C740e3715ec29de1bFa",
                   "owners": [
+                    "0xCAC616Fffb687cBDDD250b2aE6F672449462985C",
                     "0x329c54289Ff5D6B7b7daE13592C6B1EDA1543eD4",
                     "0xb647055A9915bF9c8021a684E175A353525b9890",
-                    "0x5d49dBcdd300aECc2C311cFB56593E71c445d60d",
-                    "0xbA037E4746ff58c55dc8F27a328C428F258DDACb"
+                    "0x5d49dBcdd300aECc2C311cFB56593E71c445d60d"
                   ],
                   "signersThreshold": 3
                 }
@@ -7260,10 +7260,10 @@
                 {
                   "address": "0x22740deBa78d5a0c24C58C740e3715ec29de1bFa",
                   "owners": [
+                    "0xCAC616Fffb687cBDDD250b2aE6F672449462985C",
                     "0x329c54289Ff5D6B7b7daE13592C6B1EDA1543eD4",
                     "0xb647055A9915bF9c8021a684E175A353525b9890",
-                    "0x5d49dBcdd300aECc2C311cFB56593E71c445d60d",
-                    "0xbA037E4746ff58c55dc8F27a328C428F258DDACb"
+                    "0x5d49dBcdd300aECc2C311cFB56593E71c445d60d"
                   ],
                   "signersThreshold": 3
                 }
@@ -7309,7 +7309,7 @@
             "0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A"
           ]
         },
-        "latestBlockNumber": 23896552
+        "latestBlockNumber": 24167154
       },
       "umbrellaIncentivesRoles": {
         "role": {
@@ -7321,7 +7321,7 @@
             "0x2759de67aD133C747C9f41d56F1b8A343cE679a1"
           ]
         },
-        "latestBlockNumber": 23896552
+        "latestBlockNumber": 24167154
       }
     },
     "ppc": {
@@ -7410,10 +7410,10 @@
                 {
                   "address": "0x22740deBa78d5a0c24C58C740e3715ec29de1bFa",
                   "owners": [
+                    "0xCAC616Fffb687cBDDD250b2aE6F672449462985C",
                     "0x329c54289Ff5D6B7b7daE13592C6B1EDA1543eD4",
                     "0xb647055A9915bF9c8021a684E175A353525b9890",
-                    "0x5d49dBcdd300aECc2C311cFB56593E71c445d60d",
-                    "0xbA037E4746ff58c55dc8F27a328C428F258DDACb"
+                    "0x5d49dBcdd300aECc2C311cFB56593E71c445d60d"
                   ],
                   "signersThreshold": 3
                 }
@@ -7428,10 +7428,10 @@
                 {
                   "address": "0x22740deBa78d5a0c24C58C740e3715ec29de1bFa",
                   "owners": [
+                    "0xCAC616Fffb687cBDDD250b2aE6F672449462985C",
                     "0x329c54289Ff5D6B7b7daE13592C6B1EDA1543eD4",
                     "0xb647055A9915bF9c8021a684E175A353525b9890",
-                    "0x5d49dBcdd300aECc2C311cFB56593E71c445d60d",
-                    "0xbA037E4746ff58c55dc8F27a328C428F258DDACb"
+                    "0x5d49dBcdd300aECc2C311cFB56593E71c445d60d"
                   ],
                   "signersThreshold": 3
                 }
@@ -7482,7 +7482,7 @@
     "agentHub": {
       "contracts": {
         "EModeCategory_CoreAgent": {
-          "address": "0x30D5F4Fe1fa3E5913AC88a4f62E74e750dFA33Fe",
+          "address": "0x4F2858d4A4e4464b34Aa4a22C41B2Ef540a59BF4",
           "modifiers": [
             {
               "modifier": "onlyAgentHub",
@@ -7500,7 +7500,7 @@
           ]
         },
         "PendleDiscountRate_CoreAgent": {
-          "address": "0x3cF290876E7789e598Fa20277B48B14AA3D03834",
+          "address": "0x1B3bD355c43d2247946b8e0889d4b4e701bf430d",
           "modifiers": [
             {
               "modifier": "onlyAgentHub",
@@ -7518,7 +7518,7 @@
           ]
         },
         "RateStrategy_CoreAgent": {
-          "address": "0x395Ea9C2547f3EEAE3fF8aE66b7c019024A50D76",
+          "address": "0xdA626E64f34f24e0236E0C9cD2F11ce4549a08c6",
           "modifiers": [
             {
               "modifier": "onlyAgentHub",
@@ -7674,7 +7674,7 @@
           "authorizedSenders": [
             "0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9"
           ],
-          "latestBlockNumber": 23896552,
+          "latestBlockNumber": 24167154,
           "address": "0x7ABB46C690C52E919687D19ebF89C81A6136C1F2"
         }
       }
@@ -8353,7 +8353,7 @@
           "0x7e6a6B115D31d4A837E3C737c49Cf6Fafe6112C3"
         ]
       },
-      "latestBlockNumber": 23896677
+      "latestBlockNumber": 24165095
     },
     "gsmRoles": {},
     "govV3": {
@@ -8478,7 +8478,7 @@
             "0xb7D402138Cb01BfE97d95181C849379d6AD14d19"
           ]
         },
-        "latestBlockNumber": 23896677
+        "latestBlockNumber": 24165096
       }
     },
     "clinicSteward": {
@@ -8492,8 +8492,8 @@
                 {
                   "address": "0xdeadD8aB03075b7FBA81864202a2f59EE25B312b",
                   "owners": [
+                    "0xCAC616Fffb687cBDDD250b2aE6F672449462985C",
                     "0x5d49dBcdd300aECc2C311cFB56593E71c445d60d",
-                    "0xbA037E4746ff58c55dc8F27a328C428F258DDACb",
                     "0x329c54289Ff5D6B7b7daE13592C6B1EDA1543eD4",
                     "0xb647055A9915bF9c8021a684E175A353525b9890"
                   ],
@@ -8538,7 +8538,7 @@
             "0x3Cbded22F878aFC8d39dCD744d3Fe62086B76193"
           ]
         },
-        "latestBlockNumber": 23896677
+        "latestBlockNumber": 24165096
       }
     },
     "umbrella": {},
