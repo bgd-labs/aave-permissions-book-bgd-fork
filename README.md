@@ -34,7 +34,32 @@ These documents contain tables with the following information:
 ### Permissions directory
 | Network |System type |Tables |
 |----------|----------|----------|
+|  ETHEREUM |  LIDO_TENDERLY |  [Permissions](./out/ETHEREUM-LIDO_TENDERLY.md#contracts) | |--------|--------|--------|
+|  ETHEREUM |  ETHERFI |  [Permissions](./out/ETHEREUM-ETHERFI.md#contracts) | |--------|--------|--------|
+|  ETHEREUM |  GHO |  [Permissions](./out/ETHEREUM-GHO.md#contracts) | |--------|--------|--------|
+|  ETHEREUM |  V2 |  [Permissions](./out/ETHEREUM-V2.md#contracts) | |--------|--------|--------|
+|  ETHEREUM |  V2_AMM |  [Permissions](./out/ETHEREUM-V2_AMM.md#contracts) | |--------|--------|--------|
+|  ETHEREUM |  SAFETY_MODULE |  [Permissions](./out/ETHEREUM-SAFETY_MODULE.md#contracts) | |--------|--------|--------|
+|  ETHEREUM |  V2_MISC |  [Permissions](./out/ETHEREUM-V2_MISC.md#contracts) | |--------|--------|--------|
+|  ETHEREUM |  TENDERLY |  [Permissions](./out/ETHEREUM-TENDERLY.md#contracts) | |--------|--------|--------|
+|  OPTIMISM |  TENDERLY |  [Permissions](./out/OPTIMISM-TENDERLY.md#contracts) | |--------|--------|--------|
+|  BINANCE |  TENDERLY |  [Permissions](./out/BINANCE-TENDERLY.md#contracts) | |--------|--------|--------|
+|  GNOSIS |  TENDERLY |  [Permissions](./out/GNOSIS-TENDERLY.md#contracts) | |--------|--------|--------|
+|  POLYGON |  V2 |  [Permissions](./out/POLYGON-V2.md#contracts) | |--------|--------|--------|
+|  POLYGON |  TENDERLY |  [Permissions](./out/POLYGON-TENDERLY.md#contracts) | |--------|--------|--------|
+|  SONIC |  V3 |  [Permissions](./out/SONIC-V3.md#contracts) | |--------|--------|--------|
+|  ZKSYNC |  V3 |  [Permissions](./out/ZKSYNC-V3.md#contracts) | |--------|--------|--------|
+|  METIS |  V3 |  [Permissions](./out/METIS-V3.md#contracts) | |--------|--------|--------|
+|  SONEIUM |  V3 |  [Permissions](./out/SONEIUM-V3.md#contracts) | |--------|--------|--------|
+|  BASE |  TENDERLY |  [Permissions](./out/BASE-TENDERLY.md#contracts) | |--------|--------|--------|
+|  PLASMA |  TENDERLY |  [Permissions](./out/PLASMA-TENDERLY.md#contracts) | |--------|--------|--------|
 |  ARBITRUM |  TENDERLY |  [Permissions](./out/ARBITRUM-TENDERLY.md#contracts) | |--------|--------|--------|
+|  CELO |  V3 |  [Permissions](./out/CELO-V3.md#contracts) | |--------|--------|--------|
+|  AVALANCHE |  V2 |  [Permissions](./out/AVALANCHE-V2.md#contracts) | |--------|--------|--------|
+|  AVALANCHE |  TENDERLY |  [Permissions](./out/AVALANCHE-TENDERLY.md#contracts) | |--------|--------|--------|
+|  INK |  V3_WHITE_LABEL |  [Permissions](./out/INK-V3_WHITE_LABEL.md#contracts) | |--------|--------|--------|
+|  LINEA |  TENDERLY |  [Permissions](./out/LINEA-TENDERLY.md#contracts) | |--------|--------|--------|
+|  SCROLL |  V3 |  [Permissions](./out/SCROLL-V3.md#contracts) | |--------|--------|--------|
        
     
 ## Usage
