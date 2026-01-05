@@ -118,7 +118,7 @@ export const generateTable = (network: string, pool: string): string => {
     return readmeDirectoryTable;
   }
 
-  if (pool === Pools.LIDO || pool === Pools.ETHERFI) {
+  if (pool === Pools.LIDO || pool === Pools.ETHERFI || pool === Pools.LIDO_TENDERLY || pool === Pools.ETHERFI_TENDERLY) {
     poolPermitsByContract.contracts = {
       ...poolPermitsByContract.contracts,
       PoolExposureSteward: getPermissionsByNetwork(network)['V3'].contracts['PoolExposureSteward'],
