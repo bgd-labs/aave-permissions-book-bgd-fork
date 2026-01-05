@@ -172,253 +172,253 @@ export const getNetowkName: Record<string | number, string> = {
  * tables into main branch)
  */
 export const networkConfigs: NetworkConfigs = {
-  [ChainId.mainnet]: {
-    name: 'Ethereum',
-    rpcUrl: process.env.RPC_MAINNET,
-    explorer: 'https://etherscan.io',
-    addressesNames: {
-      '0xCA76Ebd8617a03126B6FB84F9b1c1A0fB71C2633': 'Aave Guardian Ethereum', // Delete after aip execution
-      '0x23c155C1c1ecB18a86921Da29802292f1d282c68': 'Aave Arc DAO',
-      '0x33B09130b035d6D7e57d76fEa0873d9545FA7557': 'Aave Arc Guardian',
-      '0xB9062896ec3A615a4e4444DF183F0531a77218AE': 'Legacy Emergency Admin',
-      '0x36fEDC70feC3B77CAaf50E6C524FD7e5DFBD629A': 'ParaSwap',
-      '0xEAF6183bAb3eFD3bF856Ac5C058431C8592394d6': 'Deployer',
-      '0x00907f9921424583e7ffBfEdf84F92B7B2Be4977': 'GHO aToken',
-      '0xb812d0944f8F581DfAA3a93Dda0d22EcEf51A9CF': 'BGD',
-      '0x47c71dFEB55Ebaa431Ae3fbF99Ea50e0D3d30fA8': 'Risk Council',
-      '0xF60BDDE9077Be3226Db8109432d78afD92a8A003': 'Mediator',
-      '0xef6beCa8D9543eC007bceA835aF768B58F730C1f':
-        'GSM_USDC_ORACLE_SWAP_FREEZER',
-      '0x71381e6718b37C12155CB961Ca3D374A8BfFa0e5':
-        'GSM_USDT_ORACLE_SWAP_FREEZER',
-      '0x2CFe3ec4d5a6811f4B8067F0DE7e47DfA938Aa30':
-        'Aave Protocol Guardian Ethereum',
-      '0xCe52ab41C40575B072A18C9700091Ccbe4A06710':
-        'Aave Governance Guardian Ethereum',
-      '0xb9481a29f0f996BCAc759aB201FB3844c81866c4': 'GHO Steward v2',
-      '0x98217A06721Ebf727f2C8d9aD7718ec28b7aAe34': 'Core GHO Aave Steward',
-      '0xdeadD8aB03075b7FBA81864202a2f59EE25B312b': 'CleanUp Admin',
-      '0x3Cbded22F878aFC8d39dCD744d3Fe62086B76193': 'ACI Automation',
-      '0x7571F419F7Df2d0622C1A20154a0D4250B2265cC': 'Lido ClinicSteward',
-      '0x9b24C168d6A76b5459B1d47071a54962a4df36c3': 'Old VotingPortal_Eth_Pol',
-      '0x33aCEf7365809218485873B7d0d67FeE411B5D79': 'Old VotingPortal_Eth_Avax',
-      '0xf23f7De3AC42F22eBDA17e64DC4f51FB66b8E21f': 'Old VotingPortal_Eth_Eth',
-      '0x617332a777780F546261247F621051d0b98975Eb': 'Old VotingMachine',
-      '0x8513e6F37dBc52De87b166980Fa3F50639694B60': 'Gho Risk Council',
-      '0x22740deBa78d5a0c24C58C740e3715ec29de1bFa': 'Finance Risk Council',
-      '0x6c1DC85f2aE71C3DAcd6E44Bb57DEeF61b540a5A': 'Deficit Offset Clinic Steward',
-      '0x5513224daaEABCa31af5280727878d52097afA05': 'Gho Core Direct Minter',
-      '0x46Aa1063e5265b43663E81329333B47c517A5409': 'Gho Bucket Steward',
-      '0x29F8c924B7aB50649c9597B8811d08f9Ef0310c3': 'USDC Oracle Swap Freezer',
-      '0xD1E856a947CdF56b4f000ee29d34F5808E0A6848': 'Gho Gsm Steward',
-      '0x6439DA186BD3d37fE7Fd36036543b403e9FAbaE7': 'USDT Oracle Swap Freezer',
-      '0x2cE01c87Fec1b71A9041c52CaED46Fc5f4807285': 'Gho Lido Direct Minter',
-      '0x5C905d62B22e4DAa4967E517C4a047Ff6026C731': 'Lido Gho Aave Steward',
-      '0x1EBdbE77bbDDD284BdCE8D7981D7eD26D6af58cA': 'Etherfi Caps Plus Risk Steward',
-      '0x834a5aC6e9D05b92F599A031941262F761c34859': 'Lido Aave Steward Injector',
-      '0x15885A83936EB943e98EeFFb91e9A49040d93993': 'AaveStewardInjectorDiscountRate',
-      '0x83ab600cE8a61b43e1757b89C0589928f765c1C4': 'AaveStewardInjectorEMode',
-      '0x6A14eBe9A934c8EFE15C3811a999149472876b56': 'ClinicStewardV2',
-      '0xE1e62c3ee0c581F715fBb0e23CDA536Fc29eeB2c': 'ClinicStewardV2 AMM',
-      '0xff37939808EcF199A2D599ef91D699Fb13dab7F7': 'BGD Injector Guardian',
-      '0xDe841Bf4B67970f5a19165443B0e9ec808E1cC85': 'Risk Oracle Guardian',
-      '0x22aC12a6937BBBC0a301AF9154d08EaD95673122': 'PoolExposureSteward',
-      '0xf00E2de0E78DFf055A92AD4719a179CE275b6Ef7': 'ClinicSteward',
-      '0xb7D402138Cb01BfE97d95181C849379d6AD14d19': 'SwapSteward'
-    },
-    pools: {
-      // [Pools.V3]: {
-      //   collectorBlock: 21765718,
-      //   permissionsJson: './statics/functionsPermissionsV3.json',
-      //   crossChainPermissionsJson: './statics/functionsPermissionsGovV3.json',
-      //   governanceAddressBook: GovernanceV3Ethereum,
-      //   ppcPermissionsJson: './statics/functionsPermissionsPpcV1.json',
-      //   functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
-      //   agentHubBlock: 23876159,
-      //   ppcAddressBook: { ...UmbrellaEthereum, ...MiscEthereum },
-      //   aclBlock: 16291117,
-      //   crossChainControllerBlock: 18090380,
-      //   granularGuardianBlock: 20324867,
-      //   umbrellaBlock: 22346140,
-      //   umbrellaIncentivesBlock: 22346130,
-      //   umbrellaAddressBook: UmbrellaEthereum,
-      //   addressBook: { ...AaveV3Ethereum, ...MiscEthereum, ...GhoEthereum },
-      //   addresses: {
-      //     '0x2a323be63e08E08536Fc3b5d8C6f24825e68895e': 'LayerZeroAdapter',
-      //     '0x6Abb61beb5848B476d026C4934E8a6415e2E75a8': 'HyperLaneAdapter',
-      //   },
-      //   clinicStewardBlock: 21967120,
-      //   hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
+  // [ChainId.mainnet]: {
+  //   name: 'Ethereum',
+  //   rpcUrl: process.env.RPC_MAINNET,
+  //   explorer: 'https://etherscan.io',
+  //   addressesNames: {
+  //     '0xCA76Ebd8617a03126B6FB84F9b1c1A0fB71C2633': 'Aave Guardian Ethereum', // Delete after aip execution
+  //     '0x23c155C1c1ecB18a86921Da29802292f1d282c68': 'Aave Arc DAO',
+  //     '0x33B09130b035d6D7e57d76fEa0873d9545FA7557': 'Aave Arc Guardian',
+  //     '0xB9062896ec3A615a4e4444DF183F0531a77218AE': 'Legacy Emergency Admin',
+  //     '0x36fEDC70feC3B77CAaf50E6C524FD7e5DFBD629A': 'ParaSwap',
+  //     '0xEAF6183bAb3eFD3bF856Ac5C058431C8592394d6': 'Deployer',
+  //     '0x00907f9921424583e7ffBfEdf84F92B7B2Be4977': 'GHO aToken',
+  //     '0xb812d0944f8F581DfAA3a93Dda0d22EcEf51A9CF': 'BGD',
+  //     '0x47c71dFEB55Ebaa431Ae3fbF99Ea50e0D3d30fA8': 'Risk Council',
+  //     '0xF60BDDE9077Be3226Db8109432d78afD92a8A003': 'Mediator',
+  //     '0xef6beCa8D9543eC007bceA835aF768B58F730C1f':
+  //       'GSM_USDC_ORACLE_SWAP_FREEZER',
+  //     '0x71381e6718b37C12155CB961Ca3D374A8BfFa0e5':
+  //       'GSM_USDT_ORACLE_SWAP_FREEZER',
+  //     '0x2CFe3ec4d5a6811f4B8067F0DE7e47DfA938Aa30':
+  //       'Aave Protocol Guardian Ethereum',
+  //     '0xCe52ab41C40575B072A18C9700091Ccbe4A06710':
+  //       'Aave Governance Guardian Ethereum',
+  //     '0xb9481a29f0f996BCAc759aB201FB3844c81866c4': 'GHO Steward v2',
+  //     '0x98217A06721Ebf727f2C8d9aD7718ec28b7aAe34': 'Core GHO Aave Steward',
+  //     '0xdeadD8aB03075b7FBA81864202a2f59EE25B312b': 'CleanUp Admin',
+  //     '0x3Cbded22F878aFC8d39dCD744d3Fe62086B76193': 'ACI Automation',
+  //     '0x7571F419F7Df2d0622C1A20154a0D4250B2265cC': 'Lido ClinicSteward',
+  //     '0x9b24C168d6A76b5459B1d47071a54962a4df36c3': 'Old VotingPortal_Eth_Pol',
+  //     '0x33aCEf7365809218485873B7d0d67FeE411B5D79': 'Old VotingPortal_Eth_Avax',
+  //     '0xf23f7De3AC42F22eBDA17e64DC4f51FB66b8E21f': 'Old VotingPortal_Eth_Eth',
+  //     '0x617332a777780F546261247F621051d0b98975Eb': 'Old VotingMachine',
+  //     '0x8513e6F37dBc52De87b166980Fa3F50639694B60': 'Gho Risk Council',
+  //     '0x22740deBa78d5a0c24C58C740e3715ec29de1bFa': 'Finance Risk Council',
+  //     '0x6c1DC85f2aE71C3DAcd6E44Bb57DEeF61b540a5A': 'Deficit Offset Clinic Steward',
+  //     '0x5513224daaEABCa31af5280727878d52097afA05': 'Gho Core Direct Minter',
+  //     '0x46Aa1063e5265b43663E81329333B47c517A5409': 'Gho Bucket Steward',
+  //     '0x29F8c924B7aB50649c9597B8811d08f9Ef0310c3': 'USDC Oracle Swap Freezer',
+  //     '0xD1E856a947CdF56b4f000ee29d34F5808E0A6848': 'Gho Gsm Steward',
+  //     '0x6439DA186BD3d37fE7Fd36036543b403e9FAbaE7': 'USDT Oracle Swap Freezer',
+  //     '0x2cE01c87Fec1b71A9041c52CaED46Fc5f4807285': 'Gho Lido Direct Minter',
+  //     '0x5C905d62B22e4DAa4967E517C4a047Ff6026C731': 'Lido Gho Aave Steward',
+  //     '0x1EBdbE77bbDDD284BdCE8D7981D7eD26D6af58cA': 'Etherfi Caps Plus Risk Steward',
+  //     '0x834a5aC6e9D05b92F599A031941262F761c34859': 'Lido Aave Steward Injector',
+  //     '0x15885A83936EB943e98EeFFb91e9A49040d93993': 'AaveStewardInjectorDiscountRate',
+  //     '0x83ab600cE8a61b43e1757b89C0589928f765c1C4': 'AaveStewardInjectorEMode',
+  //     '0x6A14eBe9A934c8EFE15C3811a999149472876b56': 'ClinicStewardV2',
+  //     '0xE1e62c3ee0c581F715fBb0e23CDA536Fc29eeB2c': 'ClinicStewardV2 AMM',
+  //     '0xff37939808EcF199A2D599ef91D699Fb13dab7F7': 'BGD Injector Guardian',
+  //     '0xDe841Bf4B67970f5a19165443B0e9ec808E1cC85': 'Risk Oracle Guardian',
+  //     '0x22aC12a6937BBBC0a301AF9154d08EaD95673122': 'PoolExposureSteward',
+  //     '0xf00E2de0E78DFf055A92AD4719a179CE275b6Ef7': 'ClinicSteward',
+  //     '0xb7D402138Cb01BfE97d95181C849379d6AD14d19': 'SwapSteward'
+  //   },
+  //   pools: {
+  //     [Pools.V3]: {
+  //       collectorBlock: 21765718,
+  //       permissionsJson: './statics/functionsPermissionsV3.json',
+  //       crossChainPermissionsJson: './statics/functionsPermissionsGovV3.json',
+  //       governanceAddressBook: GovernanceV3Ethereum,
+  //       ppcPermissionsJson: './statics/functionsPermissionsPpcV1.json',
+  //       functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
+  //       agentHubBlock: 23876159,
+  //       ppcAddressBook: { ...UmbrellaEthereum, ...MiscEthereum },
+  //       aclBlock: 16291117,
+  //       crossChainControllerBlock: 18090380,
+  //       granularGuardianBlock: 20324867,
+  //       umbrellaBlock: 22346140,
+  //       umbrellaIncentivesBlock: 22346130,
+  //       umbrellaAddressBook: UmbrellaEthereum,
+  //       addressBook: { ...AaveV3Ethereum, ...MiscEthereum, ...GhoEthereum },
+  //       addresses: {
+  //         '0x2a323be63e08E08536Fc3b5d8C6f24825e68895e': 'LayerZeroAdapter',
+  //         '0x6Abb61beb5848B476d026C4934E8a6415e2E75a8': 'HyperLaneAdapter',
+  //       },
+  //       clinicStewardBlock: 21967120,
+  //       hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
 
-      // },
-      [Pools.LIDO]: {
-        collectorBlock: 21765718,
-        permissionsJson: './statics/functionsPermissionsV3.json',
-        aclBlock: 20262410,
-        addressBook: {
-          ...AaveV3EthereumLido,
-          ...MiscEthereum,
-          COLLECTOR: AaveV3Ethereum.COLLECTOR,
-          // @ts-ignore
-          AGENT_HUB: AaveV3Ethereum.AGENT_HUB,
-          // @ts-ignore
-          AGENT_HUB_AUTOMATION: AaveV3Ethereum.AGENT_HUB_AUTOMATION,
-          // @ts-ignore
-          RANGE_VALIDATION_MODULE: AaveV3Ethereum.RANGE_VALIDATION_MODULE
-        },
-        functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
-        agentHubBlock: 23876159,
-        clinicStewardBlock: 21967120,
-        hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
-      },
-      [Pools.LIDO_TENDERLY]: {
-        permissionsJson: './statics/functionsPermissionsV3.json',
-        aclBlock: 20262410,
-        collectorBlock: 21765718,
-        clinicStewardBlock: 21967120,
-        addressBook: {
-          ...AaveV3EthereumLido,
-          ...MiscEthereum,
-          COLLECTOR: AaveV3Ethereum.COLLECTOR,
-        },
-        functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
-        agentHubBlock: 23876159,
-        tenderlyBasePool: Pools.LIDO,
-        tenderlyBlock: 24167154,
-        tenderlyRpcUrl:
-          'https://virtual.mainnet.eu.rpc.tenderly.co/17759365-976e-4b05-bc7a-04eb23d585e6',
-        hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
-      },
-      // [Pools.ETHERFI]: {
-      //   collectorBlock: 21765718,
-      //   permissionsJson: './statics/functionsPermissionsV3.json',
-      //   aclBlock: 20625515,
-      //   addressBook: {
-      //     ...AaveV3EthereumEtherFi,
-      //     ...MiscEthereum,
-      //     COLLECTOR: AaveV3Ethereum.COLLECTOR,
-      //   },
-      // },
-      // // [Pools.ETHERFI_TENDERLY]: {
-      // //   permissionsJson: './statics/functionsPermissionsV3.json',
-      // //   aclBlock: 20625515,
-      // //   addressBook: {
-      // //     ...AaveV3EthereumEtherFi,
-      // //     ...MiscEthereum,
-      // //     COLLECTOR: AaveV3Ethereum.COLLECTOR,
-      // //   },
-      // //   tenderlyBasePool: Pools.ETHERFI,
-      // //   tenderlyBlock: 20983900,
-      // //   tenderlyRpcUrl:
-      // //     'https://rpc.tenderly.co/fork/2d5e3793-0b31-48ad-a1b0-c9e5d03b0607',
-      // // },
-      // [Pools.GHO]: {
-      //   permissionsJson: './statics/functionsPermissionsGHO.json',
-      //   ghoBlock: 17698470,
-      //   addressBook: { ...AaveV3Ethereum, ...MiscEthereum, ...GhoEthereum },
-      //   gsmBlocks: {
-      //     GSM_USDC: 19037420,
-      //     GSM_USDT: 19037420,
-      //   },
-      //   addresses: {
-      //     '0x5513224daaEABCa31af5280727878d52097afA05': 'Gho Core Direct Minter',
-      //     '0x2cE01c87Fec1b71A9041c52CaED46Fc5f4807285': 'Gho Lido Direct Minter',
-      //   }
-      // },
-      // // [Pools.GHO_TENDERLY]: {
-      // //   permissionsJson: './statics/functionsPermissionsGHO.json',
-      // //   ghoBlock: 17698470,
-      // //   tenderlyBlock: 18714237,
-      // //   addressBook: AaveV3Ethereum,
-      // //   tenderlyBasePool: Pools.GHO,
-      // //   tenderlyRpcUrl:
-      // //     'https://rpc.tenderly.co/fork/247e153a-3814-4cef-8dfa-dc0648a813c6',
-      // // },
-      // [Pools.V2]: {
-      //   collectorBlock: 21765718,
-      //   permissionsJson: './statics/functionsPermissionsV2.json',
-      //   addressBook: AaveV2Ethereum,
-      // },
-      // // [Pools.V2_TENDERLY]: {
-      // //   permissionsJson: './statics/functionsPermissionsV2.json',
-      // //   addressBook: AaveV2Ethereum,
-      // //   tenderlyBasePool: Pools.V2,
-      // //   tenderlyBlock: 20983900,
-      // //   tenderlyRpcUrl:
-      // //     'https://rpc.tenderly.co/fork/2d5e3793-0b31-48ad-a1b0-c9e5d03b0607',
-      // // },
-      // [Pools.V2_AMM]: {
-      //   collectorBlock: 21765718,
-      //   permissionsJson: './statics/functionsPermissionsV2AMM.json',
-      //   addressBook: AaveV2EthereumAMM,
-      // },
-      // // [Pools.V2_AMM_TENDERLY]: {
-      // //   permissionsJson: './statics/functionsPermissionsV2AMM.json',
-      // //   addressBook: AaveV2EthereumAMM,
-      // //   tenderlyBasePool: Pools.V2_AMM,
-      // //   tenderlyBlock: 20983900,
-      // //   tenderlyRpcUrl:
-      // //     'https://rpc.tenderly.co/fork/2d5e3793-0b31-48ad-a1b0-c9e5d03b0607',
-      // // },
-      // [Pools.SAFETY_MODULE]: {
-      //   permissionsJson: './statics/functionsPermissionsSafety.json',
-      //   addressBook: AaveSafetyModule,
-      // },
-      // // [Pools.SAFETY_MODULE_TENDERLY]: {
-      // //   permissionsJson: './statics/functionsPermissionsSafety.json',
-      // //   addressBook: AaveSafetyModule,
-      // //   tenderlyBasePool: Pools.SAFETY_MODULE,
-      // //   tenderlyRpcUrl:
-      // //     'https://rpc.tenderly.co/fork/247e153a-3814-4cef-8dfa-dc0648a813c6',
-      // // },
-      // [Pools.V2_MISC]: {
-      //   permissionsJson: './statics/functionsPermissionsV2Misc.json',
-      //   addressBook: MiscEthereum,
-      //   addresses: {
-      //     LEND_TO_AAVE_MIGRATOR: '0x317625234562B1526Ea2FaC4030Ea499C5291de4',
-      //     AAVE_MERKLE_DISTRIBUTOR: '0xa88c6D90eAe942291325f9ae3c66f3563B93FE10',
-      //   },
-      // },
-      // // [Pools.V2_MISC_TENDERLY]: {
-      // //   permissionsJson: './statics/functionsPermissionsV2Misc.json',
-      // //   addressBook: {},
-      // //   addresses: {
-      // //     LEND_TO_AAVE_MIGRATOR: '0x317625234562B1526Ea2FaC4030Ea499C5291de4',
-      // //     AAVE_MERKLE_DISTRIBUTOR: '0xa88c6D90eAe942291325f9ae3c66f3563B93FE10',
-      // //   },
-      // //   tenderlyBasePool: Pools.V2_MISC_TENDERLY,
-      // //   tenderlyRpcUrl:
-      // //     'https://rpc.tenderly.co/fork/247e153a-3814-4cef-8dfa-dc0648a813c6',
-      // // },
-      // [Pools.TENDERLY]: {
-      //   collectorBlock: 21765718,
-      //   permissionsJson: './statics/functionsPermissionsV3.json',
-      //   crossChainPermissionsJson: './statics/functionsPermissionsGovV3.json',
-      //   governanceAddressBook: GovernanceV3Ethereum,
-      //   ppcPermissionsJson: './statics/functionsPermissionsPpcV1.json',
-      //   functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
-      //   agentHubBlock: 23876159,
-      //   ppcAddressBook: { ...UmbrellaEthereum, ...MiscEthereum },
-      //   aclBlock: 16291117,
-      //   crossChainControllerBlock: 18090380,
-      //   granularGuardianBlock: 20324867,
-      //   umbrellaBlock: 22346140,
-      //   umbrellaIncentivesBlock: 22346130,
-      //   umbrellaAddressBook: UmbrellaEthereum,
-      //   addressBook: { ...AaveV3Ethereum, ...MiscEthereum, ...GhoEthereum },
-      //   addresses: {
-      //     '0x2a323be63e08E08536Fc3b5d8C6f24825e68895e': 'LayerZeroAdapter',
-      //     '0x6Abb61beb5848B476d026C4934E8a6415e2E75a8': 'HyperLaneAdapter',
-      //   },
-      //   clinicStewardBlock: 21967120,
-      //   tenderlyBasePool: Pools.V3,
-      //   tenderlyBlock: 24167154,
-      //   tenderlyRpcUrl:
-      //     'https://virtual.mainnet.eu.rpc.tenderly.co/17759365-976e-4b05-bc7a-04eb23d585e6',
-      //   hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
-      // },
-    },
-  },
+  //     },
+  //     [Pools.LIDO]: {
+  //       collectorBlock: 21765718,
+  //       permissionsJson: './statics/functionsPermissionsV3.json',
+  //       aclBlock: 20262410,
+  //       addressBook: {
+  //         ...AaveV3EthereumLido,
+  //         ...MiscEthereum,
+  //         COLLECTOR: AaveV3Ethereum.COLLECTOR,
+  //         // @ts-ignore
+  //         AGENT_HUB: AaveV3Ethereum.AGENT_HUB,
+  //         // @ts-ignore
+  //         AGENT_HUB_AUTOMATION: AaveV3Ethereum.AGENT_HUB_AUTOMATION,
+  //         // @ts-ignore
+  //         RANGE_VALIDATION_MODULE: AaveV3Ethereum.RANGE_VALIDATION_MODULE
+  //       },
+  //       functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
+  //       agentHubBlock: 23876159,
+  //       clinicStewardBlock: 21967120,
+  //       hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
+  //     },
+  //     [Pools.LIDO_TENDERLY]: {
+  //       permissionsJson: './statics/functionsPermissionsV3.json',
+  //       aclBlock: 20262410,
+  //       collectorBlock: 21765718,
+  //       clinicStewardBlock: 21967120,
+  //       addressBook: {
+  //         ...AaveV3EthereumLido,
+  //         ...MiscEthereum,
+  //         COLLECTOR: AaveV3Ethereum.COLLECTOR,
+  //       },
+  //       functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
+  //       agentHubBlock: 23876159,
+  //       tenderlyBasePool: Pools.LIDO,
+  //       tenderlyBlock: 24167154,
+  //       tenderlyRpcUrl:
+  //         'https://virtual.mainnet.eu.rpc.tenderly.co/17759365-976e-4b05-bc7a-04eb23d585e6',
+  //       hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
+  //     },
+  //     [Pools.ETHERFI]: {
+  //       collectorBlock: 21765718,
+  //       permissionsJson: './statics/functionsPermissionsV3.json',
+  //       aclBlock: 20625515,
+  //       addressBook: {
+  //         ...AaveV3EthereumEtherFi,
+  //         ...MiscEthereum,
+  //         COLLECTOR: AaveV3Ethereum.COLLECTOR,
+  //       },
+  //     },
+  //     // [Pools.ETHERFI_TENDERLY]: {
+  //     //   permissionsJson: './statics/functionsPermissionsV3.json',
+  //     //   aclBlock: 20625515,
+  //     //   addressBook: {
+  //     //     ...AaveV3EthereumEtherFi,
+  //     //     ...MiscEthereum,
+  //     //     COLLECTOR: AaveV3Ethereum.COLLECTOR,
+  //     //   },
+  //     //   tenderlyBasePool: Pools.ETHERFI,
+  //     //   tenderlyBlock: 20983900,
+  //     //   tenderlyRpcUrl:
+  //     //     'https://rpc.tenderly.co/fork/2d5e3793-0b31-48ad-a1b0-c9e5d03b0607',
+  //     // },
+  //     [Pools.GHO]: {
+  //       permissionsJson: './statics/functionsPermissionsGHO.json',
+  //       ghoBlock: 17698470,
+  //       addressBook: { ...AaveV3Ethereum, ...MiscEthereum, ...GhoEthereum },
+  //       gsmBlocks: {
+  //         GSM_USDC: 19037420,
+  //         GSM_USDT: 19037420,
+  //       },
+  //       addresses: {
+  //         '0x5513224daaEABCa31af5280727878d52097afA05': 'Gho Core Direct Minter',
+  //         '0x2cE01c87Fec1b71A9041c52CaED46Fc5f4807285': 'Gho Lido Direct Minter',
+  //       }
+  //     },
+  //     // [Pools.GHO_TENDERLY]: {
+  //     //   permissionsJson: './statics/functionsPermissionsGHO.json',
+  //     //   ghoBlock: 17698470,
+  //     //   tenderlyBlock: 18714237,
+  //     //   addressBook: AaveV3Ethereum,
+  //     //   tenderlyBasePool: Pools.GHO,
+  //     //   tenderlyRpcUrl:
+  //     //     'https://rpc.tenderly.co/fork/247e153a-3814-4cef-8dfa-dc0648a813c6',
+  //     // },
+  //     [Pools.V2]: {
+  //       collectorBlock: 21765718,
+  //       permissionsJson: './statics/functionsPermissionsV2.json',
+  //       addressBook: AaveV2Ethereum,
+  //     },
+  //     // [Pools.V2_TENDERLY]: {
+  //     //   permissionsJson: './statics/functionsPermissionsV2.json',
+  //     //   addressBook: AaveV2Ethereum,
+  //     //   tenderlyBasePool: Pools.V2,
+  //     //   tenderlyBlock: 20983900,
+  //     //   tenderlyRpcUrl:
+  //     //     'https://rpc.tenderly.co/fork/2d5e3793-0b31-48ad-a1b0-c9e5d03b0607',
+  //     // },
+  //     [Pools.V2_AMM]: {
+  //       collectorBlock: 21765718,
+  //       permissionsJson: './statics/functionsPermissionsV2AMM.json',
+  //       addressBook: AaveV2EthereumAMM,
+  //     },
+  //     // [Pools.V2_AMM_TENDERLY]: {
+  //     //   permissionsJson: './statics/functionsPermissionsV2AMM.json',
+  //     //   addressBook: AaveV2EthereumAMM,
+  //     //   tenderlyBasePool: Pools.V2_AMM,
+  //     //   tenderlyBlock: 20983900,
+  //     //   tenderlyRpcUrl:
+  //     //     'https://rpc.tenderly.co/fork/2d5e3793-0b31-48ad-a1b0-c9e5d03b0607',
+  //     // },
+  //     [Pools.SAFETY_MODULE]: {
+  //       permissionsJson: './statics/functionsPermissionsSafety.json',
+  //       addressBook: AaveSafetyModule,
+  //     },
+  //     // [Pools.SAFETY_MODULE_TENDERLY]: {
+  //     //   permissionsJson: './statics/functionsPermissionsSafety.json',
+  //     //   addressBook: AaveSafetyModule,
+  //     //   tenderlyBasePool: Pools.SAFETY_MODULE,
+  //     //   tenderlyRpcUrl:
+  //     //     'https://rpc.tenderly.co/fork/247e153a-3814-4cef-8dfa-dc0648a813c6',
+  //     // },
+  //     [Pools.V2_MISC]: {
+  //       permissionsJson: './statics/functionsPermissionsV2Misc.json',
+  //       addressBook: MiscEthereum,
+  //       addresses: {
+  //         LEND_TO_AAVE_MIGRATOR: '0x317625234562B1526Ea2FaC4030Ea499C5291de4',
+  //         AAVE_MERKLE_DISTRIBUTOR: '0xa88c6D90eAe942291325f9ae3c66f3563B93FE10',
+  //       },
+  //     },
+  //     // [Pools.V2_MISC_TENDERLY]: {
+  //     //   permissionsJson: './statics/functionsPermissionsV2Misc.json',
+  //     //   addressBook: {},
+  //     //   addresses: {
+  //     //     LEND_TO_AAVE_MIGRATOR: '0x317625234562B1526Ea2FaC4030Ea499C5291de4',
+  //     //     AAVE_MERKLE_DISTRIBUTOR: '0xa88c6D90eAe942291325f9ae3c66f3563B93FE10',
+  //     //   },
+  //     //   tenderlyBasePool: Pools.V2_MISC_TENDERLY,
+  //     //   tenderlyRpcUrl:
+  //     //     'https://rpc.tenderly.co/fork/247e153a-3814-4cef-8dfa-dc0648a813c6',
+  //     // },
+  //     [Pools.TENDERLY]: {
+  //       collectorBlock: 21765718,
+  //       permissionsJson: './statics/functionsPermissionsV3.json',
+  //       crossChainPermissionsJson: './statics/functionsPermissionsGovV3.json',
+  //       governanceAddressBook: GovernanceV3Ethereum,
+  //       ppcPermissionsJson: './statics/functionsPermissionsPpcV1.json',
+  //       functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
+  //       agentHubBlock: 23876159,
+  //       ppcAddressBook: { ...UmbrellaEthereum, ...MiscEthereum },
+  //       aclBlock: 16291117,
+  //       crossChainControllerBlock: 18090380,
+  //       granularGuardianBlock: 20324867,
+  //       umbrellaBlock: 22346140,
+  //       umbrellaIncentivesBlock: 22346130,
+  //       umbrellaAddressBook: UmbrellaEthereum,
+  //       addressBook: { ...AaveV3Ethereum, ...MiscEthereum, ...GhoEthereum },
+  //       addresses: {
+  //         '0x2a323be63e08E08536Fc3b5d8C6f24825e68895e': 'LayerZeroAdapter',
+  //         '0x6Abb61beb5848B476d026C4934E8a6415e2E75a8': 'HyperLaneAdapter',
+  //       },
+  //       clinicStewardBlock: 21967120,
+  //       tenderlyBasePool: Pools.V3,
+  //       tenderlyBlock: 24167154,
+  //       tenderlyRpcUrl:
+  //         'https://virtual.mainnet.eu.rpc.tenderly.co/17759365-976e-4b05-bc7a-04eb23d585e6',
+  //       hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
+  //     },
+  //   },
+  // },
   // [ChainId.polygon]: {
   //   name: 'Polygon',
   //   rpcUrl: process.env.RPC_POLYGON,
@@ -691,68 +691,70 @@ export const networkConfigs: NetworkConfigs = {
   //     },
   //   },
   // },
-  // [ChainId.arbitrum]: {
-  //   name: 'Arbitrum',
-  //   rpcUrl: process.env.RPC_ARBITRUM,
-  //   explorer: 'https://arbiscan.io',
-  //   addressesNames: {
-  //     '0xbbd9f90699c1FA0D7A65870D241DD1f1217c96Eb': 'Aave Guardian Arbitrum',
-  //     '0xEAF6183bAb3eFD3bF856Ac5C058431C8592394d6': 'Deployer',
-  //     '0x1Fcd437D8a9a6ea68da858b78b6cf10E8E0bF959': 'BGD',
-  //     '0x3Be327F22eB4BD8042e6944073b8826dCf357Aa2': 'Risk Council',
-  //     '0x1A0581dd5C7C3DA4Ba1CDa7e0BcA7286afc4973b':
-  //       'Aave Governance Guardian Arbitrum',
-  //     '0xCb45E82419baeBCC9bA8b1e5c7858e48A3B26Ea6':
-  //       'Aave Protocol Guardian Arbitrum',
-  //     '0xdeadD8aB03075b7FBA81864202a2f59EE25B312b': 'CleanUp Admin',
-  //     '0x3Cbded22F878aFC8d39dCD744d3Fe62086B76193': 'ACI Automation',
-  //     '0x8513e6F37dBc52De87b166980Fa3F50639694B60': 'Gho Risk Council',
-  //     '0x22740deBa78d5a0c24C58C740e3715ec29de1bFa': 'Finance Risk Council',
-  //     '0xd2D586f849620ef042FE3aF52eAa10e9b78bf7De': 'Arbitrum Gho Aave Steward',
-  //     '0x87dFb794364f2B117C8dbaE29EA622938b3Ce465': 'BGD Steward Injector Guardian',
-  //     '0xDe841Bf4B67970f5a19165443B0e9ec808E1cC85': 'Risk Oracle Guardian'
-  //   },
-  //   pools: {
-  //     [Pools.V3]: {
-  //       collectorBlock: 302176258,
-  //       aclBlock: 7740502,
-  //       crossChainControllerBlock: 112113800,
-  //       granularGuardianBlock: 233088975,
-  //       crossChainPermissionsJson: './statics/functionsPermissionsGovV3.json',
-  //       permissionsJson: './statics/functionsPermissionsV3.json',
-  //       addressBook: { ...AaveV3Arbitrum, ...MiscArbitrum, ...GhoArbitrum },
-  //       governanceAddressBook: GovernanceV3Arbitrum,
-  //       addresses: {
-  //         '0x3829943c53F2d00e20B58475aF19716724bF90Ba': 'ArbAdapter',
-  //       },
-  //       clinicStewardBlock: 311843330,
-  //       functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
-  //       agentHubBlock: 403986850,
-  //       hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
-  //     },
-  //     // [Pools.GHO]: {
-  //     //   permissionsJson: './statics/functionsPermissionsGHO.json',
-  //     //   ghoBlock: 224701170,
-  //     //   addressBook: { ...AaveV3Arbitrum, ...MiscArbitrum, ...GhoArbitrum },
-  //     // },
-  //     [Pools.TENDERLY]: {
-  //       aclBlock: 7740502,
-  //       crossChainControllerBlock: 112113800,
-  //       granularGuardianBlock: 233088975,
-  //       crossChainPermissionsJson: './statics/functionsPermissionsGovV3.json',
-  //       permissionsJson: './statics/functionsPermissionsV3.json',
-  //       addressBook: { ...AaveV3Arbitrum, ...MiscArbitrum },
-  //       governanceAddressBook: GovernanceV3Arbitrum,
-  //       functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
-  //       agentHubBlock: 403986850,
-  //       tenderlyBasePool: Pools.V3,
-  //       tenderlyBlock: 418099902,
-  //       tenderlyRpcUrl:
-  //         'https://virtual.arbitrum.eu.rpc.tenderly.co/fd1bbcd0-7f09-4993-896f-205fafa0805c',
-  //       hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
-  //     },
-  //   },
-  // },
+  [ChainId.arbitrum]: {
+    name: 'Arbitrum',
+    rpcUrl: process.env.RPC_ARBITRUM,
+    explorer: 'https://arbiscan.io',
+    addressesNames: {
+      '0xbbd9f90699c1FA0D7A65870D241DD1f1217c96Eb': 'Aave Guardian Arbitrum',
+      '0xEAF6183bAb3eFD3bF856Ac5C058431C8592394d6': 'Deployer',
+      '0x1Fcd437D8a9a6ea68da858b78b6cf10E8E0bF959': 'BGD',
+      '0x3Be327F22eB4BD8042e6944073b8826dCf357Aa2': 'Risk Council',
+      '0x1A0581dd5C7C3DA4Ba1CDa7e0BcA7286afc4973b':
+        'Aave Governance Guardian Arbitrum',
+      '0xCb45E82419baeBCC9bA8b1e5c7858e48A3B26Ea6':
+        'Aave Protocol Guardian Arbitrum',
+      '0xdeadD8aB03075b7FBA81864202a2f59EE25B312b': 'CleanUp Admin',
+      '0x3Cbded22F878aFC8d39dCD744d3Fe62086B76193': 'ACI Automation',
+      '0x8513e6F37dBc52De87b166980Fa3F50639694B60': 'Gho Risk Council',
+      '0x22740deBa78d5a0c24C58C740e3715ec29de1bFa': 'Finance Risk Council',
+      '0xd2D586f849620ef042FE3aF52eAa10e9b78bf7De': 'Arbitrum Gho Aave Steward',
+      '0x87dFb794364f2B117C8dbaE29EA622938b3Ce465': 'BGD Steward Injector Guardian',
+      '0xDe841Bf4B67970f5a19165443B0e9ec808E1cC85': 'Risk Oracle Guardian'
+    },
+    pools: {
+      [Pools.V3]: {
+        collectorBlock: 302176258,
+        aclBlock: 7740502,
+        crossChainControllerBlock: 112113800,
+        granularGuardianBlock: 233088975,
+        crossChainPermissionsJson: './statics/functionsPermissionsGovV3.json',
+        permissionsJson: './statics/functionsPermissionsV3.json',
+        addressBook: { ...AaveV3Arbitrum, ...MiscArbitrum, ...GhoArbitrum },
+        governanceAddressBook: GovernanceV3Arbitrum,
+        addresses: {
+          '0x3829943c53F2d00e20B58475aF19716724bF90Ba': 'ArbAdapter',
+        },
+        clinicStewardBlock: 311843330,
+        functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
+        agentHubBlock: 403986850,
+        hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
+      },
+      // [Pools.GHO]: {
+      //   permissionsJson: './statics/functionsPermissionsGHO.json',
+      //   ghoBlock: 224701170,
+      //   addressBook: { ...AaveV3Arbitrum, ...MiscArbitrum, ...GhoArbitrum },
+      // },
+      [Pools.TENDERLY]: {
+        collectorBlock: 302176258,
+        clinicStewardBlock: 311843330,
+        aclBlock: 7740502,
+        crossChainControllerBlock: 112113800,
+        granularGuardianBlock: 233088975,
+        crossChainPermissionsJson: './statics/functionsPermissionsGovV3.json',
+        permissionsJson: './statics/functionsPermissionsV3.json',
+        addressBook: { ...AaveV3Arbitrum, ...MiscArbitrum },
+        governanceAddressBook: GovernanceV3Arbitrum,
+        functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
+        agentHubBlock: 403986850,
+        tenderlyBasePool: Pools.V3,
+        tenderlyBlock: 418099902,
+        tenderlyRpcUrl:
+          'https://virtual.arbitrum.eu.rpc.tenderly.co/fd1bbcd0-7f09-4993-896f-205fafa0805c',
+        hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
+      },
+    },
+  },
   // [ChainId.metis]: {
   //   name: 'Metis',
   //   rpcUrl: process.env.RPC_METIS,

@@ -34,7 +34,7 @@ These documents contain tables with the following information:
 ### Permissions directory
 | Network |System type |Tables |
 |----------|----------|----------|
-|  ETHEREUM |  LIDO_TENDERLY |  [Permissions](./out/ETHEREUM-LIDO_TENDERLY.md#contracts) | |--------|--------|--------|
+|  ARBITRUM |  TENDERLY |  [Permissions](./out/ARBITRUM-TENDERLY.md#contracts) | |--------|--------|--------|
        
     
 ## Usage
