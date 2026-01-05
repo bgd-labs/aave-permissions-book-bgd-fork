@@ -471,9 +471,11 @@ export const networkConfigs: NetworkConfigs = {
       //     'https://rpc.tenderly.co/fork/567780b8-9555-4c31-b084-ad573ea79609',
       // },
       [Pools.TENDERLY]: {
+        collectorBlock: 67485143,
         aclBlock: 25824416,
         crossChainControllerBlock: 45029910,
         granularGuardianBlock: 59461826,
+        clinicStewardBlock: 68599710,
         crossChainPermissionsJson: './statics/functionsPermissionsGovV3.json',
         permissionsJson: './statics/functionsPermissionsV3.json',
         functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
