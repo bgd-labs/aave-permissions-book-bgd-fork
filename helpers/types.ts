@@ -54,15 +54,8 @@ export type Roles = {
   role: Record<string, string[]>;
 };
 
-export type AgentHubRiskOracleInfo = {
-  address: string;
-  authorizedSenders: string[];
-  latestBlockNumber: number;
-};
-
 export type AgentHub = {
   contracts: Contracts;
-  agentHubRiskOracleInfo: Record<string, AgentHubRiskOracleInfo>;
 };
 
 export type PoolInfo = {
@@ -110,7 +103,6 @@ export type PoolConfigs = {
   ppcAddressBook?: any;
 
   functionsPermissionsAgentHubJson?: string;
-  hubRiskOracleInitialSenders?: string[];
 };
 export type Network = {
   name: string;

@@ -19,7 +19,7 @@ import { getCurrentRoleAdmins } from '../helpers/adminRoles.js';
 import { resolveV2Modifiers } from './v2Permissions.js';
 import { resolveV3Modifiers } from './v3Permissions.js';
 import { resolveGovV2Modifiers } from './governancePermissions.js';
-import { AgentHub, AgentHubRiskOracleInfo, ClinicSteward, Collector, Contracts, GovV3, Ppc, Roles, Umbrella } from '../helpers/types.js';
+import { AgentHub, ClinicSteward, Collector, Contracts, GovV3, Ppc, Roles, Umbrella } from '../helpers/types.js';
 import { resolveSafetyV2Modifiers } from './safetyPermissions.js';
 import { resolveV2MiscModifiers } from './v2MiscPermissions.js';
 import { getCCCSendersAndAdapters } from '../helpers/crossChainControllerLogs.js';

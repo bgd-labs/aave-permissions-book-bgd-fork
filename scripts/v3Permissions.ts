@@ -970,28 +970,6 @@ export const resolveV3Modifiers = async (
     }
   }
 
-  if (addressBook.EDGE_RISK_ORACLE) {
-    const riskOracleContract = getContract({ address: getAddress(addressBook.EDGE_RISK_ORACLE), abi: RISK_ORACLE_ABI, client: provider });
-    const riskOracleOwner = await riskOracleContract.read.owner() as Address;
-
-    obj['RiskOracle'] = {
-      address: addressBook.EDGE_RISK_ORACLE,
-      modifiers: [
-        {
-          modifier: 'onlyOwner',
-          addresses: [
-            {
-              address: riskOracleOwner,
-              owners: await getSafeOwners(provider, riskOracleOwner),
-              signersThreshold: await getSafeThreshold(provider, riskOracleOwner),
-            },
-          ],
-          functions: roles['RiskOracle']['onlyOwner'],
-        }
-      ],
-    };
-  }
-
   if (addressBook.EDGE_INJECTOR_CAPS) {
     const aaveStewardInjectorCapsContract = getContract({ address: getAddress(addressBook.EDGE_INJECTOR_CAPS), abi: AAVE_STEWARD_INJECTOR_CAPS_ABI, client: provider });
     const aaveStewardInjectorOwner = await aaveStewardInjectorCapsContract.read.owner() as Address;

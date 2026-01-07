@@ -245,7 +245,6 @@ export const networkConfigs: NetworkConfigs = {
           '0x6Abb61beb5848B476d026C4934E8a6415e2E75a8': 'HyperLaneAdapter',
         },
         clinicStewardBlock: 21967120,
-        hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
 
       },
       [Pools.LIDO]: {
@@ -265,7 +264,6 @@ export const networkConfigs: NetworkConfigs = {
         },
         functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
         clinicStewardBlock: 21967120,
-        hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
       },
       [Pools.LIDO_TENDERLY]: {
         permissionsJson: './statics/functionsPermissionsV3.json',
@@ -280,7 +278,6 @@ export const networkConfigs: NetworkConfigs = {
         tenderlyBlock: 24167154,
         tenderlyRpcUrl:
           'https://virtual.mainnet.eu.rpc.tenderly.co/17759365-976e-4b05-bc7a-04eb23d585e6',
-        hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
       },
       [Pools.ETHERFI]: {
         collectorBlock: 21765718,
@@ -407,7 +404,6 @@ export const networkConfigs: NetworkConfigs = {
         tenderlyBlock: 24167154,
         tenderlyRpcUrl:
           'https://virtual.mainnet.eu.rpc.tenderly.co/17759365-976e-4b05-bc7a-04eb23d585e6',
-        hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
       },
     },
   },
@@ -451,7 +447,6 @@ export const networkConfigs: NetworkConfigs = {
           '0x3c25b96fF62D21E90556869272a277eE2E229747': 'HyperLaneAdapter',
         },
         clinicStewardBlock: 68599710,
-        hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
       },
       [Pools.V2]: {
         collectorBlock: 67485143,
@@ -479,7 +474,6 @@ export const networkConfigs: NetworkConfigs = {
         tenderlyBlock: 81241271,
         tenderlyRpcUrl:
           'https://virtual.polygon.eu.rpc.tenderly.co/a36f16fa-fe15-46d6-9e07-e83e78c40ac6',
-        hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
       },
     },
   },
@@ -518,7 +512,6 @@ export const networkConfigs: NetworkConfigs = {
         },
         clinicStewardBlock: 47144040,
         functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
-        hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
       },
       [Pools.TENDERLY]: {
         collectorBlock: 46332799,
@@ -534,7 +527,6 @@ export const networkConfigs: NetworkConfigs = {
         tenderlyBlock: 74133283,
         tenderlyRpcUrl:
           'https://virtual.binance.eu.rpc.tenderly.co/1a97adbf-9e3c-488a-83e4-e3082a99c4a3',
-        hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
       },
     },
   },
@@ -583,7 +575,6 @@ export const networkConfigs: NetworkConfigs = {
         },
         clinicStewardBlock: 58156580,
         functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
-        hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
       },
       // [Pools.GHO]: {
       //   permissionsJson: './statics/functionsPermissionsGHO.json',
@@ -616,7 +607,6 @@ export const networkConfigs: NetworkConfigs = {
         tenderlyBlock: 75099073,
         tenderlyRpcUrl:
           'https://virtual.avalanche.eu.rpc.tenderly.co/b8bfec00-ecb9-4cb5-8d8d-4b235b72d283',
-        hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
       },
     },
   },
@@ -654,7 +644,6 @@ export const networkConfigs: NetworkConfigs = {
         },
         clinicStewardBlock: 132707080,
         functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
-        hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
       },
       [Pools.TENDERLY]: {
         aclBlock: 4365546,
@@ -669,7 +658,6 @@ export const networkConfigs: NetworkConfigs = {
         tenderlyBlock: 146001573,
         tenderlyRpcUrl:
           'https://virtual.optimism.eu.rpc.tenderly.co/392d0f38-7d4a-4b7e-9f9d-ed2accc1fe24',
-        hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
       },
     },
   },
@@ -709,7 +697,6 @@ export const networkConfigs: NetworkConfigs = {
         },
         clinicStewardBlock: 311843330,
         functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
-        hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
       },
       // [Pools.GHO]: {
       //   permissionsJson: './statics/functionsPermissionsGHO.json',
@@ -729,7 +716,6 @@ export const networkConfigs: NetworkConfigs = {
         tenderlyBlock: 418099902,
         tenderlyRpcUrl:
           'https://virtual.arbitrum.eu.rpc.tenderly.co/fd1bbcd0-7f09-4993-896f-205fafa0805c',
-        hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
       },
     },
   },
@@ -804,7 +790,6 @@ export const networkConfigs: NetworkConfigs = {
         },
         clinicStewardBlock: 27111930,
         functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
-        hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
       },
       // [Pools.GHO]: {
       //   permissionsJson: './statics/functionsPermissionsGHO.json',
@@ -824,7 +809,6 @@ export const networkConfigs: NetworkConfigs = {
         tenderlyBlock: 40406343,
         tenderlyRpcUrl:
           'https://virtual.base.eu.rpc.tenderly.co/9bdf5ebd-aff6-42d9-bbc0-24fa68413e13',
-        hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
       },
     },
   },
@@ -864,7 +848,6 @@ export const networkConfigs: NetworkConfigs = {
         },
         clinicStewardBlock: 38845800,
         functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
-        hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
       },
       [Pools.TENDERLY]: {
         aclBlock: 30293056,
@@ -879,7 +862,6 @@ export const networkConfigs: NetworkConfigs = {
         tenderlyBlock: 44006822,
         tenderlyRpcUrl:
           'https://virtual.gnosis.eu.rpc.tenderly.co/d74ddb46-4550-4e2f-8934-0263fbaabcbb',
-        hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
       },
     },
   },
@@ -988,7 +970,6 @@ export const networkConfigs: NetworkConfigs = {
           '0xB3332d31ECFC3ef3BF6Cda79833D11d1A53f5cE6': 'LineaAdapter',
         },
         functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
-        hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
       },
       [Pools.TENDERLY]: {
         clinicStewardBlock: 16499170,
@@ -1012,7 +993,6 @@ export const networkConfigs: NetworkConfigs = {
         tenderlyBlock: 27445993,
         tenderlyRpcUrl:
           'https://virtual.linea.eu.rpc.tenderly.co/429f3112-eb0e-418c-bd6a-30fdbbc881d3',
-        hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
       },
     },
   },
@@ -1231,7 +1211,6 @@ export const networkConfigs: NetworkConfigs = {
           ...MiscPlasma
         },
         functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
-        hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
       },
       [Pools.TENDERLY]: {
         aclBlock: 489190,
@@ -1253,7 +1232,6 @@ export const networkConfigs: NetworkConfigs = {
         tenderlyBlock: 10671654,
         tenderlyRpcUrl:
           'https://virtual.plasma.eu.rpc.tenderly.co/7e890d40-1ab0-4575-9d6d-092588721c24',
-        hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
       },
     },
   },
