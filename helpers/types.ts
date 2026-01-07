@@ -109,7 +109,6 @@ export type PoolConfigs = {
   ppcPermissionsJson?: string;
   ppcAddressBook?: any;
 
-  agentHubBlock?: number;
   functionsPermissionsAgentHubJson?: string;
   hubRiskOracleInitialSenders?: string[];
 };

@@ -1178,8 +1178,7 @@
             }
           ]
         }
-      },
-      "agentHubRiskOracleInfo": {}
+      }
     }
   },
   "TENDERLY": {
@@ -2459,15 +2458,6 @@
               ]
             }
           ]
-        }
-      },
-      "agentHubRiskOracleInfo": {
-        "0xAe48F22903d43f13f66Cc650F57Bd4654ac222cb": {
-          "authorizedSenders": [
-            "0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9"
-          ],
-          "latestBlockNumber": 10671654,
-          "address": "0xAe48F22903d43f13f66Cc650F57Bd4654ac222cb"
         }
       }
     }

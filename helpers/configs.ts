@@ -232,7 +232,6 @@ export const networkConfigs: NetworkConfigs = {
         governanceAddressBook: GovernanceV3Ethereum,
         ppcPermissionsJson: './statics/functionsPermissionsPpcV1.json',
         functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
-        agentHubBlock: 23876159,
         ppcAddressBook: { ...UmbrellaEthereum, ...MiscEthereum },
         aclBlock: 16291117,
         crossChainControllerBlock: 18090380,
@@ -265,7 +264,6 @@ export const networkConfigs: NetworkConfigs = {
           RANGE_VALIDATION_MODULE: AaveV3Ethereum.RANGE_VALIDATION_MODULE
         },
         functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
-        agentHubBlock: 23876159,
         clinicStewardBlock: 21967120,
         hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
       },
@@ -278,7 +276,6 @@ export const networkConfigs: NetworkConfigs = {
           COLLECTOR: AaveV3Ethereum.COLLECTOR,
         },
         functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
-        agentHubBlock: 23876159,
         tenderlyBasePool: Pools.LIDO,
         tenderlyBlock: 24167154,
         tenderlyRpcUrl:
@@ -393,7 +390,6 @@ export const networkConfigs: NetworkConfigs = {
         governanceAddressBook: GovernanceV3Ethereum,
         ppcPermissionsJson: './statics/functionsPermissionsPpcV1.json',
         functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
-        agentHubBlock: 23876159,
         ppcAddressBook: { ...UmbrellaEthereum, ...MiscEthereum },
         aclBlock: 16291117,
         crossChainControllerBlock: 18090380,
@@ -445,7 +441,6 @@ export const networkConfigs: NetworkConfigs = {
         aclBlock: 25824416,
         crossChainControllerBlock: 45029910,
         granularGuardianBlock: 59461826,
-        agentHubBlock: 79487303,
         crossChainPermissionsJson: './statics/functionsPermissionsGovV3.json',
         permissionsJson: './statics/functionsPermissionsV3.json',
         functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
@@ -478,7 +473,6 @@ export const networkConfigs: NetworkConfigs = {
         crossChainPermissionsJson: './statics/functionsPermissionsGovV3.json',
         permissionsJson: './statics/functionsPermissionsV3.json',
         functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
-        agentHubBlock: 79487303,
         addressBook: { ...AaveV3Polygon, ...MiscPolygon },
         governanceAddressBook: GovernanceV3Polygon,
         tenderlyBasePool: Pools.V3,
@@ -524,7 +518,6 @@ export const networkConfigs: NetworkConfigs = {
         },
         clinicStewardBlock: 47144040,
         functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
-        agentHubBlock: 69437435,
         hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
       },
       [Pools.TENDERLY]: {
@@ -537,7 +530,6 @@ export const networkConfigs: NetworkConfigs = {
         addressBook: { ...AaveV3BNB, ...MiscBNB },
         governanceAddressBook: GovernanceV3BNB,
         functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
-        agentHubBlock: 69437435,
         tenderlyBasePool: Pools.V3,
         tenderlyBlock: 74133283,
         tenderlyRpcUrl:
@@ -591,7 +583,6 @@ export const networkConfigs: NetworkConfigs = {
         },
         clinicStewardBlock: 58156580,
         functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
-        agentHubBlock: 72564515,
         hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
       },
       // [Pools.GHO]: {
@@ -621,7 +612,6 @@ export const networkConfigs: NetworkConfigs = {
         addressBook: { ...AaveV3Avalanche, ...MiscAvalanche },
         governanceAddressBook: GovernanceV3Avalanche,
         functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
-        agentHubBlock: 72564515,
         tenderlyBasePool: Pools.V3,
         tenderlyBlock: 75099073,
         tenderlyRpcUrl:
@@ -664,7 +654,6 @@ export const networkConfigs: NetworkConfigs = {
         },
         clinicStewardBlock: 132707080,
         functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
-        agentHubBlock: 144240778,
         hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
       },
       [Pools.TENDERLY]: {
@@ -676,7 +665,6 @@ export const networkConfigs: NetworkConfigs = {
         addressBook: { ...AaveV3Optimism, ...MiscOptimism },
         governanceAddressBook: GovernanceV3Optimism,
         functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
-        agentHubBlock: 144240778,
         tenderlyBasePool: Pools.V3,
         tenderlyBlock: 146001573,
         tenderlyRpcUrl:
@@ -721,7 +709,6 @@ export const networkConfigs: NetworkConfigs = {
         },
         clinicStewardBlock: 311843330,
         functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
-        agentHubBlock: 403986850,
         hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
       },
       // [Pools.GHO]: {
@@ -738,7 +725,6 @@ export const networkConfigs: NetworkConfigs = {
         addressBook: { ...AaveV3Arbitrum, ...MiscArbitrum },
         governanceAddressBook: GovernanceV3Arbitrum,
         functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
-        agentHubBlock: 403986850,
         tenderlyBasePool: Pools.V3,
         tenderlyBlock: 418099902,
         tenderlyRpcUrl:
@@ -818,7 +804,6 @@ export const networkConfigs: NetworkConfigs = {
         },
         clinicStewardBlock: 27111930,
         functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
-        agentHubBlock: 38644854,
         hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
       },
       // [Pools.GHO]: {
@@ -835,7 +820,6 @@ export const networkConfigs: NetworkConfigs = {
         addressBook: { ...AaveV3Base, ...MiscBase },
         governanceAddressBook: GovernanceV3Base,
         functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
-        agentHubBlock: 38644854,
         tenderlyBasePool: Pools.V3,
         tenderlyBlock: 40406343,
         tenderlyRpcUrl:
@@ -880,7 +864,6 @@ export const networkConfigs: NetworkConfigs = {
         },
         clinicStewardBlock: 38845800,
         functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
-        agentHubBlock: 43326597,
         hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
       },
       [Pools.TENDERLY]: {
@@ -893,7 +876,6 @@ export const networkConfigs: NetworkConfigs = {
         tenderlyBasePool: Pools.V3,
         governanceAddressBook: GovernanceV3Gnosis,
         functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
-        agentHubBlock: 43326597,
         tenderlyBlock: 44006822,
         tenderlyRpcUrl:
           'https://virtual.gnosis.eu.rpc.tenderly.co/d74ddb46-4550-4e2f-8934-0263fbaabcbb',
@@ -1006,7 +988,6 @@ export const networkConfigs: NetworkConfigs = {
           '0xB3332d31ECFC3ef3BF6Cda79833D11d1A53f5cE6': 'LineaAdapter',
         },
         functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
-        agentHubBlock: 26013390,
         hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
       },
       [Pools.TENDERLY]: {
@@ -1027,7 +1008,6 @@ export const networkConfigs: NetworkConfigs = {
           '0xB3332d31ECFC3ef3BF6Cda79833D11d1A53f5cE6': 'LineaAdapter',
         },
         functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
-        agentHubBlock: 26013390,
         tenderlyBasePool: Pools.V3,
         tenderlyBlock: 27445993,
         tenderlyRpcUrl:
@@ -1251,7 +1231,6 @@ export const networkConfigs: NetworkConfigs = {
           ...MiscPlasma
         },
         functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
-        agentHubBlock: 7150621,
         hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
       },
       [Pools.TENDERLY]: {
@@ -1270,7 +1249,6 @@ export const networkConfigs: NetworkConfigs = {
           ...MiscPlasma
         },
         functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
-        agentHubBlock: 7150621,
         tenderlyBasePool: Pools.V3,
         tenderlyBlock: 10671654,
         tenderlyRpcUrl:

@@ -1282,8 +1282,7 @@
             }
           ]
         }
-      },
-      "agentHubRiskOracleInfo": {}
+      }
     }
   },
   "V2": {
@@ -2876,59 +2875,6 @@
               ]
             }
           ]
-        },
-        "RiskOracle": {
-          "address": "0x9f6aA2aB14bFF53e4b79A81ce1554F1DFdbb6608",
-          "modifiers": [
-            {
-              "modifier": "onlyOwner",
-              "addresses": [
-                {
-                  "address": "0xDe841Bf4B67970f5a19165443B0e9ec808E1cC85",
-                  "owners": [
-                    "0xE328bd9b85A127C5fbb71070d17a2d26d2615dEa",
-                    "0xdBf59fD74bd98Fc50F7952E916BB57F26037ddC9",
-                    "0x4DB9f12c891A64Ef80C6f8047a2D9a651d16f849",
-                    "0x50842854e40914A8e0745310B47fC22B98112B7A",
-                    "0x5Df7e094f52436040A5a37D5C9A9A80586D35823",
-                    "0x5d49dBcdd300aECc2C311cFB56593E71c445d60d",
-                    "0x753de005261e9Ff910B541A07282544Ec433d08c"
-                  ],
-                  "signersThreshold": 3
-                }
-              ],
-              "functions": [
-                "addAuthorizedSender",
-                "removeAuthorizedSender",
-                "addUpdateType",
-                "renounceOwnership",
-                "transferOwnership"
-              ]
-            },
-            {
-              "modifier": "onlyAuthorized",
-              "addresses": [
-                {
-                  "address": "0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9",
-                  "owners": [],
-                  "signersThreshold": 0
-                }
-              ],
-              "functions": [
-                "publishRiskParameterUpdate",
-                "publishBulkRiskParameterUpdates"
-              ]
-            }
-          ]
-        }
-      },
-      "agentHubRiskOracleInfo": {
-        "0x9f6aA2aB14bFF53e4b79A81ce1554F1DFdbb6608": {
-          "authorizedSenders": [
-            "0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9"
-          ],
-          "latestBlockNumber": 81241271,
-          "address": "0x9f6aA2aB14bFF53e4b79A81ce1554F1DFdbb6608"
         }
       }
     }

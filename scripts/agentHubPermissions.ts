@@ -1,28 +1,20 @@
 import { Address, Client, getAddress, getContract } from "viem";
-import { AgentHubRiskOracleInfo, Contracts, PermissionsJson } from "../helpers/types.js";
+import { Contracts, PermissionsJson } from "../helpers/types.js";
 import { generateRoles } from "../helpers/jsonParsers.js";
 import { getSafeOwners, getSafeThreshold } from "../helpers/guardian.js";
 import { getProxyAdmin } from "../helpers/proxyAdmin.js";
 import { uniqueAddresses } from "../helpers/utils.js";
-import { getAuthorizedSenders } from "../helpers/hubRiskOracle.js";
-import { ChainId } from "@bgd-labs/toolbox";
 import { onlyOwnerAbi } from "../abis/onlyOwnerAbi.js";
 import { AGENT_HUB_ABI } from "../abis/agentHub.js";
 import { AGENT_ABI } from "../abis/agent.js";
-import { RISK_ORACLE_ABI } from "../abis/riskOracle.js";
-import { networkConfigs } from "../helpers/configs.js";
 
 
 export const resolveAgentHubModifiers = async (
   addressBook: any,
   provider: Client,
   permissionsObject: PermissionsJson,
-  chainId: number,
-  agentHubRiskOracleInfo: Record<string, AgentHubRiskOracleInfo>,
-  agentHubBlock: number,
   poolName: string,
-  tenderlyBlock?: number,
-): Promise<{ agentHubPermissions: Contracts, agentHubRiskOracleInfo: Record<string, AgentHubRiskOracleInfo> }> => {
+): Promise<{ agentHubPermissions: Contracts }> => {
   let obj: Contracts = {};
   const roles = generateRoles(permissionsObject);
 
@@ -34,7 +26,6 @@ export const resolveAgentHubModifiers = async (
     const agentCount = Number(await hubContract.read.getAgentCount() as bigint);
     const agentAdmins: Set<Address> = new Set();
     const validationModules: Set<Address> = new Set();
-    const riskOracles: Set<Address> = new Set();
     const agents: Record<Address, string> = {};
 
     for (let i = 0; i < agentCount; i++) {
@@ -42,9 +33,6 @@ export const resolveAgentHubModifiers = async (
       if (agentEnabled) {
         const agentAdmin = await hubContract.read.getAgentAdmin([i]) as Address;
         const agentAddress = await hubContract.read.getAgentAddress([i]) as Address;
-        const agentRiskOracle = await hubContract.read.getRiskOracle([i]) as Address;
-
-        riskOracles.add(agentRiskOracle);
         agentAdmins.add(agentAdmin);
 
         // get agent info
@@ -181,75 +169,7 @@ export const resolveAgentHubModifiers = async (
         };
       }
     }
-
-    // risk oracle
-    if (riskOracles.size > 0) {
-      const riskOraclesArray = Array.from(riskOracles);
-      for (let index = 0; index < riskOraclesArray.length; index++) {
-        const riskOracle = riskOraclesArray[index];
-
-        const riskOracleContract = getContract({ address: getAddress(riskOracle), abi: RISK_ORACLE_ABI, client: provider });
-        const riskOracleOwner = await riskOracleContract.read.owner() as Address;
-        const onlyAuthorized: { address: Address, owners: string[], signersThreshold: number }[] = [];
-
-        let preAuthorizedSenders: string[] = [];
-        if (!agentHubRiskOracleInfo[riskOracle] || Object.keys(agentHubRiskOracleInfo[riskOracle]).length === 0) {
-          preAuthorizedSenders = networkConfigs[Number(chainId)].pools[poolName].hubRiskOracleInitialSenders ?? [];
-        }
-
-        const { authorizedSenders, latestBlockNumber } = await getAuthorizedSenders(
-          provider,
-          agentHubRiskOracleInfo[riskOracle] || { address: riskOracle, authorizedSenders: preAuthorizedSenders, latestBlockNumber: agentHubBlock } as AgentHubRiskOracleInfo,
-          chainId,
-          poolName,
-          tenderlyBlock,
-        );
-
-        agentHubRiskOracleInfo[riskOracle] = {
-          authorizedSenders: authorizedSenders,
-          latestBlockNumber: latestBlockNumber,
-          address: riskOracle,
-        };
-
-        for (const authorizedSender of authorizedSenders) {
-          const isAuthorized = await riskOracleContract.read.isAuthorized([authorizedSender]);
-          if (isAuthorized) {
-            onlyAuthorized.push({
-              address: getAddress(authorizedSender),
-              owners: await getSafeOwners(provider, authorizedSender),
-              signersThreshold: await getSafeThreshold(provider, authorizedSender),
-            });
-          } else {
-            console.error(`Authorized sender ${authorizedSender} is not authorized for risk oracle ${riskOracle} on chainId ${chainId}`);
-          }
-        }
-
-        obj[`RiskOracle${riskOracles.size > 1 ? `-${index}` : ''}`] = {
-          address: riskOracle,
-          modifiers: [
-            {
-              modifier: 'onlyOwner',
-              addresses: [
-                {
-                  address: riskOracleOwner,
-                  owners: await getSafeOwners(provider, riskOracleOwner),
-                  signersThreshold: await getSafeThreshold(provider, riskOracleOwner),
-                },
-              ],
-              functions: roles['RiskOracle']['onlyOwner'],
-            },
-            {
-              modifier: 'onlyAuthorized',
-              addresses: [
-                ...onlyAuthorized,
-              ],
-              functions: roles['RiskOracle']['onlyAuthorized'],
-            },
-          ],
-        };
-      }
-    }
   }
 
-  return { agentHubPermissions: obj, agentHubRiskOracleInfo: agentHubRiskOracleInfo };
+  return { agentHubPermissions: obj };
 };
