@@ -221,7 +221,6 @@ export const networkConfigs: NetworkConfigs = {
       '0x6A14eBe9A934c8EFE15C3811a999149472876b56': 'ClinicStewardV2',
       '0xE1e62c3ee0c581F715fBb0e23CDA536Fc29eeB2c': 'ClinicStewardV2 AMM',
       '0xff37939808EcF199A2D599ef91D699Fb13dab7F7': 'BGD Injector Guardian',
-      '0xDe841Bf4B67970f5a19165443B0e9ec808E1cC85': 'Risk Oracle Guardian',
       '0xb7D402138Cb01BfE97d95181C849379d6AD14d19': 'SwapSteward'
     },
     pools: {
@@ -232,7 +231,6 @@ export const networkConfigs: NetworkConfigs = {
         governanceAddressBook: GovernanceV3Ethereum,
         ppcPermissionsJson: './statics/functionsPermissionsPpcV1.json',
         functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
-        agentHubBlock: 23876159,
         ppcAddressBook: { ...UmbrellaEthereum, ...MiscEthereum },
         aclBlock: 16291117,
         crossChainControllerBlock: 18090380,
@@ -246,7 +244,6 @@ export const networkConfigs: NetworkConfigs = {
           '0x6Abb61beb5848B476d026C4934E8a6415e2E75a8': 'HyperLaneAdapter',
         },
         clinicStewardBlock: 21967120,
-        hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
 
       },
       [Pools.LIDO]: {
@@ -265,9 +262,7 @@ export const networkConfigs: NetworkConfigs = {
           RANGE_VALIDATION_MODULE: AaveV3Ethereum.RANGE_VALIDATION_MODULE
         },
         functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
-        agentHubBlock: 23876159,
         clinicStewardBlock: 21967120,
-        hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
       },
       [Pools.LIDO_TENDERLY]: {
         permissionsJson: './statics/functionsPermissionsV3.json',
@@ -278,12 +273,10 @@ export const networkConfigs: NetworkConfigs = {
           COLLECTOR: AaveV3Ethereum.COLLECTOR,
         },
         functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
-        agentHubBlock: 23876159,
         tenderlyBasePool: Pools.LIDO,
         tenderlyBlock: 24167154,
         tenderlyRpcUrl:
           'https://virtual.mainnet.eu.rpc.tenderly.co/17759365-976e-4b05-bc7a-04eb23d585e6',
-        hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
       },
       [Pools.ETHERFI]: {
         collectorBlock: 21765718,
@@ -393,7 +386,6 @@ export const networkConfigs: NetworkConfigs = {
         governanceAddressBook: GovernanceV3Ethereum,
         ppcPermissionsJson: './statics/functionsPermissionsPpcV1.json',
         functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
-        agentHubBlock: 23876159,
         ppcAddressBook: { ...UmbrellaEthereum, ...MiscEthereum },
         aclBlock: 16291117,
         crossChainControllerBlock: 18090380,
@@ -411,7 +403,6 @@ export const networkConfigs: NetworkConfigs = {
         tenderlyBlock: 24167154,
         tenderlyRpcUrl:
           'https://virtual.mainnet.eu.rpc.tenderly.co/17759365-976e-4b05-bc7a-04eb23d585e6',
-        hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
       },
     },
   },
@@ -437,7 +428,6 @@ export const networkConfigs: NetworkConfigs = {
       '0x22740deBa78d5a0c24C58C740e3715ec29de1bFa': 'Finance Risk Council',
       '0x7683177b05a92e8B169D833718BDF9d0ce809aA9': 'BGD Steward Injector Guardian',
       '0xF93b565c96446afdf8C3D37E6B4781D5d5EDef1C': 'ClinicStewardV2',
-      '0xDe841Bf4B67970f5a19165443B0e9ec808E1cC85': 'Risk Oracle Guardian'
     },
     pools: {
       [Pools.V3]: {
@@ -445,7 +435,6 @@ export const networkConfigs: NetworkConfigs = {
         aclBlock: 25824416,
         crossChainControllerBlock: 45029910,
         granularGuardianBlock: 59461826,
-        agentHubBlock: 79487303,
         crossChainPermissionsJson: './statics/functionsPermissionsGovV3.json',
         permissionsJson: './statics/functionsPermissionsV3.json',
         functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
@@ -456,7 +445,6 @@ export const networkConfigs: NetworkConfigs = {
           '0x3c25b96fF62D21E90556869272a277eE2E229747': 'HyperLaneAdapter',
         },
         clinicStewardBlock: 68599710,
-        hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
       },
       [Pools.V2]: {
         collectorBlock: 67485143,
@@ -478,14 +466,12 @@ export const networkConfigs: NetworkConfigs = {
         crossChainPermissionsJson: './statics/functionsPermissionsGovV3.json',
         permissionsJson: './statics/functionsPermissionsV3.json',
         functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
-        agentHubBlock: 79487303,
         addressBook: { ...AaveV3Polygon, ...MiscPolygon },
         governanceAddressBook: GovernanceV3Polygon,
         tenderlyBasePool: Pools.V3,
         tenderlyBlock: 81241271,
         tenderlyRpcUrl:
           'https://virtual.polygon.eu.rpc.tenderly.co/a36f16fa-fe15-46d6-9e07-e83e78c40ac6',
-        hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
       },
     },
   },
@@ -506,7 +492,6 @@ export const networkConfigs: NetworkConfigs = {
       '0x3Cbded22F878aFC8d39dCD744d3Fe62086B76193': 'ACI Automation',
       '0x22740deBa78d5a0c24C58C740e3715ec29de1bFa': 'Finance Risk Council',
       '0xB5ABc2BcB050bE70EF53338E547d87d06F7c877d': 'BGD Steward Injector Guardian',
-      '0xDe841Bf4B67970f5a19165443B0e9ec808E1cC85': 'Risk Oracle Guardian'
     },
     pools: {
       [Pools.V3]: {
@@ -524,8 +509,6 @@ export const networkConfigs: NetworkConfigs = {
         },
         clinicStewardBlock: 47144040,
         functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
-        agentHubBlock: 69437435,
-        hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
       },
       [Pools.TENDERLY]: {
         collectorBlock: 46332799,
@@ -537,12 +520,10 @@ export const networkConfigs: NetworkConfigs = {
         addressBook: { ...AaveV3BNB, ...MiscBNB },
         governanceAddressBook: GovernanceV3BNB,
         functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
-        agentHubBlock: 69437435,
         tenderlyBasePool: Pools.V3,
         tenderlyBlock: 74133283,
         tenderlyRpcUrl:
           'https://virtual.binance.eu.rpc.tenderly.co/1a97adbf-9e3c-488a-83e4-e3082a99c4a3',
-        hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
       },
     },
   },
@@ -572,7 +553,6 @@ export const networkConfigs: NetworkConfigs = {
       '0xA5Ba213867E175A182a5dd6A9193C6158738105A': 'Gho Aave Steward',
       '0xD68c00a1A4a33876C5EC71A2Bf7bBd8676d72BF6': 'BGD Steward Injector Guardian',
       '0xA28820b8af102fAABAAAdaf94224353Dc772DC99': 'ClinicStewardV2',
-      '0xDe841Bf4B67970f5a19165443B0e9ec808E1cC85': 'Risk Oracle Guardian'
     },
     pools: {
       [Pools.V3]: {
@@ -591,8 +571,6 @@ export const networkConfigs: NetworkConfigs = {
         },
         clinicStewardBlock: 58156580,
         functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
-        agentHubBlock: 72564515,
-        hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
       },
       // [Pools.GHO]: {
       //   permissionsJson: './statics/functionsPermissionsGHO.json',
@@ -621,12 +599,10 @@ export const networkConfigs: NetworkConfigs = {
         addressBook: { ...AaveV3Avalanche, ...MiscAvalanche },
         governanceAddressBook: GovernanceV3Avalanche,
         functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
-        agentHubBlock: 72564515,
         tenderlyBasePool: Pools.V3,
         tenderlyBlock: 75099073,
         tenderlyRpcUrl:
           'https://virtual.avalanche.eu.rpc.tenderly.co/b8bfec00-ecb9-4cb5-8d8d-4b235b72d283',
-        hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
       },
     },
   },
@@ -647,7 +623,6 @@ export const networkConfigs: NetworkConfigs = {
       '0x3Cbded22F878aFC8d39dCD744d3Fe62086B76193': 'ACI Automation',
       '0x22740deBa78d5a0c24C58C740e3715ec29de1bFa': 'Finance Risk Council',
       '0x9867Ce43D2a574a152fE6b134F64c9578ce3cE03': 'BGD Steward Injector Guardian',
-      '0xDe841Bf4B67970f5a19165443B0e9ec808E1cC85': 'Risk Oracle Guardian'
     },
     pools: {
       [Pools.V3]: {
@@ -664,8 +639,6 @@ export const networkConfigs: NetworkConfigs = {
         },
         clinicStewardBlock: 132707080,
         functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
-        agentHubBlock: 144240778,
-        hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
       },
       [Pools.TENDERLY]: {
         aclBlock: 4365546,
@@ -676,12 +649,10 @@ export const networkConfigs: NetworkConfigs = {
         addressBook: { ...AaveV3Optimism, ...MiscOptimism },
         governanceAddressBook: GovernanceV3Optimism,
         functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
-        agentHubBlock: 144240778,
         tenderlyBasePool: Pools.V3,
         tenderlyBlock: 146001573,
         tenderlyRpcUrl:
           'https://virtual.optimism.eu.rpc.tenderly.co/392d0f38-7d4a-4b7e-9f9d-ed2accc1fe24',
-        hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
       },
     },
   },
@@ -704,7 +675,6 @@ export const networkConfigs: NetworkConfigs = {
       '0x22740deBa78d5a0c24C58C740e3715ec29de1bFa': 'Finance Risk Council',
       '0xd2D586f849620ef042FE3aF52eAa10e9b78bf7De': 'Arbitrum Gho Aave Steward',
       '0x87dFb794364f2B117C8dbaE29EA622938b3Ce465': 'BGD Steward Injector Guardian',
-      '0xDe841Bf4B67970f5a19165443B0e9ec808E1cC85': 'Risk Oracle Guardian'
     },
     pools: {
       [Pools.V3]: {
@@ -721,8 +691,6 @@ export const networkConfigs: NetworkConfigs = {
         },
         clinicStewardBlock: 311843330,
         functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
-        agentHubBlock: 403986850,
-        hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
       },
       // [Pools.GHO]: {
       //   permissionsJson: './statics/functionsPermissionsGHO.json',
@@ -738,12 +706,10 @@ export const networkConfigs: NetworkConfigs = {
         addressBook: { ...AaveV3Arbitrum, ...MiscArbitrum },
         governanceAddressBook: GovernanceV3Arbitrum,
         functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
-        agentHubBlock: 403986850,
         tenderlyBasePool: Pools.V3,
         tenderlyBlock: 418099902,
         tenderlyRpcUrl:
           'https://virtual.arbitrum.eu.rpc.tenderly.co/fd1bbcd0-7f09-4993-896f-205fafa0805c',
-        hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
       },
     },
   },
@@ -801,7 +767,6 @@ export const networkConfigs: NetworkConfigs = {
       '0xA9F30e6ED4098e9439B2ac8aEA2d3fc26BcEbb45': 'Bridge Executor',
       '0xC5BcC58BE6172769ca1a78B8A45752E3C5059c39': 'Base Gho Aave Steward',
       '0x1B7e7b282Dff5661704E32838CAE4677FEB4C1F2': 'BGD Steward Injector Guardian',
-      '0xDe841Bf4B67970f5a19165443B0e9ec808E1cC85': 'Risk Oracle Guardian'
     },
     pools: {
       [Pools.V3]: {
@@ -818,8 +783,6 @@ export const networkConfigs: NetworkConfigs = {
         },
         clinicStewardBlock: 27111930,
         functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
-        agentHubBlock: 38644854,
-        hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
       },
       // [Pools.GHO]: {
       //   permissionsJson: './statics/functionsPermissionsGHO.json',
@@ -835,12 +798,10 @@ export const networkConfigs: NetworkConfigs = {
         addressBook: { ...AaveV3Base, ...MiscBase },
         governanceAddressBook: GovernanceV3Base,
         functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
-        agentHubBlock: 38644854,
         tenderlyBasePool: Pools.V3,
         tenderlyBlock: 40406343,
         tenderlyRpcUrl:
           'https://virtual.base.eu.rpc.tenderly.co/9bdf5ebd-aff6-42d9-bbc0-24fa68413e13',
-        hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
       },
     },
   },
@@ -861,7 +822,6 @@ export const networkConfigs: NetworkConfigs = {
       '0x22740deBa78d5a0c24C58C740e3715ec29de1bFa': 'Finance Risk Council',
       '0x6e637e1E48025E51315d50ab96d5b3be1971A715': 'Gnosis Gho Aave Steward',
       '0x4bBBcfF03E94B2B661c5cA9c3BD34f6504591764': 'BGD Steward Injector Guardian',
-      '0xDe841Bf4B67970f5a19165443B0e9ec808E1cC85': 'Risk Oracle Guardian'
     },
     pools: {
       [Pools.V3]: {
@@ -880,8 +840,6 @@ export const networkConfigs: NetworkConfigs = {
         },
         clinicStewardBlock: 38845800,
         functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
-        agentHubBlock: 43326597,
-        hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
       },
       [Pools.TENDERLY]: {
         aclBlock: 30293056,
@@ -893,11 +851,9 @@ export const networkConfigs: NetworkConfigs = {
         tenderlyBasePool: Pools.V3,
         governanceAddressBook: GovernanceV3Gnosis,
         functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
-        agentHubBlock: 43326597,
         tenderlyBlock: 44006822,
         tenderlyRpcUrl:
           'https://virtual.gnosis.eu.rpc.tenderly.co/d74ddb46-4550-4e2f-8934-0263fbaabcbb',
-        hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
       },
     },
   },
@@ -985,7 +941,6 @@ export const networkConfigs: NetworkConfigs = {
       '0x3Cbded22F878aFC8d39dCD744d3Fe62086B76193': 'ACI Automation',
       '0x22740deBa78d5a0c24C58C740e3715ec29de1bFa': 'Finance Risk Council',
       '0x0c28C535CE08345851F150dFC9c737978d726aEc': 'BGD Injector Guardian',
-      '0xDe841Bf4B67970f5a19165443B0e9ec808E1cC85': 'Risk Oracle Guardian'
     },
     pools: {
       [Pools.V3]: {
@@ -1006,8 +961,6 @@ export const networkConfigs: NetworkConfigs = {
           '0xB3332d31ECFC3ef3BF6Cda79833D11d1A53f5cE6': 'LineaAdapter',
         },
         functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
-        agentHubBlock: 26013390,
-        hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
       },
       [Pools.TENDERLY]: {
         clinicStewardBlock: 16499170,
@@ -1027,12 +980,10 @@ export const networkConfigs: NetworkConfigs = {
           '0xB3332d31ECFC3ef3BF6Cda79833D11d1A53f5cE6': 'LineaAdapter',
         },
         functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
-        agentHubBlock: 26013390,
         tenderlyBasePool: Pools.V3,
         tenderlyBlock: 27445993,
         tenderlyRpcUrl:
           'https://virtual.linea.eu.rpc.tenderly.co/429f3112-eb0e-418c-bd6a-30fdbbc881d3',
-        hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
       },
     },
   },
@@ -1231,7 +1182,6 @@ export const networkConfigs: NetworkConfigs = {
         'Aave Governance Guardian Plasma',
       '0xE71C189C7D8862EfDa0D9E031157199D2F3B4893': 'Risk Council',
       '0x1cF16B4e76D4919bD939e12C650b8F6eb9e02916': 'BGD Injector Guardian',
-      '0xDe841Bf4B67970f5a19165443B0e9ec808E1cC85': 'Risk Oracle Guardian'
       // '': 'Finance Risk Council'
     },
     pools: {
@@ -1251,8 +1201,6 @@ export const networkConfigs: NetworkConfigs = {
           ...MiscPlasma
         },
         functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
-        agentHubBlock: 7150621,
-        hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
       },
       [Pools.TENDERLY]: {
         aclBlock: 489190,
@@ -1270,12 +1218,10 @@ export const networkConfigs: NetworkConfigs = {
           ...MiscPlasma
         },
         functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
-        agentHubBlock: 7150621,
         tenderlyBasePool: Pools.V3,
         tenderlyBlock: 10671654,
         tenderlyRpcUrl:
           'https://virtual.plasma.eu.rpc.tenderly.co/7e890d40-1ab0-4575-9d6d-092588721c24',
-        hubRiskOracleInitialSenders: ['0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9'],
       },
     },
   },

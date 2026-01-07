@@ -425,36 +425,6 @@
           }
         ]
       },
-      "RiskOracle": {
-        "address": "0x239d3Bc5fa247337287cb03f53B8bc63DBBc332D",
-        "modifiers": [
-          {
-            "modifier": "onlyOwner",
-            "addresses": [
-              {
-                "address": "0xDe841Bf4B67970f5a19165443B0e9ec808E1cC85",
-                "owners": [
-                  "0xE328bd9b85A127C5fbb71070d17a2d26d2615dEa",
-                  "0xdBf59fD74bd98Fc50F7952E916BB57F26037ddC9",
-                  "0x4DB9f12c891A64Ef80C6f8047a2D9a651d16f849",
-                  "0x50842854e40914A8e0745310B47fC22B98112B7A",
-                  "0x5Df7e094f52436040A5a37D5C9A9A80586D35823",
-                  "0x5d49dBcdd300aECc2C311cFB56593E71c445d60d",
-                  "0x753de005261e9Ff910B541A07282544Ec433d08c"
-                ],
-                "signersThreshold": 3
-              }
-            ],
-            "functions": [
-              "addAuthorizedSender",
-              "removeAuthorizedSender",
-              "addUpdateType",
-              "renounceOwnership",
-              "transferOwnership"
-            ]
-          }
-        ]
-      },
       "AaveStewardInjectorCaps": {
         "address": "0x54714FAc85b0bf627288CC3a186dE81A42f1D635",
         "modifiers": [
@@ -605,7 +575,7 @@
           "0x655252250f4A453854040A49E8280951A76f3033"
         ]
       },
-      "latestBlockNumber": 74327595
+      "latestBlockNumber": 74367311
     },
     "gsmRoles": {},
     "govV3": {
@@ -621,7 +591,7 @@
             "0xE8C5ab722d0b1B7316Cc4034f2BE91A5B1d29964"
           ]
         },
-        "latestBlockNumber": 74327603
+        "latestBlockNumber": 74367315
       },
       "contracts": {
         "GranularGuardian": {
@@ -948,7 +918,7 @@
         }
       },
       "senders": [],
-      "latestCCCBlockNumber": 74327602
+      "latestCCCBlockNumber": 74367315
     },
     "collector": {
       "contracts": {
@@ -1025,7 +995,7 @@
             "0x58AfE45eE7D7f2AE9c26827F33A6f319Feb68Df8"
           ]
         },
-        "latestBlockNumber": 74327599
+        "latestBlockNumber": 74367314
       }
     },
     "clinicSteward": {
@@ -1080,7 +1050,7 @@
             "0x3Cbded22F878aFC8d39dCD744d3Fe62086B76193"
           ]
         },
-        "latestBlockNumber": 74327600
+        "latestBlockNumber": 74367314
       }
     },
     "umbrella": {},
@@ -1157,8 +1127,7 @@
             }
           ]
         }
-      },
-      "agentHubRiskOracleInfo": {}
+      }
     }
   },
   "TENDERLY": {
@@ -1593,36 +1562,6 @@
               "updateStablePriceCaps",
               "updatePendleDiscountRates",
               "updateCaps"
-            ]
-          }
-        ]
-      },
-      "RiskOracle": {
-        "address": "0x239d3Bc5fa247337287cb03f53B8bc63DBBc332D",
-        "modifiers": [
-          {
-            "modifier": "onlyOwner",
-            "addresses": [
-              {
-                "address": "0xDe841Bf4B67970f5a19165443B0e9ec808E1cC85",
-                "owners": [
-                  "0xE328bd9b85A127C5fbb71070d17a2d26d2615dEa",
-                  "0xdBf59fD74bd98Fc50F7952E916BB57F26037ddC9",
-                  "0x4DB9f12c891A64Ef80C6f8047a2D9a651d16f849",
-                  "0x50842854e40914A8e0745310B47fC22B98112B7A",
-                  "0x5Df7e094f52436040A5a37D5C9A9A80586D35823",
-                  "0x5d49dBcdd300aECc2C311cFB56593E71c445d60d",
-                  "0x753de005261e9Ff910B541A07282544Ec433d08c"
-                ],
-                "signersThreshold": 3
-              }
-            ],
-            "functions": [
-              "addAuthorizedSender",
-              "removeAuthorizedSender",
-              "addUpdateType",
-              "renounceOwnership",
-              "transferOwnership"
             ]
           }
         ]
@@ -2330,59 +2269,6 @@
               ]
             }
           ]
-        },
-        "RiskOracle": {
-          "address": "0x239d3Bc5fa247337287cb03f53B8bc63DBBc332D",
-          "modifiers": [
-            {
-              "modifier": "onlyOwner",
-              "addresses": [
-                {
-                  "address": "0xDe841Bf4B67970f5a19165443B0e9ec808E1cC85",
-                  "owners": [
-                    "0xE328bd9b85A127C5fbb71070d17a2d26d2615dEa",
-                    "0xdBf59fD74bd98Fc50F7952E916BB57F26037ddC9",
-                    "0x4DB9f12c891A64Ef80C6f8047a2D9a651d16f849",
-                    "0x50842854e40914A8e0745310B47fC22B98112B7A",
-                    "0x5Df7e094f52436040A5a37D5C9A9A80586D35823",
-                    "0x5d49dBcdd300aECc2C311cFB56593E71c445d60d",
-                    "0x753de005261e9Ff910B541A07282544Ec433d08c"
-                  ],
-                  "signersThreshold": 3
-                }
-              ],
-              "functions": [
-                "addAuthorizedSender",
-                "removeAuthorizedSender",
-                "addUpdateType",
-                "renounceOwnership",
-                "transferOwnership"
-              ]
-            },
-            {
-              "modifier": "onlyAuthorized",
-              "addresses": [
-                {
-                  "address": "0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9",
-                  "owners": [],
-                  "signersThreshold": 0
-                }
-              ],
-              "functions": [
-                "publishRiskParameterUpdate",
-                "publishBulkRiskParameterUpdates"
-              ]
-            }
-          ]
-        }
-      },
-      "agentHubRiskOracleInfo": {
-        "0x239d3Bc5fa247337287cb03f53B8bc63DBBc332D": {
-          "authorizedSenders": [
-            "0x42939e82DF15afc586bb95f7dD69Afb6Dc24A6f9"
-          ],
-          "latestBlockNumber": 74133283,
-          "address": "0x239d3Bc5fa247337287cb03f53B8bc63DBBc332D"
         }
       }
     }

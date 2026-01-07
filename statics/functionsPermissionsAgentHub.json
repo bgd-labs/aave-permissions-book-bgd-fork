@@ -143,53 +143,6 @@
     ]
   },
   {
-    "contract": "RiskOracle",
-    "functions": [
-      {
-        "name": "addAuthorizedSender",
-        "roles": [
-          "onlyOwner"
-        ]
-      },
-      {
-        "name": "removeAuthorizedSender",
-        "roles": [
-          "onlyOwner"
-        ]
-      },
-      {
-        "name": "addUpdateType",
-        "roles": [
-          "onlyOwner"
-        ]
-      },
-      {
-        "name": "publishRiskParameterUpdate",
-        "roles": [
-          "onlyAuthorized"
-        ]
-      },
-      {
-        "name": "publishBulkRiskParameterUpdates",
-        "roles": [
-          "onlyAuthorized"
-        ]
-      },
-      {
-        "name": "renounceOwnership",
-        "roles": [
-          "onlyOwner"
-        ]
-      },
-      {
-        "name": "transferOwnership",
-        "roles": [
-          "onlyOwner"
-        ]
-      }
-    ]
-  },
-  {
     "contract": "Agent",
     "functions": [
       {
