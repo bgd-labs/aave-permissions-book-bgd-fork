@@ -178,12 +178,12 @@
                 "signersThreshold": 0
               },
               {
-                "address": "0x530034d1A739Afd261291B86A5c3b95eC30c4b44",
+                "address": "0x3999d49Bbad3A7375B0376BDF2bA4f2e3c9F5177",
                 "owners": [],
                 "signersThreshold": 0
               },
               {
-                "address": "0xe1472037C9f17Ac00bf5336272ab74e423B9254d",
+                "address": "0x4e8984D11A47Ff89CD67c7651eCaB6C00a74B4A9",
                 "owners": [],
                 "signersThreshold": 0
               }
@@ -236,12 +236,12 @@
                 "signersThreshold": 0
               },
               {
-                "address": "0x530034d1A739Afd261291B86A5c3b95eC30c4b44",
+                "address": "0x3999d49Bbad3A7375B0376BDF2bA4f2e3c9F5177",
                 "owners": [],
                 "signersThreshold": 0
               },
               {
-                "address": "0xe1472037C9f17Ac00bf5336272ab74e423B9254d",
+                "address": "0x4e8984D11A47Ff89CD67c7651eCaB6C00a74B4A9",
                 "owners": [],
                 "signersThreshold": 0
               }
@@ -629,11 +629,11 @@
         ],
         "RISK_ADMIN": [
           "0x98F756B77D6Fde14E08bb064b248ec7512F9f8ba",
-          "0x530034d1A739Afd261291B86A5c3b95eC30c4b44",
-          "0xe1472037C9f17Ac00bf5336272ab74e423B9254d"
+          "0x3999d49Bbad3A7375B0376BDF2bA4f2e3c9F5177",
+          "0x4e8984D11A47Ff89CD67c7651eCaB6C00a74B4A9"
         ]
       },
-      "latestBlockNumber": 11422243
+      "latestBlockNumber": 11449887
     },
     "gsmRoles": {},
     "govV3": {
@@ -649,7 +649,7 @@
             "0xdc62E0e65b2251Dc66404ca717FD32dcC365Be3A"
           ]
         },
-        "latestBlockNumber": 11422257
+        "latestBlockNumber": 11449903
       },
       "contracts": {
         "GranularGuardian": {
@@ -995,7 +995,7 @@
         }
       },
       "senders": [],
-      "latestCCCBlockNumber": 11422253
+      "latestCCCBlockNumber": 11449899
     },
     "collector": {
       "contracts": {
@@ -1070,7 +1070,7 @@
             "0x47aAdaAE1F05C978E6aBb7568d11B7F6e0FC4d6A"
           ]
         },
-        "latestBlockNumber": 11422248
+        "latestBlockNumber": 11449894
       }
     },
     "clinicSteward": {},
@@ -1078,6 +1078,42 @@
     "ppc": {},
     "agentHub": {
       "contracts": {
+        "EModeCategoryAgent": {
+          "address": "0x3999d49Bbad3A7375B0376BDF2bA4f2e3c9F5177",
+          "modifiers": [
+            {
+              "modifier": "onlyAgentHub",
+              "addresses": [
+                {
+                  "address": "0x5F29ACbFB6de4282bB4DD2017930cDA730eD864D",
+                  "owners": [],
+                  "signersThreshold": 0
+                }
+              ],
+              "functions": [
+                "inject"
+              ]
+            }
+          ]
+        },
+        "PendleDiscountRateAgent": {
+          "address": "0x4e8984D11A47Ff89CD67c7651eCaB6C00a74B4A9",
+          "modifiers": [
+            {
+              "modifier": "onlyAgentHub",
+              "addresses": [
+                {
+                  "address": "0x5F29ACbFB6de4282bB4DD2017930cDA730eD864D",
+                  "owners": [],
+                  "signersThreshold": 0
+                }
+              ],
+              "functions": [
+                "inject"
+              ]
+            }
+          ]
+        },
         "AgentHub": {
           "address": "0x5F29ACbFB6de4282bB4DD2017930cDA730eD864D",
           "proxyAdmin": "0xc3ba7a3b8357b32df987ddefb6baf9dcc0bd8791",
@@ -1144,6 +1180,25 @@
                 "changeProxyAdmin",
                 "upgrade",
                 "upgradeAndCall"
+              ]
+            }
+          ]
+        },
+        "RangeValidationModule": {
+          "address": "0x9240a6669CC4782FC98620212862DF5CB2e0Df10",
+          "modifiers": [
+            {
+              "modifier": "onlyHubOwnerOrAgentAdmin",
+              "addresses": [
+                {
+                  "address": "0x47aAdaAE1F05C978E6aBb7568d11B7F6e0FC4d6A",
+                  "owners": [],
+                  "signersThreshold": 0
+                }
+              ],
+              "functions": [
+                "setDefaultRangeConfig",
+                "setRangeConfigByMarket"
               ]
             }
           ]

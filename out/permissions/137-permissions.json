@@ -118,7 +118,12 @@
                 "signersThreshold": 0
               },
               {
-                "address": "0x35B09a414F6003346cA2E2553b3ea91Cd3524af3",
+                "address": "0xd99D0A740AF7B68f1CB635294C013552423666b1",
+                "owners": [],
+                "signersThreshold": 0
+              },
+              {
+                "address": "0xA512909edCf6D9aE46b0414ce0aD724968448177",
                 "owners": [],
                 "signersThreshold": 0
               }
@@ -156,7 +161,12 @@
                 "signersThreshold": 0
               },
               {
-                "address": "0x35B09a414F6003346cA2E2553b3ea91Cd3524af3",
+                "address": "0xd99D0A740AF7B68f1CB635294C013552423666b1",
+                "owners": [],
+                "signersThreshold": 0
+              },
+              {
+                "address": "0xA512909edCf6D9aE46b0414ce0aD724968448177",
                 "owners": [],
                 "signersThreshold": 0
               },
@@ -621,7 +631,8 @@
         "ASSET_LISTING_ADMIN": [],
         "RISK_ADMIN": [
           "0x1e0A5985D58B45C38598e293189aa5228054629b",
-          "0x35B09a414F6003346cA2E2553b3ea91Cd3524af3"
+          "0xd99D0A740AF7B68f1CB635294C013552423666b1",
+          "0xA512909edCf6D9aE46b0414ce0aD724968448177"
         ],
         "FLASH_BORROWER": [
           "0xb58Fd91558fa213D97Ac94C97F831c7289278084",
@@ -633,7 +644,7 @@
           "0x352423e2fA5D5c99343d371C9e3bC56C87723Cc7"
         ]
       },
-      "latestBlockNumber": 81616470
+      "latestBlockNumber": 81630293
     },
     "gsmRoles": {},
     "govV3": {
@@ -649,7 +660,7 @@
             "0xbCEB4f363f2666E2E8E430806F37e97C405c130b"
           ]
         },
-        "latestBlockNumber": 81616473
+        "latestBlockNumber": 81630295
       },
       "contracts": {
         "GranularGuardian": {
@@ -1028,7 +1039,7 @@
         "0xc8a2ADC4261c6b669CdFf69E717E77C9cFeB420d",
         "0x44c8b753229006A8047A05b90379A7e92185E97C"
       ],
-      "latestCCCBlockNumber": 81616473
+      "latestCCCBlockNumber": 81630295
     },
     "collector": {
       "contracts": {
@@ -1116,7 +1127,7 @@
             "0xF93b565c96446afdf8C3D37E6B4781D5d5EDef1C"
           ]
         },
-        "latestBlockNumber": 81616470
+        "latestBlockNumber": 81630293
       }
     },
     "clinicSteward": {
@@ -1175,13 +1186,49 @@
             "0x3Cbded22F878aFC8d39dCD744d3Fe62086B76193"
           ]
         },
-        "latestBlockNumber": 81616470
+        "latestBlockNumber": 81630295
       }
     },
     "umbrella": {},
     "ppc": {},
     "agentHub": {
       "contracts": {
+        "SupplyCapAgent": {
+          "address": "0xd99D0A740AF7B68f1CB635294C013552423666b1",
+          "modifiers": [
+            {
+              "modifier": "onlyAgentHub",
+              "addresses": [
+                {
+                  "address": "0xd44342b1aC132353d3148Ea6ed330d1Ae6F0c664",
+                  "owners": [],
+                  "signersThreshold": 0
+                }
+              ],
+              "functions": [
+                "inject"
+              ]
+            }
+          ]
+        },
+        "BorrowCapAgent": {
+          "address": "0xA512909edCf6D9aE46b0414ce0aD724968448177",
+          "modifiers": [
+            {
+              "modifier": "onlyAgentHub",
+              "addresses": [
+                {
+                  "address": "0xd44342b1aC132353d3148Ea6ed330d1Ae6F0c664",
+                  "owners": [],
+                  "signersThreshold": 0
+                }
+              ],
+              "functions": [
+                "inject"
+              ]
+            }
+          ]
+        },
         "AgentHub": {
           "address": "0xd44342b1aC132353d3148Ea6ed330d1Ae6F0c664",
           "proxyAdmin": "0x65a66830e5eaa91f4e40ba08cbfb88b6b6e80104",
@@ -1248,6 +1295,25 @@
                 "changeProxyAdmin",
                 "upgrade",
                 "upgradeAndCall"
+              ]
+            }
+          ]
+        },
+        "RangeValidationModule": {
+          "address": "0x9240a6669CC4782FC98620212862DF5CB2e0Df10",
+          "modifiers": [
+            {
+              "modifier": "onlyHubOwnerOrAgentAdmin",
+              "addresses": [
+                {
+                  "address": "0xDf7d0e6454DB638881302729F5ba99936EaAB233",
+                  "owners": [],
+                  "signersThreshold": 0
+                }
+              ],
+              "functions": [
+                "setDefaultRangeConfig",
+                "setRangeConfigByMarket"
               ]
             }
           ]
@@ -1635,7 +1701,7 @@
             "0xF93b565c96446afdf8C3D37E6B4781D5d5EDef1C"
           ]
         },
-        "latestBlockNumber": 81616473
+        "latestBlockNumber": 81630298
       }
     },
     "clinicSteward": {},
