@@ -4472,7 +4472,7 @@
           "0x52E652182b22C41d0202bB8D834982F43B12Cd21"
         ]
       },
-      "latestBlockNumber": 24232196
+      "latestBlockNumber": 24232399
     },
     "gsmRoles": {},
     "govV3": {
@@ -4597,7 +4597,7 @@
             "0xb7D402138Cb01BfE97d95181C849379d6AD14d19"
           ]
         },
-        "latestBlockNumber": 24232196
+        "latestBlockNumber": 24232399
       }
     },
     "clinicSteward": {
@@ -4657,13 +4657,121 @@
             "0x3Cbded22F878aFC8d39dCD744d3Fe62086B76193"
           ]
         },
-        "latestBlockNumber": 24232196
+        "latestBlockNumber": 24232399
       }
     },
     "umbrella": {},
     "ppc": {},
     "agentHub": {
-      "contracts": {}
+      "contracts": {
+        "RateStrategy_PrimeAgent": {
+          "address": "0x52E652182b22C41d0202bB8D834982F43B12Cd21",
+          "modifiers": [
+            {
+              "modifier": "onlyAgentHub",
+              "addresses": [
+                {
+                  "address": "0x95E3015c67EF62B866cC28ca5A9AB5017A55e336",
+                  "owners": [],
+                  "signersThreshold": 0
+                }
+              ],
+              "functions": [
+                "inject"
+              ]
+            }
+          ]
+        },
+        "AgentHub": {
+          "address": "0x95E3015c67EF62B866cC28ca5A9AB5017A55e336",
+          "proxyAdmin": "0xd26dcf055e16ed3048a17b37006082779cf0297c",
+          "modifiers": [
+            {
+              "modifier": "onlyOwner",
+              "addresses": [
+                {
+                  "address": "0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A",
+                  "owners": [],
+                  "signersThreshold": 0
+                }
+              ],
+              "functions": [
+                "registerAgent",
+                "setAgentAdmin",
+                "setMaxBatchSize",
+                "setAgentAddress",
+                "renounceOwnership",
+                "transferOwnership"
+              ]
+            },
+            {
+              "modifier": "onlyOwnerOrAgentAdmin",
+              "addresses": [
+                {
+                  "address": "0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A",
+                  "owners": [],
+                  "signersThreshold": 0
+                }
+              ],
+              "functions": [
+                "setAgentAsPermissioned",
+                "addPermissionedSender",
+                "removePermissionedSender",
+                "addAllowedMarket",
+                "removeAllowedMarket",
+                "addRestrictedMarket",
+                "removeRestrictedMarket",
+                "setExpirationPeriod",
+                "setAgentEnabled",
+                "setMinimumDelay",
+                "setAgentContext",
+                "setMarketsFromAgentEnabled",
+                "addAllowedMarket",
+                "addAllowedMarket"
+              ]
+            }
+          ]
+        },
+        "AgentHubProxyAdmin": {
+          "address": "0xd26dcf055e16ed3048a17b37006082779cf0297c",
+          "modifiers": [
+            {
+              "modifier": "onlyOwner",
+              "addresses": [
+                {
+                  "address": "0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A",
+                  "owners": [],
+                  "signersThreshold": 0
+                }
+              ],
+              "functions": [
+                "changeProxyAdmin",
+                "upgrade",
+                "upgradeAndCall"
+              ]
+            }
+          ]
+        },
+        "RangeValidationModule": {
+          "address": "0x9240a6669CC4782FC98620212862DF5CB2e0Df10",
+          "modifiers": [
+            {
+              "modifier": "onlyHubOwnerOrAgentAdmin",
+              "addresses": [
+                {
+                  "address": "0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A",
+                  "owners": [],
+                  "signersThreshold": 0
+                }
+              ],
+              "functions": [
+                "setDefaultRangeConfig",
+                "setRangeConfigByMarket"
+              ]
+            }
+          ]
+        }
+      }
     }
   },
   "ETHERFI": {
