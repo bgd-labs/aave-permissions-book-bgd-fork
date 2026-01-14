@@ -149,7 +149,6 @@ export const generateTable = (network: string, pool: string): string => {
       ...getPermissionsByNetwork(network)['V3'].clinicSteward?.contracts,
       ...getPermissionsByNetwork(network)['V3'].umbrella?.contracts,
       ...getPermissionsByNetwork(network)['V3'].ppc?.contracts,
-      ...getPermissionsByNetwork(network)['V3'].agentHub?.contracts,
     });
   } else if (
     pool === Pools.TENDERLY
