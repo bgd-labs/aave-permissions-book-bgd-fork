@@ -91,6 +91,11 @@
 ### Risk Agent Contracts 
 | contract |proxyAdmin |modifier |permission owner |functions |
 |----------|----------|----------|----------|----------|
+|  [RateStrategy_PrimeAgent](https://etherscan.io/address/0x52E652182b22C41d0202bB8D834982F43B12Cd21) |  - |  onlyAgentHub |  [0x95E3015c67EF62B866cC28ca5A9AB5017A55e336](https://etherscan.io/address/0x95E3015c67EF62B866cC28ca5A9AB5017A55e336) |  inject | |--------|--------|--------|--------|--------|
+|  [AgentHub](https://etherscan.io/address/0x95E3015c67EF62B866cC28ca5A9AB5017A55e336) |  [0xD26dcF055E16ed3048a17b37006082779CF0297c](https://etherscan.io/address/0xD26dcF055E16ed3048a17b37006082779CF0297c) |  onlyOwner |  [Executor_lvl1](https://etherscan.io/address/0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A) |  registerAgent, setAgentAdmin, setMaxBatchSize, setAgentAddress, renounceOwnership, transferOwnership | |--------|--------|--------|--------|--------|
+|  [AgentHub](https://etherscan.io/address/0x95E3015c67EF62B866cC28ca5A9AB5017A55e336) |  [0xD26dcF055E16ed3048a17b37006082779CF0297c](https://etherscan.io/address/0xD26dcF055E16ed3048a17b37006082779CF0297c) |  onlyOwnerOrAgentAdmin |  [Executor_lvl1](https://etherscan.io/address/0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A) |  setAgentAsPermissioned, addPermissionedSender, removePermissionedSender, addAllowedMarket, removeAllowedMarket, addRestrictedMarket, removeRestrictedMarket, setExpirationPeriod, setAgentEnabled, setMinimumDelay, setAgentContext, setMarketsFromAgentEnabled, addAllowedMarket, addAllowedMarket | |--------|--------|--------|--------|--------|
+|  [AgentHubProxyAdmin](https://etherscan.io/address/0xd26dcf055e16ed3048a17b37006082779cf0297c) |  - |  onlyOwner |  [Executor_lvl1](https://etherscan.io/address/0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A) |  changeProxyAdmin, upgrade, upgradeAndCall | |--------|--------|--------|--------|--------|
+|  [RangeValidationModule](https://etherscan.io/address/0x9240a6669CC4782FC98620212862DF5CB2e0Df10) |  - |  onlyHubOwnerOrAgentAdmin |  [Executor_lvl1](https://etherscan.io/address/0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A) |  setDefaultRangeConfig, setRangeConfigByMarket | |--------|--------|--------|--------|--------|
 
 ### Guardians 
 | Guardian |Threshold |Address |Owners |

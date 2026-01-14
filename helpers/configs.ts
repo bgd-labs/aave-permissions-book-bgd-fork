@@ -244,7 +244,6 @@ export const networkConfigs: NetworkConfigs = {
           '0x6Abb61beb5848B476d026C4934E8a6415e2E75a8': 'HyperLaneAdapter',
         },
         clinicStewardBlock: 21967120,
-
       },
       [Pools.LIDO]: {
         collectorBlock: 21765718,
@@ -254,12 +253,6 @@ export const networkConfigs: NetworkConfigs = {
           ...AaveV3EthereumLido,
           ...MiscEthereum,
           COLLECTOR: AaveV3Ethereum.COLLECTOR,
-          // @ts-ignore
-          AGENT_HUB: AaveV3Ethereum.AGENT_HUB,
-          // @ts-ignore
-          AGENT_HUB_AUTOMATION: AaveV3Ethereum.AGENT_HUB_AUTOMATION,
-          // @ts-ignore
-          RANGE_VALIDATION_MODULE: AaveV3Ethereum.RANGE_VALIDATION_MODULE
         },
         functionsPermissionsAgentHubJson: './statics/functionsPermissionsAgentHub.json',
         clinicStewardBlock: 21967120,
