@@ -51,6 +51,7 @@ These documents contain tables with the following information:
 |  ZKSYNC |  V3 |  [Permissions](./out/ZKSYNC-V3.md#contracts) | |--------|--------|--------|
 |  METIS |  V3 |  [Permissions](./out/METIS-V3.md#contracts) | |--------|--------|--------|
 |  SONEIUM |  V3 |  [Permissions](./out/SONEIUM-V3.md#contracts) | |--------|--------|--------|
+|  MANTLE |  V3 |  [Permissions](./out/MANTLE-V3.md#contracts) | |--------|--------|--------|
 |  BASE |  V3 |  [Permissions](./out/BASE-V3.md#contracts) | |--------|--------|--------|
 |  PLASMA |  V3 |  [Permissions](./out/PLASMA-V3.md#contracts) | |--------|--------|--------|
 |  ARBITRUM |  V3 |  [Permissions](./out/ARBITRUM-V3.md#contracts) | |--------|--------|--------|

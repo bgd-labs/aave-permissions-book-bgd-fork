@@ -685,7 +685,7 @@ export const generateTable = (network: string, pool: string): string => {
 
   if (poolPermitsByContract.agentHub &&
     Object.keys(poolPermitsByContract.agentHub).length > 0 &&
-    poolPermitsByContract.agentHub.contracts) {
+    poolPermitsByContract.agentHub.contracts && Object.keys(poolPermitsByContract.agentHub.contracts).length > 0) {
 
     let agentHubTable = `### Risk Agent Contracts \n`;
     const agentHubHeaderTitles = [

@@ -1,0 +1,120 @@
+# MANTLE 
+## V3 
+### Contracts upgradeability
+| contract |upgradeable by |
+|----------|----------|
+|  [PoolAddressesProvider](https://explorer.mantle.xyz//address/0xba50Cd2A20f6DA35D788639E581bca8d0B5d4D5f) |  not upgradeable | |--------|--------|
+|  [Pool](https://explorer.mantle.xyz//address/0x458F293454fE0d67EC0655f3672301301DD51422) |  Governance | |--------|--------|
+|  [PoolConfigurator](https://explorer.mantle.xyz//address/0x719755fC1ACf2f9079B0Cbc56e23712c09Ab8626) |  Governance | |--------|--------|
+|  [AaveOracle](https://explorer.mantle.xyz//address/0x47a063CfDa980532267970d478EC340C0F80E8df) |  not upgradeable | |--------|--------|
+|  [RewardsController](https://explorer.mantle.xyz//address/0x682482a584eE20fefc01f4575c45C5d84de6F619) |  Governance | |--------|--------|
+|  [WrappedTokenGatewayV3](https://explorer.mantle.xyz//address/0x9C6cCAC66b1c9AbA4855e2dD284b9e16e41E06eA) |  not upgradeable | |--------|--------|
+|  [EmissionManager](https://explorer.mantle.xyz//address/0x67eD9aC2b65F2ACa57ef2B6BA709251BC2B5036d) |  not upgradeable | |--------|--------|
+|  [PoolAddressesProviderRegistry](https://explorer.mantle.xyz//address/0x54114591963CF60EF3aA63bEfD6eC263D98145a4) |  not upgradeable | |--------|--------|
+|  [ACLManager](https://explorer.mantle.xyz//address/0x810D46F9a9027E28F9B01F75E2bdde839dA61115) |  not upgradeable | |--------|--------|
+|  [Manual AGRS](https://explorer.mantle.xyz//address/0xa35358159F42E11C5689C68f181a71d51BB22de3) |  not upgradeable | |--------|--------|
+|  [Collector](https://explorer.mantle.xyz//address/0x0cd2670339Cd520BF9428Ad881bE60A698aB9B32) |  Governance | |--------|--------|
+|  [CollectorProxyAdmin](https://explorer.mantle.xyz//address/0xfd354205874d8ff57a724fc7c7d84b6aed502800) |  not upgradeable | |--------|--------|
+|  Aave a/v/s tokens |  Governance | |--------|--------|
+|  [GranularGuardian](https://explorer.mantle.xyz//address/0xb26670d2800DBB9cfCe2f2660FfDcA48C799c86d) |  not upgradeable | |--------|--------|
+|  [PayloadsController](https://explorer.mantle.xyz//address/0xF089f77173A3009A98c45f49D547BF714A7B1e01) |  Governance | |--------|--------|
+|  [PayloadsControllerProxyAdmin](https://explorer.mantle.xyz//address/0x18a2374354ebbae707e613d58bc9035400477bdf) |  not upgradeable | |--------|--------|
+|  [Executor_lvl1](https://explorer.mantle.xyz//address/0x70884634D0098782592111A2A6B8d223be31CB7b) |  not upgradeable | |--------|--------|
+|  [Mantle native adapter](https://explorer.mantle.xyz//address/0x4E740ac02b866b429738a9e225e92A15F4452521) |  not upgradeable | |--------|--------|
+|  [CrossChainController](https://explorer.mantle.xyz//address/0x1283C5015B1Fb5616FA3aCb0C18e6879a02869cB) |  Governance | |--------|--------|
+|  [CrossChainControllerProxyAdmin](https://explorer.mantle.xyz//address/0x80568e042ad141ee72667db9f2549e5aa8433a94) |  not upgradeable | |--------|--------|
+
+### Actions type
+| type |can be executed by |
+|----------|----------|
+|  updateReserveBorrowSettings |  Governance | |--------|--------|
+|  configureProtocolFees |  Governance | |--------|--------|
+|  updateReserveCaps |  Governance | |--------|--------|
+|  updateReserveSettings |  Governance | |--------|--------|
+|  configureCollateral |  Governance | |--------|--------|
+|  upgradeAaveTokens (a/v/s) |  Governance | |--------|--------|
+|  upgradeAaveOracles |  Governance | |--------|--------|
+|  reserveUpgradeability |  Governance | |--------|--------|
+|  pausePool |  Governance,Multi-sig | |--------|--------|
+|  pauseAndFreezeReserve |  Governance,Multi-sig | |--------|--------|
+|  reserveListing |  Governance | |--------|--------|
+|  adminsConfiguration |  Governance | |--------|--------|
+|  protocolUpgradeablity |  Governance | |--------|--------|
+|  adiConfigurations |  Governance | |--------|--------|
+|  retryAndInvalidateMessages |  Multi-sig,Governance | |--------|--------|
+|  updateRiskParameters |  Steward | |--------|--------|
+
+### Contracts
+| contract |proxyAdmin |modifier |permission owner |functions |
+|----------|----------|----------|----------|----------|
+|  [PoolAddressesProvider](https://explorer.mantle.xyz//address/0xba50Cd2A20f6DA35D788639E581bca8d0B5d4D5f) |  - |  onlyOwner |  [Executor_lvl1](https://explorer.mantle.xyz//address/0x70884634D0098782592111A2A6B8d223be31CB7b) |  setMarketId, setAddress, setAddressAsProxy, setPoolImpl, setPoolConfiguratorImpl, setPriceOracle, setACLManager, setACLAdmin, setPriceOracleSentinel, setPoolDataProvider | |--------|--------|--------|--------|--------|
+|  [Pool](https://explorer.mantle.xyz//address/0x458F293454fE0d67EC0655f3672301301DD51422) |  [PoolAddressesProvider](https://explorer.mantle.xyz//address/0xba50Cd2A20f6DA35D788639E581bca8d0B5d4D5f) |  onlyPoolConfigurator |  [PoolConfigurator](https://explorer.mantle.xyz//address/0x719755fC1ACf2f9079B0Cbc56e23712c09Ab8626) |  initReserve, dropReserve, setReserveInterestRateStrategyAddress, setConfiguration, updateBridgeProtocolFee, updateFlashloanPremiums, configureEModeCategory, resetIsolationModeTotalDebt | |--------|--------|--------|--------|--------|
+|  [Pool](https://explorer.mantle.xyz//address/0x458F293454fE0d67EC0655f3672301301DD51422) |  [PoolAddressesProvider](https://explorer.mantle.xyz//address/0xba50Cd2A20f6DA35D788639E581bca8d0B5d4D5f) |  onlyPoolAdmin |  [Executor_lvl1](https://explorer.mantle.xyz//address/0x70884634D0098782592111A2A6B8d223be31CB7b) |  rescueTokens | |--------|--------|--------|--------|--------|
+|  [PoolConfigurator](https://explorer.mantle.xyz//address/0x719755fC1ACf2f9079B0Cbc56e23712c09Ab8626) |  [PoolAddressesProvider](https://explorer.mantle.xyz//address/0xba50Cd2A20f6DA35D788639E581bca8d0B5d4D5f) |  onlyPoolAdmin |  [Executor_lvl1](https://explorer.mantle.xyz//address/0x70884634D0098782592111A2A6B8d223be31CB7b) |  dropReserve, dropReserve, updateAToken, updateStableDebtToken, updateVariableDebtToken, setReserveActive, updateBridgeProtocolFee, updateFlashloanPremiumTotal, updateFlashloanPremiumToProtocol | |--------|--------|--------|--------|--------|
+|  [PoolConfigurator](https://explorer.mantle.xyz//address/0x719755fC1ACf2f9079B0Cbc56e23712c09Ab8626) |  [PoolAddressesProvider](https://explorer.mantle.xyz//address/0xba50Cd2A20f6DA35D788639E581bca8d0B5d4D5f) |  onlyAssetListingOrPoolAdmins |  [Executor_lvl1](https://explorer.mantle.xyz//address/0x70884634D0098782592111A2A6B8d223be31CB7b) |  initReserves | |--------|--------|--------|--------|--------|
+|  [PoolConfigurator](https://explorer.mantle.xyz//address/0x719755fC1ACf2f9079B0Cbc56e23712c09Ab8626) |  [PoolAddressesProvider](https://explorer.mantle.xyz//address/0xba50Cd2A20f6DA35D788639E581bca8d0B5d4D5f) |  onlyRiskOrPoolAdmins |  [Executor_lvl1](https://explorer.mantle.xyz//address/0x70884634D0098782592111A2A6B8d223be31CB7b) |  setReserveBorrowing, setReserveBorrowing, configureReserveAsCollateral, setReserveStableRateBorrowing, setBorrowableInIsolation, setReserveFactor, setDebtCeiling, setSiloedBorrowing, setBorrowCap, setSupplyCap, setLiquidationProtocolFee, setEModeCategory, setAssetEModeCategory, setUnbackedMintCap, setReserveInterestRateStrategyAddress, setReserveFlashLoaning | |--------|--------|--------|--------|--------|
+|  [PoolConfigurator](https://explorer.mantle.xyz//address/0x719755fC1ACf2f9079B0Cbc56e23712c09Ab8626) |  [PoolAddressesProvider](https://explorer.mantle.xyz//address/0xba50Cd2A20f6DA35D788639E581bca8d0B5d4D5f) |  onlyRiskOrPoolOrEmergencyAdmins |  [Executor_lvl1](https://explorer.mantle.xyz//address/0x70884634D0098782592111A2A6B8d223be31CB7b), [Aave Protocol Guardian Mantle](https://explorer.mantle.xyz//address/0x172867391d690Eb53896623DaD22208624230686) |  setReserveFreeze | |--------|--------|--------|--------|--------|
+|  [PoolConfigurator](https://explorer.mantle.xyz//address/0x719755fC1ACf2f9079B0Cbc56e23712c09Ab8626) |  [PoolAddressesProvider](https://explorer.mantle.xyz//address/0xba50Cd2A20f6DA35D788639E581bca8d0B5d4D5f) |  onlyEmergencyOrPoolAdmin |  [Executor_lvl1](https://explorer.mantle.xyz//address/0x70884634D0098782592111A2A6B8d223be31CB7b), [Aave Protocol Guardian Mantle](https://explorer.mantle.xyz//address/0x172867391d690Eb53896623DaD22208624230686) |  setPoolPause, setReservePause | |--------|--------|--------|--------|--------|
+|  [AaveOracle](https://explorer.mantle.xyz//address/0x47a063CfDa980532267970d478EC340C0F80E8df) |  - |  onlyAssetListingOrPoolAdmins |  [Executor_lvl1](https://explorer.mantle.xyz//address/0x70884634D0098782592111A2A6B8d223be31CB7b) |  setAssetSources, setFallbackOracle | |--------|--------|--------|--------|--------|
+|  [RewardsController](https://explorer.mantle.xyz//address/0x682482a584eE20fefc01f4575c45C5d84de6F619) |  [PoolAddressesProvider](https://explorer.mantle.xyz//address/0xba50Cd2A20f6DA35D788639E581bca8d0B5d4D5f) |  onlyEmissionManager |  [EmissionManager](https://explorer.mantle.xyz//address/0x67eD9aC2b65F2ACa57ef2B6BA709251BC2B5036d) |  configureAssets, setTransferStrategy, setRewardOracle, setClaimer | |--------|--------|--------|--------|--------|
+|  [WrappedTokenGatewayV3](https://explorer.mantle.xyz//address/0x9C6cCAC66b1c9AbA4855e2dD284b9e16e41E06eA) |  - |  onlyOwner |  [Executor_lvl1](https://explorer.mantle.xyz//address/0x70884634D0098782592111A2A6B8d223be31CB7b) |  emergencyTokenTransfer, emergencyEtherTransfer | |--------|--------|--------|--------|--------|
+|  [EmissionManager](https://explorer.mantle.xyz//address/0x67eD9aC2b65F2ACa57ef2B6BA709251BC2B5036d) |  - |  onlyOwner |  [Executor_lvl1](https://explorer.mantle.xyz//address/0x70884634D0098782592111A2A6B8d223be31CB7b) |  setClaimer, setEmissionAdmin, setRewardsController | |--------|--------|--------|--------|--------|
+|  [PoolAddressesProviderRegistry](https://explorer.mantle.xyz//address/0x54114591963CF60EF3aA63bEfD6eC263D98145a4) |  - |  onlyOwner |  [Executor_lvl1](https://explorer.mantle.xyz//address/0x70884634D0098782592111A2A6B8d223be31CB7b) |  registerAddressesProvider, unregisterAddressesProvider | |--------|--------|--------|--------|--------|
+|  [ACLManager](https://explorer.mantle.xyz//address/0x810D46F9a9027E28F9B01F75E2bdde839dA61115) |  - |  onlyRole |  [Executor_lvl1](https://explorer.mantle.xyz//address/0x70884634D0098782592111A2A6B8d223be31CB7b) |  setRoleAdmin | |--------|--------|--------|--------|--------|
+|  [Manual AGRS](https://explorer.mantle.xyz//address/0xa35358159F42E11C5689C68f181a71d51BB22de3) |  - |  onlyOwner |  [Executor_lvl1](https://explorer.mantle.xyz//address/0x70884634D0098782592111A2A6B8d223be31CB7b) |  setRiskConfig, setAddressRestricted | |--------|--------|--------|--------|--------|
+|  [Manual AGRS](https://explorer.mantle.xyz//address/0xa35358159F42E11C5689C68f181a71d51BB22de3) |  - |  onlyRiskCouncil |  [Risk Council](https://explorer.mantle.xyz//address/0xfF0ACe5060bd25f6900eb4bD91a868213C5346B5) |  updateCaps, updateRates, updateCollateralSide, updateLstPriceCaps, updateStablePriceCaps | |--------|--------|--------|--------|--------|
+|  [Collector](https://explorer.mantle.xyz//address/0x0cd2670339Cd520BF9428Ad881bE60A698aB9B32) |  [CollectorProxyAdmin](https://explorer.mantle.xyz//address/0xFd354205874D8FF57A724fc7C7d84b6aED502800) |  onlyFundsAdmin |  [Executor_lvl1](https://explorer.mantle.xyz//address/0x70884634D0098782592111A2A6B8d223be31CB7b) |  approve, transfer, setFundsAdmin, createStream | |--------|--------|--------|--------|--------|
+|  [Collector](https://explorer.mantle.xyz//address/0x0cd2670339Cd520BF9428Ad881bE60A698aB9B32) |  [CollectorProxyAdmin](https://explorer.mantle.xyz//address/0xFd354205874D8FF57A724fc7C7d84b6aED502800) |  onlyAdminOrRecipient |  [CollectorProxyAdmin](https://explorer.mantle.xyz//address/0xFd354205874D8FF57A724fc7C7d84b6aED502800), [Executor_lvl1](https://explorer.mantle.xyz//address/0x70884634D0098782592111A2A6B8d223be31CB7b) |  withdrawFromStream, cancelStream | |--------|--------|--------|--------|--------|
+|  [CollectorProxyAdmin](https://explorer.mantle.xyz//address/0xfd354205874d8ff57a724fc7c7d84b6aed502800) |  - |  onlyOwner |  [Executor_lvl1](https://explorer.mantle.xyz//address/0x70884634D0098782592111A2A6B8d223be31CB7b) |  changeProxyAdmin, upgrade, upgradeAndCall | |--------|--------|--------|--------|--------|
+
+### Governance V3 Contracts 
+| contract |proxyAdmin |modifier |permission owner |functions |
+|----------|----------|----------|----------|----------|
+|  [GranularGuardian](https://explorer.mantle.xyz//address/0xb26670d2800DBB9cfCe2f2660FfDcA48C799c86d) |  - |  onlyRetryGuardian |  [BGD](https://explorer.mantle.xyz//address/0x0686f59Cc2aEc1ccf891472Dc6C89bB747F6a4A7) |  retryEnvelope, retryTransaction | |--------|--------|--------|--------|--------|
+|  [GranularGuardian](https://explorer.mantle.xyz//address/0xb26670d2800DBB9cfCe2f2660FfDcA48C799c86d) |  - |  onlyEmergencyGuardian |  [Aave Governance Guardian Mantle](https://explorer.mantle.xyz//address/0x14816fC7f443A9C834d30eeA64daD20C4f56fBCD) |  solveEmergency | |--------|--------|--------|--------|--------|
+|  [GranularGuardian](https://explorer.mantle.xyz//address/0xb26670d2800DBB9cfCe2f2660FfDcA48C799c86d) |  - |  onlyDefaultAdmin |  [Executor_lvl1](https://explorer.mantle.xyz//address/0x70884634D0098782592111A2A6B8d223be31CB7b) |  updateGuardian | |--------|--------|--------|--------|--------|
+|  [PayloadsController](https://explorer.mantle.xyz//address/0xF089f77173A3009A98c45f49D547BF714A7B1e01) |  [PayloadsControllerProxyAdmin](https://explorer.mantle.xyz//address/0x18a2374354EBbaE707E613D58bC9035400477bDf) |  onlyOwner |  [Executor_lvl1](https://explorer.mantle.xyz//address/0x70884634D0098782592111A2A6B8d223be31CB7b) |  updateExecutors | |--------|--------|--------|--------|--------|
+|  [PayloadsController](https://explorer.mantle.xyz//address/0xF089f77173A3009A98c45f49D547BF714A7B1e01) |  [PayloadsControllerProxyAdmin](https://explorer.mantle.xyz//address/0x18a2374354EBbaE707E613D58bC9035400477bDf) |  onlyGuardian |  [Aave Governance Guardian Mantle](https://explorer.mantle.xyz//address/0x14816fC7f443A9C834d30eeA64daD20C4f56fBCD) |  cancelPayload | |--------|--------|--------|--------|--------|
+|  [PayloadsController](https://explorer.mantle.xyz//address/0xF089f77173A3009A98c45f49D547BF714A7B1e01) |  [PayloadsControllerProxyAdmin](https://explorer.mantle.xyz//address/0x18a2374354EBbaE707E613D58bC9035400477bDf) |  onlyOwnerOrGuardian |  [Aave Governance Guardian Mantle](https://explorer.mantle.xyz//address/0x14816fC7f443A9C834d30eeA64daD20C4f56fBCD), [Executor_lvl1](https://explorer.mantle.xyz//address/0x70884634D0098782592111A2A6B8d223be31CB7b) |  updateGuardian | |--------|--------|--------|--------|--------|
+|  [PayloadsController](https://explorer.mantle.xyz//address/0xF089f77173A3009A98c45f49D547BF714A7B1e01) |  [PayloadsControllerProxyAdmin](https://explorer.mantle.xyz//address/0x18a2374354EBbaE707E613D58bC9035400477bDf) |  onlyRescueGuardian |  [Executor_lvl1](https://explorer.mantle.xyz//address/0x70884634D0098782592111A2A6B8d223be31CB7b) |  emergencyTokenTransfer, emergencyEtherTransfer | |--------|--------|--------|--------|--------|
+|  [PayloadsControllerProxyAdmin](https://explorer.mantle.xyz//address/0x18a2374354ebbae707e613d58bc9035400477bdf) |  - |  onlyOwner |  [Executor_lvl1](https://explorer.mantle.xyz//address/0x70884634D0098782592111A2A6B8d223be31CB7b) |  changeProxyAdmin, upgrade, upgradeAndCall | |--------|--------|--------|--------|--------|
+|  [Executor_lvl1](https://explorer.mantle.xyz//address/0x70884634D0098782592111A2A6B8d223be31CB7b) |  - |  onlyOwner |  [PayloadsController](https://explorer.mantle.xyz//address/0xF089f77173A3009A98c45f49D547BF714A7B1e01) |  executeTransaction | |--------|--------|--------|--------|--------|
+|  [Mantle native adapter](https://explorer.mantle.xyz//address/0x4E740ac02b866b429738a9e225e92A15F4452521) |  - |  trustedRemote |  [CrossChainController(Eth)](https://explorer.mantle.xyz//address/0xEd42a7D8559a463722Ca4beD50E0Cc05a386b0e1) |  receiveMessage | |--------|--------|--------|--------|--------|
+|  [CrossChainController](https://explorer.mantle.xyz//address/0x1283C5015B1Fb5616FA3aCb0C18e6879a02869cB) |  [CrossChainControllerProxyAdmin](https://explorer.mantle.xyz//address/0x80568e042AD141EE72667db9F2549e5aA8433A94) |  onlyOwner |  [Executor_lvl1](https://explorer.mantle.xyz//address/0x70884634D0098782592111A2A6B8d223be31CB7b) |  approveSenders, removeSenders, enableBridgeAdapters, disableBridgeAdapters, updateMessagesValidityTimestamp, allowReceiverBridgeAdapters, disallowReceiverBridgeAdapters | |--------|--------|--------|--------|--------|
+|  [CrossChainController](https://explorer.mantle.xyz//address/0x1283C5015B1Fb5616FA3aCb0C18e6879a02869cB) |  [CrossChainControllerProxyAdmin](https://explorer.mantle.xyz//address/0x80568e042AD141EE72667db9F2549e5aA8433A94) |  onlyOwnerOrGuardian |  [Aave Granular Guardian Mantle](https://explorer.mantle.xyz//address/0xb26670d2800DBB9cfCe2f2660FfDcA48C799c86d), [Executor_lvl1](https://explorer.mantle.xyz//address/0x70884634D0098782592111A2A6B8d223be31CB7b) |  retryEnvelope, retryTransaction, updateGuardian | |--------|--------|--------|--------|--------|
+|  [CrossChainController](https://explorer.mantle.xyz//address/0x1283C5015B1Fb5616FA3aCb0C18e6879a02869cB) |  [CrossChainControllerProxyAdmin](https://explorer.mantle.xyz//address/0x80568e042AD141EE72667db9F2549e5aA8433A94) |  onlyRescueGuardian |  [Executor_lvl1](https://explorer.mantle.xyz//address/0x70884634D0098782592111A2A6B8d223be31CB7b) |  emergencyTokenTransfer, emergencyEtherTransfer | |--------|--------|--------|--------|--------|
+|  [CrossChainController](https://explorer.mantle.xyz//address/0x1283C5015B1Fb5616FA3aCb0C18e6879a02869cB) |  [CrossChainControllerProxyAdmin](https://explorer.mantle.xyz//address/0x80568e042AD141EE72667db9F2549e5aA8433A94) |  onlyApprovedSenders |   |  forwardMessage | |--------|--------|--------|--------|--------|
+|  [CrossChainController](https://explorer.mantle.xyz//address/0x1283C5015B1Fb5616FA3aCb0C18e6879a02869cB) |  [CrossChainControllerProxyAdmin](https://explorer.mantle.xyz//address/0x80568e042AD141EE72667db9F2549e5aA8433A94) |  onlyApprovedBridges |  [Mantle native adapter](https://explorer.mantle.xyz//address/0x4E740ac02b866b429738a9e225e92A15F4452521) |  receiveCrossChainMessage | |--------|--------|--------|--------|--------|
+|  [CrossChainControllerProxyAdmin](https://explorer.mantle.xyz//address/0x80568e042ad141ee72667db9f2549e5aa8433a94) |  - |  onlyOwner |  [Executor_lvl1](https://explorer.mantle.xyz//address/0x70884634D0098782592111A2A6B8d223be31CB7b) |  changeProxyAdmin, upgrade, upgradeAndCall | |--------|--------|--------|--------|--------|
+
+### Guardians 
+| Guardian |Threshold |Address |Owners |
+|----------|----------|----------|----------|
+|  [Aave Protocol Guardian Mantle](https://explorer.mantle.xyz//address/0x172867391d690Eb53896623DaD22208624230686) |  5/9 |  0x172867391d690Eb53896623DaD22208624230686 |  [0x5d49dBcdd300aECc2C311cFB56593E71c445d60d](https://explorer.mantle.xyz//address/0x5d49dBcdd300aECc2C311cFB56593E71c445d60d), [0xbA037E4746ff58c55dc8F27a328C428F258DDACb](https://explorer.mantle.xyz//address/0xbA037E4746ff58c55dc8F27a328C428F258DDACb), [0x818C277dBE886b934e60aa047250A73529E26A99](https://explorer.mantle.xyz//address/0x818C277dBE886b934e60aa047250A73529E26A99), [0x4f96743057482a2E10253AFDacDA3fd9CF2C1DC9](https://explorer.mantle.xyz//address/0x4f96743057482a2E10253AFDacDA3fd9CF2C1DC9), [0xb647055A9915bF9c8021a684E175A353525b9890](https://explorer.mantle.xyz//address/0xb647055A9915bF9c8021a684E175A353525b9890), [0x57ab7ee15cE5ECacB1aB84EE42D5A9d0d8112922](https://explorer.mantle.xyz//address/0x57ab7ee15cE5ECacB1aB84EE42D5A9d0d8112922), [0xC5bE5c0134857B4b96F45AA6f6B77DB96Ac1487e](https://explorer.mantle.xyz//address/0xC5bE5c0134857B4b96F45AA6f6B77DB96Ac1487e), [0xd4af2E86a27F8F77B0556E081F97B215C9cA8f2E](https://explorer.mantle.xyz//address/0xd4af2E86a27F8F77B0556E081F97B215C9cA8f2E), [0xf71fc92e2949ccF6A5Fd369a0b402ba80Bc61E02](https://explorer.mantle.xyz//address/0xf71fc92e2949ccF6A5Fd369a0b402ba80Bc61E02) | |--------|--------|--------|--------|
+|  [Risk Council](https://explorer.mantle.xyz//address/0xfF0ACe5060bd25f6900eb4bD91a868213C5346B5) |  2/2 |  0xfF0ACe5060bd25f6900eb4bD91a868213C5346B5 |  [0xc2cf0387f2a83A7F5C6675F4CDe7F367ea1B989a](https://explorer.mantle.xyz//address/0xc2cf0387f2a83A7F5C6675F4CDe7F367ea1B989a), [0x5d49dBcdd300aECc2C311cFB56593E71c445d60d](https://explorer.mantle.xyz//address/0x5d49dBcdd300aECc2C311cFB56593E71c445d60d) | |--------|--------|--------|--------|
+|  [BGD](https://explorer.mantle.xyz//address/0x0686f59Cc2aEc1ccf891472Dc6C89bB747F6a4A7) |  2/3 |  0x0686f59Cc2aEc1ccf891472Dc6C89bB747F6a4A7 |  [0x0650302887619fa7727D8BD480Cda11A638B219B](https://explorer.mantle.xyz//address/0x0650302887619fa7727D8BD480Cda11A638B219B), [0xf71fc92e2949ccF6A5Fd369a0b402ba80Bc61E02](https://explorer.mantle.xyz//address/0xf71fc92e2949ccF6A5Fd369a0b402ba80Bc61E02), [0x5811d9FF80ff4B73A8F9bA42A6082FaB82E89Ea7](https://explorer.mantle.xyz//address/0x5811d9FF80ff4B73A8F9bA42A6082FaB82E89Ea7) | |--------|--------|--------|--------|
+|  [Aave Governance Guardian Mantle](https://explorer.mantle.xyz//address/0x14816fC7f443A9C834d30eeA64daD20C4f56fBCD) |  5/9 |  0x14816fC7f443A9C834d30eeA64daD20C4f56fBCD |  [0xDA5Ae43e179987a66B9831F92223567e1F38BE7D](https://explorer.mantle.xyz//address/0xDA5Ae43e179987a66B9831F92223567e1F38BE7D), [0x1e3804357eD445251FfECbb6e40107bf03888885](https://explorer.mantle.xyz//address/0x1e3804357eD445251FfECbb6e40107bf03888885), [0x4f96743057482a2E10253AFDacDA3fd9CF2C1DC9](https://explorer.mantle.xyz//address/0x4f96743057482a2E10253AFDacDA3fd9CF2C1DC9), [0xebED04E9137AfeBFF6a1B97aC0adf61a544eFE29](https://explorer.mantle.xyz//address/0xebED04E9137AfeBFF6a1B97aC0adf61a544eFE29), [0xbd4DCfA978c6D0d342cE36809AfFFa49d4B7f1F7](https://explorer.mantle.xyz//address/0xbd4DCfA978c6D0d342cE36809AfFFa49d4B7f1F7), [0xA3103D0ED00d24795Faa2d641ACf6A320EeD7396](https://explorer.mantle.xyz//address/0xA3103D0ED00d24795Faa2d641ACf6A320EeD7396), [0x936CD9654271083cCF93A975919Da0aB3Bc99EF3](https://explorer.mantle.xyz//address/0x936CD9654271083cCF93A975919Da0aB3Bc99EF3), [0x0D2394C027602Dc4c3832Ffd849b5df45DBac0E9](https://explorer.mantle.xyz//address/0x0D2394C027602Dc4c3832Ffd849b5df45DBac0E9), [0x4C30E33758216aD0d676419c21CB8D014C68099f](https://explorer.mantle.xyz//address/0x4C30E33758216aD0d676419c21CB8D014C68099f) | |--------|--------|--------|--------|
+
+### Admins 
+| Role |Contract |
+|----------|----------|
+|  DEFAULT_ADMIN |  [Executor_lvl1](https://explorer.mantle.xyz//address/0x70884634D0098782592111A2A6B8d223be31CB7b) | |--------|--------|
+|  POOL_ADMIN |  [Executor_lvl1](https://explorer.mantle.xyz//address/0x70884634D0098782592111A2A6B8d223be31CB7b) | |--------|--------|
+|  EMERGENCY_ADMIN |  [Aave Protocol Guardian Mantle](https://explorer.mantle.xyz//address/0x172867391d690Eb53896623DaD22208624230686) | |--------|--------|
+|  ASSET_LISTING_ADMIN |   | |--------|--------|
+|  FLASH_BORROWER |   | |--------|--------|
+|  RISK_ADMIN |   | |--------|--------|
+
+### Granular Guardian Admins 
+| Role |Contract |
+|----------|----------|
+|  DEFAULT_ADMIN |  [Executor_lvl1](https://explorer.mantle.xyz//address/0x70884634D0098782592111A2A6B8d223be31CB7b) | |--------|--------|
+|  SOLVE_EMERGENCY_ROLE |  [Aave Governance Guardian Mantle](https://explorer.mantle.xyz//address/0x14816fC7f443A9C834d30eeA64daD20C4f56fBCD) | |--------|--------|
+|  RETRY_ROLE |  [BGD](https://explorer.mantle.xyz//address/0x0686f59Cc2aEc1ccf891472Dc6C89bB747F6a4A7) | |--------|--------|
+
+### Collector Admins 
+| Role |Contract |
+|----------|----------|
+|  DEFAULT_ADMIN |  [Executor_lvl1](https://explorer.mantle.xyz//address/0x70884634D0098782592111A2A6B8d223be31CB7b) | |--------|--------|
+|  FUNDS_ADMIN_ROLE |  [Executor_lvl1](https://explorer.mantle.xyz//address/0x70884634D0098782592111A2A6B8d223be31CB7b) | |--------|--------|
+
