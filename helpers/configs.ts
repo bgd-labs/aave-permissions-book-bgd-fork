@@ -67,6 +67,9 @@ import {
   GovernanceV3Plasma,
   GovernanceV3Bob,
   MiscBob,
+  GovernanceV3Mantle,
+  MiscMantle,
+  AaveV3Mantle,
 } from '@bgd-labs/aave-address-book';
 import { NetworkConfigs } from './types.js';
 import { ChainId } from '@bgd-labs/toolbox';
@@ -1249,4 +1252,39 @@ export const networkConfigs: NetworkConfigs = {
       },
     },
   },
+  [ChainId.mantle]: {
+    name: 'Mantle',
+    rpcUrl: process.env.RPC_MANTLE,
+    explorer: 'https://explorer.mantle.xyz/',
+    addressesNames: {
+      '0x172867391d690Eb53896623DaD22208624230686':
+        'Aave Protocol Guardian Mantle',
+      '0x0686f59Cc2aEc1ccf891472Dc6C89bB747F6a4A7': 'BGD',
+      '0xEAF6183bAb3eFD3bF856Ac5C058431C8592394d6': 'Deployer',
+      '0xb26670d2800DBB9cfCe2f2660FfDcA48C799c86d':
+        'Aave Granular Guardian Mantle',
+      '0x14816fC7f443A9C834d30eeA64daD20C4f56fBCD':
+        'Aave Governance Guardian Mantle',
+      '0xfF0ACe5060bd25f6900eb4bD91a868213C5346B5': 'Risk Council',
+      // '': 'Finance Risk Council'
+    },
+    pools: {
+      [Pools.V3]: {
+        aclBlock: 90172810,
+        collectorBlock: 90172810,
+        crossChainControllerBlock: 75528130,
+        granularGuardianBlock: 75528470,
+        crossChainPermissionsJson: './statics/functionsPermissionsGovV3.json',
+        permissionsJson: './statics/functionsPermissionsV3.json',
+        addressBook: {
+          ...AaveV3Mantle,
+          ...MiscMantle,
+        },
+        governanceAddressBook: {
+          ...GovernanceV3Mantle,
+          ...MiscMantle
+        }
+      },
+    },
+  }
 };
