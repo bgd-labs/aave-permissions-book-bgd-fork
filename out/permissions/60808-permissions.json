@@ -16,7 +16,7 @@
             "0xdc62E0e65b2251Dc66404ca717FD32dcC365Be3A"
           ]
         },
-        "latestBlockNumber": 28177343
+        "latestBlockNumber": 28220820
       },
       "contracts": {
         "GranularGuardian": {
@@ -318,7 +318,7 @@
         }
       },
       "senders": [],
-      "latestCCCBlockNumber": 28177343
+      "latestCCCBlockNumber": 28220820
     },
     "collector": {},
     "clinicSteward": {},
