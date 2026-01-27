@@ -34,6 +34,7 @@ These documents contain tables with the following information:
 ### Permissions directory
 | Network |System type |Tables |
 |----------|----------|----------|
+|  MEGAETH |  V3 |  [Permissions](./out/MEGAETH-V3.md#contracts) | |--------|--------|--------|
        
     
 ## Usage
