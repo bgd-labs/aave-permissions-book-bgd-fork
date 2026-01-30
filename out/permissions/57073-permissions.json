@@ -143,6 +143,12 @@
               {
                 "address": "0x00C2B13eF4F70Bf1827179Fe6d8facF7cFf6AcD2",
                 "owners": [
+                  "0x08111735E84817A8728E46f8297205AfCD25d234",
+                  "0x3858f8dA2df01097af16BDCF9D43d395F7d92aE7",
+                  "0x985E4c7E8132F89eF8bC5bd79F2cF3960E1f9C8a",
+                  "0x1a8F70af805C0c3D77bEa4dbfB6175c79B6D72D0",
+                  "0xE9CD92079Ee565a9557c500448F37A091FB50205",
+                  "0xfa3f1c37969b75F215C2828f9372C757a2411dcb",
                   "0x56A0f31BB43Bcc938dbDa07381221DA9075a4D53",
                   "0x82f8025E7f483Af96c2938C9930D1a9D8B6C6e5e",
                   "0xf71fc92e2949ccF6A5Fd369a0b402ba80Bc61E02",
@@ -172,6 +178,12 @@
               {
                 "address": "0x00C2B13eF4F70Bf1827179Fe6d8facF7cFf6AcD2",
                 "owners": [
+                  "0x08111735E84817A8728E46f8297205AfCD25d234",
+                  "0x3858f8dA2df01097af16BDCF9D43d395F7d92aE7",
+                  "0x985E4c7E8132F89eF8bC5bd79F2cF3960E1f9C8a",
+                  "0x1a8F70af805C0c3D77bEa4dbfB6175c79B6D72D0",
+                  "0xE9CD92079Ee565a9557c500448F37A091FB50205",
+                  "0xfa3f1c37969b75F215C2828f9372C757a2411dcb",
                   "0x56A0f31BB43Bcc938dbDa07381221DA9075a4D53",
                   "0x82f8025E7f483Af96c2938C9930D1a9D8B6C6e5e",
                   "0xf71fc92e2949ccF6A5Fd369a0b402ba80Bc61E02",
@@ -326,7 +338,7 @@
         "FLASH_BORROWER": [],
         "RISK_ADMIN": []
       },
-      "latestBlockNumber": 36151016
+      "latestBlockNumber": 36237369
     },
     "gsmRoles": {},
     "govV3": {
@@ -405,7 +417,7 @@
             "0x1dF462e2712496373A347f8ad10802a5E95f053D"
           ]
         },
-        "latestBlockNumber": 36151019
+        "latestBlockNumber": 36237372
       }
     },
     "clinicSteward": {},
@@ -442,6 +454,12 @@
                 {
                   "address": "0x2e8090716C5a25332cf963d454250B88bf04E6dC",
                   "owners": [
+                    "0x08111735E84817A8728E46f8297205AfCD25d234",
+                    "0x3858f8dA2df01097af16BDCF9D43d395F7d92aE7",
+                    "0x985E4c7E8132F89eF8bC5bd79F2cF3960E1f9C8a",
+                    "0x1a8F70af805C0c3D77bEa4dbfB6175c79B6D72D0",
+                    "0xE9CD92079Ee565a9557c500448F37A091FB50205",
+                    "0xfa3f1c37969b75F215C2828f9372C757a2411dcb",
                     "0x56A0f31BB43Bcc938dbDa07381221DA9075a4D53",
                     "0x82f8025E7f483Af96c2938C9930D1a9D8B6C6e5e",
                     "0x26de2b9E15886b21dd86ec57C2f4983A98458FCe",
@@ -483,6 +501,12 @@
                 {
                   "address": "0x2e8090716C5a25332cf963d454250B88bf04E6dC",
                   "owners": [
+                    "0x08111735E84817A8728E46f8297205AfCD25d234",
+                    "0x3858f8dA2df01097af16BDCF9D43d395F7d92aE7",
+                    "0x985E4c7E8132F89eF8bC5bd79F2cF3960E1f9C8a",
+                    "0x1a8F70af805C0c3D77bEa4dbfB6175c79B6D72D0",
+                    "0xE9CD92079Ee565a9557c500448F37A091FB50205",
+                    "0xfa3f1c37969b75F215C2828f9372C757a2411dcb",
                     "0x56A0f31BB43Bcc938dbDa07381221DA9075a4D53",
                     "0x82f8025E7f483Af96c2938C9930D1a9D8B6C6e5e",
                     "0x26de2b9E15886b21dd86ec57C2f4983A98458FCe",
@@ -497,6 +521,12 @@
                 {
                   "address": "0x2e8090716C5a25332cf963d454250B88bf04E6dC",
                   "owners": [
+                    "0x08111735E84817A8728E46f8297205AfCD25d234",
+                    "0x3858f8dA2df01097af16BDCF9D43d395F7d92aE7",
+                    "0x985E4c7E8132F89eF8bC5bd79F2cF3960E1f9C8a",
+                    "0x1a8F70af805C0c3D77bEa4dbfB6175c79B6D72D0",
+                    "0xE9CD92079Ee565a9557c500448F37A091FB50205",
+                    "0xfa3f1c37969b75F215C2828f9372C757a2411dcb",
                     "0x56A0f31BB43Bcc938dbDa07381221DA9075a4D53",
                     "0x82f8025E7f483Af96c2938C9930D1a9D8B6C6e5e",
                     "0x26de2b9E15886b21dd86ec57C2f4983A98458FCe",
@@ -519,6 +549,12 @@
                 {
                   "address": "0x2e8090716C5a25332cf963d454250B88bf04E6dC",
                   "owners": [
+                    "0x08111735E84817A8728E46f8297205AfCD25d234",
+                    "0x3858f8dA2df01097af16BDCF9D43d395F7d92aE7",
+                    "0x985E4c7E8132F89eF8bC5bd79F2cF3960E1f9C8a",
+                    "0x1a8F70af805C0c3D77bEa4dbfB6175c79B6D72D0",
+                    "0xE9CD92079Ee565a9557c500448F37A091FB50205",
+                    "0xfa3f1c37969b75F215C2828f9372C757a2411dcb",
                     "0x56A0f31BB43Bcc938dbDa07381221DA9075a4D53",
                     "0x82f8025E7f483Af96c2938C9930D1a9D8B6C6e5e",
                     "0x26de2b9E15886b21dd86ec57C2f4983A98458FCe",
@@ -576,7 +612,7 @@
             "0x81D251dA015A0C7bD882918Ca1ec6B7B8E094585"
           ]
         },
-        "latestBlockNumber": 36151023
+        "latestBlockNumber": 36237377
       },
       "contracts": {
         "GranularGuardian": {
@@ -878,7 +914,7 @@
         }
       },
       "senders": [],
-      "latestCCCBlockNumber": 36151023
+      "latestCCCBlockNumber": 36237377
     },
     "collector": {},
     "clinicSteward": {},
