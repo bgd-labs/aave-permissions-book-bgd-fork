@@ -1,16 +1,15 @@
 import { onlyOwnerAbi } from '../abis/onlyOwnerAbi.js';
 import { generateRoles } from '../helpers/jsonParsers.js';
-import { getProxyAdmin, getProxyAdminFromFactory } from '../helpers/proxyAdmin.js';
-import { getSafeOwners, getSafeThreshold } from '../helpers/guardian.js';
+import { getProxyAdmin } from '../helpers/proxyAdmin.js';
 import { ChainId } from '@bgd-labs/toolbox';
 import {
-  AddressInfo,
   Contracts,
-  Guardian,
   PermissionsJson,
 } from '../helpers/types.js';
 import { Address, Client, getAddress, getContract, zeroAddress } from 'viem';
 import { uniqueAddresses } from '../helpers/addressUtils.js';
+import { createOwnerResolver } from '../helpers/ownerResolver.js';
+import { resolveAllRoleOwners, mapRoleAddresses } from '../helpers/contractResolvers.js';
 
 export const resolveCollectorModifiers = async (
   addressBook: any,
@@ -19,28 +18,14 @@ export const resolveCollectorModifiers = async (
   chainId: typeof ChainId | number,
   adminRoles: Record<string, string[]>,
 ): Promise<Contracts> => {
-  let obj: Contracts = {};
+  const obj: Contracts = {};
   const roles = generateRoles(permissionsObject);
 
-  const owners: Record<string, Record<string, Guardian>> = {};
-  // owners
-  for (const roleName of Object.keys(adminRoles)) {
-    for (const roleAddress of adminRoles[roleName]) {
-      if (!owners[roleName]) {
-        owners[roleName] = {
-          [roleAddress]: {
-            owners: await getSafeOwners(provider, roleAddress),
-            threshold: await getSafeThreshold(provider, roleAddress),
-          },
-        };
-      } else if (owners[roleName] && !owners[roleName][roleAddress]) {
-        owners[roleName][roleAddress] = {
-          owners: await getSafeOwners(provider, roleAddress),
-          threshold: await getSafeThreshold(provider, roleAddress),
-        };
-      }
-    }
-  }
+  // Create owner resolver with caching for this network
+  const ownerResolver = createOwnerResolver(provider);
+
+  // Resolve all role owners (with caching to avoid redundant RPC calls)
+  const owners = await resolveAllRoleOwners(adminRoles, ownerResolver);
 
   if (
     addressBook.COLLECTOR &&
@@ -50,22 +35,14 @@ export const resolveCollectorModifiers = async (
       addressBook.COLLECTOR,
       provider,
     );
+    const proxyAdminInfo = await ownerResolver.resolve(collectorProxyAdmin);
 
     obj['Collector'] = {
       address: addressBook.COLLECTOR,
       modifiers: [
         {
           modifier: 'onlyFundsAdmin',
-          addresses: uniqueAddresses([
-            ...adminRoles['FUNDS_ADMIN_ROLE'].map((roleAddress) => {
-              return {
-                address: roleAddress,
-                owners: owners['FUNDS_ADMIN_ROLE'][roleAddress].owners || [],
-                signersThreshold:
-                  owners['FUNDS_ADMIN_ROLE'][roleAddress].threshold || 0,
-              };
-            }),
-          ]),
+          addresses: mapRoleAddresses('FUNDS_ADMIN_ROLE', adminRoles, owners),
           functions: roles['Collector']['onlyFundsAdmin'],
         },
         {
@@ -73,22 +50,10 @@ export const resolveCollectorModifiers = async (
           addresses: [
             {
               address: collectorProxyAdmin,
-              owners: await getSafeOwners(provider, collectorProxyAdmin),
-              signersThreshold: await getSafeThreshold(
-                provider,
-                collectorProxyAdmin,
-              ),
+              owners: proxyAdminInfo.owners,
+              signersThreshold: proxyAdminInfo.threshold,
             },
-            ...uniqueAddresses([
-              ...adminRoles['FUNDS_ADMIN_ROLE'].map((roleAddress) => {
-                return {
-                  address: roleAddress,
-                  owners: owners['FUNDS_ADMIN_ROLE'][roleAddress].owners || [],
-                  signersThreshold:
-                    owners['FUNDS_ADMIN_ROLE'][roleAddress].threshold || 0,
-                };
-              }),
-            ])
+            ...uniqueAddresses(mapRoleAddresses('FUNDS_ADMIN_ROLE', adminRoles, owners)),
           ],
           functions: roles['Collector']['onlyAdminOrRecipient'],
         },
@@ -104,6 +69,7 @@ export const resolveCollectorModifiers = async (
     const proxyAdminContract = getContract({ address: getAddress(collectorProxyAdmin), abi: onlyOwnerAbi, client: provider });
     if (collectorProxyAdmin !== zeroAddress) {
       const proxyAdminOwner = await proxyAdminContract.read.owner() as Address;
+      const ownerInfo = await ownerResolver.resolve(proxyAdminOwner);
 
       obj['CollectorProxyAdmin'] = {
         address: collectorProxyAdmin,
@@ -113,8 +79,8 @@ export const resolveCollectorModifiers = async (
             addresses: [
               {
                 address: proxyAdminOwner,
-                owners: await getSafeOwners(provider, proxyAdminOwner),
-                signersThreshold: await getSafeThreshold(provider, proxyAdminOwner),
+                owners: ownerInfo.owners,
+                signersThreshold: ownerInfo.threshold,
               },
             ],
             functions: roles['ProxyAdmin']['onlyOwner'],

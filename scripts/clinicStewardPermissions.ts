@@ -1,13 +1,9 @@
 import { generateRoles } from '../helpers/jsonParsers.js';
-import { getSafeOwners, getSafeThreshold } from '../helpers/guardian.js';
-import {
-  AddressInfo,
-  Contracts,
-  Guardian,
-  PermissionsJson,
-} from '../helpers/types.js';
+import { Contracts, PermissionsJson } from '../helpers/types.js';
 import { Client, zeroAddress } from 'viem';
 import { uniqueAddresses } from '../helpers/addressUtils.js';
+import { createOwnerResolver } from '../helpers/ownerResolver.js';
+import { resolveAllRoleOwners, mapRoleAddresses } from '../helpers/contractResolvers.js';
 
 export const resolveClinicStewardModifiers = async (
   addressBook: any,
@@ -15,28 +11,14 @@ export const resolveClinicStewardModifiers = async (
   permissionsObject: PermissionsJson,
   adminRoles: Record<string, string[]>,
 ): Promise<Contracts> => {
-  let obj: Contracts = {};
+  const obj: Contracts = {};
   const roles = generateRoles(permissionsObject);
 
-  const owners: Record<string, Record<string, Guardian>> = {};
-  // owners
-  for (const roleName of Object.keys(adminRoles)) {
-    for (const roleAddress of adminRoles[roleName]) {
-      if (!owners[roleName]) {
-        owners[roleName] = {
-          [roleAddress]: {
-            owners: await getSafeOwners(provider, roleAddress),
-            threshold: await getSafeThreshold(provider, roleAddress),
-          },
-        };
-      } else if (owners[roleName] && !owners[roleName][roleAddress]) {
-        owners[roleName][roleAddress] = {
-          owners: await getSafeOwners(provider, roleAddress),
-          threshold: await getSafeThreshold(provider, roleAddress),
-        };
-      }
-    }
-  }
+  // Create owner resolver with caching for this network
+  const ownerResolver = createOwnerResolver(provider);
+
+  // Resolve all role owners (with caching to avoid redundant RPC calls)
+  const owners = await resolveAllRoleOwners(adminRoles, ownerResolver);
 
   if (
     addressBook.CLINIC_STEWARD &&
@@ -47,32 +29,12 @@ export const resolveClinicStewardModifiers = async (
       modifiers: [
         {
           modifier: 'onlyCleanUpRole',
-          addresses: uniqueAddresses([
-            ...adminRoles['CLEANUP_ROLE'].map((roleAddress) => {
-              return {
-                address: roleAddress,
-                owners: owners['CLEANUP_ROLE'][roleAddress].owners || [],
-                signersThreshold:
-                  owners['CLEANUP_ROLE'][roleAddress].threshold || 0,
-              };
-            }),
-          ]),
+          addresses: uniqueAddresses(mapRoleAddresses('CLEANUP_ROLE', adminRoles, owners)),
           functions: roles['ClinicSteward']['onlyCleanUpRole'],
         },
         {
           modifier: 'onlyAdmin',
-          addresses: [
-            ...uniqueAddresses([
-              ...adminRoles['DEFAULT_ADMIN'].map((roleAddress) => {
-                return {
-                  address: roleAddress,
-                  owners: owners['DEFAULT_ADMIN'][roleAddress].owners || [],
-                  signersThreshold:
-                    owners['DEFAULT_ADMIN'][roleAddress].threshold || 0,
-                };
-              }),
-            ])
-          ],
+          addresses: uniqueAddresses(mapRoleAddresses('DEFAULT_ADMIN', adminRoles, owners)),
           functions: roles['ClinicSteward']['onlyAdmin'],
         },
       ],
