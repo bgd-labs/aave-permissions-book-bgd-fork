@@ -5,13 +5,11 @@ import {
 import { ChainId } from '@bgd-labs/toolbox';
 import { getProxyAdmin } from '../helpers/proxyAdmin.js';
 import { generateRoles } from '../helpers/jsonParsers.js';
-import { getSafeOwners, getSafeThreshold } from '../helpers/guardian.js';
-import {
-  IOwnable_ABI,
-} from '@bgd-labs/aave-address-book/abis';
+import { IOwnable_ABI } from '@bgd-labs/aave-address-book/abis';
 import { onlyOwnerAbi } from '../abis/onlyOwnerAbi.js';
 import { PERMISSIONED_PAYLOADS_CONTROLLER_ABI } from '../abis/permissionedPayloadsController.js';
 import { Address, Client, getAddress, getContract, zeroAddress } from 'viem';
+import { createOwnerResolver } from '../helpers/ownerResolver.js';
 
 export const resolvePpcModifiers = async (
   addressBook: any,
@@ -19,9 +17,11 @@ export const resolvePpcModifiers = async (
   permissionsObject: PermissionsJson,
   chainId: typeof ChainId | number,
 ) => {
-  let obj: Contracts = {};
+  const obj: Contracts = {};
   const roles = generateRoles(permissionsObject);
 
+  // Create owner resolver with caching for this network
+  const ownerResolver = createOwnerResolver(provider);
 
   if (
     addressBook.PERMISSIONED_PAYLOADS_CONTROLLER &&
@@ -35,6 +35,7 @@ export const resolvePpcModifiers = async (
 
     if (ppcProxyAdmin !== zeroAddress) {
       const proxyAdminOwner = await proxyAdminContract.read.owner() as Address;
+      const proxyAdminOwnerInfo = await ownerResolver.resolve(proxyAdminOwner);
 
       obj['PermissionedPayloadsControllerProxyAdmin'] = {
         address: ppcProxyAdmin,
@@ -44,8 +45,8 @@ export const resolvePpcModifiers = async (
             addresses: [
               {
                 address: proxyAdminOwner,
-                owners: await getSafeOwners(provider, proxyAdminOwner),
-                signersThreshold: await getSafeThreshold(provider, proxyAdminOwner),
+                owners: proxyAdminOwnerInfo.owners,
+                signersThreshold: proxyAdminOwnerInfo.threshold,
               },
             ],
             functions: roles['ProxyAdmin']['onlyOwner'],
@@ -64,6 +65,12 @@ export const resolvePpcModifiers = async (
     const rescuer = await ppcContract.read.whoCanRescue() as Address;
     const payloadsManager = await ppcContract.read.payloadsManager() as Address;
 
+    // Resolve all addresses using cache
+    const guardianInfo = await ownerResolver.resolve(pcGuardian);
+    const pcOwnerInfo = await ownerResolver.resolve(pcOwner);
+    const rescuerInfo = await ownerResolver.resolve(rescuer);
+    const payloadsManagerInfo = await ownerResolver.resolve(payloadsManager);
+
     obj['PermissionedPayloadsController'] = {
       address: addressBook.PERMISSIONED_PAYLOADS_CONTROLLER,
       proxyAdmin: ppcProxyAdmin,
@@ -73,13 +80,13 @@ export const resolvePpcModifiers = async (
           addresses: [
             {
               address: pcGuardian,
-              owners: await getSafeOwners(provider, pcGuardian),
-              signersThreshold: await getSafeThreshold(provider, pcGuardian),
+              owners: guardianInfo.owners,
+              signersThreshold: guardianInfo.threshold,
             },
             {
               address: pcOwner,
-              owners: await getSafeOwners(provider, pcOwner),
-              signersThreshold: await getSafeThreshold(provider, pcOwner),
+              owners: pcOwnerInfo.owners,
+              signersThreshold: pcOwnerInfo.threshold,
             },
           ],
           functions: roles['PermissionedPayloadsController']['onlyOwnerOrGuardian'],
@@ -89,8 +96,8 @@ export const resolvePpcModifiers = async (
           addresses: [
             {
               address: rescuer,
-              owners: await getSafeOwners(provider, rescuer),
-              signersThreshold: await getSafeThreshold(provider, rescuer),
+              owners: rescuerInfo.owners,
+              signersThreshold: rescuerInfo.threshold,
             },
           ],
           functions: roles['PermissionedPayloadsController']['onlyRescueGuardian'],
@@ -100,13 +107,13 @@ export const resolvePpcModifiers = async (
           addresses: [
             {
               address: pcGuardian,
-              owners: await getSafeOwners(provider, pcGuardian),
-              signersThreshold: await getSafeThreshold(provider, pcGuardian),
+              owners: guardianInfo.owners,
+              signersThreshold: guardianInfo.threshold,
             },
             {
               address: payloadsManager,
-              owners: await getSafeOwners(provider, payloadsManager),
-              signersThreshold: await getSafeThreshold(provider, payloadsManager),
+              owners: payloadsManagerInfo.owners,
+              signersThreshold: payloadsManagerInfo.threshold,
             },
           ],
           functions: roles['PermissionedPayloadsController']['onlyPayloadsManagerOrGuardian'],
@@ -116,8 +123,8 @@ export const resolvePpcModifiers = async (
           addresses: [
             {
               address: payloadsManager,
-              owners: await getSafeOwners(provider, payloadsManager),
-              signersThreshold: await getSafeThreshold(provider, payloadsManager),
+              owners: payloadsManagerInfo.owners,
+              signersThreshold: payloadsManagerInfo.threshold,
             },
           ],
           functions: roles['PermissionedPayloadsController']['onlyPayloadsManager'],
@@ -132,8 +139,8 @@ export const resolvePpcModifiers = async (
           addresses: [
             {
               address: pcGuardian,
-              owners: await getSafeOwners(provider, pcGuardian),
-              signersThreshold: await getSafeThreshold(provider, pcGuardian),
+              owners: guardianInfo.owners,
+              signersThreshold: guardianInfo.threshold,
             },
           ],
           functions: roles['PermissionedPayloadsController']['onlyGuardian'],
@@ -147,7 +154,9 @@ export const resolvePpcModifiers = async (
     addressBook.PERMISSIONED_PAYLOADS_CONTROLLER_EXECUTOR !== zeroAddress
   ) {
     const executorContract = getContract({ address: getAddress(addressBook.PERMISSIONED_PAYLOADS_CONTROLLER_EXECUTOR), abi: IOwnable_ABI, client: provider });
-    const owner = await executorContract.read.owner();
+    const owner = await executorContract.read.owner() as Address;
+    const ownerInfo = await ownerResolver.resolve(owner);
+
     obj['PermissionedExecutor'] = {
       address: addressBook.PERMISSIONED_PAYLOADS_CONTROLLER_EXECUTOR,
       modifiers: [
@@ -156,8 +165,8 @@ export const resolvePpcModifiers = async (
           addresses: [
             {
               address: owner,
-              owners: await getSafeOwners(provider, owner),
-              signersThreshold: await getSafeThreshold(provider, owner),
+              owners: ownerInfo.owners,
+              signersThreshold: ownerInfo.threshold,
             },
           ],
           functions: roles['PermissionedExecutor']['onlyOwner'],

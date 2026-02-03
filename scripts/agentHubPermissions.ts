@@ -1,12 +1,12 @@
 import { Address, Client, getAddress, getContract } from "viem";
 import { Contracts, PermissionsJson } from "../helpers/types.js";
 import { generateRoles } from "../helpers/jsonParsers.js";
-import { getSafeOwners, getSafeThreshold } from "../helpers/guardian.js";
 import { getProxyAdmin } from "../helpers/proxyAdmin.js";
-import { uniqueAddresses } from "../helpers/utils.js";
+import { uniqueAddresses } from "../helpers/addressUtils.js";
 import { onlyOwnerAbi } from "../abis/onlyOwnerAbi.js";
 import { AGENT_HUB_ABI } from "../abis/agentHub.js";
 import { AGENT_ABI } from "../abis/agent.js";
+import { createOwnerResolver } from "../helpers/ownerResolver.js";
 
 
 export const resolveAgentHubModifiers = async (
@@ -15,8 +15,11 @@ export const resolveAgentHubModifiers = async (
   permissionsObject: PermissionsJson,
   poolName: string,
 ): Promise<{ agentHubPermissions: Contracts }> => {
-  let obj: Contracts = {};
+  const obj: Contracts = {};
   const roles = generateRoles(permissionsObject);
+
+  // Create owner resolver with caching for this network
+  const ownerResolver = createOwnerResolver(provider);
 
   // hub
   if (addressBook.AGENT_HUB) {
@@ -57,6 +60,10 @@ export const resolveAgentHubModifiers = async (
       }
     }
 
+    // Resolve hubOwner info (used multiple times)
+    const hubOwnerInfo = await ownerResolver.resolve(hubOwner);
+    const agentHubInfo = await ownerResolver.resolve(addressBook.AGENT_HUB);
+
     for (const agentAddress of Object.keys(agents)) {
       obj[agents[getAddress(agentAddress)]] = {
         address: agentAddress,
@@ -66,11 +73,8 @@ export const resolveAgentHubModifiers = async (
             addresses: [
               {
                 address: addressBook.AGENT_HUB,
-                owners: await getSafeOwners(provider, addressBook.AGENT_HUB),
-                signersThreshold: await getSafeThreshold(
-                  provider,
-                  addressBook.AGENT_HUB,
-                ),
+                owners: agentHubInfo.owners,
+                signersThreshold: agentHubInfo.threshold,
               },
             ],
             functions: roles['Agent']['onlyAgentHub'],
@@ -80,18 +84,19 @@ export const resolveAgentHubModifiers = async (
     }
 
     // get proxy admin from new transparent proxy factory
-
     const hubProxyAdmin = await getProxyAdmin(
       addressBook.AGENT_HUB,
       provider,
     );
 
+    // Resolve all agent admins using cache
     const onlyAgentAdmins: { address: Address, owners: string[], signersThreshold: number }[] = [];
     for (const agentAdmin of agentAdmins) {
+      const adminInfo = await ownerResolver.resolve(agentAdmin);
       onlyAgentAdmins.push({
         address: agentAdmin,
-        owners: await getSafeOwners(provider, agentAdmin),
-        signersThreshold: await getSafeThreshold(provider, agentAdmin),
+        owners: adminInfo.owners,
+        signersThreshold: adminInfo.threshold,
       });
     }
 
@@ -104,8 +109,8 @@ export const resolveAgentHubModifiers = async (
           addresses: [
             {
               address: hubOwner,
-              owners: await getSafeOwners(provider, hubOwner),
-              signersThreshold: await getSafeThreshold(provider, hubOwner),
+              owners: hubOwnerInfo.owners,
+              signersThreshold: hubOwnerInfo.threshold,
             },
           ],
           functions: roles['AgentHub']['onlyOwner'],
@@ -116,8 +121,8 @@ export const resolveAgentHubModifiers = async (
             ...onlyAgentAdmins,
             {
               address: hubOwner,
-              owners: await getSafeOwners(provider, hubOwner),
-              signersThreshold: await getSafeThreshold(provider, hubOwner),
+              owners: hubOwnerInfo.owners,
+              signersThreshold: hubOwnerInfo.threshold,
             },
           ]),
           functions: roles['AgentHub']['onlyOwnerOrAgentAdmin'],
@@ -127,6 +132,7 @@ export const resolveAgentHubModifiers = async (
 
     const proxyAdminContract = getContract({ address: getAddress(hubProxyAdmin), abi: onlyOwnerAbi, client: provider });
     const proxyAdminOwner = await proxyAdminContract.read.owner() as Address;
+    const proxyAdminOwnerInfo = await ownerResolver.resolve(proxyAdminOwner);
 
     obj['AgentHubProxyAdmin'] = {
       address: hubProxyAdmin,
@@ -136,8 +142,8 @@ export const resolveAgentHubModifiers = async (
           addresses: [
             {
               address: proxyAdminOwner,
-              owners: await getSafeOwners(provider, proxyAdminOwner),
-              signersThreshold: await getSafeThreshold(provider, proxyAdminOwner),
+              owners: proxyAdminOwnerInfo.owners,
+              signersThreshold: proxyAdminOwnerInfo.threshold,
             },
           ],
           functions: roles['ProxyAdmin']['onlyOwner'],
@@ -159,8 +165,8 @@ export const resolveAgentHubModifiers = async (
                 ...onlyAgentAdmins,
                 {
                   address: hubOwner,
-                  owners: await getSafeOwners(provider, hubOwner),
-                  signersThreshold: await getSafeThreshold(provider, hubOwner),
+                  owners: hubOwnerInfo.owners,
+                  signersThreshold: hubOwnerInfo.threshold,
                 },
               ]),
               functions: roles['RangeValidationModule']['onlyHubOwnerOrAgentAdmin'],
