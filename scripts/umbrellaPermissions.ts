@@ -11,21 +11,7 @@ import { onlyOwnerAbi } from '../abis/onlyOwnerAbi.js';
 import { PERMISSIONED_PAYLOADS_CONTROLLER_ABI } from '../abis/permissionedPayloadsController.js';
 import { IOwnable_ABI } from '@bgd-labs/aave-address-book/abis';
 import { Address, Client, getAddress, getContract, zeroAddress } from 'viem';
-
-const uniqueAddresses = (addressesInfo: AddressInfo[]): AddressInfo[] => {
-  const cleanAddresses: AddressInfo[] = [];
-
-  addressesInfo.forEach((addressInfo) => {
-    const found = cleanAddresses.find(
-      (cleanAddressInfo) => cleanAddressInfo.address === addressInfo.address,
-    );
-    if (!found) {
-      cleanAddresses.push(addressInfo);
-    }
-  });
-
-  return cleanAddresses;
-};
+import { uniqueAddresses } from '../helpers/addressUtils.js';
 
 export const resolveUmbrellaModifiers = async (
   addressBook: any,

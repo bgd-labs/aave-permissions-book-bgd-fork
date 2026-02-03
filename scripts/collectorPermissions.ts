@@ -10,32 +10,7 @@ import {
   PermissionsJson,
 } from '../helpers/types.js';
 import { Address, Client, getAddress, getContract, zeroAddress } from 'viem';
-
-const getAddressInfo = async (
-  provider: Client,
-  roleAddress: string,
-): Promise<AddressInfo> => {
-  const owners = await getSafeOwners(provider, roleAddress);
-  return {
-    address: roleAddress,
-    owners,
-  };
-};
-
-const uniqueAddresses = (addressesInfo: AddressInfo[]): AddressInfo[] => {
-  const cleanAddresses: AddressInfo[] = [];
-
-  addressesInfo.forEach((addressInfo) => {
-    const found = cleanAddresses.find(
-      (cleanAddressInfo) => cleanAddressInfo.address === addressInfo.address,
-    );
-    if (!found) {
-      cleanAddresses.push(addressInfo);
-    }
-  });
-
-  return cleanAddresses;
-};
+import { uniqueAddresses } from '../helpers/addressUtils.js';
 
 export const resolveCollectorModifiers = async (
   addressBook: any,

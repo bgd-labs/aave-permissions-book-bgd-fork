@@ -25,32 +25,7 @@ import { AAVE_STEWARD_INJECTOR_CAPS_ABI } from '../abis/aaveStewardInjectorCaps.
 import { CLINIC_STEWARD_ABI } from '../abis/clinicSteward.js';
 import { COLLECTOR_SWAP_STEWARD_ABI } from '../abis/collectorSwapSteward.js';
 import { RISK_ORACLE_ABI } from '../abis/riskOracle.js';
-
-const getAddressInfo = async (
-  provider: Client,
-  roleAddress: string,
-): Promise<AddressInfo> => {
-  const owners = await getSafeOwners(provider, roleAddress);
-  return {
-    address: roleAddress,
-    owners,
-  };
-};
-
-const uniqueAddresses = (addressesInfo: AddressInfo[]): AddressInfo[] => {
-  const cleanAddresses: AddressInfo[] = [];
-
-  addressesInfo.forEach((addressInfo) => {
-    const found = cleanAddresses.find(
-      (cleanAddressInfo) => cleanAddressInfo.address === addressInfo.address,
-    );
-    if (!found) {
-      cleanAddresses.push(addressInfo);
-    }
-  });
-
-  return cleanAddresses;
-};
+import { uniqueAddresses } from '../helpers/addressUtils.js';
 
 export const resolveV3Modifiers = async (
   addressBook: any,

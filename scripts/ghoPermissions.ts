@@ -15,21 +15,8 @@ import { ghoStewardV2 } from '../abis/ghoStewardV2.js';
 import { Address, Client, getAddress, getContract } from 'viem';
 import { getProxyAdmin } from '../helpers/proxyAdmin.js';
 import { EDGE_RISK_STEWARD_CAPS_ABI } from '../abis/edgeRiskStewardCaps.js';
+import { uniqueAddresses } from '../helpers/addressUtils.js';
 
-const uniqueAddresses = (addressesInfo: AddressInfo[]): AddressInfo[] => {
-  const cleanAddresses: AddressInfo[] = [];
-
-  addressesInfo.forEach((addressInfo) => {
-    const found = cleanAddresses.find(
-      (cleanAddressInfo) => cleanAddressInfo.address === addressInfo.address,
-    );
-    if (!found) {
-      cleanAddresses.push(addressInfo);
-    }
-  });
-
-  return cleanAddresses;
-};
 export const resolveGHOModifiers = async (
   addressBook: any,
   provider: Client,
