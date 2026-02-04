@@ -6,6 +6,7 @@ import {
 import { generateRoles } from '../helpers/jsonParsers.js';
 import { ghoABI } from '../abis/ghoABI.js';
 import { IOwnable_ABI, IWithGuardian_ABI } from '@bgd-labs/aave-address-book/abis';
+import { MiscEthereum } from '@bgd-labs/aave-address-book';
 import { ghoStewardV2 } from '../abis/ghoStewardV2.js';
 import { Address, Client, getAddress, getContract } from 'viem';
 import { getProxyAdmin } from '../helpers/proxyAdmin.js';
@@ -203,7 +204,7 @@ export const resolveGHOModifiers = async (
       };
 
       // Skip aave proxy admin (already handled elsewhere)
-      if (getAddress(proxyAdmin) !== getAddress('0xd3cf979e676265e4f6379749dece4708b9a22476')) {
+      if (getAddress(proxyAdmin) !== getAddress(MiscEthereum.PROXY_ADMIN)) {
         const proxyAdminContract = getContract({ address: getAddress(proxyAdmin), abi: IOwnable_ABI, client: provider });
         const proxyAdminOwner = await proxyAdminContract.read.owner() as Address;
         const proxyAdminOwnerInfo = await ownerResolver.resolve(proxyAdminOwner);

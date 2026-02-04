@@ -8,7 +8,7 @@ import { AaveV2EthereumArc } from '@bgd-labs/aave-address-book';
 import { getProxyAdmin } from '../helpers/proxyAdmin.js';
 import { ChainId } from '@bgd-labs/toolbox';
 import { Contracts, PermissionsJson } from '../helpers/types.js';
-import { Address, Client, getAddress, getContract } from 'viem';
+import { Address, Client, getAddress, getContract, zeroAddress } from 'viem';
 import { createOwnerResolver } from '../helpers/ownerResolver.js';
 
 export const resolveV2Modifiers = async (
@@ -417,7 +417,7 @@ export const resolveV2Modifiers = async (
   if (
     addressBook.DEFAULT_INCENTIVES_CONTROLLER != undefined &&
     addressBook.DEFAULT_INCENTIVES_CONTROLLER !==
-    '0x0000000000000000000000000000000000000000'
+    zeroAddress
   ) {
     const emissionManagerInfo = await ownerResolver.resolve(addressBook.EMISSION_MANAGER);
 
