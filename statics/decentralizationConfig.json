@@ -1,0 +1,25 @@
+{
+  "knownGovernanceOwnedAddresses": [
+    {
+      "address": "0xf02d4931e0d5c79af9094cd9dff16ea6e3d9acb8",
+      "comment": "GHO facilitator double proxy - can be removed after facilitator change"
+    }
+  ],
+  "riskCouncilExceptions": ["GhoStewardV2"],
+  "stewardIndicators": ["steward", "agrs"],
+  "governanceOnlyActions": [
+    "updateReserveBorrowSettings",
+    "configureCollateral",
+    "updateReserveSettings",
+    "reserveUpgradeability",
+    "configureProtocolFees"
+  ],
+  "strictModifiers": ["onlyOwner"],
+  "administeredModifiers": [
+    "onlyOwner",
+    "onlyEthereumGovernanceExecutor",
+    "onlyRiskCouncil",
+    "onlyEmergencyAdmin",
+    "onlyDefaultAdmin"
+  ]
+}
