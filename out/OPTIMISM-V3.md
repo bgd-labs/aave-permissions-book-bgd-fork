@@ -83,7 +83,7 @@
 |  [ClinicSteward](https://optimistic.etherscan.io/address/0xD835fb6f9823b4054Ccf30403De76AA8abcd00b8) |  - |  onlyCleanUpRole |  [CleanUp Admin](https://optimistic.etherscan.io/address/0xdeadD8aB03075b7FBA81864202a2f59EE25B312b), [ACI Automation](https://optimistic.etherscan.io/address/0x3Cbded22F878aFC8d39dCD744d3Fe62086B76193) |  renewAllowance, batchRepayBadDebt, batchLiquidate, batchRepayBadDebt | |--------|--------|--------|--------|--------|
 |  [ClinicSteward](https://optimistic.etherscan.io/address/0xD835fb6f9823b4054Ccf30403De76AA8abcd00b8) |  - |  onlyAdmin |  [Executor_lvl1](https://optimistic.etherscan.io/address/0x746c675dAB49Bcd5BB9Dc85161f2d7Eb435009bf) |  setAvailableBudget | |--------|--------|--------|--------|--------|
 
-### Governance V3 Contracts 
+### Governance V3 Contracts
 | contract |proxyAdmin |modifier |permission owner |functions |
 |----------|----------|----------|----------|----------|
 |  [GranularGuardian](https://optimistic.etherscan.io/address/0x6c5264C380C7022e54f585c4E354ffb6f221a03b) |  - |  onlyRetryGuardian |  [BGD](https://optimistic.etherscan.io/address/0x3A800fbDeAC82a4d9c68A9FA0a315e095129CDBF) |  retryEnvelope, retryTransaction | |--------|--------|--------|--------|--------|
@@ -101,7 +101,7 @@
 |  [CrossChainController](https://optimistic.etherscan.io/address/0x48A9FE90bce5EEd790f3F4Ce192d1C0B351fd4Ca) |  [ProxyAdmin](https://optimistic.etherscan.io/address/0xD3cF979e676265e4f6379749DECe4708B9A22476) |  onlyApprovedSenders |   |  forwardMessage | |--------|--------|--------|--------|--------|
 |  [CrossChainController](https://optimistic.etherscan.io/address/0x48A9FE90bce5EEd790f3F4Ce192d1C0B351fd4Ca) |  [ProxyAdmin](https://optimistic.etherscan.io/address/0xD3cF979e676265e4f6379749DECe4708B9A22476) |  onlyApprovedBridges |  [Optimism native adapter](https://optimistic.etherscan.io/address/0xAE93BEa44dcbE52B625169588574d31e36fb3A67) |  receiveCrossChainMessage | |--------|--------|--------|--------|--------|
 
-### Risk Agent Contracts 
+### Risk Agent Contracts
 | contract |proxyAdmin |modifier |permission owner |functions |
 |----------|----------|----------|----------|----------|
 |  [SupplyCapAgent](https://optimistic.etherscan.io/address/0x8963Abfb008A668346B18d0BeE82b171F3b2Be24) |  - |  onlyAgentHub |  [AgentHub](https://optimistic.etherscan.io/address/0x1aCEC7abbcFE6dD10EA4bB50894908406FfE8719) |  inject | |--------|--------|--------|--------|--------|
@@ -122,7 +122,7 @@
 |  [BGD](https://optimistic.etherscan.io/address/0x3A800fbDeAC82a4d9c68A9FA0a315e095129CDBF) |  2/3 |  0x3A800fbDeAC82a4d9c68A9FA0a315e095129CDBF |  [0xf71fc92e2949ccF6A5Fd369a0b402ba80Bc61E02](https://optimistic.etherscan.io/address/0xf71fc92e2949ccF6A5Fd369a0b402ba80Bc61E02), [0x5811d9FF80ff4B73A8F9bA42A6082FaB82E89Ea7](https://optimistic.etherscan.io/address/0x5811d9FF80ff4B73A8F9bA42A6082FaB82E89Ea7), [0x0650302887619fa7727D8BD480Cda11A638B219B](https://optimistic.etherscan.io/address/0x0650302887619fa7727D8BD480Cda11A638B219B) | |--------|--------|--------|--------|
 |  [Aave Governance Guardian Optimism](https://optimistic.etherscan.io/address/0x360c0a69Ed2912351227a0b745f890CB2eBDbcFe) |  5/9 |  0x360c0a69Ed2912351227a0b745f890CB2eBDbcFe |  [0xDA5Ae43e179987a66B9831F92223567e1F38BE7D](https://optimistic.etherscan.io/address/0xDA5Ae43e179987a66B9831F92223567e1F38BE7D), [0x1e3804357eD445251FfECbb6e40107bf03888885](https://optimistic.etherscan.io/address/0x1e3804357eD445251FfECbb6e40107bf03888885), [0x4f96743057482a2E10253AFDacDA3fd9CF2C1DC9](https://optimistic.etherscan.io/address/0x4f96743057482a2E10253AFDacDA3fd9CF2C1DC9), [0xebED04E9137AfeBFF6a1B97aC0adf61a544eFE29](https://optimistic.etherscan.io/address/0xebED04E9137AfeBFF6a1B97aC0adf61a544eFE29), [0xbd4DCfA978c6D0d342cE36809AfFFa49d4B7f1F7](https://optimistic.etherscan.io/address/0xbd4DCfA978c6D0d342cE36809AfFFa49d4B7f1F7), [0xA3103D0ED00d24795Faa2d641ACf6A320EeD7396](https://optimistic.etherscan.io/address/0xA3103D0ED00d24795Faa2d641ACf6A320EeD7396), [0x936CD9654271083cCF93A975919Da0aB3Bc99EF3](https://optimistic.etherscan.io/address/0x936CD9654271083cCF93A975919Da0aB3Bc99EF3), [0x0D2394C027602Dc4c3832Ffd849b5df45DBac0E9](https://optimistic.etherscan.io/address/0x0D2394C027602Dc4c3832Ffd849b5df45DBac0E9), [0x4C30E33758216aD0d676419c21CB8D014C68099f](https://optimistic.etherscan.io/address/0x4C30E33758216aD0d676419c21CB8D014C68099f) | |--------|--------|--------|--------|
 
-### Admins 
+### Admins
 | Role |Contract |
 |----------|----------|
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://optimistic.etherscan.io/address/0x746c675dAB49Bcd5BB9Dc85161f2d7Eb435009bf) | |--------|--------|
@@ -132,20 +132,20 @@
 |  RISK_ADMIN |  [Manual AGRS](https://optimistic.etherscan.io/address/0xa59262276dB8F997948fdc4a10cBc1448A375636), [SupplyCapAgent](https://optimistic.etherscan.io/address/0x8963Abfb008A668346B18d0BeE82b171F3b2Be24), [BorrowCapAgent](https://optimistic.etherscan.io/address/0x3993695F48d64076C5Df1EeC9490501F9bB400C8) | |--------|--------|
 |  FLASH_BORROWER |  [0xfbcF23D2BeF8A2C491cfa4dD409D8dF12d431c85](https://optimistic.etherscan.io/address/0xfbcF23D2BeF8A2C491cfa4dD409D8dF12d431c85), [0xE668197A175E7A2143222a028470c6ABBBD183F6](https://optimistic.etherscan.io/address/0xE668197A175E7A2143222a028470c6ABBBD183F6), [0xcFaE0D8c5707FCc6478D6a65fFA31efADeF8b8EC](https://optimistic.etherscan.io/address/0xcFaE0D8c5707FCc6478D6a65fFA31efADeF8b8EC), [0xab515542d621574f9b5212d50593cD0C07e641bD](https://optimistic.etherscan.io/address/0xab515542d621574f9b5212d50593cD0C07e641bD), [0x49d9409111a6363d82C4371fFa43fAEA660C917B](https://optimistic.etherscan.io/address/0x49d9409111a6363d82C4371fFa43fAEA660C917B), [0x83d1Fa384EC44C2769A3562EDe372484f26E141B](https://optimistic.etherscan.io/address/0x83d1Fa384EC44C2769A3562EDe372484f26E141B), [0x32Ad28356EF70adC3EC051D8AAcdEEaA10135296](https://optimistic.etherscan.io/address/0x32Ad28356EF70adC3EC051D8AAcdEEaA10135296), [0xB03818de4992388260b62259361778CF98485dFE](https://optimistic.etherscan.io/address/0xB03818de4992388260b62259361778CF98485dFE), [0x11b55966527FF030ca9c7B1c548B4bE5e7EaEe6D](https://optimistic.etherscan.io/address/0x11b55966527FF030ca9c7B1c548B4bE5e7EaEe6D), [0xcACb5A722a36cFf6bAeB359e21C098a4ACbffDfa](https://optimistic.etherscan.io/address/0xcACb5A722a36cFf6bAeB359e21C098a4ACbffDfa), [0x9573c7b691cDcEbBFa9D655181f291799dfB7Cf5](https://optimistic.etherscan.io/address/0x9573c7b691cDcEbBFa9D655181f291799dfB7Cf5), [0x32b1D1bFd4B3b0CB9FF2DcD9DAc757aA64d4cb69](https://optimistic.etherscan.io/address/0x32b1D1bFd4B3b0CB9FF2DcD9DAc757aA64d4cb69), [0x7D3c9C6566375d7ad6e89169cA5C01B5Edc15364](https://optimistic.etherscan.io/address/0x7D3c9C6566375d7ad6e89169cA5C01B5Edc15364), [0xcC7d6ED524760539311ed0Cdb41D0852b4eb77eb](https://optimistic.etherscan.io/address/0xcC7d6ED524760539311ed0Cdb41D0852b4eb77eb), [0xB9243C495117343981EC9f8AA2ABfFEe54396Fc0](https://optimistic.etherscan.io/address/0xB9243C495117343981EC9f8AA2ABfFEe54396Fc0), [0x1eC50880101022C11530A069690F5446d1464592](https://optimistic.etherscan.io/address/0x1eC50880101022C11530A069690F5446d1464592), [0x49bF093277Bf4dDe49c48c6AA55A3bDA3eeDEF68](https://optimistic.etherscan.io/address/0x49bF093277Bf4dDe49c48c6AA55A3bDA3eeDEF68), [0xb2cFb909e8657C0EC44D3dD898C1053b87804755](https://optimistic.etherscan.io/address/0xb2cFb909e8657C0EC44D3dD898C1053b87804755), [0x59bAbc14Dd73761e38E5bdA171b2298DC14da92d](https://optimistic.etherscan.io/address/0x59bAbc14Dd73761e38E5bdA171b2298DC14da92d) | |--------|--------|
 
-### Granular Guardian Admins 
+### Granular Guardian Admins
 | Role |Contract |
 |----------|----------|
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://optimistic.etherscan.io/address/0x746c675dAB49Bcd5BB9Dc85161f2d7Eb435009bf) | |--------|--------|
 |  SOLVE_EMERGENCY_ROLE |  [Aave Governance Guardian Optimism](https://optimistic.etherscan.io/address/0x360c0a69Ed2912351227a0b745f890CB2eBDbcFe) | |--------|--------|
 |  RETRY_ROLE |  [BGD](https://optimistic.etherscan.io/address/0x3A800fbDeAC82a4d9c68A9FA0a315e095129CDBF) | |--------|--------|
 
-### Collector Admins 
+### Collector Admins
 | Role |Contract |
 |----------|----------|
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://optimistic.etherscan.io/address/0x746c675dAB49Bcd5BB9Dc85161f2d7Eb435009bf) | |--------|--------|
 |  FUNDS_ADMIN_ROLE |  [Executor_lvl1](https://optimistic.etherscan.io/address/0x746c675dAB49Bcd5BB9Dc85161f2d7Eb435009bf), [ClinicSteward](https://optimistic.etherscan.io/address/0xD835fb6f9823b4054Ccf30403De76AA8abcd00b8), [PoolExposureSteward](https://optimistic.etherscan.io/address/0x4684b645386525057526EB85854045914Fe389d6) | |--------|--------|
 
-### Clinic Steward Admins 
+### Clinic Steward Admins
 | Role |Contract |
 |----------|----------|
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://optimistic.etherscan.io/address/0x746c675dAB49Bcd5BB9Dc85161f2d7Eb435009bf) | |--------|--------|

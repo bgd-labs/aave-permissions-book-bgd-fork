@@ -76,7 +76,7 @@
 |  [Collector](https://sonicscan.org//address/0x1aB55bBdD5DF0782BBCf73553Af93BC6B29A286B) |  [CollectorProxyAdmin](https://sonicscan.org//address/0xB8273B2d166B7D9EC734C74e379dfaa1EaA1249E) |  onlyAdminOrRecipient |  [CollectorProxyAdmin](https://sonicscan.org//address/0xB8273B2d166B7D9EC734C74e379dfaa1EaA1249E), [Executor_lvl1](https://sonicscan.org//address/0x7b62461a3570c6AC8a9f8330421576e417B71EE7), [PoolExposureSteward](https://sonicscan.org//address/0x4A137d528444Cc0346320CFa5C80FFc68087D7F9) |  withdrawFromStream, cancelStream | |--------|--------|--------|--------|--------|
 |  [CollectorProxyAdmin](https://sonicscan.org//address/0xb8273b2d166b7d9ec734c74e379dfaa1eaa1249e) |  - |  onlyOwner |  [Executor_lvl1](https://sonicscan.org//address/0x7b62461a3570c6AC8a9f8330421576e417B71EE7) |  changeProxyAdmin, upgrade, upgradeAndCall | |--------|--------|--------|--------|--------|
 
-### Governance V3 Contracts 
+### Governance V3 Contracts
 | contract |proxyAdmin |modifier |permission owner |functions |
 |----------|----------|----------|----------|----------|
 |  [GranularGuardian](https://sonicscan.org//address/0x10078c1D8E46dd1ed5D8df2C42d5ABb969b11566) |  - |  onlyRetryGuardian |  [BGD](https://sonicscan.org//address/0x7837d7a167732aE41627A3B829871d9e32e2e7f2) |  retryEnvelope, retryTransaction | |--------|--------|--------|--------|--------|
@@ -108,7 +108,7 @@
 |  [BGD](https://sonicscan.org//address/0x7837d7a167732aE41627A3B829871d9e32e2e7f2) |  2/3 |  0x7837d7a167732aE41627A3B829871d9e32e2e7f2 |  [0x0650302887619fa7727D8BD480Cda11A638B219B](https://sonicscan.org//address/0x0650302887619fa7727D8BD480Cda11A638B219B), [0xf71fc92e2949ccF6A5Fd369a0b402ba80Bc61E02](https://sonicscan.org//address/0xf71fc92e2949ccF6A5Fd369a0b402ba80Bc61E02), [0x5811d9FF80ff4B73A8F9bA42A6082FaB82E89Ea7](https://sonicscan.org//address/0x5811d9FF80ff4B73A8F9bA42A6082FaB82E89Ea7) | |--------|--------|--------|--------|
 |  [Aave Governance Guardian Sonic](https://sonicscan.org//address/0x63C4422D6cc849549daeb600B7EcE52bD18fAd7f) |  5/9 |  0x63C4422D6cc849549daeb600B7EcE52bD18fAd7f |  [0xDA5Ae43e179987a66B9831F92223567e1F38BE7D](https://sonicscan.org//address/0xDA5Ae43e179987a66B9831F92223567e1F38BE7D), [0x1e3804357eD445251FfECbb6e40107bf03888885](https://sonicscan.org//address/0x1e3804357eD445251FfECbb6e40107bf03888885), [0x4f96743057482a2E10253AFDacDA3fd9CF2C1DC9](https://sonicscan.org//address/0x4f96743057482a2E10253AFDacDA3fd9CF2C1DC9), [0xebED04E9137AfeBFF6a1B97aC0adf61a544eFE29](https://sonicscan.org//address/0xebED04E9137AfeBFF6a1B97aC0adf61a544eFE29), [0xbd4DCfA978c6D0d342cE36809AfFFa49d4B7f1F7](https://sonicscan.org//address/0xbd4DCfA978c6D0d342cE36809AfFFa49d4B7f1F7), [0xA3103D0ED00d24795Faa2d641ACf6A320EeD7396](https://sonicscan.org//address/0xA3103D0ED00d24795Faa2d641ACf6A320EeD7396), [0x936CD9654271083cCF93A975919Da0aB3Bc99EF3](https://sonicscan.org//address/0x936CD9654271083cCF93A975919Da0aB3Bc99EF3), [0x0D2394C027602Dc4c3832Ffd849b5df45DBac0E9](https://sonicscan.org//address/0x0D2394C027602Dc4c3832Ffd849b5df45DBac0E9), [0x4C30E33758216aD0d676419c21CB8D014C68099f](https://sonicscan.org//address/0x4C30E33758216aD0d676419c21CB8D014C68099f) | |--------|--------|--------|--------|
 
-### Admins 
+### Admins
 | Role |Contract |
 |----------|----------|
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://sonicscan.org//address/0x7b62461a3570c6AC8a9f8330421576e417B71EE7) | |--------|--------|
@@ -118,14 +118,14 @@
 |  FLASH_BORROWER |   | |--------|--------|
 |  RISK_ADMIN |  [Manual AGRS](https://sonicscan.org//address/0xdb93e2712a8B36835078f8D28c70fCC95FD6d37c) | |--------|--------|
 
-### Granular Guardian Admins 
+### Granular Guardian Admins
 | Role |Contract |
 |----------|----------|
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://sonicscan.org//address/0x7b62461a3570c6AC8a9f8330421576e417B71EE7) | |--------|--------|
 |  SOLVE_EMERGENCY_ROLE |  [Aave Governance Guardian Sonic](https://sonicscan.org//address/0x63C4422D6cc849549daeb600B7EcE52bD18fAd7f) | |--------|--------|
 |  RETRY_ROLE |  [BGD](https://sonicscan.org//address/0x7837d7a167732aE41627A3B829871d9e32e2e7f2) | |--------|--------|
 
-### Collector Admins 
+### Collector Admins
 | Role |Contract |
 |----------|----------|
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://sonicscan.org//address/0x7b62461a3570c6AC8a9f8330421576e417B71EE7) | |--------|--------|

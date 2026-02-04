@@ -67,7 +67,7 @@
 |  [Collector](https://explorer.mantle.xyz//address/0x0cd2670339Cd520BF9428Ad881bE60A698aB9B32) |  [CollectorProxyAdmin](https://explorer.mantle.xyz//address/0xFd354205874D8FF57A724fc7C7d84b6aED502800) |  onlyAdminOrRecipient |  [CollectorProxyAdmin](https://explorer.mantle.xyz//address/0xFd354205874D8FF57A724fc7C7d84b6aED502800), [Executor_lvl1](https://explorer.mantle.xyz//address/0x70884634D0098782592111A2A6B8d223be31CB7b) |  withdrawFromStream, cancelStream | |--------|--------|--------|--------|--------|
 |  [CollectorProxyAdmin](https://explorer.mantle.xyz//address/0xfd354205874d8ff57a724fc7c7d84b6aed502800) |  - |  onlyOwner |  [Executor_lvl1](https://explorer.mantle.xyz//address/0x70884634D0098782592111A2A6B8d223be31CB7b) |  changeProxyAdmin, upgrade, upgradeAndCall | |--------|--------|--------|--------|--------|
 
-### Governance V3 Contracts 
+### Governance V3 Contracts
 | contract |proxyAdmin |modifier |permission owner |functions |
 |----------|----------|----------|----------|----------|
 |  [GranularGuardian](https://explorer.mantle.xyz//address/0xb26670d2800DBB9cfCe2f2660FfDcA48C799c86d) |  - |  onlyRetryGuardian |  [BGD](https://explorer.mantle.xyz//address/0x0686f59Cc2aEc1ccf891472Dc6C89bB747F6a4A7) |  retryEnvelope, retryTransaction | |--------|--------|--------|--------|--------|
@@ -95,7 +95,7 @@
 |  [BGD](https://explorer.mantle.xyz//address/0x0686f59Cc2aEc1ccf891472Dc6C89bB747F6a4A7) |  2/3 |  0x0686f59Cc2aEc1ccf891472Dc6C89bB747F6a4A7 |  [0x0650302887619fa7727D8BD480Cda11A638B219B](https://explorer.mantle.xyz//address/0x0650302887619fa7727D8BD480Cda11A638B219B), [0xf71fc92e2949ccF6A5Fd369a0b402ba80Bc61E02](https://explorer.mantle.xyz//address/0xf71fc92e2949ccF6A5Fd369a0b402ba80Bc61E02), [0x5811d9FF80ff4B73A8F9bA42A6082FaB82E89Ea7](https://explorer.mantle.xyz//address/0x5811d9FF80ff4B73A8F9bA42A6082FaB82E89Ea7) | |--------|--------|--------|--------|
 |  [Aave Governance Guardian Mantle](https://explorer.mantle.xyz//address/0x14816fC7f443A9C834d30eeA64daD20C4f56fBCD) |  5/9 |  0x14816fC7f443A9C834d30eeA64daD20C4f56fBCD |  [0xDA5Ae43e179987a66B9831F92223567e1F38BE7D](https://explorer.mantle.xyz//address/0xDA5Ae43e179987a66B9831F92223567e1F38BE7D), [0x1e3804357eD445251FfECbb6e40107bf03888885](https://explorer.mantle.xyz//address/0x1e3804357eD445251FfECbb6e40107bf03888885), [0x4f96743057482a2E10253AFDacDA3fd9CF2C1DC9](https://explorer.mantle.xyz//address/0x4f96743057482a2E10253AFDacDA3fd9CF2C1DC9), [0xebED04E9137AfeBFF6a1B97aC0adf61a544eFE29](https://explorer.mantle.xyz//address/0xebED04E9137AfeBFF6a1B97aC0adf61a544eFE29), [0xbd4DCfA978c6D0d342cE36809AfFFa49d4B7f1F7](https://explorer.mantle.xyz//address/0xbd4DCfA978c6D0d342cE36809AfFFa49d4B7f1F7), [0xA3103D0ED00d24795Faa2d641ACf6A320EeD7396](https://explorer.mantle.xyz//address/0xA3103D0ED00d24795Faa2d641ACf6A320EeD7396), [0x936CD9654271083cCF93A975919Da0aB3Bc99EF3](https://explorer.mantle.xyz//address/0x936CD9654271083cCF93A975919Da0aB3Bc99EF3), [0x0D2394C027602Dc4c3832Ffd849b5df45DBac0E9](https://explorer.mantle.xyz//address/0x0D2394C027602Dc4c3832Ffd849b5df45DBac0E9), [0x4C30E33758216aD0d676419c21CB8D014C68099f](https://explorer.mantle.xyz//address/0x4C30E33758216aD0d676419c21CB8D014C68099f) | |--------|--------|--------|--------|
 
-### Admins 
+### Admins
 | Role |Contract |
 |----------|----------|
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://explorer.mantle.xyz//address/0x70884634D0098782592111A2A6B8d223be31CB7b) | |--------|--------|
@@ -105,14 +105,14 @@
 |  FLASH_BORROWER |   | |--------|--------|
 |  RISK_ADMIN |   | |--------|--------|
 
-### Granular Guardian Admins 
+### Granular Guardian Admins
 | Role |Contract |
 |----------|----------|
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://explorer.mantle.xyz//address/0x70884634D0098782592111A2A6B8d223be31CB7b) | |--------|--------|
 |  SOLVE_EMERGENCY_ROLE |  [Aave Governance Guardian Mantle](https://explorer.mantle.xyz//address/0x14816fC7f443A9C834d30eeA64daD20C4f56fBCD) | |--------|--------|
 |  RETRY_ROLE |  [BGD](https://explorer.mantle.xyz//address/0x0686f59Cc2aEc1ccf891472Dc6C89bB747F6a4A7) | |--------|--------|
 
-### Collector Admins 
+### Collector Admins
 | Role |Contract |
 |----------|----------|
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://explorer.mantle.xyz//address/0x70884634D0098782592111A2A6B8d223be31CB7b) | |--------|--------|

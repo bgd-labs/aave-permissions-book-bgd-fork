@@ -88,7 +88,7 @@
 |  [PoolExposureSteward](https://etherscan.io/address/0x22aC12a6937BBBC0a301AF9154d08EaD95673122) |  - |  onlyOwner |  [Executor_lvl1](https://etherscan.io/address/0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A) |  approvePool, revokePool | |--------|--------|--------|--------|--------|
 |  [PoolExposureSteward](https://etherscan.io/address/0x22aC12a6937BBBC0a301AF9154d08EaD95673122) |  - |  onlyOwnerOrGuardian |  [Finance Risk Council](https://etherscan.io/address/0x22740deBa78d5a0c24C58C740e3715ec29de1bFa), [Executor_lvl1](https://etherscan.io/address/0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A) |  depositV3, withdrawV3, withdrawV2, migrateV2toV3, migrateBetweenV3 | |--------|--------|--------|--------|--------|
 
-### Risk Agent Contracts 
+### Risk Agent Contracts
 | contract |proxyAdmin |modifier |permission owner |functions |
 |----------|----------|----------|----------|----------|
 |  [RateStrategy_PrimeAgent](https://etherscan.io/address/0x52E652182b22C41d0202bB8D834982F43B12Cd21) |  - |  onlyAgentHub |  [0x95E3015c67EF62B866cC28ca5A9AB5017A55e336](https://etherscan.io/address/0x95E3015c67EF62B866cC28ca5A9AB5017A55e336) |  inject | |--------|--------|--------|--------|--------|
@@ -106,7 +106,7 @@
 |  [CleanUp Admin](https://etherscan.io/address/0xdeadD8aB03075b7FBA81864202a2f59EE25B312b) |  3/4 |  0xdeadD8aB03075b7FBA81864202a2f59EE25B312b |  [0xCAC616Fffb687cBDDD250b2aE6F672449462985C](https://etherscan.io/address/0xCAC616Fffb687cBDDD250b2aE6F672449462985C), [0x5d49dBcdd300aECc2C311cFB56593E71c445d60d](https://etherscan.io/address/0x5d49dBcdd300aECc2C311cFB56593E71c445d60d), [0x329c54289Ff5D6B7b7daE13592C6B1EDA1543eD4](https://etherscan.io/address/0x329c54289Ff5D6B7b7daE13592C6B1EDA1543eD4), [0xb647055A9915bF9c8021a684E175A353525b9890](https://etherscan.io/address/0xb647055A9915bF9c8021a684E175A353525b9890) | |--------|--------|--------|--------|
 |  [Finance Risk Council](https://etherscan.io/address/0x22740deBa78d5a0c24C58C740e3715ec29de1bFa) |  3/4 |  0x22740deBa78d5a0c24C58C740e3715ec29de1bFa |  [0xCAC616Fffb687cBDDD250b2aE6F672449462985C](https://etherscan.io/address/0xCAC616Fffb687cBDDD250b2aE6F672449462985C), [0x329c54289Ff5D6B7b7daE13592C6B1EDA1543eD4](https://etherscan.io/address/0x329c54289Ff5D6B7b7daE13592C6B1EDA1543eD4), [0xb647055A9915bF9c8021a684E175A353525b9890](https://etherscan.io/address/0xb647055A9915bF9c8021a684E175A353525b9890), [0x5d49dBcdd300aECc2C311cFB56593E71c445d60d](https://etherscan.io/address/0x5d49dBcdd300aECc2C311cFB56593E71c445d60d) | |--------|--------|--------|--------|
 
-### Admins 
+### Admins
 | Role |Contract |
 |----------|----------|
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://etherscan.io/address/0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A) | |--------|--------|
@@ -116,13 +116,13 @@
 |  FLASH_BORROWER |  [0x49d9409111a6363d82C4371fFa43fAEA660C917B](https://etherscan.io/address/0x49d9409111a6363d82C4371fFa43fAEA660C917B), [0x45c00508C14601fd1C1e296eB3C0e3eEEdCa45D0](https://etherscan.io/address/0x45c00508C14601fd1C1e296eB3C0e3eEEdCa45D0), [0xab515542d621574f9b5212d50593cD0C07e641bD](https://etherscan.io/address/0xab515542d621574f9b5212d50593cD0C07e641bD), [0x352423e2fA5D5c99343d371C9e3bC56C87723Cc7](https://etherscan.io/address/0x352423e2fA5D5c99343d371C9e3bC56C87723Cc7) | |--------|--------|
 |  RISK_ADMIN |  [Gho Lido Direct Minter](https://etherscan.io/address/0x2cE01c87Fec1b71A9041c52CaED46Fc5f4807285), [Lido Gho Aave Steward](https://etherscan.io/address/0x5C905d62B22e4DAa4967E517C4a047Ff6026C731), [Manual AGRS](https://etherscan.io/address/0x7e6a6B115D31d4A837E3C737c49Cf6Fafe6112C3), [0x52E652182b22C41d0202bB8D834982F43B12Cd21](https://etherscan.io/address/0x52E652182b22C41d0202bB8D834982F43B12Cd21) | |--------|--------|
 
-### Collector Admins 
+### Collector Admins
 | Role |Contract |
 |----------|----------|
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://etherscan.io/address/0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A) | |--------|--------|
 |  FUNDS_ADMIN_ROLE |  [Executor_lvl1](https://etherscan.io/address/0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A), [ClinicSteward](https://etherscan.io/address/0xf00E2de0E78DFf055A92AD4719a179CE275b6Ef7), [Lido ClinicSteward](https://etherscan.io/address/0x7571F419F7Df2d0622C1A20154a0D4250B2265cC), [PoolExposureSteward](https://etherscan.io/address/0x22aC12a6937BBBC0a301AF9154d08EaD95673122), [ClinicStewardV2](https://etherscan.io/address/0x6A14eBe9A934c8EFE15C3811a999149472876b56), [ClinicStewardV2 AMM](https://etherscan.io/address/0xE1e62c3ee0c581F715fBb0e23CDA536Fc29eeB2c), [SwapSteward](https://etherscan.io/address/0xb7D402138Cb01BfE97d95181C849379d6AD14d19) | |--------|--------|
 
-### Clinic Steward Admins 
+### Clinic Steward Admins
 | Role |Contract |
 |----------|----------|
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://etherscan.io/address/0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A) | |--------|--------|

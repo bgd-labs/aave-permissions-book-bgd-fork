@@ -13,7 +13,6 @@ import {
 } from '../helpers/tables.js';
 import { getPrincipalReadme } from './readme.js';
 import {
-  AddressInfo,
   ContractsByAddress,
   PoolConfigs,
   PoolGuardians,
@@ -24,6 +23,12 @@ import {
   getLevelOfDecentralization,
 } from '../helpers/decentralization.js';
 import { getAddress } from 'viem';
+import {
+  generateContractTable,
+  generateRoleTable,
+  generateGsmRolesTables,
+  TableContext,
+} from '../helpers/tableGenerator.js';
 
 export const generateTableAddress = (
   address: string | undefined,
@@ -33,8 +38,13 @@ export const generateTableAddress = (
   network: string,
   chainId?: string,
 ): string => {
-  const checkSummedAddress = address ? getAddress(address) : null;
+  if (!address) {
+    return '-';
+  }
 
+  const checkSummedAddress = getAddress(address);
+
+  // Handle cross-chain address resolution
   if (chainId) {
     const newContractsByAddress = generateContractsByAddress({
       ...getPermissionsByNetwork(chainId)['V3'].govV3?.contracts,
@@ -44,43 +54,51 @@ export const generateTableAddress = (
     });
     const networkContractsByAddress: Record<string, string> = {};
     Object.keys(newContractsByAddress).forEach((key) => {
-      networkContractsByAddress[
-        key
-      ] = `${newContractsByAddress[key]}(${getNetowkName[chainId]})`;
+      networkContractsByAddress[key] = `${newContractsByAddress[key]}(${getNetowkName[chainId]})`;
     });
     contractsByAddress = {
       ...contractsByAddress,
       ...networkContractsByAddress,
     };
   }
-  return address && checkSummedAddress
-    ? '[' +
-    (
-      addressesNames[address]
-        ? addressesNames[address]
-        : addressesNames[checkSummedAddress]
-          ? addressesNames[checkSummedAddress]
-          : contractsByAddress[address]
-            ? contractsByAddress[address]
-            : contractsByAddress[checkSummedAddress]
-              ? contractsByAddress[checkSummedAddress]
-              : poolGuardians[checkSummedAddress] &&
-                poolGuardians[checkSummedAddress].owners.length > 0
-                ? addressesNames[checkSummedAddress]
-                  ? addressesNames[checkSummedAddress]
-                  : `${checkSummedAddress} (Safe)`
-                : checkSummedAddress) +
-    '](' +
-    (contractsByAddress[checkSummedAddress] &&
-      (contractsByAddress[checkSummedAddress] === 'ShortExecutor' ||
-        contractsByAddress[checkSummedAddress] === 'LongExecutor')
-      ? explorerAddressUrlComposer(
-        checkSummedAddress,
-        ChainId.mainnet.toString(),
-      )
-      : explorerAddressUrlComposer(checkSummedAddress, network)) +
-    ')'
-    : '-';
+
+  // Resolve display name (priority order)
+  const resolveDisplayName = (): string => {
+    // 1. Check addressesNames with original address
+    if (addressesNames[address]) {
+      return addressesNames[address];
+    }
+    // 2. Check addressesNames with checksummed address
+    if (addressesNames[checkSummedAddress]) {
+      return addressesNames[checkSummedAddress];
+    }
+    // 3. Check contractsByAddress with original address
+    if (contractsByAddress[address]) {
+      return contractsByAddress[address];
+    }
+    // 4. Check contractsByAddress with checksummed address
+    if (contractsByAddress[checkSummedAddress]) {
+      return contractsByAddress[checkSummedAddress];
+    }
+    // 5. Check if it's a Safe (has owners)
+    const guardian = poolGuardians[checkSummedAddress];
+    if (guardian && guardian.owners.length > 0) {
+      return addressesNames[checkSummedAddress] || `${checkSummedAddress} (Safe)`;
+    }
+    // 6. Fall back to checksummed address
+    return checkSummedAddress;
+  };
+
+  // Resolve explorer URL (ShortExecutor/LongExecutor go to mainnet)
+  const resolveExplorerUrl = (): string => {
+    const contractName = contractsByAddress[checkSummedAddress];
+    if (contractName === 'ShortExecutor' || contractName === 'LongExecutor') {
+      return explorerAddressUrlComposer(checkSummedAddress, ChainId.mainnet.toString());
+    }
+    return explorerAddressUrlComposer(checkSummedAddress, network);
+  };
+
+  return `[${resolveDisplayName()}](${resolveExplorerUrl()})`;
 };
 
 export const generateTable = (network: string, pool: string): string => {
@@ -404,86 +422,21 @@ export const generateTable = (network: string, pool: string): string => {
     readmeByNetwork += actionsTable + '\n';
   }
 
+  // Create table context for use with generic table generators
+  const tableCtx: TableContext = {
+    network,
+    addressesNames,
+    contractsByAddress,
+    poolGuardians,
+    generateTableAddress,
+  };
+
+  // Contracts table
   if (poolPermitsByContract.contracts && Object.keys(poolPermitsByContract.contracts).length > 0) {
-    let contractTable = `### Contracts\n`;
-    const contractsModifiersHeaderTitles = [
-      'contract',
-      'proxyAdmin',
-      'modifier',
-      'permission owner',
-      'functions',
-    ];
-    const header = getTableHeader(contractsModifiersHeaderTitles);
-    contractTable += header;
-
-    // fill pool table
-    let tableBody = '';
-    for (let contractName of Object.keys(poolPermitsByContract.contracts)) {
-      const contract = poolPermitsByContract.contracts[contractName];
-
-      if (contract.modifiers.length === 0) {
-        tableBody += getTableBody([
-          `[${contractName}](${explorerAddressUrlComposer(
-            contract.address,
-            network,
-          )})`,
-          `${generateTableAddress(
-            getAddress(contract.proxyAdmin!),
-            addressesNames,
-            contractsByAddress,
-            poolGuardians,
-            network,
-          )}`,
-          `-`,
-          `-`,
-          '-',
-        ]);
-        tableBody += getLineSeparator(contractsModifiersHeaderTitles.length);
-      }
-      for (let modifier of contract.modifiers) {
-        for (let modifierAddress of modifier.addresses) {
-          if (!poolGuardians[modifierAddress.address]) {
-            if (modifierAddress.owners.length > 0) {
-              poolGuardians[modifierAddress.address] = {
-                owners: modifierAddress.owners,
-                threshold: modifierAddress.signersThreshold,
-              };
-            }
-          }
-        }
-
-        tableBody += getTableBody([
-          `[${contractName}](${explorerAddressUrlComposer(
-            contract.address,
-            network,
-          )})`,
-          `${generateTableAddress(
-            contract.proxyAdmin,
-            addressesNames,
-            contractsByAddress,
-            poolGuardians,
-            network,
-          )}`,
-          `${modifier.modifier}`,
-          `${modifier.addresses
-            .map((modifierAddress: AddressInfo) =>
-              generateTableAddress(
-                modifierAddress.address,
-                addressesNames,
-                contractsByAddress,
-                poolGuardians,
-                network,
-                modifierAddress.chain,
-              ),
-            )
-            .join(', ')}`,
-          modifier?.functions ? modifier.functions.join(', ') : '',
-        ]);
-        tableBody += getLineSeparator(contractsModifiersHeaderTitles.length);
-      }
-    }
-
-    contractTable += tableBody;
+    readmeByNetwork += generateContractTable(
+      { title: 'Contracts', contracts: poolPermitsByContract.contracts },
+      tableCtx,
+    );
 
     readmeDirectoryTable += getTableBody([
       networkName,
@@ -491,380 +444,31 @@ export const generateTable = (network: string, pool: string): string => {
       `[Permissions](./out/${networkName}-${pool}.md#contracts)`,
     ]);
     readmeDirectoryTable += getLineSeparator(3);
-
-    readmeByNetwork += contractTable + '\n';
   }
 
-  if (
-    poolPermitsByContract.govV3 &&
-    Object.keys(poolPermitsByContract.govV3).length > 0 &&
-    poolPermitsByContract.govV3.contracts
-  ) {
-    let govV3Table = `### Governance V3 Contracts \n`;
-    const govV3HeaderTitles = [
-      'contract',
-      'proxyAdmin',
-      'modifier',
-      'permission owner',
-      'functions',
-    ];
-    const govV3Header = getTableHeader(govV3HeaderTitles);
-    govV3Table += govV3Header;
+  // Governance V3 Contracts table
+  readmeByNetwork += generateContractTable(
+    { title: 'Governance V3 Contracts', contracts: poolPermitsByContract.govV3?.contracts },
+    tableCtx,
+  );
 
-    let govV3tableBody = '';
-    for (let contractName of Object.keys(
-      poolPermitsByContract.govV3.contracts,
-    )) {
-      const contract = poolPermitsByContract.govV3.contracts[contractName];
+  // Umbrella Contracts table
+  readmeByNetwork += generateContractTable(
+    { title: 'Umbrella Contracts', contracts: poolPermitsByContract.umbrella?.contracts },
+    tableCtx,
+  );
 
-      if (contract.modifiers.length === 0) {
-        govV3tableBody += getTableBody([
-          `[${contractName}](${explorerAddressUrlComposer(
-            contract.address,
-            network,
-          )})`,
-          `${generateTableAddress(
-            contract.proxyAdmin,
-            addressesNames,
-            contractsByAddress,
-            poolGuardians,
-            network,
-          )}`,
-          `-`,
-          `-`,
-          '-',
-        ]);
-        govV3tableBody += getLineSeparator(
-          govV3HeaderTitles.length,
-        );
-      }
-      for (let modifier of contract.modifiers) {
-        for (let modifierAddress of modifier.addresses) {
-          if (!poolGuardians[modifierAddress.address]) {
-            if (modifierAddress.owners.length > 0) {
-              poolGuardians[modifierAddress.address] = {
-                owners: modifierAddress.owners,
-                threshold: modifierAddress.signersThreshold,
-              };
-            }
-          }
-        }
+  // Risk Agent Contracts table (agentHub)
+  readmeByNetwork += generateContractTable(
+    { title: 'Risk Agent Contracts', contracts: poolPermitsByContract.agentHub?.contracts },
+    tableCtx,
+  );
 
-        govV3tableBody += getTableBody([
-          `[${contractName}](${explorerAddressUrlComposer(
-            contract.address,
-            network,
-          )})`,
-          `${generateTableAddress(
-            contract.proxyAdmin,
-            addressesNames,
-            contractsByAddress,
-            poolGuardians,
-            network,
-          )}`,
-          `${modifier.modifier}`,
-          `${modifier.addresses
-            .map((modifierAddress: AddressInfo) =>
-              generateTableAddress(
-                modifierAddress.address,
-                addressesNames,
-                contractsByAddress,
-                poolGuardians,
-                network,
-                modifierAddress.chain,
-              ),
-            )
-            .join(', ')}`,
-          modifier?.functions ? modifier.functions.join(', ') : '',
-        ]);
-        govV3tableBody += getLineSeparator(
-          govV3HeaderTitles.length,
-        );
-      }
-    }
-
-    govV3Table += govV3tableBody;
-    readmeByNetwork += govV3Table + '\n';
-  }
-
-  // Umbrella Table
-  if (poolPermitsByContract.umbrella &&
-    Object.keys(poolPermitsByContract.umbrella).length > 0 &&
-    poolPermitsByContract.umbrella.contracts) {
-
-
-    let umbrellaTable = `### Umbrella Contracts \n`;
-    const umbrellaHeaderTitles = [
-      'contract',
-      'proxyAdmin',
-      'modifier',
-      'permission owner',
-      'functions',
-    ];
-    const umbrellaHeader = getTableHeader(umbrellaHeaderTitles);
-    umbrellaTable += umbrellaHeader;
-
-    let umbrellaTableBody = '';
-    for (let contractName of Object.keys(
-      poolPermitsByContract.umbrella.contracts,
-    )) {
-      const contract = poolPermitsByContract.umbrella.contracts[contractName];
-
-      if (contract.modifiers.length === 0) {
-        umbrellaTableBody += getTableBody([
-          `[${contractName}](${explorerAddressUrlComposer(
-            contract.address,
-            network,
-          )})`,
-          `${generateTableAddress(
-            contract.proxyAdmin,
-            addressesNames,
-            contractsByAddress,
-            poolGuardians,
-            network,
-          )}`,
-          `-`,
-          `-`,
-          '-',
-        ]);
-        umbrellaTableBody += getLineSeparator(
-          umbrellaHeaderTitles.length,
-        );
-      }
-      for (let modifier of contract.modifiers) {
-        for (let modifierAddress of modifier.addresses) {
-          if (!poolGuardians[modifierAddress.address]) {
-            if (modifierAddress.owners.length > 0) {
-              poolGuardians[modifierAddress.address] = {
-                owners: modifierAddress.owners,
-                threshold: modifierAddress.signersThreshold,
-              };
-            }
-          }
-        }
-
-        umbrellaTableBody += getTableBody([
-          `[${contractName}](${explorerAddressUrlComposer(
-            contract.address,
-            network,
-          )})`,
-          `${generateTableAddress(
-            contract.proxyAdmin,
-            addressesNames,
-            contractsByAddress,
-            poolGuardians,
-            network,
-          )}`,
-          `${modifier.modifier}`,
-          `${modifier.addresses
-            .map((modifierAddress: AddressInfo) =>
-              generateTableAddress(
-                modifierAddress.address,
-                addressesNames,
-                contractsByAddress,
-                poolGuardians,
-                network,
-                modifierAddress.chain,
-              ),
-            )
-            .join(', ')}`,
-          modifier?.functions ? modifier.functions.join(', ') : '',
-        ]);
-        umbrellaTableBody += getLineSeparator(
-          umbrellaHeaderTitles.length,
-        );
-      }
-    }
-
-    umbrellaTable += umbrellaTableBody;
-    readmeByNetwork += umbrellaTable + '\n';
-
-  }
-
-  // Agent Hub Table
-
-  if (poolPermitsByContract.agentHub &&
-    Object.keys(poolPermitsByContract.agentHub).length > 0 &&
-    poolPermitsByContract.agentHub.contracts && Object.keys(poolPermitsByContract.agentHub.contracts).length > 0) {
-
-    let agentHubTable = `### Risk Agent Contracts \n`;
-    const agentHubHeaderTitles = [
-      'contract',
-      'proxyAdmin',
-      'modifier',
-      'permission owner',
-      'functions',
-    ];
-    const agentHubHeader = getTableHeader(agentHubHeaderTitles);
-    agentHubTable += agentHubHeader;
-
-    let agentHubTableBody = '';
-    for (let contractName of Object.keys(
-      poolPermitsByContract.agentHub.contracts,
-    )) {
-      const contract = poolPermitsByContract.agentHub.contracts[contractName];
-
-      if (contract.modifiers.length === 0) {
-        agentHubTableBody += getTableBody([
-          `[${contractName}](${explorerAddressUrlComposer(
-            contract.address,
-            network,
-          )})`,
-          `${generateTableAddress(
-            contract.proxyAdmin,
-            addressesNames,
-            contractsByAddress,
-            poolGuardians,
-            network,
-          )}`,
-          `-`,
-          `-`,
-          '-',
-        ]);
-        agentHubTableBody += getLineSeparator(
-          agentHubHeaderTitles.length,
-        );
-      }
-      for (let modifier of contract.modifiers) {
-        for (let modifierAddress of modifier.addresses) {
-          if (!poolGuardians[modifierAddress.address]) {
-            if (modifierAddress.owners.length > 0) {
-              poolGuardians[modifierAddress.address] = {
-                owners: modifierAddress.owners,
-                threshold: modifierAddress.signersThreshold,
-              };
-            }
-          }
-        }
-        agentHubTableBody += getTableBody([
-          `[${contractName}](${explorerAddressUrlComposer(
-            contract.address,
-            network,
-          )})`,
-          `${generateTableAddress(
-            contract.proxyAdmin,
-            addressesNames,
-            contractsByAddress,
-            poolGuardians,
-            network,
-          )}`,
-          `${modifier.modifier}`,
-          `${modifier.addresses
-            .map((modifierAddress: AddressInfo) =>
-              generateTableAddress(
-                modifierAddress.address,
-                addressesNames,
-                contractsByAddress,
-                poolGuardians,
-                network,
-                modifierAddress.chain,
-              ),
-            )
-            .join(', ')}`,
-          modifier?.functions ? modifier.functions.join(', ') : '',
-        ]);
-        agentHubTableBody += getLineSeparator(
-          agentHubHeaderTitles.length,
-        );
-      }
-    }
-    agentHubTable += agentHubTableBody;
-    readmeByNetwork += agentHubTable + '\n';
-  }
-
-  // PPC Table
-  if (poolPermitsByContract.ppc &&
-    Object.keys(poolPermitsByContract.ppc).length > 0 &&
-    poolPermitsByContract.ppc.contracts) {
-
-
-    let ppcTable = `### Permissioned Payloads Controller Contracts \n`;
-    const ppcHeaderTitles = [
-      'contract',
-      'proxyAdmin',
-      'modifier',
-      'permission owner',
-      'functions',
-    ];
-    const ppcHeader = getTableHeader(ppcHeaderTitles);
-    ppcTable += ppcHeader;
-
-    let ppcTableBody = '';
-    for (let contractName of Object.keys(
-      poolPermitsByContract.ppc.contracts,
-    )) {
-      const contract = poolPermitsByContract.ppc.contracts[contractName];
-
-      if (contract.modifiers.length === 0) {
-        ppcTableBody += getTableBody([
-          `[${contractName}](${explorerAddressUrlComposer(
-            contract.address,
-            network,
-          )})`,
-          `${generateTableAddress(
-            contract.proxyAdmin,
-            addressesNames,
-            contractsByAddress,
-            poolGuardians,
-            network,
-          )}`,
-          `-`,
-          `-`,
-          '-',
-        ]);
-        ppcTableBody += getLineSeparator(
-          ppcHeaderTitles.length,
-        );
-      }
-      for (let modifier of contract.modifiers) {
-        for (let modifierAddress of modifier.addresses) {
-          if (!poolGuardians[modifierAddress.address]) {
-            if (modifierAddress.owners.length > 0) {
-              poolGuardians[modifierAddress.address] = {
-                owners: modifierAddress.owners,
-                threshold: modifierAddress.signersThreshold,
-              };
-            }
-          }
-        }
-
-        ppcTableBody += getTableBody([
-          `[${contractName}](${explorerAddressUrlComposer(
-            contract.address,
-            network,
-          )})`,
-          `${generateTableAddress(
-            contract.proxyAdmin,
-            addressesNames,
-            contractsByAddress,
-            poolGuardians,
-            network,
-          )}`,
-          `${modifier.modifier}`,
-          `${modifier.addresses
-            .map((modifierAddress: AddressInfo) =>
-              generateTableAddress(
-                modifierAddress.address,
-                addressesNames,
-                contractsByAddress,
-                poolGuardians,
-                network,
-                modifierAddress.chain,
-              ),
-            )
-            .join(', ')}`,
-          modifier?.functions ? modifier.functions.join(', ') : '',
-        ]);
-        ppcTableBody += getLineSeparator(
-          ppcHeaderTitles.length,
-        );
-      }
-    }
-
-    ppcTable += ppcTableBody;
-    readmeByNetwork += ppcTable + '\n';
-
-  }
+  // Permissioned Payloads Controller Contracts table (ppc)
+  readmeByNetwork += generateContractTable(
+    { title: 'Permissioned Payloads Controller Contracts', contracts: poolPermitsByContract.ppc?.contracts },
+    tableCtx,
+  );
 
   if (Object.keys(poolGuardians).length > 0) {
     let guardianTable = `### Guardians \n`;
@@ -892,213 +496,41 @@ export const generateTable = (network: string, pool: string): string => {
 
     readmeByNetwork += guardianTable + '\n';
   }
-  let adminTable = `### Admins \n`;
-  const adminsHeaderTitles = ['Role', 'Contract'];
-  const adminHeader = getTableHeader(adminsHeaderTitles);
-  adminTable += adminHeader;
+  // Admins table
+  readmeByNetwork += generateRoleTable(
+    { title: 'Admins', roles: poolPermitsByContract.roles?.role },
+    tableCtx,
+  );
 
-  if (
-    networkConfigs[network].pools[pool] &&
-    poolPermitsByContract.roles &&
-    poolPermitsByContract.roles.role
-  ) {
-    Object.keys(poolPermitsByContract.roles.role).forEach((role) => {
-      const roleAddresses = poolPermitsByContract.roles?.role[role] || [];
-      adminTable += getTableBody([
-        role,
-        `${roleAddresses
-          .map((roleAddress: string) =>
-            generateTableAddress(
-              roleAddress,
-              addressesNames,
-              contractsByAddress,
-              poolGuardians,
-              network,
-            ),
-          )
-          .join(', ')}`,
-      ]);
-      adminTable += getLineSeparator(adminsHeaderTitles.length);
-    });
+  // Granular Guardian Admins table
+  readmeByNetwork += generateRoleTable(
+    { title: 'Granular Guardian Admins', roles: poolPermitsByContract.govV3?.ggRoles?.role },
+    tableCtx,
+  );
 
-    readmeByNetwork += adminTable + '\n';
-  }
+  // Umbrella Admins table (merged from umbrellaRoles and umbrellaIncentivesRoles)
+  const umbrellaRoles = poolPermitsByContract.umbrella?.umbrellaRoles?.role && poolPermitsByContract.umbrella?.umbrellaIncentivesRoles?.role
+    ? { ...poolPermitsByContract.umbrella.umbrellaRoles.role, ...poolPermitsByContract.umbrella.umbrellaIncentivesRoles.role }
+    : undefined;
+  readmeByNetwork += generateRoleTable(
+    { title: 'Umbrella Admins', roles: umbrellaRoles },
+    tableCtx,
+  );
 
-  let ggAdminTable = `### Granular Guardian Admins \n`;
-  const ggAdminsHeaderTitles = ['Role', 'Contract'];
-  const ggAdminHeader = getTableHeader(ggAdminsHeaderTitles);
-  ggAdminTable += ggAdminHeader;
+  // Collector Admins table
+  readmeByNetwork += generateRoleTable(
+    { title: 'Collector Admins', roles: poolPermitsByContract.collector?.cRoles?.role },
+    tableCtx,
+  );
 
-  if (
-    networkConfigs[network].pools[pool] &&
-    poolPermitsByContract.govV3 &&
-    poolPermitsByContract.govV3.ggRoles &&
-    poolPermitsByContract.govV3.ggRoles.role
-  ) {
-    Object.keys(poolPermitsByContract.govV3.ggRoles.role).forEach((role) => {
-      const roleAddresses =
-        poolPermitsByContract.govV3?.ggRoles?.role[role] || [];
-      ggAdminTable += getTableBody([
-        role,
-        `${roleAddresses
-          .map((roleAddress: string) =>
-            generateTableAddress(
-              roleAddress,
-              addressesNames,
-              contractsByAddress,
-              poolGuardians,
-              network,
-            ),
-          )
-          .join(', ')}`,
-      ]);
-      ggAdminTable += getLineSeparator(ggAdminsHeaderTitles.length);
-    });
+  // Clinic Steward Admins table
+  readmeByNetwork += generateRoleTable(
+    { title: 'Clinic Steward Admins', roles: poolPermitsByContract.clinicSteward?.clinicStewardRoles?.role },
+    tableCtx,
+  );
 
-    readmeByNetwork += ggAdminTable + '\n';
-  }
-
-  // umbrella admins
-  let umbrellaAdminTable = `### Umbrella Admins \n`;
-  const umbrellaAdminHeaderTitles = ['Role', 'Contract'];
-  const umbrellaAdminHeader = getTableHeader(umbrellaAdminHeaderTitles);
-  umbrellaAdminTable += umbrellaAdminHeader;
-
-  if (
-    networkConfigs[network].pools[pool] &&
-    poolPermitsByContract.umbrella &&
-    poolPermitsByContract.umbrella.umbrellaRoles &&
-    poolPermitsByContract.umbrella.umbrellaRoles.role &&
-    poolPermitsByContract.umbrella.umbrellaIncentivesRoles &&
-    poolPermitsByContract.umbrella.umbrellaIncentivesRoles.role
-  ) {
-    const umbrellaRoles = { ...poolPermitsByContract.umbrella.umbrellaRoles.role, ...poolPermitsByContract.umbrella.umbrellaIncentivesRoles.role }
-    Object.keys(umbrellaRoles).forEach((role) => {
-      const roleAddresses = umbrellaRoles[role] || [];
-      umbrellaAdminTable += getTableBody([
-        role,
-        `${roleAddresses
-          .map((roleAddress: string) =>
-            generateTableAddress(
-              roleAddress,
-              addressesNames,
-              contractsByAddress,
-              poolGuardians,
-              network,
-            ),
-          )
-          .join(', ')}`,
-      ]);
-      umbrellaAdminTable += getLineSeparator(umbrellaAdminHeaderTitles.length);
-    });
-
-    readmeByNetwork += umbrellaAdminTable + '\n';
-  }
-
-  // collector tables
-  let collectorAdminTable = `### Collector Admins \n`;
-  const collectorAdminHeaderTitles = ['Role', 'Contract'];
-  const collectorAdminHeader = getTableHeader(collectorAdminHeaderTitles);
-  collectorAdminTable += collectorAdminHeader;
-
-  if (
-    networkConfigs[network].pools[pool] &&
-    poolPermitsByContract.collector &&
-    poolPermitsByContract.collector.cRoles &&
-    poolPermitsByContract.collector.cRoles.role
-  ) {
-    Object.keys(poolPermitsByContract.collector.cRoles.role).forEach((role) => {
-      const roleAddresses = poolPermitsByContract.collector?.cRoles.role[role] || [];
-      collectorAdminTable += getTableBody([
-        role,
-        `${roleAddresses
-          .map((roleAddress: string) =>
-            generateTableAddress(
-              roleAddress,
-              addressesNames,
-              contractsByAddress,
-              poolGuardians,
-              network,
-            ),
-          )
-          .join(', ')}`,
-      ]);
-      collectorAdminTable += getLineSeparator(collectorAdminHeaderTitles.length);
-    });
-
-    readmeByNetwork += collectorAdminTable + '\n';
-  }
-
-  // Clinic Steward tables
-  let clinicStewardAdminTable = `### Clinic Steward Admins \n`;
-  const clinicStewardAdminHeaderTitles = ['Role', 'Contract'];
-  const clinicStewardAdminHeader = getTableHeader(clinicStewardAdminHeaderTitles);
-  clinicStewardAdminTable += clinicStewardAdminHeader;
-
-  if (
-    networkConfigs[network].pools[pool] &&
-    poolPermitsByContract.clinicSteward &&
-    poolPermitsByContract.clinicSteward.clinicStewardRoles &&
-    poolPermitsByContract.clinicSteward.clinicStewardRoles.role
-  ) {
-    Object.keys(poolPermitsByContract.clinicSteward.clinicStewardRoles.role).forEach((role) => {
-      const roleAddresses = poolPermitsByContract.clinicSteward?.clinicStewardRoles.role[role] || [];
-      clinicStewardAdminTable += getTableBody([
-        role,
-        `${roleAddresses
-          .map((roleAddress: string) =>
-            generateTableAddress(
-              roleAddress,
-              addressesNames,
-              contractsByAddress,
-              poolGuardians,
-              network,
-            ),
-          )
-          .join(', ')}`,
-      ]);
-      clinicStewardAdminTable += getLineSeparator(clinicStewardAdminHeaderTitles.length);
-    });
-
-    readmeByNetwork += clinicStewardAdminTable + '\n';
-  }
-
-  // gho gsms tables
-  if (networkConfigs[network].pools[pool] && poolPermitsByContract.gsmRoles) {
-    for (
-      let i = 0;
-      i < Object.keys(poolPermitsByContract.gsmRoles).length;
-      i++
-    ) {
-      const key = Object.keys(poolPermitsByContract.gsmRoles)[i];
-      const gsmRoles = poolPermitsByContract.gsmRoles[key];
-      let gsmAdminTable = `### Admins ${key}\n`;
-      const gsmAdminsHeaderTitles = ['Role', 'Contract'];
-      const gsmAdminHeader = getTableHeader(gsmAdminsHeaderTitles);
-      gsmAdminTable += gsmAdminHeader;
-
-      Object.keys(gsmRoles.role).forEach((role) => {
-        const roleAddresses = gsmRoles?.role[role] || [];
-        gsmAdminTable += getTableBody([
-          role,
-          `${roleAddresses
-            .map((roleAddress: string) =>
-              generateTableAddress(
-                roleAddress,
-                addressesNames,
-                contractsByAddress,
-                poolGuardians,
-                network,
-              ),
-            )
-            .join(', ')}`,
-        ]);
-        gsmAdminTable += getLineSeparator(gsmAdminsHeaderTitles.length);
-      });
-
-      readmeByNetwork += gsmAdminTable + '\n';
-    }
-  }
+  // GSM Admins tables
+  readmeByNetwork += generateGsmRolesTables(poolPermitsByContract.gsmRoles, tableCtx);
 
   let poolName = pool;
   if (networkConfigs[network].pools[pool].tenderlyBasePool) {
