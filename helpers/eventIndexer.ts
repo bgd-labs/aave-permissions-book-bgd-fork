@@ -152,12 +152,13 @@ export const indexPoolEvents = async ({
 
   let latestBlockNumber = poolMetadata?.latestBlockNumber ?? 0;
 
-  // Handle Tenderly pools: fetch from mainnet up to fork block, then from fork
+  // Handle Tenderly pools:
+  // 1. Parent pool's state was copied (via overwriteBaseTenderlyPool) - gives mainnet state at parent's latestBlockNumber
+  // 2. Index mainnet from parent's latestBlockNumber to current - updates to latest mainnet state
+  // 3. Index Tenderly fork events from tenderlyBlock onwards - adds fork-specific changes
   if (isTenderlyPool(poolKey) && tenderlyConfig) {
-    // Fetch events from mainnet up to the Tenderly fork block
+    // Step 2: Index mainnet events from where parent left off to current block
     for (const [fromBlock, contractGroup] of byFromBlock) {
-      if (fromBlock >= tenderlyConfig.tenderlyBlock) continue;
-
       const addresses = contractGroup.map((c) => c.address);
       const eventTypes = [...new Set(contractGroup.flatMap((c) => c.eventTypes))];
 
@@ -167,10 +168,9 @@ export const indexPoolEvents = async ({
         contracts: addresses,
         eventTypes,
         limit,
-        maxBlock: tenderlyConfig.tenderlyBlock,
       });
 
-      // Distribute logs to their respective contracts by ID
+      // Distribute mainnet logs to their respective contracts by ID
       for (const contract of contractGroup) {
         const logs = logsByContract.get(contract.address.toLowerCase()) ?? [];
         eventsByContract[contract.id].push(...logs);
@@ -179,7 +179,7 @@ export const indexPoolEvents = async ({
       latestBlockNumber = Math.max(latestBlockNumber, currentBlock);
     }
 
-    // Fetch events from the Tenderly fork
+    // Step 3: Fetch events from the Tenderly fork
     const tenderlyProvider = getRpcClientFromUrl(tenderlyConfig.tenderlyRpcUrl);
     const allAddresses = validContracts.map((c) => c.address);
     const allEventTypes = [...new Set(validContracts.flatMap((c) => c.eventTypes))];

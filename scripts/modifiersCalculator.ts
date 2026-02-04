@@ -78,6 +78,10 @@ const generateNetworkPermissions = async (network: string) => {
     // =========================================================================
     // UNIFIED EVENT INDEXING
     // For pools that need event-based role tracking, we fetch all events once
+    // For Tenderly pools:
+    // 1. Copy parent pool's state (mainnet at parent's latestBlockNumber)
+    // 2. Index mainnet from parent's latestBlockNumber to current block
+    // 3. Index Tenderly fork events from tenderlyBlock onwards
     // =========================================================================
     const needsEventIndexing =
       pool.aclBlock ||
@@ -92,9 +96,12 @@ const generateNetworkPermissions = async (network: string) => {
     let indexedEvents: Record<string, import('viem').Log[]> = {};
     let indexedLatestBlock = 0;
 
-    if (needsEventIndexing && !isTenderlyPool(poolKey)) {
-      // Handle Tenderly base pool overwrite first
-      if (pool.tenderlyBasePool) {
+    if (needsEventIndexing) {
+      // For Tenderly pools:
+      // 1. Copy parent pool's current state (mainnet state at parent's latestBlockNumber)
+      // 2. Index mainnet from parent's latestBlockNumber to current (via parent metadata)
+      // 3. Index Tenderly fork events from tenderlyBlock onwards
+      if (pool.tenderlyBasePool && isTenderlyPool(poolKey)) {
         await overwriteBaseTenderlyPool(poolKey, network, pool.tenderlyBasePool);
         fullJson = getPermissionsByNetwork(network);
       }
@@ -116,8 +123,13 @@ const generateNetworkPermissions = async (network: string) => {
       });
 
       if (contractConfigs.length > 0) {
-        // Get existing metadata for this pool
-        const existingMetadata = getPoolMetadata(network, poolKey);
+        // For Tenderly pools: use PARENT pool's metadata to start mainnet indexing
+        // from parent's latestBlockNumber (after copying parent's state)
+        // For regular pools: use own metadata for incremental indexing
+        const metadataSourcePool = isTenderlyPool(poolKey) && pool.tenderlyBasePool
+          ? pool.tenderlyBasePool
+          : poolKey;
+        const existingMetadata = getPoolMetadata(network, metadataSourcePool);
 
         // Index all events in one call
         const indexResult = await indexPoolEvents({
@@ -131,7 +143,8 @@ const generateNetworkPermissions = async (network: string) => {
         indexedEvents = indexResult.eventsByContract;
         indexedLatestBlock = indexResult.latestBlockNumber;
 
-        // Save updated metadata
+        // Save updated metadata to the CURRENT pool (not the parent)
+        // This tracks the mainnet block we've indexed up to
         updatePoolMetadata(network, poolKey, indexResult.poolMetadata);
 
         logTableGeneration(network, poolKey, 'Events indexed', indexedLatestBlock);
