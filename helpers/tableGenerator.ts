@@ -11,6 +11,8 @@ import { AddressInfo, Contracts, ContractsByAddress, PoolGuardians } from './typ
  */
 export interface TableContext {
   network: string;
+  pool: string;
+  tenderlyBasePool?: string;
   addressesNames: Record<string, string>;
   contractsByAddress: ContractsByAddress;
   poolGuardians: PoolGuardians;
@@ -20,6 +22,8 @@ export interface TableContext {
     contractsByAddress: ContractsByAddress,
     poolGuardians: PoolGuardians,
     network: string,
+    pool: string,
+    tenderlyBasePool?: string,
     chainId?: string,
   ) => string;
 }
@@ -102,6 +106,8 @@ export const generateContractTable = (
           ctx.contractsByAddress,
           ctx.poolGuardians,
           ctx.network,
+          ctx.pool,
+          ctx.tenderlyBasePool,
         ),
         '-',
         '-',
@@ -121,6 +127,8 @@ export const generateContractTable = (
           ctx.contractsByAddress,
           ctx.poolGuardians,
           ctx.network,
+          ctx.pool,
+          ctx.tenderlyBasePool,
         ),
         modifier.modifier,
         modifier.addresses
@@ -131,6 +139,8 @@ export const generateContractTable = (
               ctx.contractsByAddress,
               ctx.poolGuardians,
               ctx.network,
+              ctx.pool,
+              ctx.tenderlyBasePool,
               modifierAddress.chain,
             ),
           )
@@ -184,6 +194,8 @@ export const generateRoleTable = (
             ctx.contractsByAddress,
             ctx.poolGuardians,
             ctx.network,
+            ctx.pool,
+            ctx.tenderlyBasePool,
           ),
         )
         .join(', '),

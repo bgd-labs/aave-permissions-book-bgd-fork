@@ -5,7 +5,7 @@ import {
 import { getNetowkName, networkConfigs, Pools } from '../helpers/configs.js';
 import { explorerAddressUrlComposer } from '../helpers/explorer.js';
 import { ChainId } from '@bgd-labs/toolbox';
-import { generateContractsByAddress } from '../helpers/jsonParsers.js';
+import { generateContractsByAddress, findContractNameByAddress } from '../helpers/jsonParsers.js';
 import {
   getLineSeparator,
   getTableBody,
@@ -36,6 +36,8 @@ export const generateTableAddress = (
   contractsByAddress: ContractsByAddress,
   poolGuardians: PoolGuardians,
   network: string,
+  pool: string,
+  tenderlyBasePool?: string,
   chainId?: string,
 ): string => {
   if (!address) {
@@ -85,7 +87,17 @@ export const generateTableAddress = (
     if (guardian && guardian.owners.length > 0) {
       return addressesNames[checkSummedAddress] || `${checkSummedAddress} (Safe)`;
     }
-    // 6. Fall back to checksummed address
+    // 6. Lazy lookup: search across pools for contract name
+    const foundContractName = findContractNameByAddress(
+      checkSummedAddress,
+      network,
+      pool,
+      tenderlyBasePool,
+    );
+    if (foundContractName) {
+      return foundContractName;
+    }
+    // 7. Fall back to checksummed address
     return checkSummedAddress;
   };
 
@@ -155,98 +167,15 @@ export const generateTable = (network: string, pool: string): string => {
     });
   }
 
-  let v3Contracts;
-  if (
-    pool === Pools.LIDO ||
-    pool === Pools.ETHERFI
-  ) {
-    v3Contracts = generateContractsByAddress({
-      ...(poolPermitsByContract?.contracts || {}),
-      ...getPermissionsByNetwork(network)['V3'].govV3?.contracts,
-      ...getPermissionsByNetwork(network)['V3'].collector?.contracts,
-      ...getPermissionsByNetwork(network)['V3'].clinicSteward?.contracts,
-      ...getPermissionsByNetwork(network)['V3'].umbrella?.contracts,
-      ...getPermissionsByNetwork(network)['V3'].ppc?.contracts,
-    });
-  } else if (
-    pool === Pools.TENDERLY
-  ) {
-    v3Contracts = generateContractsByAddress({
-      ...(poolPermitsByContract?.contracts || {}),
-      ...getPermissionsByNetwork(network)['V3'].govV3?.contracts,
-      ...getPermissionsByNetwork(network)['V3'].collector?.contracts,
-      ...getPermissionsByNetwork(network)['V3'].clinicSteward?.contracts,
-      ...getPermissionsByNetwork(network)['V3'].umbrella?.contracts,
-      ...getPermissionsByNetwork(network)['V3'].ppc?.contracts,
-      ...getPermissionsByNetwork(network)['V3'].agentHub?.contracts,
-      ...getPermissionsByNetwork(network)['TENDERLY'].govV3?.contracts,
-      ...getPermissionsByNetwork(network)['TENDERLY'].collector?.contracts,
-      ...getPermissionsByNetwork(network)['TENDERLY'].clinicSteward?.contracts,
-      ...getPermissionsByNetwork(network)['TENDERLY'].umbrella?.contracts,
-      ...getPermissionsByNetwork(network)['TENDERLY'].ppc?.contracts,
-      ...getPermissionsByNetwork(network)['TENDERLY'].agentHub?.contracts,
-    });
-  } else if (
-    pool === Pools.LIDO_TENDERLY
-  ) {
-    v3Contracts = generateContractsByAddress({
-      ...(poolPermitsByContract?.contracts || {}),
-      ...getPermissionsByNetwork(network)['V3'].govV3?.contracts,
-      ...getPermissionsByNetwork(network)['V3'].collector?.contracts,
-      ...getPermissionsByNetwork(network)['V3'].clinicSteward?.contracts,
-      ...getPermissionsByNetwork(network)['V3'].umbrella?.contracts,
-      ...getPermissionsByNetwork(network)['V3'].ppc?.contracts,
-      ...getPermissionsByNetwork(network)['V3'].agentHub?.contracts,
-      ...getPermissionsByNetwork(network)['LIDO_TENDERLY'].govV3?.contracts,
-      ...getPermissionsByNetwork(network)['LIDO_TENDERLY'].collector?.contracts,
-      ...getPermissionsByNetwork(network)['LIDO_TENDERLY'].clinicSteward?.contracts,
-      ...getPermissionsByNetwork(network)['LIDO_TENDERLY'].umbrella?.contracts,
-      ...getPermissionsByNetwork(network)['LIDO_TENDERLY'].ppc?.contracts,
-      ...getPermissionsByNetwork(network)['LIDO_TENDERLY'].agentHub?.contracts,
-    });
-  } else if (
-    pool === Pools.ETHERFI_TENDERLY
-  ) {
-    v3Contracts = generateContractsByAddress({
-      ...(poolPermitsByContract?.contracts || {}),
-      ...getPermissionsByNetwork(network)['V3'].govV3?.contracts,
-      ...getPermissionsByNetwork(network)['V3'].collector?.contracts,
-      ...getPermissionsByNetwork(network)['V3'].clinicSteward?.contracts,
-      ...getPermissionsByNetwork(network)['V3'].umbrella?.contracts,
-      ...getPermissionsByNetwork(network)['V3'].ppc?.contracts,
-      ...getPermissionsByNetwork(network)['V3'].agentHub?.contracts,
-      ...getPermissionsByNetwork(network)['ETHERFI_TENDERLY'].govV3?.contracts,
-      ...getPermissionsByNetwork(network)['ETHERFI_TENDERLY'].collector?.contracts,
-      ...getPermissionsByNetwork(network)['ETHERFI_TENDERLY'].clinicSteward?.contracts,
-      ...getPermissionsByNetwork(network)['ETHERFI_TENDERLY'].umbrella?.contracts,
-      ...getPermissionsByNetwork(network)['ETHERFI_TENDERLY'].ppc?.contracts,
-      ...getPermissionsByNetwork(network)['ETHERFI_TENDERLY'].agentHub?.contracts,
-    });
-  } else if (pool === Pools.V3_WHITE_LABEL) {
-    v3Contracts = generateContractsByAddress({
-      ...(poolPermitsByContract?.contracts || {}),
-      ...getPermissionsByNetwork(network)['V3_WHITE_LABEL']?.govV3?.contracts,
-      ...getPermissionsByNetwork(network)['V3_WHITE_LABEL']?.contracts,
-      ...getPermissionsByNetwork(network)['V3_WHITE_LABEL']?.collector?.contracts,
-      ...getPermissionsByNetwork(network)['V3_WHITE_LABEL']?.clinicSteward?.contracts,
-      ...getPermissionsByNetwork(network)['V3_WHITE_LABEL']?.umbrella?.contracts,
-      ...getPermissionsByNetwork(network)['V3_WHITE_LABEL']?.ppc?.contracts,
-      ...getPermissionsByNetwork(network)['V3_WHITE_LABEL']?.agentHub?.contracts,
-    });
-  } else {
-    v3Contracts = generateContractsByAddress({
-      ...(poolPermitsByContract?.contracts || {}),
-      ...getPermissionsByNetwork(network)['V3'].govV3?.contracts,
-      ...getPermissionsByNetwork(network)['V3'].contracts,
-      ...getPermissionsByNetwork(ChainId.mainnet)['GHO'].contracts,
-      ...getPermissionsByNetwork(network)['V3'].collector?.contracts,
-      ...getPermissionsByNetwork(network)['V3'].clinicSteward?.contracts,
-      ...getPermissionsByNetwork(network)['V3'].ppc?.contracts,
-      ...getPermissionsByNetwork(network)['V3'].umbrella?.contracts,
-      ...getPermissionsByNetwork(network)['V3'].agentHub?.contracts,
-    });
-  }
-  contractsByAddress = { ...contractsByAddress, ...v3Contracts };
+  // Add current pool's contracts to contractsByAddress
+  // Additional lookups across pools are done lazily via findContractNameByAddress
+  contractsByAddress = {
+    ...contractsByAddress,
+    ...generateContractsByAddress(poolPermitsByContract?.contracts || {}),
+  };
+
+  // Get tenderlyBasePool from pool config if available
+  const tenderlyBasePool = networkConfigs[network].pools[pool]?.tenderlyBasePool;
 
   let decentralizationTable = `### Contracts upgradeability\n`;
   const decentralizationHeaderTitles = ['contract', 'upgradeable by'];
@@ -425,6 +354,8 @@ export const generateTable = (network: string, pool: string): string => {
   // Create table context for use with generic table generators
   const tableCtx: TableContext = {
     network,
+    pool,
+    tenderlyBasePool,
     addressesNames,
     contractsByAddress,
     poolGuardians,
