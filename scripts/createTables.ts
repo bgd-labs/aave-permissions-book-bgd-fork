@@ -5,7 +5,7 @@ import {
 import { getNetowkName, networkConfigs, Pools } from '../helpers/configs.js';
 import { explorerAddressUrlComposer } from '../helpers/explorer.js';
 import { ChainId } from '@bgd-labs/toolbox';
-import { generateContractsByAddress, findContractNameByAddress } from '../helpers/jsonParsers.js';
+import { generateContractsByAddress, findContractNameByAddress, extractPoolContracts } from '../helpers/jsonParsers.js';
 import {
   getLineSeparator,
   getTableBody,
@@ -29,6 +29,143 @@ import {
   generateGsmRolesTables,
   TableContext,
 } from '../helpers/tableGenerator.js';
+import { Contracts } from '../helpers/types.js';
+
+// ============================================================================
+// Pool Contract Aggregation Helpers
+// ============================================================================
+
+/**
+ * Builds the poolInfo contracts object for decentralization checks.
+ * Uses lazy extraction from pool sections based on pool type.
+ */
+const buildPoolInfoContracts = (
+  network: string,
+  pool: string,
+  currentPoolContracts: Contracts,
+): Contracts => {
+  const networkPermits = getPermissionsByNetwork(network);
+  const isWhiteLabel = pool === Pools.V3_WHITE_LABEL;
+  const isLidoOrEtherfi = pool === Pools.LIDO || pool === Pools.ETHERFI ||
+    pool === Pools.LIDO_TENDERLY || pool === Pools.ETHERFI_TENDERLY;
+
+  if (isWhiteLabel) {
+    // V3_WHITE_LABEL uses only its own pool data
+    return extractPoolContracts(networkPermits['V3_WHITE_LABEL']) as Contracts;
+  }
+
+  if (isLidoOrEtherfi) {
+    // LIDO/ETHERFI pools: current pool + V3's sections (excluding V3's main contracts)
+    return {
+      ...currentPoolContracts,
+      ...networkPermits['V3'].collector?.contracts,
+      ...networkPermits['V3'].govV3?.contracts,
+      ...networkPermits['V3'].clinicSteward?.contracts,
+      ...networkPermits['V3'].umbrella?.contracts,
+      ...networkPermits['V3'].ppc?.contracts,
+      ...networkPermits['V3'].agentHub?.contracts,
+    } as Contracts;
+  }
+
+  // Default: current pool contracts + all V3 sections (including V3's main contracts)
+  return {
+    ...currentPoolContracts,
+    ...extractPoolContracts(networkPermits['V3']),
+  } as Contracts;
+};
+
+/**
+ * Builds the govPermissions contracts object for ownership checks.
+ */
+const buildGovPermissions = (
+  network: string,
+  pool: string,
+): Contracts => {
+  const networkPermits = getPermissionsByNetwork(network);
+
+  if (pool === Pools.V3_WHITE_LABEL) {
+    return {
+      ...networkPermits['V3_WHITE_LABEL']?.govV3?.contracts,
+      ...networkPermits['V3_WHITE_LABEL']?.ppc?.contracts,
+    } as Contracts;
+  }
+
+  if (pool === Pools.V2_ARC) {
+    return {
+      ...networkPermits['V3'].govV3?.contracts,
+      ...getPermissionsByNetwork(ChainId.mainnet)['V2_ARC'].contracts,
+    } as Contracts;
+  }
+
+  return {
+    ...networkPermits['V3'].govV3?.contracts,
+  } as Contracts;
+};
+
+/**
+ * Builds the poolInfo contracts object for action executors.
+ * Note: This uses specific sections, not extractPoolContracts, to match original behavior.
+ */
+const buildActionPoolInfo = (
+  network: string,
+  pool: string,
+  currentPoolContracts: Contracts,
+): Contracts => {
+  const networkPermits = getPermissionsByNetwork(network);
+  const isWhiteLabel = pool === Pools.V3_WHITE_LABEL;
+
+  if (isWhiteLabel) {
+    return {
+      ...currentPoolContracts,
+      ...networkPermits['V3_WHITE_LABEL']?.govV3?.contracts,
+      ...networkPermits['V3_WHITE_LABEL']?.contracts,
+      ...networkPermits['V3_WHITE_LABEL']?.collector?.contracts,
+      ...networkPermits['V3_WHITE_LABEL']?.clinicSteward?.contracts,
+      ...networkPermits['V3_WHITE_LABEL']?.umbrella?.contracts,
+      ...networkPermits['V3_WHITE_LABEL']?.ppc?.contracts,
+      ...networkPermits['V3_WHITE_LABEL']?.agentHub?.contracts,
+    } as Contracts;
+  }
+
+  // Non-white-label: specific sections (excludes V3.contracts, V3.umbrella, V3.ppc)
+  return {
+    ...currentPoolContracts,
+    ...networkPermits['V3'].govV3?.contracts,
+    ...networkPermits['V3'].collector?.contracts,
+    ...networkPermits['V3'].clinicSteward?.contracts,
+    ...getPermissionsByNetwork(ChainId.mainnet)['GHO']?.contracts,
+    ...networkPermits['V3'].agentHub?.contracts,
+  } as Contracts;
+};
+
+/**
+ * Builds the govInfo contracts object for action executors.
+ */
+const buildActionGovInfo = (
+  network: string,
+  pool: string,
+): Contracts => {
+  const networkPermits = getPermissionsByNetwork(network);
+
+  if (pool === Pools.V3_WHITE_LABEL) {
+    return {
+      ...networkPermits['V3_WHITE_LABEL']?.govV3?.contracts,
+      ...networkPermits['V3_WHITE_LABEL']?.ppc?.contracts,
+    } as Contracts;
+  }
+
+  return {
+    ...networkPermits['V3'].govV3?.contracts,
+    ...networkPermits['V3'].ppc?.contracts,
+    ...networkPermits['V3'].clinicSteward?.contracts,
+    ...getPermissionsByNetwork(ChainId.mainnet)['GHO']?.contracts,
+    ...networkPermits['V3'].agentHub?.contracts,
+  } as Contracts;
+};
+
+// ============================================================================
+// Table Address Generation
+// ============================================================================
 
 export const generateTableAddress = (
   address: string | undefined,
@@ -182,62 +319,17 @@ export const generateTable = (network: string, pool: string): string => {
   const decentralizationHeader = getTableHeader(decentralizationHeaderTitles);
   decentralizationTable += decentralizationHeader;
 
+  // Build contracts objects once for all decentralization checks
+  const poolInfoContracts = buildPoolInfoContracts(network, pool, poolPermitsByContract.contracts);
+  const govPermissions = buildGovPermissions(network, pool);
+  const isWhiteLabel = pool === Pools.V3_WHITE_LABEL;
+
   // fill pool table
   let decentralizationTableBody = '';
   for (let contractName of Object.keys(poolPermitsByContract.contracts)) {
     const contract = poolPermitsByContract.contracts[contractName];
-    let govPermissions = pool === Pools.V3_WHITE_LABEL ? {
-      ...getPermissionsByNetwork(network)['V3_WHITE_LABEL']?.govV3?.contracts,
-      ...getPermissionsByNetwork(network)['V3_WHITE_LABEL']?.ppc?.contracts,
-    } : {
-      ...getPermissionsByNetwork(network)['V3'].govV3?.contracts,
-    };
-    if (pool === Pools.V2_ARC) {
-      govPermissions = {
-        ...getPermissionsByNetwork(network)['V3'].govV3?.contracts,
-        ...getPermissionsByNetwork(ChainId.mainnet)['V2_ARC'].contracts,
-      };
-    }
     const { upgradeable, ownedBy }: Decentralization =
-      getLevelOfDecentralization(
-        contract,
-        pool === Pools.LIDO ||
-          pool === Pools.ETHERFI ||
-          pool === Pools.ETHERFI_TENDERLY ||
-          pool === Pools.LIDO_TENDERLY
-          ? {
-            ...poolPermitsByContract.contracts,
-            ...getPermissionsByNetwork(network)['V3'].collector?.contracts,
-            ...getPermissionsByNetwork(network)['V3'].govV3?.contracts,
-            ...getPermissionsByNetwork(network)['V3'].clinicSteward?.contracts,
-            ...getPermissionsByNetwork(network)['V3'].umbrella?.contracts,
-            ...getPermissionsByNetwork(network)['V3'].ppc?.contracts,
-            ...getPermissionsByNetwork(network)['V3'].agentHub?.contracts,
-          }
-          : pool === Pools.V3_WHITE_LABEL ?
-            {
-
-              ...getPermissionsByNetwork(network)['V3_WHITE_LABEL']?.govV3?.contracts,
-              ...getPermissionsByNetwork(network)['V3_WHITE_LABEL']?.contracts,
-              ...getPermissionsByNetwork(network)['V3_WHITE_LABEL']?.collector?.contracts,
-              ...getPermissionsByNetwork(network)['V3_WHITE_LABEL']?.clinicSteward?.contracts,
-              ...getPermissionsByNetwork(network)['V3_WHITE_LABEL']?.umbrella?.contracts,
-              ...getPermissionsByNetwork(network)['V3_WHITE_LABEL']?.ppc?.contracts,
-              ...getPermissionsByNetwork(network)['V3_WHITE_LABEL']?.agentHub?.contracts,
-            } :
-            {
-              ...poolPermitsByContract.contracts,
-              ...getPermissionsByNetwork(network)['V3'].contracts,
-              ...getPermissionsByNetwork(network)['V3'].collector?.contracts,
-              ...getPermissionsByNetwork(network)['V3'].govV3?.contracts,
-              ...getPermissionsByNetwork(network)['V3'].clinicSteward?.contracts,
-              ...getPermissionsByNetwork(network)['V3'].umbrella?.contracts,
-              ...getPermissionsByNetwork(network)['V3'].ppc?.contracts,
-              ...getPermissionsByNetwork(network)['V3'].agentHub?.contracts,
-            },
-        govPermissions,
-        pool === Pools.V3_WHITE_LABEL ? true : false,
-      );
+      getLevelOfDecentralization(contract, poolInfoContracts, govPermissions, isWhiteLabel);
     decentralizationTableBody += getTableBody([
       `[${contractName}](${explorerAddressUrlComposer(
         contract.address,
@@ -265,20 +357,19 @@ export const generateTable = (network: string, pool: string): string => {
     Object.keys(poolPermitsByContract.govV3).length > 0 &&
     poolPermitsByContract.govV3.contracts
   ) {
+    // For govV3 contracts, use combined pool + govV3 contracts for lookup
+    const govV3PoolInfo = {
+      ...poolPermitsByContract.contracts,
+      ...networkPermits['V3'].govV3?.contracts,
+    } as Contracts;
+    const govV3GovPermissions = networkPermits['V3'].govV3?.contracts || {};
+
     for (let contractName of Object.keys(
       poolPermitsByContract.govV3.contracts,
     )) {
       const contract = poolPermitsByContract.govV3.contracts[contractName];
       const { upgradeable, ownedBy }: Decentralization =
-        getLevelOfDecentralization(
-          contract,
-          {
-            ...poolPermitsByContract.contracts,
-            ...getPermissionsByNetwork(network)['V3'].govV3?.contracts,
-          },
-          getPermissionsByNetwork(network)['V3'].govV3?.contracts || {},
-          pool === Pools.V3_WHITE_LABEL ? true : false,
-        );
+        getLevelOfDecentralization(contract, govV3PoolInfo, govV3GovPermissions, isWhiteLabel);
       decentralizationTableBody += getTableBody([
         `[${contractName}](${explorerAddressUrlComposer(
           contract.address,
@@ -302,39 +393,12 @@ export const generateTable = (network: string, pool: string): string => {
 
   // fill pool table
   let actionsTableBody = '';
+  const actionPoolInfo = buildActionPoolInfo(network, pool, poolPermitsByContract.contracts);
+  const actionGovInfo = buildActionGovInfo(network, pool);
   const actionExecutors = getActionExecutors(
-    pool === Pools.V3_WHITE_LABEL ?
-      {
-        ...poolPermitsByContract.contracts,
-        ...getPermissionsByNetwork(network)['V3_WHITE_LABEL']?.govV3?.contracts,
-        ...getPermissionsByNetwork(network)['V3_WHITE_LABEL']?.contracts,
-        ...getPermissionsByNetwork(network)['V3_WHITE_LABEL']?.collector?.contracts,
-        ...getPermissionsByNetwork(network)['V3_WHITE_LABEL']?.clinicSteward?.contracts,
-        ...getPermissionsByNetwork(network)['V3_WHITE_LABEL']?.umbrella?.contracts,
-        ...getPermissionsByNetwork(network)['V3_WHITE_LABEL']?.ppc?.contracts,
-        ...getPermissionsByNetwork(network)['V3_WHITE_LABEL']?.agentHub?.contracts,
-      } :
-      {
-        ...poolPermitsByContract.contracts,
-        ...getPermissionsByNetwork(network)['V3'].govV3?.contracts,
-        ...getPermissionsByNetwork(network)['V3'].collector?.contracts,
-        ...getPermissionsByNetwork(network)['V3'].clinicSteward?.contracts,
-        ...getPermissionsByNetwork(ChainId.mainnet)['GHO'].contracts,
-        ...getPermissionsByNetwork(network)['V3'].agentHub?.contracts,
-      },
-    pool === Pools.V3_WHITE_LABEL ?
-      {
-        ...getPermissionsByNetwork(network)['V3_WHITE_LABEL']?.govV3?.contracts,
-        ...getPermissionsByNetwork(network)['V3_WHITE_LABEL']?.ppc?.contracts,
-      } :
-      {
-        ...getPermissionsByNetwork(network)['V3'].govV3?.contracts,
-        ...getPermissionsByNetwork(network)['V3'].ppc?.contracts,
-        ...getPermissionsByNetwork(network)['V3'].clinicSteward?.contracts,
-        ...getPermissionsByNetwork(ChainId.mainnet)['GHO'].contracts,
-        ...getPermissionsByNetwork(network)['V3'].agentHub?.contracts,
-      },
-    pool === Pools.V3_WHITE_LABEL ? true : false,
+    actionPoolInfo,
+    actionGovInfo,
+    isWhiteLabel,
     networkConfigs[Number(network)].addressesNames || {} as Record<string, string>
   );
   for (let actionName of Object.keys(actionExecutors)) {

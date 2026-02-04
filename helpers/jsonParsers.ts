@@ -40,9 +40,9 @@ export const generateContractsByAddress = (
 
 /**
  * Extracts all contracts from a pool's various sections.
- * Used to build address-to-name lookup tables.
+ * Used to build address-to-name lookup tables and contract aggregation.
  */
-const extractPoolContracts = (poolData: any): Record<string, any> => {
+export const extractPoolContracts = (poolData: any): Record<string, any> => {
   if (!poolData) return {};
 
   const sections = ['contracts', 'govV3', 'collector', 'clinicSteward', 'umbrella', 'ppc', 'agentHub'];
