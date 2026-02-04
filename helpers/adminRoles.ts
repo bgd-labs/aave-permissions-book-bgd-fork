@@ -3,6 +3,7 @@ import { networkConfigs, Pools } from './configs.js';
 import { getLimit } from './limits.js';
 import { Client, Log, keccak256, encodePacked } from 'viem';
 import { getEvents, getRpcClientFromUrl } from './rpc.js';
+import { isTenderlyPool, getTenderlyConfig } from './poolHelpers.js';
 
 
 
@@ -103,39 +104,34 @@ export const getCurrentRoleAdmins = async (
   contract: string,
   collector?: boolean,
 ): Promise<Roles> => {
-  let limit = getLimit(chainId) ?? 0;
+  const limit = getLimit(chainId);
+  const tenderlyConfig = getTenderlyConfig(chainId, pool);
 
   let events: Log[] = [];
   let latestBlockNumber = 0;
-  if (
-    pool === Pools.TENDERLY ||
-    pool === Pools.GHO_TENDERLY ||
-    pool == Pools.ETHERFI_TENDERLY ||
-    pool == Pools.LIDO_TENDERLY
-  ) {
+
+  if (isTenderlyPool(pool) && tenderlyConfig) {
+    // Fetch events from mainnet up to the Tenderly fork block
     const { logs: preTenderlyForkEvents, currentBlock: preTenderlyForkCurrentBlock } = await getEvents({
       client,
       fromBlock,
       contract,
       eventTypes: ['RoleGranted', 'RoleRevoked'],
-      maxBlock: networkConfigs[Number(chainId)].pools[pool].tenderlyBlock!,
+      maxBlock: tenderlyConfig.tenderlyBlock,
       limit
     });
 
-    const tenderlyProvider = getRpcClientFromUrl(
-      networkConfigs[Number(chainId)].pools[pool].tenderlyRpcUrl!,
-    );
-
-
+    // Fetch events from the Tenderly fork
+    const tenderlyProvider = getRpcClientFromUrl(tenderlyConfig.tenderlyRpcUrl);
     const { logs: tenderlyForkEvents } = await getEvents({
       client: tenderlyProvider,
-      fromBlock: networkConfigs[Number(chainId)].pools[pool].tenderlyBlock!,
+      fromBlock: tenderlyConfig.tenderlyBlock,
       contract,
       eventTypes: ['RoleGranted', 'RoleRevoked'],
       limit: 999
     });
-    events = [...preTenderlyForkEvents, ...tenderlyForkEvents];
 
+    events = [...preTenderlyForkEvents, ...tenderlyForkEvents];
     latestBlockNumber = preTenderlyForkCurrentBlock;
   } else {
     const { logs: networkEvents, currentBlock: eventsCurrentBlock } = await getEvents({
@@ -149,6 +145,7 @@ export const getCurrentRoleAdmins = async (
     events = networkEvents;
     latestBlockNumber = eventsCurrentBlock;
   }
+
   const roles = getRoleAdmins({
     oldRoles,
     roleNames,
@@ -156,7 +153,5 @@ export const getCurrentRoleAdmins = async (
     eventLogs: events,
   });
 
-  // console.log('roes: ', roles);
-  // console.log('-------------------------------');
   return { role: roles, latestBlockNumber };
 };

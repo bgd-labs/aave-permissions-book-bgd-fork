@@ -2,7 +2,7 @@ import { getLimit } from './limits.js';
 import { Client, Log } from 'viem';
 import { getEvents, getRpcClientFromUrl } from './rpc.js';
 import { Pools } from './configs.js';
-import { networkConfigs } from './configs.js';
+import { getTenderlyConfig } from './poolHelpers.js';
 
 
 export const getSenders = ({
@@ -48,35 +48,36 @@ export const getCCCSendersAndAdapters = async (
   chainId: string,
   pool: Pools,
 ) => {
-  let limit = getLimit(chainId) ?? 0;
+  const limit = getLimit(chainId);
+  const tenderlyConfig = getTenderlyConfig(chainId, pool);
 
   let events: Log[] = [];
   let latestBlockNumber = 0;
 
   if (addressBook.CROSS_CHAIN_CONTROLLER) {
-    if (pool === Pools.TENDERLY) {
+    // Only TENDERLY pool uses the fork logic for CCC (not LIDO_TENDERLY, ETHERFI_TENDERLY, etc.)
+    if (pool === Pools.TENDERLY && tenderlyConfig) {
+      // Fetch events from mainnet up to the Tenderly fork block
       const { logs: preTenderlyForkEvents, currentBlock: preTenderlyForkCurrentBlock } = await getEvents({
         client,
         fromBlock,
         contract: addressBook.CROSS_CHAIN_CONTROLLER,
         eventTypes: ['SenderUpdated'],
-        maxBlock: networkConfigs[Number(chainId)].pools[pool].tenderlyBlock!,
+        maxBlock: tenderlyConfig.tenderlyBlock,
         limit
       });
 
-      const tenderlyProvider = getRpcClientFromUrl(
-        networkConfigs[Number(chainId)].pools[pool].tenderlyRpcUrl!,
-      );
-
+      // Fetch events from the Tenderly fork
+      const tenderlyProvider = getRpcClientFromUrl(tenderlyConfig.tenderlyRpcUrl);
       const { logs: tenderlyForkEvents } = await getEvents({
         client: tenderlyProvider,
-        fromBlock: networkConfigs[Number(chainId)].pools[pool].tenderlyBlock!,
+        fromBlock: tenderlyConfig.tenderlyBlock,
         contract: addressBook.CROSS_CHAIN_CONTROLLER,
         eventTypes: ['SenderUpdated'],
         limit: 999
       });
-      events = [...preTenderlyForkEvents, ...tenderlyForkEvents];
 
+      events = [...preTenderlyForkEvents, ...tenderlyForkEvents];
       latestBlockNumber = preTenderlyForkCurrentBlock;
     } else {
       const { logs: networkEvents, currentBlock: eventsCurrentBlock } = await getEvents({
@@ -90,7 +91,6 @@ export const getCCCSendersAndAdapters = async (
       latestBlockNumber = eventsCurrentBlock;
     }
   }
-
 
   const senders = getSenders({
     oldSenders,
