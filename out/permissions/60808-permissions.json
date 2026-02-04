@@ -15,8 +15,7 @@
           "RETRY_ROLE": [
             "0xdc62E0e65b2251Dc66404ca717FD32dcC365Be3A"
           ]
-        },
-        "latestBlockNumber": 28671408
+        }
       },
       "contracts": {
         "GranularGuardian": {
@@ -317,8 +316,7 @@
           ]
         }
       },
-      "senders": [],
-      "latestCCCBlockNumber": 28671407
+      "senders": []
     },
     "collector": {},
     "clinicSteward": {},

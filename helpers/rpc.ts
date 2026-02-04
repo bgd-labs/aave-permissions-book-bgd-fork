@@ -89,3 +89,62 @@ export const getEvents = async ({
 
   return { logs, currentBlock: Number(currentBlock) };
 }
+
+/**
+ * Fetches events from multiple contracts in a single pass.
+ * Groups logs by contract address for easy distribution to processors.
+ *
+ * @param contracts - Array of contract addresses to fetch events from
+ * @param eventTypes - Event types to fetch (e.g., ['RoleGranted', 'RoleRevoked'])
+ * @returns Map of contract address (lowercase) to its logs, plus the current block number
+ */
+export const getEventsMultiContract = async ({
+  client,
+  fromBlock,
+  contracts,
+  eventTypes,
+  limit,
+  maxBlock,
+}: {
+  client: Client,
+  fromBlock: number,
+  contracts: string[],
+  eventTypes: string[],
+  limit: number,
+  maxBlock?: number,
+}): Promise<{ logsByContract: Map<string, Log[]>, currentBlock: number }> => {
+  const currentBlock = maxBlock ?? Number(await getBlockNumber(client));
+  const eventsAbis = eventTypes.map(getEventTypeAbi);
+
+  // Initialize map with empty arrays for each contract
+  const logsByContract = new Map<string, Log[]>();
+  for (const contract of contracts) {
+    logsByContract.set(contract.toLowerCase(), []);
+  }
+
+  // Fetch logs for all contracts
+  const contractAddresses = contracts.map(c => getAddress(c));
+
+  for (let startBlock = fromBlock; startBlock < currentBlock; startBlock += limit) {
+    const intervalLogs = await getLogsRecursive({
+      client,
+      address: contractAddresses,
+      fromBlock: BigInt(startBlock),
+      toBlock: BigInt(Math.min(startBlock + limit, currentBlock)),
+      events: eventsAbis
+    });
+
+    console.log(`chainId: ${client.chain?.id}, startBlock: ${startBlock}, toBlock: ${currentBlock}, maxBlock: ${maxBlock ?? 'null'}, limit: ${limit}, | events: ${eventTypes.join(', ')}, contracts: ${contracts.length}, intervalLogs: ${intervalLogs.length}`);
+
+    // Distribute logs to their respective contracts
+    for (const log of intervalLogs) {
+      const contractAddr = log.address.toLowerCase();
+      const contractLogs = logsByContract.get(contractAddr);
+      if (contractLogs) {
+        contractLogs.push(log);
+      }
+    }
+  }
+
+  return { logsByContract, currentBlock };
+}

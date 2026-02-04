@@ -18,7 +18,6 @@ export type ContractInfo = {
 
 export type Contracts = Record<string, ContractInfo>;
 export type GovV3 = {
-  latestCCCBlockNumber: number;
   contracts: Contracts;
   senders: string[];
   ggRoles?: Roles;
@@ -29,12 +28,10 @@ export type Ppc = {
 };
 
 export type Collector = {
-  latestBlockNumber: number;
   contracts: Contracts;
   cRoles: Roles;
 };
 export type ClinicSteward = {
-  latestBlockNumber: number;
   contracts: Contracts;
   clinicStewardRoles: Roles;
 };
@@ -50,7 +47,6 @@ export type AddressInfo = {
   chain?: string;
 };
 export type Roles = {
-  latestBlockNumber: number;
   role: Record<string, string[]>;
 };
 

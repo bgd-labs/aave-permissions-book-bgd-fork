@@ -1,0 +1,52 @@
+{
+  "V3": {
+    "latestBlockNumber": 147308832,
+    "indexedContracts": {
+      "ACL_MANAGER": {
+        "address": "0xa72636CbcAa8F5FF95B2cc47F3CDEe83F3294a0B",
+        "deploymentBlock": 4365546,
+        "firstIndexedAt": 4365546
+      },
+      "COLLECTOR": {
+        "address": "0xB2289E329D2F85F1eD31Adbb30eA345278F21bcf",
+        "deploymentBlock": 131490051,
+        "firstIndexedAt": 131490051
+      },
+      "CLINIC_STEWARD": {
+        "address": "0xD835fb6f9823b4054Ccf30403De76AA8abcd00b8",
+        "deploymentBlock": 132707080,
+        "firstIndexedAt": 132707080
+      },
+      "CROSS_CHAIN_CONTROLLER": {
+        "address": "0x48A9FE90bce5EEd790f3F4Ce192d1C0B351fd4Ca",
+        "deploymentBlock": 106996150,
+        "firstIndexedAt": 106996150
+      },
+      "GRANULAR_GUARDIAN": {
+        "address": "0x6c5264C380C7022e54f585c4E354ffb6f221a03b",
+        "deploymentBlock": 122802392,
+        "firstIndexedAt": 122802392
+      }
+    }
+  },
+  "TENDERLY": {
+    "latestBlockNumber": 146001573,
+    "indexedContracts": {
+      "ACL_MANAGER": {
+        "address": "0xa72636CbcAa8F5FF95B2cc47F3CDEe83F3294a0B",
+        "deploymentBlock": 4365546,
+        "firstIndexedAt": 4365546
+      },
+      "CROSS_CHAIN_CONTROLLER": {
+        "address": "0x48A9FE90bce5EEd790f3F4Ce192d1C0B351fd4Ca",
+        "deploymentBlock": 106996150,
+        "firstIndexedAt": 106996150
+      },
+      "GRANULAR_GUARDIAN": {
+        "address": "0x6c5264C380C7022e54f585c4E354ffb6f221a03b",
+        "deploymentBlock": 122802392,
+        "firstIndexedAt": 122802392
+      }
+    }
+  }
+}

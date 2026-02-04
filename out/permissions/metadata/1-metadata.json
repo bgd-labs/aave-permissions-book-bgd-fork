@@ -1,0 +1,172 @@
+{
+  "V3": {
+    "latestBlockNumber": 24384181,
+    "indexedContracts": {
+      "ACL_MANAGER": {
+        "address": "0xc2aaCf6553D20d1e9d78E365AAba8032af9c85b0",
+        "deploymentBlock": 16291117,
+        "firstIndexedAt": 16291117
+      },
+      "COLLECTOR": {
+        "address": "0x464C71f6c2F760DdA6093dCB91C24c39e5d6e18c",
+        "deploymentBlock": 21765718,
+        "firstIndexedAt": 21765718
+      },
+      "CLINIC_STEWARD": {
+        "address": "0xf00E2de0E78DFf055A92AD4719a179CE275b6Ef7",
+        "deploymentBlock": 21967120,
+        "firstIndexedAt": 21967120
+      },
+      "UMBRELLA": {
+        "address": "0xD400fc38ED4732893174325693a63C30ee3881a8",
+        "deploymentBlock": 22346140,
+        "firstIndexedAt": 22346140
+      },
+      "UMBRELLA_REWARDS_CONTROLLER": {
+        "address": "0x4655Ce3D625a63d30bA704087E52B4C31E38188B",
+        "deploymentBlock": 22346130,
+        "firstIndexedAt": 22346130
+      },
+      "CROSS_CHAIN_CONTROLLER": {
+        "address": "0xEd42a7D8559a463722Ca4beD50E0Cc05a386b0e1",
+        "deploymentBlock": 18090380,
+        "firstIndexedAt": 18090380
+      },
+      "GRANULAR_GUARDIAN": {
+        "address": "0x4457cA11E90f416Cc1D3a8E1cA41C0cdEcC251d4",
+        "deploymentBlock": 20324867,
+        "firstIndexedAt": 20324867
+      }
+    }
+  },
+  "V2": {
+    "latestBlockNumber": 24384183,
+    "indexedContracts": {
+      "COLLECTOR": {
+        "address": "0x464C71f6c2F760DdA6093dCB91C24c39e5d6e18c",
+        "deploymentBlock": 21765718,
+        "firstIndexedAt": 21765718
+      }
+    }
+  },
+  "V2_AMM": {
+    "latestBlockNumber": 24384183,
+    "indexedContracts": {
+      "COLLECTOR": {
+        "address": "0x464C71f6c2F760DdA6093dCB91C24c39e5d6e18c",
+        "deploymentBlock": 21765718,
+        "firstIndexedAt": 21765718
+      }
+    }
+  },
+  "LIDO": {
+    "latestBlockNumber": 24384182,
+    "indexedContracts": {
+      "ACL_MANAGER": {
+        "address": "0x013E2C7567b6231e865BB9273F8c7656103611c0",
+        "deploymentBlock": 20262410,
+        "firstIndexedAt": 20262410
+      },
+      "COLLECTOR": {
+        "address": "0x464C71f6c2F760DdA6093dCB91C24c39e5d6e18c",
+        "deploymentBlock": 21765718,
+        "firstIndexedAt": 21765718
+      },
+      "CLINIC_STEWARD": {
+        "address": "0x7571F419F7Df2d0622C1A20154a0D4250B2265cC",
+        "deploymentBlock": 21967120,
+        "firstIndexedAt": 21967120
+      }
+    }
+  },
+  "ETHERFI": {
+    "latestBlockNumber": 24384182,
+    "indexedContracts": {
+      "ACL_MANAGER": {
+        "address": "0x3cE8E2eb6501d4705477643E96881B1bef6A2DB3",
+        "deploymentBlock": 20625515,
+        "firstIndexedAt": 20625515
+      },
+      "COLLECTOR": {
+        "address": "0x464C71f6c2F760DdA6093dCB91C24c39e5d6e18c",
+        "deploymentBlock": 21765718,
+        "firstIndexedAt": 21765718
+      }
+    }
+  },
+  "TENDERLY": {
+    "latestBlockNumber": 24167154,
+    "indexedContracts": {
+      "ACL_MANAGER": {
+        "address": "0xc2aaCf6553D20d1e9d78E365AAba8032af9c85b0",
+        "deploymentBlock": 16291117,
+        "firstIndexedAt": 16291117
+      },
+      "COLLECTOR": {
+        "address": "0x464C71f6c2F760DdA6093dCB91C24c39e5d6e18c",
+        "deploymentBlock": 21765718,
+        "firstIndexedAt": 21765718
+      },
+      "CLINIC_STEWARD": {
+        "address": "0xf00E2de0E78DFf055A92AD4719a179CE275b6Ef7",
+        "deploymentBlock": 21967120,
+        "firstIndexedAt": 21967120
+      },
+      "UMBRELLA": {
+        "address": "0xD400fc38ED4732893174325693a63C30ee3881a8",
+        "deploymentBlock": 22346140,
+        "firstIndexedAt": 22346140
+      },
+      "UMBRELLA_REWARDS_CONTROLLER": {
+        "address": "0x4655Ce3D625a63d30bA704087E52B4C31E38188B",
+        "deploymentBlock": 22346130,
+        "firstIndexedAt": 22346130
+      },
+      "CROSS_CHAIN_CONTROLLER": {
+        "address": "0xEd42a7D8559a463722Ca4beD50E0Cc05a386b0e1",
+        "deploymentBlock": 18090380,
+        "firstIndexedAt": 18090380
+      },
+      "GRANULAR_GUARDIAN": {
+        "address": "0x4457cA11E90f416Cc1D3a8E1cA41C0cdEcC251d4",
+        "deploymentBlock": 20324867,
+        "firstIndexedAt": 20324867
+      }
+    }
+  },
+  "LIDO_TENDERLY": {
+    "latestBlockNumber": 24167154,
+    "indexedContracts": {
+      "ACL_MANAGER": {
+        "address": "0x013E2C7567b6231e865BB9273F8c7656103611c0",
+        "deploymentBlock": 20262410,
+        "firstIndexedAt": 20262410
+      }
+    }
+  },
+  "GHO": {
+    "latestBlockNumber": 24384182,
+    "indexedContracts": {
+      "ACL_MANAGER": {
+        "address": "0xc2aaCf6553D20d1e9d78E365AAba8032af9c85b0",
+        "deploymentBlock": 24383216,
+        "firstIndexedAt": 24383216
+      },
+      "GHO_TOKEN": {
+        "address": "0x40D16FC0246aD3160Ccc09B8D0D3A2cD28aE6C2f",
+        "deploymentBlock": 17698470,
+        "firstIndexedAt": 17698470
+      },
+      "GSM_USDC": {
+        "address": "0xFeeb6FE430B7523fEF2a38327241eE7153779535",
+        "deploymentBlock": 19037420,
+        "firstIndexedAt": 19037420
+      },
+      "GSM_USDT": {
+        "address": "0x535b2f7C20B9C83d70e519cf9991578eF9816B7B",
+        "deploymentBlock": 19037420,
+        "firstIndexedAt": 19037420
+      }
+    }
+  }
+}

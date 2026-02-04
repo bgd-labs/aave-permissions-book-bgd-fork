@@ -1,0 +1,32 @@
+{
+  "V3": {
+    "latestBlockNumber": 68310128,
+    "indexedContracts": {
+      "ACL_MANAGER": {
+        "address": "0xc6150b63c2F02528d4A969a248710A4658ed7928",
+        "deploymentBlock": 43709020,
+        "firstIndexedAt": 43709020
+      },
+      "COLLECTOR": {
+        "address": "0xd69Cbda644c6be817AaFb5Fd9174f50C33803B6b",
+        "deploymentBlock": 55159191,
+        "firstIndexedAt": 55159191
+      },
+      "CLINIC_STEWARD": {
+        "address": "0x2a549daDfe66AcFf25Bb0Cf0C989AAD0Dc547ceb",
+        "deploymentBlock": 56964260,
+        "firstIndexedAt": 56964260
+      },
+      "CROSS_CHAIN_CONTROLLER": {
+        "address": "0x800813f4714BC7A0a95310e3fB9e4f18872CA92C",
+        "deploymentBlock": 40068400,
+        "firstIndexedAt": 40068400
+      },
+      "GRANULAR_GUARDIAN": {
+        "address": "0xe0e23196D42b54F262a3DE952e6B34B197D1A228",
+        "deploymentBlock": 40095020,
+        "firstIndexedAt": 40095020
+      }
+    }
+  }
+}
