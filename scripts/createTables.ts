@@ -3,6 +3,13 @@ import {
   saveJson,
 } from '../helpers/fileSystem.js';
 import { getNetowkName, networkConfigs, Pools } from '../helpers/configs.js';
+import {
+  parseCliArgs,
+  getNetworksToProcess,
+  getPoolsToProcess,
+  logExecutionConfig,
+  CliArgs,
+} from '../helpers/cli.js';
 import { explorerAddressUrlComposer } from '../helpers/explorer.js';
 import { ChainId } from '@bgd-labs/toolbox';
 import { generateContractsByAddress, findContractNameByAddress, extractPoolContracts } from '../helpers/jsonParsers.js';
@@ -14,7 +21,6 @@ import {
 import { getPrincipalReadme } from './readme.js';
 import {
   ContractsByAddress,
-  PoolConfigs,
   PoolGuardians,
 } from '../helpers/types.js';
 import {
@@ -252,14 +258,6 @@ export const generateTableAddress = (
 
 export const generateTable = (network: string, pool: string): string => {
   let readmeDirectoryTable: string = '';
-
-  // to generate tenderly tables, add TENDERLY flag on .env file
-  if (
-    (!process.env.TENDERLY || process.env.TENDERLY === 'false') &&
-    pool.toLowerCase().indexOf('tenderly') > -1
-  ) {
-    return '';
-  }
 
   const networkPermits = getPermissionsByNetwork(network);
   const mainnetPermissions = getPermissionsByNetwork(ChainId.mainnet);
@@ -536,30 +534,8 @@ export const generateTable = (network: string, pool: string): string => {
   return readmeDirectoryTable;
 };
 
-const checkForTenderlyPool = (
-  pools: Record<string, PoolConfigs>,
-  selectedPool: string,
-): boolean => {
-  if (!process.env.TENDERLY || process.env.TENDERLY === 'false') {
-    return false;
-  }
-
-  const poolNames = Object.keys(pools).map((pool) => pool);
-  for (const poolName of poolNames) {
-    if (
-      poolName !== selectedPool &&
-      pools[poolName].tenderlyBasePool &&
-      pools[poolName].tenderlyBasePool === selectedPool
-    ) {
-      return true;
-    }
-  }
-
-  return false;
-};
-
-export const generateAllTables = () => {
-  const networks = Object.keys(networkConfigs).map((network) => network);
+export const generateAllTables = (args: CliArgs) => {
+  const networks = getNetworksToProcess(args);
 
   // create readme string
   let readmeDirectoryTable = '';
@@ -570,23 +546,18 @@ export const generateAllTables = () => {
   readmeDirectoryTable += readmeDirectoryHeader;
 
   for (let network of networks) {
-    const pools = Object.keys(networkConfigs[network].pools).map(
-      (pool) => pool,
-    );
+    const pools = getPoolsToProcess(network, args);
     for (let pool of pools) {
-      // if pool has a tenderly pool enabled only generate tenderly
-      const hasTenderlyTable = checkForTenderlyPool(
-        networkConfigs[network].pools,
-        pool,
-      );
-
-      if (!hasTenderlyTable) {
-        readmeDirectoryTable += generateTable(network, pool);
-      }
+      readmeDirectoryTable += generateTable(String(network), pool);
     }
   }
 
-  saveJson('./README.md', getPrincipalReadme(readmeDirectoryTable));
+  // Only update README when running all networks in regular mode
+  if (args.networks.length === 0 && !args.tenderly) {
+    saveJson('./README.md', getPrincipalReadme(readmeDirectoryTable));
+  }
 };
 
-generateAllTables();
+const args = parseCliArgs();
+logExecutionConfig(args);
+generateAllTables(args);

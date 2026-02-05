@@ -29,7 +29,7 @@ import {
 } from '../helpers/contractResolvers.js';
 
 export const resolveV3Modifiers = async (
-  addressBook: AddressBook,
+  addressBook: any,
   provider: Client,
   permissionsObject: PermissionsJson,
   pool: Pools,

@@ -42,7 +42,7 @@ export const getRPCClient = (chainId: number): Client => {
   });
 };
 
-const abiByEventType: Record<string, Abi> = {
+const abiByEventType: Record<string, any> = {
   'RoleGranted': aclManagerAbi,
   'RoleRevoked': aclManagerAbi,
   'SenderUpdated': crossChainControllerAbi,

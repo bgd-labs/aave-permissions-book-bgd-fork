@@ -11,6 +11,12 @@ import {
   umbrellaRoleNames,
 } from '../helpers/configs.js';
 import {
+  parseCliArgs,
+  getNetworksToProcess,
+  getPoolsToProcess,
+  logExecutionConfig,
+} from '../helpers/cli.js';
+import {
   getPermissionsByNetwork,
   getPoolMetadata,
   getStaticPermissionsJson,
@@ -45,22 +51,15 @@ import {
   buildPoolContractConfigs,
 } from '../helpers/eventIndexer.js';
 
-const generateNetworkPermissions = async (network: string) => {
+const generateNetworkPermissions = async (network: number, poolsToProcess: string[]) => {
   // get current permissions
-  let fullJson = getPermissionsByNetwork(network);
+  let fullJson = getPermissionsByNetwork(String(network));
   // generate permissions
-  let provider = getRPCClient(Number(network))
+  let provider = getRPCClient(network)
 
   const pools = networkConfigs[network].pools;
-  const poolsKeys = Object.keys(pools).map((pool) => pool);
-  for (let i = 0; i < poolsKeys.length; i++) {
-    const poolKey = poolsKeys[i];
-    if (
-      (!process.env.TENDERLY || process.env.TENDERLY === 'false') &&
-      poolKey.toLowerCase().indexOf('tenderly') > -1
-    ) {
-      continue;
-    }
+  for (let i = 0; i < poolsToProcess.length; i++) {
+    const poolKey = poolsToProcess[i];
     const pool = pools[poolKey];
 
     const permissionsJson = getStaticPermissionsJson(pool.permissionsJson);
@@ -536,19 +535,19 @@ const generateNetworkPermissions = async (network: string) => {
 };
 
 async function main() {
-  const networks = Object.keys(networkConfigs).map((network) => network);
-  const permissions = networks.map((network) =>
-    generateNetworkPermissions(network),
-  );
+  const args = parseCliArgs();
+  logExecutionConfig(args);
 
-  // const permissions = [];
-  // for (const network of networks) {
-  //   console.log(`Generating permissions for network: ${network}`);
-  //   const result = await generateNetworkPermissions(network);
-  //   permissions.push(result);
-  //   console.log(`Permissions generated for network: ${network}`);
-  // }
+  const networks = getNetworksToProcess(args);
 
+  const permissions = networks.map((network) => {
+    const pools = getPoolsToProcess(network, args);
+    if (pools.length === 0) {
+      console.log(`Skipping network ${network}: no matching pools`);
+      return Promise.resolve();
+    }
+    return generateNetworkPermissions(network, pools);
+  });
 
   await Promise.allSettled(permissions);
   console.log('--------------FINISHED--------------')
