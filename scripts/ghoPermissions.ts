@@ -1,4 +1,5 @@
 import {
+  AddressBook,
   Contracts,
   PermissionsJson,
   Roles,
@@ -21,7 +22,7 @@ import {
 } from '../helpers/contractResolvers.js';
 
 export const resolveGHOModifiers = async (
-  addressBook: any,
+  addressBook: AddressBook,
   provider: Client,
   permissionsObject: PermissionsJson,
   adminRoles: Record<string, string[]>,

@@ -1,5 +1,5 @@
 import { Address, Client, getAddress, getContract } from "viem";
-import { Contracts, PermissionsJson } from "../helpers/types.js";
+import { AddressBook, Contracts, PermissionsJson } from "../helpers/types.js";
 import { generateRoles } from "../helpers/jsonParsers.js";
 import { getProxyAdmin } from "../helpers/proxyAdmin.js";
 import { uniqueAddresses } from "../helpers/addressUtils.js";
@@ -10,7 +10,7 @@ import { createOwnerResolver } from "../helpers/ownerResolver.js";
 
 
 export const resolveAgentHubModifiers = async (
-  addressBook: any,
+  addressBook: AddressBook,
   provider: Client,
   permissionsObject: PermissionsJson,
   poolName: string,

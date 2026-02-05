@@ -1,5 +1,5 @@
 import { generateRoles } from '../helpers/jsonParsers.js';
-import { Contracts, PermissionsJson } from '../helpers/types.js';
+import { AddressBook, Contracts, PermissionsJson } from '../helpers/types.js';
 import { getProxyAdmin } from '../helpers/proxyAdmin.js';
 import { onlyOwnerAbi } from '../abis/onlyOwnerAbi.js';
 import { PERMISSIONED_PAYLOADS_CONTROLLER_ABI } from '../abis/permissionedPayloadsController.js';
@@ -10,7 +10,7 @@ import { createOwnerResolver } from '../helpers/ownerResolver.js';
 import { resolveAllRoleOwners, mapRoleAddresses } from '../helpers/contractResolvers.js';
 
 export const resolveUmbrellaModifiers = async (
-  addressBook: any,
+  addressBook: AddressBook,
   provider: Client,
   permissionsObject: PermissionsJson,
   umbrellaRoles: Record<string, string[]>,

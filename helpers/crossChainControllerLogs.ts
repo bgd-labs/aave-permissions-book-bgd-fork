@@ -1,4 +1,8 @@
-import { Log } from 'viem';
+import { ParseEventLogsReturnType } from 'viem';
+import { crossChainControllerAbi } from '../abis/crossChainControllerAbi.js';
+
+// Properly typed log from the CrossChainController ABI
+type SenderUpdatedLog = ParseEventLogsReturnType<typeof crossChainControllerAbi, undefined, true, 'SenderUpdated'>[number];
 
 /**
  * Processes SenderUpdated events to determine current approved senders.
@@ -15,15 +19,12 @@ export const getSenders = ({
   eventLogs,
 }: {
   oldSenders: string[];
-  eventLogs: Log[];
+  eventLogs: SenderUpdatedLog[];
 }): string[] => {
   const senders = new Set<string>(oldSenders);
 
   for (const eventLog of eventLogs) {
-    // @ts-ignore - event args typing
-    const sender = eventLog.args.sender;
-    // @ts-ignore - event args typing
-    const isApproved = eventLog.args.isApproved;
+    const { sender, isApproved } = eventLog.args;
 
     if (eventLog.eventName === 'SenderUpdated') {
       if (isApproved) {

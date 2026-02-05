@@ -3,12 +3,12 @@ import { getProxyAdmin } from '../helpers/proxyAdmin.js';
 import { stkToken } from '../abis/stkToken.js';
 import { abptABI } from '../abis/abptABI.js';
 import { bptABI } from '../abis/bptABI.js';
-import { Contracts, PermissionsJson } from '../helpers/types.js';
+import { AddressBook, Contracts, PermissionsJson } from '../helpers/types.js';
 import { Address, Client, getAddress, getContract } from 'viem';
 import { createOwnerResolver } from '../helpers/ownerResolver.js';
 
 export const resolveSafetyV2Modifiers = async (
-  addressBook: any,
+  addressBook: AddressBook,
   provider: Client,
   permissionsObject: PermissionsJson,
 ): Promise<Contracts> => {

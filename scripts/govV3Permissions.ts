@@ -1,4 +1,4 @@
-import { Contracts, PermissionsJson } from '../helpers/types.js';
+import { AddressBook, Contracts, PermissionsJson } from '../helpers/types.js';
 import { ChainId } from '@bgd-labs/toolbox';
 import { getProxyAdmin } from '../helpers/proxyAdmin.js';
 import { generateRoles } from '../helpers/jsonParsers.js';
@@ -12,7 +12,7 @@ import { createOwnerResolver } from '../helpers/ownerResolver.js';
 import { resolveAllRoleOwners, mapRoleAddresses } from '../helpers/contractResolvers.js';
 
 export const resolveGovV3Modifiers = async (
-  addressBook: any,
+  addressBook: AddressBook,
   provider: Client,
   permissionsObject: PermissionsJson,
   chainId: typeof ChainId | number,

@@ -1,8 +1,8 @@
 import { onlyOwnerAbi } from '../abis/onlyOwnerAbi.js';
 import { generateRoles } from '../helpers/jsonParsers.js';
 import { getProxyAdmin } from '../helpers/proxyAdmin.js';
-import { ChainId } from '@bgd-labs/toolbox';
 import {
+  AddressBook,
   Contracts,
   PermissionsJson,
 } from '../helpers/types.js';
@@ -12,10 +12,10 @@ import { createOwnerResolver } from '../helpers/ownerResolver.js';
 import { resolveAllRoleOwners, mapRoleAddresses } from '../helpers/contractResolvers.js';
 
 export const resolveCollectorModifiers = async (
-  addressBook: any,
+  addressBook: AddressBook,
   provider: Client,
   permissionsObject: PermissionsJson,
-  chainId: typeof ChainId | number,
+  chainId: string | number,
   adminRoles: Record<string, string[]>,
 ): Promise<Contracts> => {
   const obj: Contracts = {};
@@ -32,13 +32,13 @@ export const resolveCollectorModifiers = async (
     addressBook.COLLECTOR !== zeroAddress
   ) {
     const collectorProxyAdmin = await getProxyAdmin(
-      addressBook.COLLECTOR,
+      addressBook.COLLECTOR as string,
       provider,
     );
     const proxyAdminInfo = await ownerResolver.resolve(collectorProxyAdmin);
 
     obj['Collector'] = {
-      address: addressBook.COLLECTOR,
+      address: addressBook.COLLECTOR as string,
       modifiers: [
         {
           modifier: 'onlyFundsAdmin',
@@ -63,7 +63,7 @@ export const resolveCollectorModifiers = async (
 
   if ((!addressBook.PROXY_ADMIN && addressBook.TRANSPARENT_PROXY_FACTORY) || chainId === 42220) {
     const collectorProxyAdmin = await getProxyAdmin(
-      addressBook.COLLECTOR,
+      addressBook.COLLECTOR as string,
       provider,
     );
     const proxyAdminContract = getContract({ address: getAddress(collectorProxyAdmin), abi: onlyOwnerAbi, client: provider });

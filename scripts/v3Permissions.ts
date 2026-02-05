@@ -6,6 +6,7 @@ import { getProxyAdmin } from '../helpers/proxyAdmin.js';
 import { getSafeOwners, getSafeThreshold } from '../helpers/guardian.js';
 import { ChainId } from '@bgd-labs/toolbox';
 import {
+  AddressBook,
   Contracts,
   PermissionsJson,
 } from '../helpers/types.js';
@@ -28,7 +29,7 @@ import {
 } from '../helpers/contractResolvers.js';
 
 export const resolveV3Modifiers = async (
-  addressBook: any,
+  addressBook: AddressBook,
   provider: Client,
   permissionsObject: PermissionsJson,
   pool: Pools,

@@ -7,12 +7,12 @@ import { arcTimelockAbi } from '../abis/arcTimelockAbi.js';
 import { AaveV2EthereumArc } from '@bgd-labs/aave-address-book';
 import { getProxyAdmin } from '../helpers/proxyAdmin.js';
 import { ChainId } from '@bgd-labs/toolbox';
-import { Contracts, PermissionsJson } from '../helpers/types.js';
+import { AddressBook, Contracts, PermissionsJson } from '../helpers/types.js';
 import { Address, Client, getAddress, getContract, zeroAddress } from 'viem';
 import { createOwnerResolver } from '../helpers/ownerResolver.js';
 
 export const resolveV2Modifiers = async (
-  addressBook: any,
+  addressBook: AddressBook,
   provider: Client,
   permissionsObject: PermissionsJson,
   pool: Pools,

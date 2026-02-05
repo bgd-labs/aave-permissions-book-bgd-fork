@@ -1,5 +1,8 @@
 import { AddressInfo, ContractInfo, Contracts } from './types.js';
-import actionsConfig from '../statics/actionsConfig.json' assert { type: 'json' };
+import actionsConfigJson from '../statics/actionsConfig.json' assert { type: 'json' };
+
+// Type the actions config for proper indexing
+const actionsConfig = actionsConfigJson as Record<string, string[]>;
 import decentralizationConfig from '../statics/decentralizationConfig.json' assert { type: 'json' };
 
 export type Decentralization = {
@@ -332,8 +335,7 @@ export const getActionExecutors = (
     for (const [contractName, contract] of Object.entries(poolInfo)) {
       for (const modifier of contract.modifiers) {
         const hasMatchingFunction = modifier.functions.some((functionName: string) =>
-          // @ts-ignore
-          actionsConfig[action].includes(functionName),
+          actionsConfig[action]?.includes(functionName),
         );
 
         if (!hasMatchingFunction) {

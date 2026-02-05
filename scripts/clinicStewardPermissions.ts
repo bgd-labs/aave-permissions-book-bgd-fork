@@ -1,12 +1,12 @@
 import { generateRoles } from '../helpers/jsonParsers.js';
-import { Contracts, PermissionsJson } from '../helpers/types.js';
+import { AddressBook, Contracts, PermissionsJson } from '../helpers/types.js';
 import { Client, zeroAddress } from 'viem';
 import { uniqueAddresses } from '../helpers/addressUtils.js';
 import { createOwnerResolver } from '../helpers/ownerResolver.js';
 import { resolveAllRoleOwners, mapRoleAddresses } from '../helpers/contractResolvers.js';
 
 export const resolveClinicStewardModifiers = async (
-  addressBook: any,
+  addressBook: AddressBook,
   provider: Client,
   permissionsObject: PermissionsJson,
   adminRoles: Record<string, string[]>,

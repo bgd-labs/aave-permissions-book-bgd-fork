@@ -11,8 +11,7 @@ export const saveJson = (filePath: string, stringifiedJson: string) => {
 export const getAllPermissionsJson = (): FullPermissions => {
   try {
     const file = fs.readFileSync('out/aavePermissionList.json');
-    // @ts-ignore
-    return JSON.parse(file);
+    return JSON.parse(file.toString()) as FullPermissions;
   } catch (error) {
     return {};
   }
@@ -21,8 +20,7 @@ export const getAllPermissionsJson = (): FullPermissions => {
 export const getPermissionsByNetwork = (network: string | number): Pool => {
   try {
     const file = fs.readFileSync(`out/permissions/${network}-permissions.json`);
-    // @ts-ignore
-    return JSON.parse(file);
+    return JSON.parse(file.toString()) as Pool;
   } catch (error) {
     return {};
   }
@@ -31,8 +29,7 @@ export const getPermissionsByNetwork = (network: string | number): Pool => {
 export const getStaticPermissionsJson = (path: string): PermissionsJson => {
   try {
     const file = fs.readFileSync(path);
-    // @ts-ignore
-    return JSON.parse(file);
+    return JSON.parse(file.toString()) as PermissionsJson;
   } catch (error) {
     console.error(new Error(`unable to fetch ${path} with error: ${error}`));
     return [];

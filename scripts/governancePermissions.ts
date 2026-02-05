@@ -2,12 +2,12 @@ import { generateRoles } from '../helpers/jsonParsers.js';
 import { getProxyAdmin } from '../helpers/proxyAdmin.js';
 import { AaveGovernanceV2ABI } from '../abis/AaveGovernanceV2.js';
 import { executorWithTimelockAbi } from '../abis/executorWithTimelockAbi.js';
-import { Contracts, PermissionsJson } from '../helpers/types.js';
+import { AddressBook, Contracts, PermissionsJson } from '../helpers/types.js';
 import { Address, Client, getAddress, getContract } from 'viem';
 import { createOwnerResolver } from '../helpers/ownerResolver.js';
 
 export const resolveGovV2Modifiers = async (
-  addressBook: any,
+  addressBook: AddressBook,
   provider: Client,
   permissionsObject: PermissionsJson,
 ): Promise<Contracts> => {

@@ -1,4 +1,5 @@
 import {
+  AddressBook,
   Contracts,
   PermissionsJson,
 } from '../helpers/types.js';
@@ -12,7 +13,7 @@ import { Address, Client, getAddress, getContract, zeroAddress } from 'viem';
 import { createOwnerResolver } from '../helpers/ownerResolver.js';
 
 export const resolvePpcModifiers = async (
-  addressBook: any,
+  addressBook: AddressBook,
   provider: Client,
   permissionsObject: PermissionsJson,
   chainId: typeof ChainId | number,

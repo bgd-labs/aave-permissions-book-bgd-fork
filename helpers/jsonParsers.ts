@@ -1,4 +1,4 @@
-import { Contracts, PermissionsJson } from './types.js';
+import { Contracts, ContractInfo, PermissionsJson, PoolInfo } from './types.js';
 import {
   getAllPermissionsJson,
   getPermissionsByNetwork,
@@ -42,23 +42,23 @@ export const generateContractsByAddress = (
  * Extracts all contracts from a pool's various sections.
  * Used to build address-to-name lookup tables and contract aggregation.
  */
-export const extractPoolContracts = (poolData: any): Record<string, any> => {
+export const extractPoolContracts = (poolData: PoolInfo | undefined): Contracts => {
   if (!poolData) return {};
 
-  const sections = ['contracts', 'govV3', 'collector', 'clinicSteward', 'umbrella', 'ppc', 'agentHub'];
-  const allContracts: Record<string, any> = {};
+  const sections = ['contracts', 'govV3', 'collector', 'clinicSteward', 'umbrella', 'ppc', 'agentHub'] as const;
+  const allContracts: Contracts = {};
 
   for (const section of sections) {
-    const sectionData = poolData[section];
+    const sectionData = poolData[section as keyof PoolInfo];
     if (!sectionData) continue;
 
     // Some sections have contracts nested, others are the contracts directly
-    const contracts = sectionData.contracts || sectionData;
+    const contracts = (sectionData as { contracts?: Contracts }).contracts || sectionData;
     if (typeof contracts === 'object' && contracts !== null) {
       // Only add if it looks like a contracts object (has address property in values)
       for (const [key, value] of Object.entries(contracts)) {
-        if (value && typeof value === 'object' && 'address' in (value as any)) {
-          allContracts[key] = value;
+        if (value && typeof value === 'object' && 'address' in value) {
+          allContracts[key] = value as ContractInfo;
         }
       }
     }
@@ -94,10 +94,10 @@ export const findContractNameByAddress = (
   const isTenderly = pool.toLowerCase().includes('tenderly');
 
   // Helper to search in a pool's contracts
-  const findInPool = (poolData: any): string | undefined => {
+  const findInPool = (poolData: PoolInfo | undefined): string | undefined => {
     const contracts = extractPoolContracts(poolData);
     for (const [contractName, contractInfo] of Object.entries(contracts)) {
-      if ((contractInfo as any).address?.toLowerCase() === normalizedAddress) {
+      if (contractInfo.address?.toLowerCase() === normalizedAddress) {
         return contractName;
       }
     }

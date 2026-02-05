@@ -239,7 +239,7 @@ export const generateTableAddress = (
   };
 
   // Resolve explorer URL (ShortExecutor/LongExecutor go to mainnet)
-  const resolveExplorerUrl = (): string => {
+  const resolveExplorerUrl = (): string | null => {
     const contractName = contractsByAddress[checkSummedAddress];
     if (contractName === 'ShortExecutor' || contractName === 'LongExecutor') {
       return explorerAddressUrlComposer(checkSummedAddress, ChainId.mainnet.toString());
@@ -247,7 +247,7 @@ export const generateTableAddress = (
     return explorerAddressUrlComposer(checkSummedAddress, network);
   };
 
-  return `[${resolveDisplayName()}](${resolveExplorerUrl()})`;
+  return `[${resolveDisplayName()}](${resolveExplorerUrl() || ''})`;
 };
 
 export const generateTable = (network: string, pool: string): string => {

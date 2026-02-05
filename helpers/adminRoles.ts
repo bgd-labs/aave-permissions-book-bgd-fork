@@ -1,4 +1,8 @@
-import { Log, keccak256, encodePacked } from 'viem';
+import { keccak256, encodePacked, ParseEventLogsReturnType } from 'viem';
+import { aclManagerAbi } from '../abis/aclManager.js';
+
+// Properly typed log from the ACL Manager ABI
+type RoleEventLog = ParseEventLogsReturnType<typeof aclManagerAbi>[number];
 
 export const defaultRolesAdmin =
   '0x0000000000000000000000000000000000000000000000000000000000000000';
@@ -50,16 +54,13 @@ export const getRoleAdmins = ({
   oldRoles: Record<string, string[]>;
   roleNames: string[];
   collector?: boolean;
-  eventLogs: Log[];
+  eventLogs: RoleEventLog[];
 }): Record<string, string[]> => {
   const roleHexToNameMap = initializeRoleCodeMap(roleNames, collector);
   const roles: Record<string, string[]> = { ...oldRoles };
 
   for (const eventLog of eventLogs) {
-    // @ts-ignore - event args typing
-    const role = eventLog.args.role;
-    // @ts-ignore - event args typing
-    const account = eventLog.args.account;
+    const { role, account } = eventLog.args;
     const roleName = roleHexToNameMap.get(role);
 
     if (eventLog.eventName === 'RoleGranted') {

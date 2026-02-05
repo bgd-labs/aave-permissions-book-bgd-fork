@@ -1,6 +1,6 @@
 import { ChainId, getClient, getLogsRecursive } from "@bgd-labs/toolbox";
 import { env } from "process";
-import { AbiEvent, Client, http, getAbiItem, getAddress, Log, createClient, createPublicClient } from "viem";
+import { Abi, AbiEvent, Client, http, getAbiItem, getAddress, Log, createClient, createPublicClient } from "viem";
 import { aclManagerAbi } from "../abis/aclManager.js";
 import { getBlockNumber } from "viem/actions";
 import { crossChainControllerAbi } from "../abis/crossChainControllerAbi.js";
@@ -42,7 +42,7 @@ export const getRPCClient = (chainId: number): Client => {
   });
 };
 
-const abiByEventType: Record<string, any> = {
+const abiByEventType: Record<string, Abi> = {
   'RoleGranted': aclManagerAbi,
   'RoleRevoked': aclManagerAbi,
   'SenderUpdated': crossChainControllerAbi,

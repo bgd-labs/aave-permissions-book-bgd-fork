@@ -1,5 +1,16 @@
 import { Pools } from './configs.js';
 
+/**
+ * Generic AddressBook type for pool/governance address books.
+ * Properties can be:
+ * - string: address values like POOL, ACL_MANAGER, etc.
+ * - number: like CHAIN_ID
+ * - nested objects: like ASSETS containing asset metadata
+ * - undefined: for optional addresses
+ * The code already checks for undefined before using properties.
+ */
+export type AddressBook = Record<string, string | number | Record<string, unknown> | undefined>;
+
 export type ContractsByAddress = Record<string, string>;
 export type Guardian = { owners: string[]; threshold: number | undefined };
 export type PoolGuardians = Record<string, Guardian>;
@@ -73,11 +84,11 @@ export type FullPermissions = Record<string, Pool>;
 export type PoolConfigs = {
   permissionsJson: string;
   crossChainPermissionsJson?: string;
-  addressBook: any;
+  addressBook: AddressBook;
   aclBlock?: number;
   crossChainControllerBlock?: number;
   granularGuardianBlock?: number;
-  governanceAddressBook?: any;
+  governanceAddressBook?: AddressBook;
 
   tenderlyBlock?: number;
   tenderlyRpcUrl?: string;
@@ -93,10 +104,10 @@ export type PoolConfigs = {
 
   umbrellaBlock?: number;
   umbrellaIncentivesBlock?: number;
-  umbrellaAddressBook?: any;
+  umbrellaAddressBook?: AddressBook;
 
   ppcPermissionsJson?: string;
-  ppcAddressBook?: any;
+  ppcAddressBook?: AddressBook;
 
   functionsPermissionsAgentHubJson?: string;
 };
