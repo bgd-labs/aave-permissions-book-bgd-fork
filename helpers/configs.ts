@@ -70,6 +70,9 @@ import {
   GovernanceV3Mantle,
   MiscMantle,
   AaveV3Mantle,
+  GovernanceV3MegaEth,
+  MiscMegaEth,
+  AaveV3MegaEth,
 } from '@bgd-labs/aave-address-book';
 import { NetworkConfigs } from './types.js';
 import { ChainId } from '@bgd-labs/toolbox';
@@ -1286,5 +1289,40 @@ export const networkConfigs: NetworkConfigs = {
         }
       },
     },
-  }
+  },
+  [ChainId.megaeth]: {
+    name: 'MegaEth',
+    rpcUrl: process.env.RPC_MEGAETH,
+    explorer: 'https://megaeth.blockscout.com/',
+    addressesNames: {
+      '0x8126eAd44383cb52Cf6A1bb70F1b4d7399DE34ef':
+        'Aave Protocol Guardian MegaETH',
+      '0x58528Cd7B8E84520df4D3395249D24543f431c21': 'BGD',
+      '0xEAF6183bAb3eFD3bF856Ac5C058431C8592394d6': 'Deployer',
+      '0x8Fa22D09b13486A40cd6b04398b948AA8bD5853A':
+        'Aave Granular Guardian MegaETH',
+      '0x5a578ee1dA2c798Be60036AdDD223Ac164d948Af':
+        'Aave Governance Guardian MegaETH',
+      '0x36CF7a4377aAf1988E01a4b38224FC8D583E50A9': 'Risk Council',
+      // '': 'Finance Risk Council'
+    },
+    pools: {
+      [Pools.V3]: {
+        crossChainControllerBlock: 5516650,
+        granularGuardianBlock: 5516650,
+        crossChainPermissionsJson: './statics/functionsPermissionsGovV3.json',
+        permissionsJson: './statics/functionsPermissionsV3.json',
+        aclBlock: 5516650,
+        collectorBlock: 5516650,
+        addressBook: {
+          ...AaveV3MegaEth,
+          ...MiscMegaEth,
+        },
+        governanceAddressBook: {
+          ...GovernanceV3MegaEth,
+          ...MiscMegaEth
+        },
+      },
+    },
+  },
 };
