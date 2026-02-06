@@ -375,8 +375,7 @@
         ],
         "ASSET_LISTING_ADMIN": [],
         "FLASH_BORROWER": []
-      },
-      "latestBlockNumber": 22113012
+      }
     },
     "gsmRoles": {},
     "govV3": {
@@ -391,8 +390,7 @@
           "RETRY_ROLE": [
             "0x9853589F951D724D9f7c6724E0fD63F9d888C429"
           ]
-        },
-        "latestBlockNumber": 22113012
+        }
       },
       "contracts": {
         "GranularGuardian": {
@@ -657,8 +655,7 @@
           "proxyAdmin": "0x1cabd986cbabdf12e00128dff03c80ee62c4fd97"
         }
       },
-      "senders": [],
-      "latestCCCBlockNumber": 22113012
+      "senders": []
     },
     "collector": {
       "contracts": {
@@ -723,8 +720,7 @@
             "0x6fD45D32375d5aDB8D76275A3932c740F03a8718",
             "0x53d3c1B2d42578F56ef4c0142F19CDB54CE55040"
           ]
-        },
-        "latestBlockNumber": 22113012
+        }
       }
     },
     "clinicSteward": {
@@ -778,12 +774,13 @@
             "0xdeadD8aB03075b7FBA81864202a2f59EE25B312b",
             "0x3Cbded22F878aFC8d39dCD744d3Fe62086B76193"
           ]
-        },
-        "latestBlockNumber": 22113012
+        }
       }
     },
     "umbrella": {},
     "ppc": {},
-    "agentHub": {}
+    "agentHub": {
+      "contracts": {}
+    }
   }
 }

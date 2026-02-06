@@ -76,6 +76,17 @@
 |  [PoolExposureSteward](https://etherscan.io/address/0x22aC12a6937BBBC0a301AF9154d08EaD95673122) |  - |  onlyOwner |  [Executor_lvl1](https://etherscan.io/address/0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A) |  approvePool, revokePool | |--------|--------|--------|--------|--------|
 |  [PoolExposureSteward](https://etherscan.io/address/0x22aC12a6937BBBC0a301AF9154d08EaD95673122) |  - |  onlyOwnerOrGuardian |  [Finance Risk Council](https://etherscan.io/address/0x22740deBa78d5a0c24C58C740e3715ec29de1bFa), [Executor_lvl1](https://etherscan.io/address/0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A) |  depositV3, withdrawV3, withdrawV2, migrateV2toV3, migrateBetweenV3 | |--------|--------|--------|--------|--------|
 
+### Risk Agent Contracts
+| contract |proxyAdmin |modifier |permission owner |functions |
+|----------|----------|----------|----------|----------|
+|  [EModeCategory_CoreAgent](https://etherscan.io/address/0x4F2858d4A4e4464b34Aa4a22C41B2Ef540a59BF4) |  - |  onlyAgentHub |  [AgentHub](https://etherscan.io/address/0x95E3015c67EF62B866cC28ca5A9AB5017A55e336) |  inject | |--------|--------|--------|--------|--------|
+|  [PendleDiscountRate_CoreAgent](https://etherscan.io/address/0x1B3bD355c43d2247946b8e0889d4b4e701bf430d) |  - |  onlyAgentHub |  [AgentHub](https://etherscan.io/address/0x95E3015c67EF62B866cC28ca5A9AB5017A55e336) |  inject | |--------|--------|--------|--------|--------|
+|  [RateStrategy_CoreAgent](https://etherscan.io/address/0xdA626E64f34f24e0236E0C9cD2F11ce4549a08c6) |  - |  onlyAgentHub |  [AgentHub](https://etherscan.io/address/0x95E3015c67EF62B866cC28ca5A9AB5017A55e336) |  inject | |--------|--------|--------|--------|--------|
+|  [AgentHub](https://etherscan.io/address/0x95E3015c67EF62B866cC28ca5A9AB5017A55e336) |  [AgentHubProxyAdmin](https://etherscan.io/address/0xD26dcF055E16ed3048a17b37006082779CF0297c) |  onlyOwner |  [Executor_lvl1](https://etherscan.io/address/0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A) |  registerAgent, setAgentAdmin, setMaxBatchSize, setAgentAddress, renounceOwnership, transferOwnership | |--------|--------|--------|--------|--------|
+|  [AgentHub](https://etherscan.io/address/0x95E3015c67EF62B866cC28ca5A9AB5017A55e336) |  [AgentHubProxyAdmin](https://etherscan.io/address/0xD26dcF055E16ed3048a17b37006082779CF0297c) |  onlyOwnerOrAgentAdmin |  [Executor_lvl1](https://etherscan.io/address/0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A) |  setAgentAsPermissioned, addPermissionedSender, removePermissionedSender, addAllowedMarket, removeAllowedMarket, addRestrictedMarket, removeRestrictedMarket, setExpirationPeriod, setAgentEnabled, setMinimumDelay, setAgentContext, setMarketsFromAgentEnabled, addAllowedMarket, addAllowedMarket | |--------|--------|--------|--------|--------|
+|  [AgentHubProxyAdmin](https://etherscan.io/address/0xd26dcf055e16ed3048a17b37006082779cf0297c) |  - |  onlyOwner |  [Executor_lvl1](https://etherscan.io/address/0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A) |  changeProxyAdmin, upgrade, upgradeAndCall | |--------|--------|--------|--------|--------|
+|  [RangeValidationModule](https://etherscan.io/address/0x9240a6669CC4782FC98620212862DF5CB2e0Df10) |  - |  onlyHubOwnerOrAgentAdmin |  [Executor_lvl1](https://etherscan.io/address/0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A) |  setDefaultRangeConfig, setRangeConfigByMarket | |--------|--------|--------|--------|--------|
+
 ### Guardians 
 | Guardian |Threshold |Address |Owners |
 |----------|----------|----------|----------|

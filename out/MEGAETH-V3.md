@@ -67,7 +67,7 @@
 |  [Collector](https://megaeth.blockscout.com//address/0x7E195b3fc91fDd51A9CD5070cC044602212Ac983) |  [CollectorProxyAdmin](https://megaeth.blockscout.com//address/0x5aDAb126f4200A6945c81fA3E39AecF4eEebee82) |  onlyAdminOrRecipient |  [CollectorProxyAdmin](https://megaeth.blockscout.com//address/0x5aDAb126f4200A6945c81fA3E39AecF4eEebee82), [Executor_lvl1](https://megaeth.blockscout.com//address/0xE2E8Badc5d50f8a6188577B89f50701cDE2D4e19) |  withdrawFromStream, cancelStream | |--------|--------|--------|--------|--------|
 |  [CollectorProxyAdmin](https://megaeth.blockscout.com//address/0x5adab126f4200a6945c81fa3e39aecf4eeebee82) |  - |  onlyOwner |  [Executor_lvl1](https://megaeth.blockscout.com//address/0xE2E8Badc5d50f8a6188577B89f50701cDE2D4e19) |  changeProxyAdmin, upgrade, upgradeAndCall | |--------|--------|--------|--------|--------|
 
-### Governance V3 Contracts 
+### Governance V3 Contracts
 | contract |proxyAdmin |modifier |permission owner |functions |
 |----------|----------|----------|----------|----------|
 |  [GranularGuardian](https://megaeth.blockscout.com//address/0x8Fa22D09b13486A40cd6b04398b948AA8bD5853A) |  - |  onlyRetryGuardian |  [BGD](https://megaeth.blockscout.com//address/0x58528Cd7B8E84520df4D3395249D24543f431c21) |  retryEnvelope, retryTransaction | |--------|--------|--------|--------|--------|
@@ -95,7 +95,7 @@
 |  [BGD](https://megaeth.blockscout.com//address/0x58528Cd7B8E84520df4D3395249D24543f431c21) |  2/3 |  0x58528Cd7B8E84520df4D3395249D24543f431c21 |  [0x0650302887619fa7727D8BD480Cda11A638B219B](https://megaeth.blockscout.com//address/0x0650302887619fa7727D8BD480Cda11A638B219B), [0xf71fc92e2949ccF6A5Fd369a0b402ba80Bc61E02](https://megaeth.blockscout.com//address/0xf71fc92e2949ccF6A5Fd369a0b402ba80Bc61E02), [0x5811d9FF80ff4B73A8F9bA42A6082FaB82E89Ea7](https://megaeth.blockscout.com//address/0x5811d9FF80ff4B73A8F9bA42A6082FaB82E89Ea7) | |--------|--------|--------|--------|
 |  [Aave Governance Guardian MegaETH](https://megaeth.blockscout.com//address/0x5a578ee1dA2c798Be60036AdDD223Ac164d948Af) |  5/9 |  0x5a578ee1dA2c798Be60036AdDD223Ac164d948Af |  [0xDA5Ae43e179987a66B9831F92223567e1F38BE7D](https://megaeth.blockscout.com//address/0xDA5Ae43e179987a66B9831F92223567e1F38BE7D), [0x1e3804357eD445251FfECbb6e40107bf03888885](https://megaeth.blockscout.com//address/0x1e3804357eD445251FfECbb6e40107bf03888885), [0x4f96743057482a2E10253AFDacDA3fd9CF2C1DC9](https://megaeth.blockscout.com//address/0x4f96743057482a2E10253AFDacDA3fd9CF2C1DC9), [0xebED04E9137AfeBFF6a1B97aC0adf61a544eFE29](https://megaeth.blockscout.com//address/0xebED04E9137AfeBFF6a1B97aC0adf61a544eFE29), [0xbd4DCfA978c6D0d342cE36809AfFFa49d4B7f1F7](https://megaeth.blockscout.com//address/0xbd4DCfA978c6D0d342cE36809AfFFa49d4B7f1F7), [0xA3103D0ED00d24795Faa2d641ACf6A320EeD7396](https://megaeth.blockscout.com//address/0xA3103D0ED00d24795Faa2d641ACf6A320EeD7396), [0x936CD9654271083cCF93A975919Da0aB3Bc99EF3](https://megaeth.blockscout.com//address/0x936CD9654271083cCF93A975919Da0aB3Bc99EF3), [0x0D2394C027602Dc4c3832Ffd849b5df45DBac0E9](https://megaeth.blockscout.com//address/0x0D2394C027602Dc4c3832Ffd849b5df45DBac0E9), [0x4C30E33758216aD0d676419c21CB8D014C68099f](https://megaeth.blockscout.com//address/0x4C30E33758216aD0d676419c21CB8D014C68099f) | |--------|--------|--------|--------|
 
-### Admins 
+### Admins
 | Role |Contract |
 |----------|----------|
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://megaeth.blockscout.com//address/0xE2E8Badc5d50f8a6188577B89f50701cDE2D4e19) | |--------|--------|
@@ -105,14 +105,14 @@
 |  FLASH_BORROWER |   | |--------|--------|
 |  RISK_ADMIN |   | |--------|--------|
 
-### Granular Guardian Admins 
+### Granular Guardian Admins
 | Role |Contract |
 |----------|----------|
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://megaeth.blockscout.com//address/0xE2E8Badc5d50f8a6188577B89f50701cDE2D4e19) | |--------|--------|
 |  SOLVE_EMERGENCY_ROLE |  [Aave Governance Guardian MegaETH](https://megaeth.blockscout.com//address/0x5a578ee1dA2c798Be60036AdDD223Ac164d948Af) | |--------|--------|
 |  RETRY_ROLE |  [BGD](https://megaeth.blockscout.com//address/0x58528Cd7B8E84520df4D3395249D24543f431c21) | |--------|--------|
 
-### Collector Admins 
+### Collector Admins
 | Role |Contract |
 |----------|----------|
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://megaeth.blockscout.com//address/0xE2E8Badc5d50f8a6188577B89f50701cDE2D4e19) | |--------|--------|
