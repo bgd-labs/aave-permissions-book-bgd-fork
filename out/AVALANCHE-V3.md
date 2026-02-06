@@ -91,7 +91,7 @@
 |  [ClinicSteward](https://snowscan.xyz/address/0x6c2B732cB368322E460D718df3CD4F553d5fbAde) |  - |  onlyCleanUpRole |  [CleanUp Admin](https://snowscan.xyz/address/0xdeadD8aB03075b7FBA81864202a2f59EE25B312b), [ACI Automation](https://snowscan.xyz/address/0x3Cbded22F878aFC8d39dCD744d3Fe62086B76193) |  renewAllowance, batchRepayBadDebt, batchLiquidate, batchRepayBadDebt | |--------|--------|--------|--------|--------|
 |  [ClinicSteward](https://snowscan.xyz/address/0x6c2B732cB368322E460D718df3CD4F553d5fbAde) |  - |  onlyAdmin |  [Executor_lvl1](https://snowscan.xyz/address/0x3C06dce358add17aAf230f2234bCCC4afd50d090) |  setAvailableBudget | |--------|--------|--------|--------|--------|
 
-### Governance V3 Contracts 
+### Governance V3 Contracts
 | contract |proxyAdmin |modifier |permission owner |functions |
 |----------|----------|----------|----------|----------|
 |  [GranularGuardian](https://snowscan.xyz/address/0xc1162BCb2E5E3ca4725512008c7522dF8C8B7B65) |  - |  onlyRetryGuardian |  [BGD](https://snowscan.xyz/address/0x3DBA1c4094BC0eE4772A05180B7E0c2F1cFD9c36) |  retryEnvelope, retryTransaction | |--------|--------|--------|--------|--------|
@@ -113,7 +113,7 @@
 |  [CrossChainController](https://snowscan.xyz/address/0x27FC7D54C893dA63C0AE6d57e1B2B13A70690928) |  [ProxyAdmin](https://snowscan.xyz/address/0xD3cF979e676265e4f6379749DECe4708B9A22476) |  onlyApprovedBridges |  [LayerZero adapter](https://snowscan.xyz/address/0x10f02995a399C0dC0FaF29914220E9C1bCdE8640), [CCIP adapter](https://snowscan.xyz/address/0x2b88C83727B0E290B76EB3F6133994fF81B7f355), [Hyperlane adapter](https://snowscan.xyz/address/0x617332a777780F546261247F621051d0b98975Eb) |  receiveCrossChainMessage | |--------|--------|--------|--------|--------|
 |  [CrossChainController](https://snowscan.xyz/address/0x27FC7D54C893dA63C0AE6d57e1B2B13A70690928) |  [ProxyAdmin](https://snowscan.xyz/address/0xD3cF979e676265e4f6379749DECe4708B9A22476) |  onlyGuardian |  [BGD](https://snowscan.xyz/address/0x3DBA1c4094BC0eE4772A05180B7E0c2F1cFD9c36) |  solveEmergency | |--------|--------|--------|--------|--------|
 
-### Risk Agent Contracts 
+### Risk Agent Contracts
 | contract |proxyAdmin |modifier |permission owner |functions |
 |----------|----------|----------|----------|----------|
 |  [SupplyCapAgent](https://snowscan.xyz/address/0x38753B4D5116b12bC3524e334bC76AE57fA42fFB) |  - |  onlyAgentHub |  [AgentHub](https://snowscan.xyz/address/0x556bBE96f04b4610E48EE003DAcEE1C74de7AC6a) |  inject | |--------|--------|--------|--------|--------|
@@ -133,7 +133,7 @@
 |  [BGD](https://snowscan.xyz/address/0x3DBA1c4094BC0eE4772A05180B7E0c2F1cFD9c36) |  2/3 |  0x3DBA1c4094BC0eE4772A05180B7E0c2F1cFD9c36 |  [0xf71fc92e2949ccF6A5Fd369a0b402ba80Bc61E02](https://snowscan.xyz/address/0xf71fc92e2949ccF6A5Fd369a0b402ba80Bc61E02), [0x5811d9FF80ff4B73A8F9bA42A6082FaB82E89Ea7](https://snowscan.xyz/address/0x5811d9FF80ff4B73A8F9bA42A6082FaB82E89Ea7), [0x0650302887619fa7727D8BD480Cda11A638B219B](https://snowscan.xyz/address/0x0650302887619fa7727D8BD480Cda11A638B219B) | |--------|--------|--------|--------|
 |  [Aave Governance Guardian Avalanche](https://snowscan.xyz/address/0x360c0a69Ed2912351227a0b745f890CB2eBDbcFe) |  5/9 |  0x360c0a69Ed2912351227a0b745f890CB2eBDbcFe |  [0xDA5Ae43e179987a66B9831F92223567e1F38BE7D](https://snowscan.xyz/address/0xDA5Ae43e179987a66B9831F92223567e1F38BE7D), [0x1e3804357eD445251FfECbb6e40107bf03888885](https://snowscan.xyz/address/0x1e3804357eD445251FfECbb6e40107bf03888885), [0x4f96743057482a2E10253AFDacDA3fd9CF2C1DC9](https://snowscan.xyz/address/0x4f96743057482a2E10253AFDacDA3fd9CF2C1DC9), [0xebED04E9137AfeBFF6a1B97aC0adf61a544eFE29](https://snowscan.xyz/address/0xebED04E9137AfeBFF6a1B97aC0adf61a544eFE29), [0xbd4DCfA978c6D0d342cE36809AfFFa49d4B7f1F7](https://snowscan.xyz/address/0xbd4DCfA978c6D0d342cE36809AfFFa49d4B7f1F7), [0xA3103D0ED00d24795Faa2d641ACf6A320EeD7396](https://snowscan.xyz/address/0xA3103D0ED00d24795Faa2d641ACf6A320EeD7396), [0x936CD9654271083cCF93A975919Da0aB3Bc99EF3](https://snowscan.xyz/address/0x936CD9654271083cCF93A975919Da0aB3Bc99EF3), [0x0D2394C027602Dc4c3832Ffd849b5df45DBac0E9](https://snowscan.xyz/address/0x0D2394C027602Dc4c3832Ffd849b5df45DBac0E9), [0x4C30E33758216aD0d676419c21CB8D014C68099f](https://snowscan.xyz/address/0x4C30E33758216aD0d676419c21CB8D014C68099f) | |--------|--------|--------|--------|
 
-### Admins 
+### Admins
 | Role |Contract |
 |----------|----------|
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://snowscan.xyz/address/0x3C06dce358add17aAf230f2234bCCC4afd50d090) | |--------|--------|
@@ -143,20 +143,20 @@
 |  RISK_ADMIN |  [Proof Of Reserve Executor V3](https://snowscan.xyz/address/0xB94e515615c244Ab25f7A6e592e3Cb7EE31E99F4), [Gho Aave Steward](https://snowscan.xyz/address/0xA5Ba213867E175A182a5dd6A9193C6158738105A), [Manual AGRS](https://snowscan.xyz/address/0x23AceD103f5E22bD22B9272c82f29C0E51abC5c2), [SupplyCapAgent](https://snowscan.xyz/address/0x38753B4D5116b12bC3524e334bC76AE57fA42fFB), [BorrowCapAgent](https://snowscan.xyz/address/0xb57C37F48d1De2DACBefed69679Ba0b7DC43A394) | |--------|--------|
 |  FLASH_BORROWER |  [0x14F8e5Fe35b2d0D67dBcE9329f1b5d09f60c06C3](https://snowscan.xyz/address/0x14F8e5Fe35b2d0D67dBcE9329f1b5d09f60c06C3), [0x352423e2fA5D5c99343d371C9e3bC56C87723Cc7](https://snowscan.xyz/address/0x352423e2fA5D5c99343d371C9e3bC56C87723Cc7) | |--------|--------|
 
-### Granular Guardian Admins 
+### Granular Guardian Admins
 | Role |Contract |
 |----------|----------|
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://snowscan.xyz/address/0x3C06dce358add17aAf230f2234bCCC4afd50d090) | |--------|--------|
 |  SOLVE_EMERGENCY_ROLE |  [Aave Governance Guardian Avalanche](https://snowscan.xyz/address/0x360c0a69Ed2912351227a0b745f890CB2eBDbcFe) | |--------|--------|
 |  RETRY_ROLE |  [BGD](https://snowscan.xyz/address/0x3DBA1c4094BC0eE4772A05180B7E0c2F1cFD9c36) | |--------|--------|
 
-### Collector Admins 
+### Collector Admins
 | Role |Contract |
 |----------|----------|
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://snowscan.xyz/address/0x3C06dce358add17aAf230f2234bCCC4afd50d090) | |--------|--------|
 |  FUNDS_ADMIN_ROLE |  [Executor_lvl1](https://snowscan.xyz/address/0x3C06dce358add17aAf230f2234bCCC4afd50d090), [ClinicSteward](https://snowscan.xyz/address/0x6c2B732cB368322E460D718df3CD4F553d5fbAde), [PoolExposureSteward](https://snowscan.xyz/address/0x0d68D50DB848dfE6012456781c1D79A11eD12a2e), [ClinicStewardV2](https://snowscan.xyz/address/0xA28820b8af102fAABAAAdaf94224353Dc772DC99) | |--------|--------|
 
-### Clinic Steward Admins 
+### Clinic Steward Admins
 | Role |Contract |
 |----------|----------|
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://snowscan.xyz/address/0x3C06dce358add17aAf230f2234bCCC4afd50d090) | |--------|--------|

@@ -1,18 +1,14 @@
-
 import { onlyOwnerAbi } from '../abis/onlyOwnerAbi.js';
-import { collectorAbi } from '../abis/collectorAbi.js';
 import { Pools } from '../helpers/configs.js';
 import { generateRoles } from '../helpers/jsonParsers.js';
 import { poolAddressProviderAbi } from '../abis/lendingPoolAddressProviderAbi.js';
-import { getProxyAdmin, getProxyAdminFromFactory } from '../helpers/proxyAdmin.js';
+import { getProxyAdmin } from '../helpers/proxyAdmin.js';
 import { getSafeOwners, getSafeThreshold } from '../helpers/guardian.js';
 import { ChainId } from '@bgd-labs/toolbox';
 import {
-  AddressInfo,
+  AddressBook,
   Contracts,
-  Guardian,
   PermissionsJson,
-  PoolGuardians,
 } from '../helpers/types.js';
 import { capsPlusRiskStewardABI } from '../abis/capsPlusRiskSteward.js';
 import { erc20Bridge } from '../abis/Erc20Bridge.js';
@@ -22,35 +18,15 @@ import { EDGE_RISK_STEWARD_CAPS_ABI } from '../abis/edgeRiskStewardCaps.js';
 import { POOL_EXPOSURE_STEWARD_ABI } from '../abis/poolExposureStewards.js';
 import { Address, Client, getAddress, getContract, zeroAddress } from 'viem';
 import { AAVE_STEWARD_INJECTOR_CAPS_ABI } from '../abis/aaveStewardInjectorCaps.js';
-import { CLINIC_STEWARD_ABI } from '../abis/clinicSteward.js';
 import { COLLECTOR_SWAP_STEWARD_ABI } from '../abis/collectorSwapSteward.js';
-import { RISK_ORACLE_ABI } from '../abis/riskOracle.js';
-
-const getAddressInfo = async (
-  provider: Client,
-  roleAddress: string,
-): Promise<AddressInfo> => {
-  const owners = await getSafeOwners(provider, roleAddress);
-  return {
-    address: roleAddress,
-    owners,
-  };
-};
-
-const uniqueAddresses = (addressesInfo: AddressInfo[]): AddressInfo[] => {
-  const cleanAddresses: AddressInfo[] = [];
-
-  addressesInfo.forEach((addressInfo) => {
-    const found = cleanAddresses.find(
-      (cleanAddressInfo) => cleanAddressInfo.address === addressInfo.address,
-    );
-    if (!found) {
-      cleanAddresses.push(addressInfo);
-    }
-  });
-
-  return cleanAddresses;
-};
+import { uniqueAddresses } from '../helpers/addressUtils.js';
+import { createOwnerResolver } from '../helpers/ownerResolver.js';
+import {
+  resolveRiskCouncilContract,
+  resolveAllRoleOwners,
+  mapRoleAddresses,
+  EDGE_STEWARD_CONFIGS,
+} from '../helpers/contractResolvers.js';
 
 export const resolveV3Modifiers = async (
   addressBook: any,
@@ -60,28 +36,14 @@ export const resolveV3Modifiers = async (
   chainId: typeof ChainId | number,
   adminRoles: Record<string, string[]>,
 ): Promise<Contracts> => {
-  let obj: Contracts = {};
+  const obj: Contracts = {};
   const roles = generateRoles(permissionsObject);
 
-  const owners: Record<string, Record<string, Guardian>> = {};
-  // owners
-  for (const roleName of Object.keys(adminRoles)) {
-    for (const roleAddress of adminRoles[roleName]) {
-      if (!owners[roleName]) {
-        owners[roleName] = {
-          [roleAddress]: {
-            owners: await getSafeOwners(provider, roleAddress),
-            threshold: await getSafeThreshold(provider, roleAddress),
-          },
-        };
-      } else if (owners[roleName] && !owners[roleName][roleAddress]) {
-        owners[roleName][roleAddress] = {
-          owners: await getSafeOwners(provider, roleAddress),
-          threshold: await getSafeThreshold(provider, roleAddress),
-        };
-      }
-    }
-  }
+  // Create owner resolver with caching for this network
+  const ownerResolver = createOwnerResolver(provider);
+
+  // Resolve all role owners (with caching to avoid redundant RPC calls)
+  const owners = await resolveAllRoleOwners(adminRoles, ownerResolver);
 
   const poolAddressesProvider = getContract({ address: getAddress(addressBook.POOL_ADDRESSES_PROVIDER), abi: poolAddressProviderAbi, client: provider });
 
@@ -113,26 +75,12 @@ export const resolveV3Modifiers = async (
     modifiers: [
       {
         modifier: 'onlyPoolConfigurator',
-        addresses: [
-          {
-            address: addressBook.POOL_CONFIGURATOR,
-            owners: [],
-          },
-        ],
+        addresses: [{ address: addressBook.POOL_CONFIGURATOR, owners: [] }],
         functions: roles['Pool']['onlyPoolConfigurator'],
       },
       {
         modifier: 'onlyPoolAdmin',
-        addresses: [
-          ...adminRoles['POOL_ADMIN'].map((roleAddress) => {
-            return {
-              address: roleAddress,
-              owners: owners['POOL_ADMIN'][roleAddress].owners || [],
-              signersThreshold:
-                owners['POOL_ADMIN'][roleAddress].threshold || 0,
-            };
-          }),
-        ],
+        addresses: mapRoleAddresses('POOL_ADMIN', adminRoles, owners),
         functions: roles['Pool']['onlyPoolAdmin'],
       },
     ],
@@ -144,115 +92,40 @@ export const resolveV3Modifiers = async (
     modifiers: [
       {
         modifier: 'onlyPoolAdmin',
-        addresses: [
-          ...adminRoles['POOL_ADMIN'].map((roleAddress) => {
-            return {
-              address: roleAddress,
-              owners: owners['POOL_ADMIN'][roleAddress].owners || [],
-              signersThreshold:
-                owners['POOL_ADMIN'][roleAddress].threshold || 0,
-            };
-          }),
-        ],
+        addresses: mapRoleAddresses('POOL_ADMIN', adminRoles, owners),
         functions: roles['PoolConfigurator']['onlyPoolAdmin'],
       },
       {
         modifier: 'onlyAssetListingOrPoolAdmins',
         addresses: uniqueAddresses([
-          ...adminRoles['POOL_ADMIN'].map((roleAddress) => {
-            return {
-              address: roleAddress,
-              owners: owners['POOL_ADMIN'][roleAddress].owners || [],
-              signersThreshold:
-                owners['POOL_ADMIN'][roleAddress].threshold || 0,
-            };
-          }),
-          ...adminRoles['ASSET_LISTING_ADMIN'].map((roleAddress) => {
-            return {
-              address: roleAddress,
-              owners: owners['ASSET_LISTING_ADMIN'][roleAddress].owners || [],
-              signersThreshold:
-                owners['ASSET_LISTING_ADMIN'][roleAddress].threshold || 0,
-            };
-          }),
+          ...mapRoleAddresses('POOL_ADMIN', adminRoles, owners),
+          ...mapRoleAddresses('ASSET_LISTING_ADMIN', adminRoles, owners),
         ]),
         functions: roles['PoolConfigurator']['onlyAssetListingOrPoolAdmins'],
       },
       {
         modifier: 'onlyRiskOrPoolAdmins',
         addresses: uniqueAddresses([
-          ...adminRoles['POOL_ADMIN'].map((roleAddress) => {
-            return {
-              address: roleAddress,
-              owners: owners['POOL_ADMIN'][roleAddress].owners || [],
-              signersThreshold:
-                owners['POOL_ADMIN'][roleAddress].threshold || 0,
-            };
-          }),
-          ...adminRoles['RISK_ADMIN'].map((roleAddress) => {
-            return {
-              address: roleAddress,
-              owners: owners['RISK_ADMIN'][roleAddress].owners || [],
-              signersThreshold:
-                owners['RISK_ADMIN'][roleAddress].threshold || 0,
-            };
-          }),
+          ...mapRoleAddresses('POOL_ADMIN', adminRoles, owners),
+          ...mapRoleAddresses('RISK_ADMIN', adminRoles, owners),
         ]),
-
         functions: roles['PoolConfigurator']['onlyRiskOrPoolAdmins'],
       },
       {
         modifier: 'onlyRiskOrPoolOrEmergencyAdmins',
         addresses: uniqueAddresses([
-          ...adminRoles['POOL_ADMIN'].map((roleAddress) => {
-            return {
-              address: roleAddress,
-              owners: owners['POOL_ADMIN'][roleAddress].owners || [],
-              signersThreshold:
-                owners['POOL_ADMIN'][roleAddress].threshold || 0,
-            };
-          }),
-          ...adminRoles['RISK_ADMIN'].map((roleAddress) => {
-            return {
-              address: roleAddress,
-              owners: owners['RISK_ADMIN'][roleAddress].owners || [],
-              signersThreshold:
-                owners['RISK_ADMIN'][roleAddress].threshold || 0,
-            };
-          }),
-          ...adminRoles['EMERGENCY_ADMIN'].map((roleAddress) => {
-            return {
-              address: roleAddress,
-              owners: owners['EMERGENCY_ADMIN'][roleAddress].owners || [],
-              signersThreshold:
-                owners['EMERGENCY_ADMIN'][roleAddress].threshold || 0,
-            };
-          }),
+          ...mapRoleAddresses('POOL_ADMIN', adminRoles, owners),
+          ...mapRoleAddresses('RISK_ADMIN', adminRoles, owners),
+          ...mapRoleAddresses('EMERGENCY_ADMIN', adminRoles, owners),
         ]),
-
         functions: roles['PoolConfigurator']['onlyRiskOrPoolOrEmergencyAdmins'],
       },
       {
         modifier: 'onlyEmergencyOrPoolAdmin',
         addresses: uniqueAddresses([
-          ...adminRoles['POOL_ADMIN'].map((roleAddress) => {
-            return {
-              address: roleAddress,
-              owners: owners['POOL_ADMIN'][roleAddress].owners || [],
-              signersThreshold:
-                owners['POOL_ADMIN'][roleAddress].threshold || 0,
-            };
-          }),
-          ...adminRoles['EMERGENCY_ADMIN'].map((roleAddress) => {
-            return {
-              address: roleAddress,
-              owners: owners['EMERGENCY_ADMIN'][roleAddress].owners || [],
-              signersThreshold:
-                owners['EMERGENCY_ADMIN'][roleAddress].threshold || 0,
-            };
-          }),
+          ...mapRoleAddresses('POOL_ADMIN', adminRoles, owners),
+          ...mapRoleAddresses('EMERGENCY_ADMIN', adminRoles, owners),
         ]),
-
         functions: roles['PoolConfigurator']['onlyEmergencyOrPoolAdmin'],
       },
     ],
@@ -312,22 +185,8 @@ export const resolveV3Modifiers = async (
       {
         modifier: 'onlyAssetListingOrPoolAdmins',
         addresses: uniqueAddresses([
-          ...adminRoles['POOL_ADMIN'].map((roleAddress) => {
-            return {
-              address: roleAddress,
-              owners: owners['POOL_ADMIN'][roleAddress].owners || [],
-              signersThreshold:
-                owners['POOL_ADMIN'][roleAddress].threshold || 0,
-            };
-          }),
-          ...adminRoles['ASSET_LISTING_ADMIN'].map((roleAddress) => {
-            return {
-              address: roleAddress,
-              owners: owners['ASSET_LISTING_ADMIN'][roleAddress].owners || [],
-              signersThreshold:
-                owners['ASSET_LISTING_ADMIN'][roleAddress].threshold || 0,
-            };
-          }),
+          ...mapRoleAddresses('POOL_ADMIN', adminRoles, owners),
+          ...mapRoleAddresses('ASSET_LISTING_ADMIN', adminRoles, owners),
         ]),
         functions: roles['AaveOracle']['onlyAssetListingOrPoolAdmins'],
       },
@@ -549,16 +408,7 @@ export const resolveV3Modifiers = async (
     modifiers: [
       {
         modifier: 'onlyRole',
-        addresses: [
-          ...adminRoles['DEFAULT_ADMIN'].map((roleAddress) => {
-            return {
-              address: roleAddress,
-              owners: owners['DEFAULT_ADMIN'][roleAddress].owners || [],
-              signersThreshold:
-                owners['DEFAULT_ADMIN'][roleAddress].threshold || 0,
-            };
-          }),
-        ],
+        addresses: mapRoleAddresses('DEFAULT_ADMIN', adminRoles, owners),
         functions: roles['ACLManager']['onlyRole'],
       },
     ],
@@ -591,16 +441,7 @@ export const resolveV3Modifiers = async (
       modifiers: [
         {
           modifier: 'onlyEmergencyAdmin',
-          addresses: [
-            ...adminRoles['EMERGENCY_ADMIN'].map((roleAddress) => {
-              return {
-                address: roleAddress,
-                owners: owners['EMERGENCY_ADMIN'][roleAddress].owners || [],
-                signersThreshold:
-                  owners['EMERGENCY_ADMIN'][roleAddress].threshold || 0,
-              };
-            }),
-          ],
+          addresses: mapRoleAddresses('EMERGENCY_ADMIN', adminRoles, owners),
           functions: roles['FreezeSteward']['onlyEmergencyAdmin'],
         },
       ],
@@ -672,171 +513,23 @@ export const resolveV3Modifiers = async (
     };
   }
 
-  if (addressBook.EDGE_RISK_STEWARD_CAPS) {
-    const edgeRiskStewardCapsContract = getContract({ address: getAddress(addressBook.EDGE_RISK_STEWARD_CAPS), abi: EDGE_RISK_STEWARD_CAPS_ABI, client: provider });
-    const edgeRiskStewardOwner = await edgeRiskStewardCapsContract.read.owner() as Address;
-    const edgeRiskStewardCouncil = await edgeRiskStewardCapsContract.read.RISK_COUNCIL() as Address;
-
-
-    obj['EdgeRiskStewardCaps'] = {
-      address: addressBook.EDGE_RISK_STEWARD_CAPS,
-      modifiers: [
-        {
-          modifier: 'onlyOwner',
-          addresses: [
-            {
-              address: edgeRiskStewardOwner,
-              owners: await getSafeOwners(provider, edgeRiskStewardOwner),
-              signersThreshold: await getSafeThreshold(
-                provider,
-                edgeRiskStewardOwner,
-              ),
-            },
-          ],
-          functions: roles['EdgeRiskStewardCaps']['onlyOwner'],
-        },
-        {
-          modifier: 'onlyRiskCouncil',
-          addresses: [
-            {
-              address: edgeRiskStewardCouncil,
-              owners: await getSafeOwners(provider, edgeRiskStewardCouncil),
-              signersThreshold: await getSafeThreshold(
-                provider,
-                edgeRiskStewardCouncil,
-              ),
-            },
-          ],
-          functions: roles['EdgeRiskStewardCaps']['onlyRiskCouncil'],
-        },
-      ],
-    };
-  }
-
-  if (addressBook.EDGE_RISK_STEWARD_DISCOUNT_RATE) {
-    const edgeRiskStewardCapsContract = getContract({ address: getAddress(addressBook.EDGE_RISK_STEWARD_DISCOUNT_RATE), abi: EDGE_RISK_STEWARD_CAPS_ABI, client: provider });
-    const edgeRiskStewardOwner = await edgeRiskStewardCapsContract.read.owner() as Address;
-    const edgeRiskStewardCouncil = await edgeRiskStewardCapsContract.read.RISK_COUNCIL() as Address;
-
-
-    obj['EdgeRiskStewardDiscountRate'] = {
-      address: addressBook.EDGE_RISK_STEWARD_DISCOUNT_RATE,
-      modifiers: [
-        {
-          modifier: 'onlyOwner',
-          addresses: [
-            {
-              address: edgeRiskStewardOwner,
-              owners: await getSafeOwners(provider, edgeRiskStewardOwner),
-              signersThreshold: await getSafeThreshold(
-                provider,
-                edgeRiskStewardOwner,
-              ),
-            },
-          ],
-          functions: roles['EdgeRiskStewardDiscountRate']['onlyOwner'],
-        },
-        {
-          modifier: 'onlyRiskCouncil',
-          addresses: [
-            {
-              address: edgeRiskStewardCouncil,
-              owners: await getSafeOwners(provider, edgeRiskStewardCouncil),
-              signersThreshold: await getSafeThreshold(
-                provider,
-                edgeRiskStewardCouncil,
-              ),
-            },
-          ],
-          functions: roles['EdgeRiskStewardDiscountRate']['onlyRiskCouncil'],
-        },
-      ],
-    };
-  }
-
-
-  if (addressBook.EDGE_RISK_STEWARD_RATES) {
-    const edgeRiskStewardCapsContract = getContract({ address: getAddress(addressBook.EDGE_RISK_STEWARD_RATES), abi: EDGE_RISK_STEWARD_CAPS_ABI, client: provider });
-    const edgeRiskStewardOwner = await edgeRiskStewardCapsContract.read.owner() as Address;
-    const edgeRiskStewardCouncil = await edgeRiskStewardCapsContract.read.RISK_COUNCIL() as Address;
-
-
-    obj['EdgeRiskStewardRates'] = {
-      address: addressBook.EDGE_RISK_STEWARD_RATES,
-      modifiers: [
-        {
-          modifier: 'onlyOwner',
-          addresses: [
-            {
-              address: edgeRiskStewardOwner,
-              owners: await getSafeOwners(provider, edgeRiskStewardOwner),
-              signersThreshold: await getSafeThreshold(
-                provider,
-                edgeRiskStewardOwner,
-              ),
-            },
-          ],
-          functions: roles['EdgeRiskStewardRates']['onlyOwner'],
-        },
-        {
-          modifier: 'onlyRiskCouncil',
-          addresses: [
-            {
-              address: edgeRiskStewardCouncil,
-              owners: await getSafeOwners(provider, edgeRiskStewardCouncil),
-              signersThreshold: await getSafeThreshold(
-                provider,
-                edgeRiskStewardCouncil,
-              ),
-            },
-          ],
-          functions: roles['EdgeRiskStewardRates']['onlyRiskCouncil'],
-        },
-      ],
-    };
-  }
-
-
-
-  if (addressBook.EDGE_RISK_STEWARD_PENDLE_EMODE) {
-    const edgeRiskStewardCapsContract = getContract({ address: getAddress(addressBook.EDGE_RISK_STEWARD_PENDLE_EMODE), abi: EDGE_RISK_STEWARD_CAPS_ABI, client: provider });
-    const edgeRiskStewardOwner = await edgeRiskStewardCapsContract.read.owner() as Address;
-    const edgeRiskStewardCouncil = await edgeRiskStewardCapsContract.read.RISK_COUNCIL() as Address;
-
-
-    obj['EdgeRiskStewardEMode'] = {
-      address: addressBook.EDGE_RISK_STEWARD_PENDLE_EMODE,
-      modifiers: [
-        {
-          modifier: 'onlyOwner',
-          addresses: [
-            {
-              address: edgeRiskStewardOwner,
-              owners: await getSafeOwners(provider, edgeRiskStewardOwner),
-              signersThreshold: await getSafeThreshold(
-                provider,
-                edgeRiskStewardOwner,
-              ),
-            },
-          ],
-          functions: roles['EdgeRiskStewardEMode']['onlyOwner'],
-        },
-        {
-          modifier: 'onlyRiskCouncil',
-          addresses: [
-            {
-              address: edgeRiskStewardCouncil,
-              owners: await getSafeOwners(provider, edgeRiskStewardCouncil),
-              signersThreshold: await getSafeThreshold(
-                provider,
-                edgeRiskStewardCouncil,
-              ),
-            },
-          ],
-          functions: roles['EdgeRiskStewardEMode']['onlyRiskCouncil'],
-        },
-      ],
-    };
+  // Edge Risk Stewards - all use same pattern (owner + RISK_COUNCIL)
+  for (const config of EDGE_STEWARD_CONFIGS) {
+    const address = addressBook[config.addressKey];
+    if (address) {
+      const result = await resolveRiskCouncilContract(
+        config.contractName,
+        config.contractName,
+        address,
+        provider,
+        ownerResolver,
+        roles,
+        EDGE_RISK_STEWARD_CAPS_ABI,
+      );
+      if (result) {
+        obj[config.contractName] = result;
+      }
+    }
   }
 
   if (addressBook.EDGE_INJECTOR_PENDLE_EMODE) {

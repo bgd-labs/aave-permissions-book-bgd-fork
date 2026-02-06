@@ -68,7 +68,7 @@
 |  [ClinicSteward](https://era.zksync.network//address/0x2a549daDfe66AcFf25Bb0Cf0C989AAD0Dc547ceb) |  - |  onlyCleanUpRole |  [CleanUp Admin](https://era.zksync.network//address/0x77CC0A0582475bfD74CD838610e817d05c181E11), [ACI Automation](https://era.zksync.network//address/0x3Cbded22F878aFC8d39dCD744d3Fe62086B76193) |  renewAllowance, batchRepayBadDebt, batchLiquidate, batchRepayBadDebt | |--------|--------|--------|--------|--------|
 |  [ClinicSteward](https://era.zksync.network//address/0x2a549daDfe66AcFf25Bb0Cf0C989AAD0Dc547ceb) |  - |  onlyAdmin |  [Executor_lvl1](https://era.zksync.network//address/0x04cE39789e11a49595cD0ECEf6f4Bd54ABF4d020) |  setAvailableBudget | |--------|--------|--------|--------|--------|
 
-### Governance V3 Contracts 
+### Governance V3 Contracts
 | contract |proxyAdmin |modifier |permission owner |functions |
 |----------|----------|----------|----------|----------|
 |  [GranularGuardian](https://era.zksync.network//address/0xe0e23196D42b54F262a3DE952e6B34B197D1A228) |  - |  onlyRetryGuardian |  [BGD](https://era.zksync.network//address/0x2451337aD5fE8b563bEB3b9c4A2B8789294879Ec) |  retryEnvelope, retryTransaction | |--------|--------|--------|--------|--------|
@@ -95,7 +95,7 @@
 |  [BGD](https://era.zksync.network//address/0x2451337aD5fE8b563bEB3b9c4A2B8789294879Ec) |  2/3 |  0x2451337aD5fE8b563bEB3b9c4A2B8789294879Ec |  [0xf71fc92e2949ccF6A5Fd369a0b402ba80Bc61E02](https://era.zksync.network//address/0xf71fc92e2949ccF6A5Fd369a0b402ba80Bc61E02), [0x5811d9FF80ff4B73A8F9bA42A6082FaB82E89Ea7](https://era.zksync.network//address/0x5811d9FF80ff4B73A8F9bA42A6082FaB82E89Ea7), [0x0650302887619fa7727D8BD480Cda11A638B219B](https://era.zksync.network//address/0x0650302887619fa7727D8BD480Cda11A638B219B) | |--------|--------|--------|--------|
 |  [Aave Governance Guardian ZkSync](https://era.zksync.network//address/0x4257bf0746D783f0D962913d7d8AFA408B62547E) |  5/9 |  0x4257bf0746D783f0D962913d7d8AFA408B62547E |  [0x1e3804357eD445251FfECbb6e40107bf03888885](https://era.zksync.network//address/0x1e3804357eD445251FfECbb6e40107bf03888885), [0x4f96743057482a2E10253AFDacDA3fd9CF2C1DC9](https://era.zksync.network//address/0x4f96743057482a2E10253AFDacDA3fd9CF2C1DC9), [0xebED04E9137AfeBFF6a1B97aC0adf61a544eFE29](https://era.zksync.network//address/0xebED04E9137AfeBFF6a1B97aC0adf61a544eFE29), [0xbd4DCfA978c6D0d342cE36809AfFFa49d4B7f1F7](https://era.zksync.network//address/0xbd4DCfA978c6D0d342cE36809AfFFa49d4B7f1F7), [0xDA5Ae43e179987a66B9831F92223567e1F38BE7D](https://era.zksync.network//address/0xDA5Ae43e179987a66B9831F92223567e1F38BE7D), [0xA3103D0ED00d24795Faa2d641ACf6A320EeD7396](https://era.zksync.network//address/0xA3103D0ED00d24795Faa2d641ACf6A320EeD7396), [0x936CD9654271083cCF93A975919Da0aB3Bc99EF3](https://era.zksync.network//address/0x936CD9654271083cCF93A975919Da0aB3Bc99EF3), [0x0D2394C027602Dc4c3832Ffd849b5df45DBac0E9](https://era.zksync.network//address/0x0D2394C027602Dc4c3832Ffd849b5df45DBac0E9), [0x4C30E33758216aD0d676419c21CB8D014C68099f](https://era.zksync.network//address/0x4C30E33758216aD0d676419c21CB8D014C68099f) | |--------|--------|--------|--------|
 
-### Admins 
+### Admins
 | Role |Contract |
 |----------|----------|
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://era.zksync.network//address/0x04cE39789e11a49595cD0ECEf6f4Bd54ABF4d020) | |--------|--------|
@@ -105,20 +105,20 @@
 |  FLASH_BORROWER |   | |--------|--------|
 |  RISK_ADMIN |  [Manual AGRS](https://era.zksync.network//address/0x528a1036C8450464f8a00A0A8c2f517595E44169) | |--------|--------|
 
-### Granular Guardian Admins 
+### Granular Guardian Admins
 | Role |Contract |
 |----------|----------|
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://era.zksync.network//address/0x04cE39789e11a49595cD0ECEf6f4Bd54ABF4d020) | |--------|--------|
 |  SOLVE_EMERGENCY_ROLE |  [Aave Governance Guardian ZkSync](https://era.zksync.network//address/0x4257bf0746D783f0D962913d7d8AFA408B62547E) | |--------|--------|
 |  RETRY_ROLE |  [BGD](https://era.zksync.network//address/0x2451337aD5fE8b563bEB3b9c4A2B8789294879Ec) | |--------|--------|
 
-### Collector Admins 
+### Collector Admins
 | Role |Contract |
 |----------|----------|
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://era.zksync.network//address/0x04cE39789e11a49595cD0ECEf6f4Bd54ABF4d020) | |--------|--------|
 |  FUNDS_ADMIN_ROLE |  [Executor_lvl1](https://era.zksync.network//address/0x04cE39789e11a49595cD0ECEf6f4Bd54ABF4d020), [ClinicSteward](https://era.zksync.network//address/0x2a549daDfe66AcFf25Bb0Cf0C989AAD0Dc547ceb) | |--------|--------|
 
-### Clinic Steward Admins 
+### Clinic Steward Admins
 | Role |Contract |
 |----------|----------|
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://era.zksync.network//address/0x04cE39789e11a49595cD0ECEf6f4Bd54ABF4d020) | |--------|--------|

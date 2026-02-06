@@ -6,20 +6,23 @@ import { onlyOwnerAbi } from '../abis/onlyOwnerAbi.js';
 import { arcTimelockAbi } from '../abis/arcTimelockAbi.js';
 import { AaveV2EthereumArc } from '@bgd-labs/aave-address-book';
 import { getProxyAdmin } from '../helpers/proxyAdmin.js';
-import { getSafeOwners, getSafeThreshold } from '../helpers/guardian.js';
 import { ChainId } from '@bgd-labs/toolbox';
-import { Contracts, PermissionsJson } from '../helpers/types.js';
-import { Address, Client, getAddress, getContract } from 'viem';
+import { AddressBook, Contracts, PermissionsJson } from '../helpers/types.js';
+import { Address, Client, getAddress, getContract, zeroAddress } from 'viem';
+import { createOwnerResolver } from '../helpers/ownerResolver.js';
 
 export const resolveV2Modifiers = async (
-  addressBook: any,
+  addressBook: AddressBook,
   provider: Client,
   permissionsObject: PermissionsJson,
   pool: Pools,
   chainId: string,
 ): Promise<Contracts> => {
-  let obj: Contracts = {};
+  const obj: Contracts = {};
   const roles = generateRoles(permissionsObject);
+
+  // Create owner resolver with caching for this network
+  const ownerResolver = createOwnerResolver(provider);
 
   const lendingPoolAddressesProvider = getContract({ address: getAddress(addressBook.POOL_ADDRESSES_PROVIDER), abi: poolAddressProviderAbi, client: provider });
   const lendingPoolAddressesProviderOwner: Address =
@@ -27,8 +30,8 @@ export const resolveV2Modifiers = async (
   const lendingRateOracleAddress: Address =
     await lendingPoolAddressesProvider.read.getLendingRateOracle() as Address;
   const poolAdmin: Address = await lendingPoolAddressesProvider.read.getPoolAdmin() as Address;
-  const emergencyAdmin: string =
-    await lendingPoolAddressesProvider.read.getEmergencyAdmin() as Address;
+
+  const providerOwnerInfo = await ownerResolver.resolve(lendingPoolAddressesProviderOwner);
 
   obj['LendingPoolAddressesProvider'] = {
     address: addressBook.POOL_ADDRESSES_PROVIDER,
@@ -38,14 +41,8 @@ export const resolveV2Modifiers = async (
         addresses: [
           {
             address: lendingPoolAddressesProviderOwner,
-            owners: await getSafeOwners(
-              provider,
-              lendingPoolAddressesProviderOwner,
-            ),
-            signersThreshold: await getSafeThreshold(
-              provider,
-              lendingPoolAddressesProviderOwner,
-            ),
+            owners: providerOwnerInfo.owners,
+            signersThreshold: providerOwnerInfo.threshold,
           },
         ],
         functions: roles['LendingPoolAddressesProvider']['onlyOwner'],
@@ -75,6 +72,10 @@ export const resolveV2Modifiers = async (
     await lendingPoolConfiguratorContract.read.getPoolAdmin() as Address;
   const emergencyAdminConfigurator: Address =
     await lendingPoolConfiguratorContract.read.getEmergencyAdmin() as Address;
+
+  const poolConfiguratorAdminInfo = await ownerResolver.resolve(poolConfiguratorAdmin);
+  const emergencyAdminInfo = await ownerResolver.resolve(emergencyAdminConfigurator);
+
   obj['LendingPoolConfigurator'] = {
     address: addressBook.POOL_CONFIGURATOR,
     proxyAdmin: addressBook.POOL_ADDRESSES_PROVIDER,
@@ -84,11 +85,8 @@ export const resolveV2Modifiers = async (
         addresses: [
           {
             address: poolConfiguratorAdmin,
-            owners: await getSafeOwners(provider, poolConfiguratorAdmin),
-            signersThreshold: await getSafeThreshold(
-              provider,
-              poolConfiguratorAdmin,
-            ),
+            owners: poolConfiguratorAdminInfo.owners,
+            signersThreshold: poolConfiguratorAdminInfo.threshold,
           },
         ],
         functions: roles['LendingPoolConfigurator']['onlyPoolAdmin'],
@@ -98,36 +96,28 @@ export const resolveV2Modifiers = async (
         addresses: [
           {
             address: emergencyAdminConfigurator,
-            owners: await getSafeOwners(provider, emergencyAdminConfigurator),
-            signersThreshold: await getSafeThreshold(
-              provider,
-              emergencyAdminConfigurator,
-            ),
+            owners: emergencyAdminInfo.owners,
+            signersThreshold: emergencyAdminInfo.threshold,
           },
         ],
         functions: roles['LendingPoolConfigurator']['onlyEmergencyAdmin'],
       },
     ],
   };
+
   if (pool === Pools.V2) {
     obj['LendingPoolConfigurator'].modifiers.push({
       modifier: 'onlyPoolOrEmergencyAdmin',
       addresses: [
         {
           address: poolConfiguratorAdmin,
-          owners: await getSafeOwners(provider, poolConfiguratorAdmin),
-          signersThreshold: await getSafeThreshold(
-            provider,
-            poolConfiguratorAdmin,
-          ),
+          owners: poolConfiguratorAdminInfo.owners,
+          signersThreshold: poolConfiguratorAdminInfo.threshold,
         },
         {
           address: emergencyAdminConfigurator,
-          owners: await getSafeOwners(provider, emergencyAdminConfigurator),
-          signersThreshold: await getSafeThreshold(
-            provider,
-            emergencyAdminConfigurator,
-          ),
+          owners: emergencyAdminInfo.owners,
+          signersThreshold: emergencyAdminInfo.threshold,
         },
       ],
       functions: roles['LendingPoolConfigurator']['onlyPoolOrEmergencyAdmin'],
@@ -136,28 +126,21 @@ export const resolveV2Modifiers = async (
 
   // Proof of reserve contracts
   if (Number(chainId) === Number(ChainId.avalanche)) {
-    // const code = ethers.utils.solidityKeccak256(
-    //   ['string'],
-    //   ['PROOF_OF_RESERVE_ADMIN'],
-    // );
-    // const proofOfReserveAdmin = await lendingPoolAddressesProvider.getAddress(
-    //   code,
-    // );
+    const poolAdminInfo = await ownerResolver.resolve(poolAdmin);
+    const porInfo = await ownerResolver.resolve(addressBook.PROOF_OF_RESERVE);
+
     obj['LendingPoolConfigurator'].modifiers.push({
       modifier: 'onlyPoolOrProofOfReserveAdmin',
       addresses: [
         {
           address: poolAdmin,
-          owners: await getSafeOwners(provider, poolAdmin),
-          signersThreshold: await getSafeThreshold(provider, poolAdmin),
+          owners: poolAdminInfo.owners,
+          signersThreshold: poolAdminInfo.threshold,
         },
         {
           address: addressBook.PROOF_OF_RESERVE,
-          owners: await getSafeOwners(provider, addressBook.PROOF_OF_RESERVE),
-          signersThreshold: await getSafeThreshold(
-            provider,
-            addressBook.PROOF_OF_RESERVE,
-          ),
+          owners: porInfo.owners,
+          signersThreshold: porInfo.threshold,
         },
       ],
       functions:
@@ -166,6 +149,8 @@ export const resolveV2Modifiers = async (
 
     const porExecutorContract = getContract({ address: getAddress(addressBook.PROOF_OF_RESERVE), abi: onlyOwnerAbi, client: provider });
     const porExecutorOwner = await porExecutorContract.read.owner() as Address;
+    const porExecutorOwnerInfo = await ownerResolver.resolve(porExecutorOwner);
+
     obj['ProofOfReserveExecutorV2'] = {
       address: addressBook.PROOF_OF_RESERVE,
       modifiers: [
@@ -174,19 +159,19 @@ export const resolveV2Modifiers = async (
           addresses: [
             {
               address: porExecutorOwner,
-              owners: await getSafeOwners(provider, porExecutorOwner),
-              signersThreshold: await getSafeThreshold(
-                provider,
-                porExecutorOwner,
-              ),
+              owners: porExecutorOwnerInfo.owners,
+              signersThreshold: porExecutorOwnerInfo.threshold,
             },
           ],
           functions: roles['ProofOfReserveExecutorV2']['onlyOwner'],
         },
       ],
     };
+
     const porAggregatorContract = getContract({ address: getAddress(addressBook.PROOF_OF_RESERVE_AGGREGATOR), abi: onlyOwnerAbi, client: provider });
     const porAggregatorOwner = await porAggregatorContract.read.owner() as Address;
+    const porAggregatorOwnerInfo = await ownerResolver.resolve(porAggregatorOwner);
+
     obj['ProofOfReserveAggregatorV2'] = {
       address: addressBook.PROOF_OF_RESERVE_AGGREGATOR,
       modifiers: [
@@ -195,11 +180,8 @@ export const resolveV2Modifiers = async (
           addresses: [
             {
               address: porAggregatorOwner,
-              owners: await getSafeOwners(provider, porAggregatorOwner),
-              signersThreshold: await getSafeThreshold(
-                provider,
-                porAggregatorOwner,
-              ),
+              owners: porAggregatorOwnerInfo.owners,
+              signersThreshold: porAggregatorOwnerInfo.threshold,
             },
           ],
           functions: roles['ProofOfReserveAggregatorV2']['onlyOwner'],
@@ -210,6 +192,7 @@ export const resolveV2Modifiers = async (
 
   const aaveOracle = getContract({ address: getAddress(addressBook.ORACLE), abi: onlyOwnerAbi, client: provider });
   const aaveOracleOwner = await aaveOracle.read.owner() as Address;
+  const aaveOracleOwnerInfo = await ownerResolver.resolve(aaveOracleOwner);
 
   obj['AaveOracle'] = {
     address: addressBook.ORACLE,
@@ -219,8 +202,8 @@ export const resolveV2Modifiers = async (
         addresses: [
           {
             address: aaveOracleOwner,
-            owners: await getSafeOwners(provider, aaveOracleOwner),
-            signersThreshold: await getSafeThreshold(provider, aaveOracleOwner),
+            owners: aaveOracleOwnerInfo.owners,
+            signersThreshold: aaveOracleOwnerInfo.threshold,
           },
         ],
         functions: roles['AaveOracle']['onlyOwner'],
@@ -230,6 +213,7 @@ export const resolveV2Modifiers = async (
 
   const lendingRateOracle = getContract({ address: getAddress(lendingRateOracleAddress), abi: onlyOwnerAbi, client: provider });
   const lendingRateOracleOwner = await lendingRateOracle.read.owner() as Address;
+  const lendingRateOracleOwnerInfo = await ownerResolver.resolve(lendingRateOracleOwner);
 
   obj['LendingRateOracle'] = {
     address: lendingRateOracleAddress,
@@ -239,18 +223,14 @@ export const resolveV2Modifiers = async (
         addresses: [
           {
             address: lendingRateOracleOwner,
-            owners: await getSafeOwners(provider, lendingRateOracleOwner),
-            signersThreshold: await getSafeThreshold(
-              provider,
-              lendingRateOracleOwner,
-            ),
+            owners: lendingRateOracleOwnerInfo.owners,
+            signersThreshold: lendingRateOracleOwnerInfo.threshold,
           },
         ],
         functions: roles['LendingRateOracle']['onlyOwner'],
       },
     ],
   };
-
 
   const collectorProxyAdmin = await getProxyAdmin(
     addressBook.COLLECTOR,
@@ -259,6 +239,8 @@ export const resolveV2Modifiers = async (
 
   const proxyAdminContract = getContract({ address: getAddress(collectorProxyAdmin), abi: onlyOwnerAbi, client: provider });
   const proxyAdminOwner = await proxyAdminContract.read.owner() as Address;
+  const proxyAdminOwnerInfo = await ownerResolver.resolve(proxyAdminOwner);
+
   obj['ProxyAdmin'] = {
     address: getAddress(collectorProxyAdmin),
     modifiers: [
@@ -267,8 +249,8 @@ export const resolveV2Modifiers = async (
         addresses: [
           {
             address: proxyAdminOwner,
-            owners: await getSafeOwners(provider, proxyAdminOwner),
-            signersThreshold: await getSafeThreshold(provider, proxyAdminOwner),
+            owners: proxyAdminOwnerInfo.owners,
+            signersThreshold: proxyAdminOwnerInfo.threshold,
           },
         ],
         functions: roles['ProxyAdmin']['onlyOwner'],
@@ -283,6 +265,9 @@ export const resolveV2Modifiers = async (
       await arcTimelock.read.getEthereumGovernanceExecutor() as Address;
     const arcTimelockGuardian = await arcTimelock.read.getGuardian() as Address;
 
+    const govExecutorInfo = await ownerResolver.resolve(governanceExecutor);
+    const arcTimelockGuardianInfo = await ownerResolver.resolve(arcTimelockGuardian);
+
     obj['ArcTimelock'] = {
       address: poolAdmin,
       modifiers: [
@@ -291,11 +276,8 @@ export const resolveV2Modifiers = async (
           addresses: [
             {
               address: governanceExecutor,
-              owners: await getSafeOwners(provider, governanceExecutor),
-              signersThreshold: await getSafeThreshold(
-                provider,
-                governanceExecutor,
-              ),
+              owners: govExecutorInfo.owners,
+              signersThreshold: govExecutorInfo.threshold,
             },
           ],
           functions: roles['ArcTimelock']['onlyEthereumGovernanceExecutor'],
@@ -305,11 +287,8 @@ export const resolveV2Modifiers = async (
           addresses: [
             {
               address: arcTimelockGuardian,
-              owners: await getSafeOwners(provider, arcTimelockGuardian),
-              signersThreshold: await getSafeThreshold(
-                provider,
-                arcTimelockGuardian,
-              ),
+              owners: arcTimelockGuardianInfo.owners,
+              signersThreshold: arcTimelockGuardianInfo.threshold,
             },
           ],
           functions: roles['ArcTimelock']['onlyGuardian'],
@@ -319,6 +298,7 @@ export const resolveV2Modifiers = async (
 
     const permissionManager = getContract({ address: getAddress(AaveV2EthereumArc.PERMISSION_MANAGER), abi: onlyOwnerAbi, client: provider });
     const permissionManagerOwner = await permissionManager.read.owner() as Address;
+    const permissionManagerOwnerInfo = await ownerResolver.resolve(permissionManagerOwner);
 
     obj['PermissionManager'] = {
       address: AaveV2EthereumArc.PERMISSION_MANAGER,
@@ -328,11 +308,8 @@ export const resolveV2Modifiers = async (
           addresses: [
             {
               address: permissionManagerOwner,
-              owners: await getSafeOwners(provider, permissionManagerOwner),
-              signersThreshold: await getSafeThreshold(
-                provider,
-                permissionManagerOwner,
-              ),
+              owners: permissionManagerOwnerInfo.owners,
+              signersThreshold: permissionManagerOwnerInfo.threshold,
             },
           ],
           functions: roles['PermissionManager']['onlyOwner'],
@@ -344,6 +321,7 @@ export const resolveV2Modifiers = async (
   if (pool !== Pools.V2_ARC && pool !== Pools.V2_ARC_TENDERLY) {
     const wethGatewayContract = getContract({ address: getAddress(addressBook.WETH_GATEWAY), abi: onlyOwnerAbi, client: provider });
     const wethGatewayOwner = await wethGatewayContract.read.owner() as Address;
+    const wethGatewayOwnerInfo = await ownerResolver.resolve(wethGatewayOwner);
 
     obj['WrappedTokenGatewayV2'] = {
       address: addressBook.WETH_GATEWAY,
@@ -353,11 +331,8 @@ export const resolveV2Modifiers = async (
           addresses: [
             {
               address: wethGatewayOwner,
-              owners: await getSafeOwners(provider, wethGatewayOwner),
-              signersThreshold: await getSafeThreshold(
-                provider,
-                wethGatewayOwner,
-              ),
+              owners: wethGatewayOwnerInfo.owners,
+              signersThreshold: wethGatewayOwnerInfo.threshold,
             },
           ],
           functions: roles['WrappedTokenGatewayV2']['onlyOwner'],
@@ -374,6 +349,7 @@ export const resolveV2Modifiers = async (
   ) {
     const paraswapLiquiditySwapContract = getContract({ address: getAddress(addressBook.SWAP_COLLATERAL_ADAPTER), abi: onlyOwnerAbi, client: provider });
     const liquiditySwapOwner = await paraswapLiquiditySwapContract.read.owner() as Address;
+    const liquiditySwapOwnerInfo = await ownerResolver.resolve(liquiditySwapOwner);
 
     obj['ParaSwapLiquiditySwapAdapter'] = {
       address: addressBook.SWAP_COLLATERAL_ADAPTER,
@@ -383,11 +359,8 @@ export const resolveV2Modifiers = async (
           addresses: [
             {
               address: liquiditySwapOwner,
-              owners: await getSafeOwners(provider, liquiditySwapOwner),
-              signersThreshold: await getSafeThreshold(
-                provider,
-                liquiditySwapOwner,
-              ),
+              owners: liquiditySwapOwnerInfo.owners,
+              signersThreshold: liquiditySwapOwnerInfo.threshold,
             },
           ],
           functions: roles['ParaSwapLiquiditySwapAdapter']['onlyOwner'],
@@ -397,6 +370,7 @@ export const resolveV2Modifiers = async (
 
     const paraswapRepaySwapContract = getContract({ address: getAddress(addressBook.REPAY_WITH_COLLATERAL_ADAPTER), abi: onlyOwnerAbi, client: provider });
     const repaySwapOwner = await paraswapRepaySwapContract.read.owner() as Address;
+    const repaySwapOwnerInfo = await ownerResolver.resolve(repaySwapOwner);
 
     obj['ParaSwapRepayAdapter'] = {
       address: addressBook.REPAY_WITH_COLLATERAL_ADAPTER,
@@ -406,11 +380,8 @@ export const resolveV2Modifiers = async (
           addresses: [
             {
               address: repaySwapOwner,
-              owners: await getSafeOwners(provider, repaySwapOwner),
-              signersThreshold: await getSafeThreshold(
-                provider,
-                repaySwapOwner,
-              ),
+              owners: repaySwapOwnerInfo.owners,
+              signersThreshold: repaySwapOwnerInfo.threshold,
             },
           ],
           functions: roles['ParaSwapRepayAdapter']['onlyOwner'],
@@ -422,6 +393,7 @@ export const resolveV2Modifiers = async (
   if (pool !== Pools.V2_ARC && pool !== Pools.V2_ARC_TENDERLY) {
     const addressesRegistryContract = getContract({ address: getAddress(addressBook.POOL_ADDRESSES_PROVIDER_REGISTRY), abi: onlyOwnerAbi, client: provider });
     const addressRegistryOwner = await addressesRegistryContract.read.owner() as Address;
+    const addressRegistryOwnerInfo = await ownerResolver.resolve(addressRegistryOwner);
 
     obj['LendingPoolAddressesProviderRegistry'] = {
       address: addressBook.POOL_ADDRESSES_PROVIDER_REGISTRY,
@@ -431,11 +403,8 @@ export const resolveV2Modifiers = async (
           addresses: [
             {
               address: addressRegistryOwner,
-              owners: await getSafeOwners(provider, addressRegistryOwner),
-              signersThreshold: await getSafeThreshold(
-                provider,
-                addressRegistryOwner,
-              ),
+              owners: addressRegistryOwnerInfo.owners,
+              signersThreshold: addressRegistryOwnerInfo.threshold,
             },
           ],
           functions: roles['LendingPoolAddressesProviderRegistry']['onlyOwner'],
@@ -448,8 +417,10 @@ export const resolveV2Modifiers = async (
   if (
     addressBook.DEFAULT_INCENTIVES_CONTROLLER != undefined &&
     addressBook.DEFAULT_INCENTIVES_CONTROLLER !==
-    '0x0000000000000000000000000000000000000000'
+    zeroAddress
   ) {
+    const emissionManagerInfo = await ownerResolver.resolve(addressBook.EMISSION_MANAGER);
+
     obj['DefaultIncentivesController'] = {
       address: addressBook.DEFAULT_INCENTIVES_CONTROLLER,
       modifiers: [
@@ -458,14 +429,8 @@ export const resolveV2Modifiers = async (
           addresses: [
             {
               address: addressBook.EMISSION_MANAGER,
-              owners: await getSafeOwners(
-                provider,
-                addressBook.EMISSION_MANAGER,
-              ),
-              signersThreshold: await getSafeThreshold(
-                provider,
-                addressBook.EMISSION_MANAGER,
-              ),
+              owners: emissionManagerInfo.owners,
+              signersThreshold: emissionManagerInfo.threshold,
             },
           ],
           functions:

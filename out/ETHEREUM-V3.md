@@ -118,7 +118,7 @@
 |  [ClinicSteward](https://etherscan.io/address/0xf00E2de0E78DFf055A92AD4719a179CE275b6Ef7) |  - |  onlyCleanUpRole |  [CleanUp Admin](https://etherscan.io/address/0xdeadD8aB03075b7FBA81864202a2f59EE25B312b), [ACI Automation](https://etherscan.io/address/0x3Cbded22F878aFC8d39dCD744d3Fe62086B76193) |  renewAllowance, batchRepayBadDebt, batchLiquidate, batchRepayBadDebt | |--------|--------|--------|--------|--------|
 |  [ClinicSteward](https://etherscan.io/address/0xf00E2de0E78DFf055A92AD4719a179CE275b6Ef7) |  - |  onlyAdmin |  [Executor_lvl1](https://etherscan.io/address/0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A) |  setAvailableBudget | |--------|--------|--------|--------|--------|
 
-### Governance V3 Contracts 
+### Governance V3 Contracts
 | contract |proxyAdmin |modifier |permission owner |functions |
 |----------|----------|----------|----------|----------|
 |  [GranularGuardian](https://etherscan.io/address/0x4457cA11E90f416Cc1D3a8E1cA41C0cdEcC251d4) |  - |  onlyRetryGuardian |  [BGD](https://etherscan.io/address/0xb812d0944f8F581DfAA3a93Dda0d22EcEf51A9CF) |  retryEnvelope, retryTransaction | |--------|--------|--------|--------|--------|
@@ -148,7 +148,7 @@
 |  [CrossChainController](https://etherscan.io/address/0xEd42a7D8559a463722Ca4beD50E0Cc05a386b0e1) |  [ProxyAdmin](https://etherscan.io/address/0xD3cF979e676265e4f6379749DECe4708B9A22476) |  onlyApprovedSenders |  [AaveGovernanceV3](https://etherscan.io/address/0x9AEE0B04504CeF83A65AC3f0e838D0593BCb2BC7), [Old VotingMachine](https://etherscan.io/address/0x617332a777780F546261247F621051d0b98975Eb), [Old VotingPortal_Eth_Eth](https://etherscan.io/address/0xf23f7De3AC42F22eBDA17e64DC4f51FB66b8E21f), [Old VotingPortal_Eth_Avax](https://etherscan.io/address/0x33aCEf7365809218485873B7d0d67FeE411B5D79), [Old VotingPortal_Eth_Pol](https://etherscan.io/address/0x9b24C168d6A76b5459B1d47071a54962a4df36c3), [VotingMachine](https://etherscan.io/address/0x06a1795a88b82700896583e123F46BE43877bFb6), [VotingPortal_Eth_Eth](https://etherscan.io/address/0x6ACe1Bf22D57a33863161bFDC851316Fb0442690), [VotingPortal_Eth_Avax](https://etherscan.io/address/0x9Ded9406f088C10621BE628EEFf40c1DF396c172), [VotingPortal_Eth_Pol](https://etherscan.io/address/0xFe4683C18aaad791B6AFDF0a8e1Ed5C6e2c9ecD6) |  forwardMessage | |--------|--------|--------|--------|--------|
 |  [CrossChainController](https://etherscan.io/address/0xEd42a7D8559a463722Ca4beD50E0Cc05a386b0e1) |  [ProxyAdmin](https://etherscan.io/address/0xD3cF979e676265e4f6379749DECe4708B9A22476) |  onlyApprovedBridges |  [CCIP adapter](https://etherscan.io/address/0xB7a6618df58626C3a122ABAFD6Ee63Af63f3Ef29), [Polygon native adapter](https://etherscan.io/address/0x1562F1b2487F892BBA8Ef325aF054Fd157510a71), [LayerZero adapter](https://etherscan.io/address/0x8410d9BD353b420ebA8C48ff1B0518426C280FCC), [Hyperlane adapter](https://etherscan.io/address/0x01dcb90Cf13b82Cde4A0BAcC655585a83Af3cCC1) |  receiveCrossChainMessage | |--------|--------|--------|--------|--------|
 
-### Umbrella Contracts 
+### Umbrella Contracts
 | contract |proxyAdmin |modifier |permission owner |functions |
 |----------|----------|----------|----------|----------|
 |  [UmbrellaProxyAdmin](https://etherscan.io/address/0xfd57de1f38e3f730e0beb7238dd50e396851dda0) |  - |  onlyOwner |  [Executor_lvl1](https://etherscan.io/address/0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A) |  changeProxyAdmin, upgrade, upgradeAndCall | |--------|--------|--------|--------|--------|
@@ -164,7 +164,7 @@
 |  [PermissionedPayloadsController](https://etherscan.io/address/0xF86F77F7531B3374274E3f725E0A81D60bC4bB67) |  [PermissionedPayloadsControllerProxyAdmin](https://etherscan.io/address/0x1C7B0090bADF16EDCbd11cD1d20dDc403ed43D17) |  onlyPayloadsManager |  [Finance Risk Council](https://etherscan.io/address/0x22740deBa78d5a0c24C58C740e3715ec29de1bFa) |  createPayload | |--------|--------|--------|--------|--------|
 |  [PermissionedExecutor](https://etherscan.io/address/0x2759de67aD133C747C9f41d56F1b8A343cE679a1) |  - |  onlyOwner |  [PermissionedPayloadsController](https://etherscan.io/address/0xF86F77F7531B3374274E3f725E0A81D60bC4bB67) |  executeTransaction | |--------|--------|--------|--------|--------|
 
-### Risk Agent Contracts 
+### Risk Agent Contracts
 | contract |proxyAdmin |modifier |permission owner |functions |
 |----------|----------|----------|----------|----------|
 |  [EModeCategory_CoreAgent](https://etherscan.io/address/0x4F2858d4A4e4464b34Aa4a22C41B2Ef540a59BF4) |  - |  onlyAgentHub |  [AgentHub](https://etherscan.io/address/0x95E3015c67EF62B866cC28ca5A9AB5017A55e336) |  inject | |--------|--------|--------|--------|--------|
@@ -175,7 +175,7 @@
 |  [AgentHubProxyAdmin](https://etherscan.io/address/0xd26dcf055e16ed3048a17b37006082779cf0297c) |  - |  onlyOwner |  [Executor_lvl1](https://etherscan.io/address/0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A) |  changeProxyAdmin, upgrade, upgradeAndCall | |--------|--------|--------|--------|--------|
 |  [RangeValidationModule](https://etherscan.io/address/0x9240a6669CC4782FC98620212862DF5CB2e0Df10) |  - |  onlyHubOwnerOrAgentAdmin |  [Executor_lvl1](https://etherscan.io/address/0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A) |  setDefaultRangeConfig, setRangeConfigByMarket | |--------|--------|--------|--------|--------|
 
-### Permissioned Payloads Controller Contracts 
+### Permissioned Payloads Controller Contracts
 | contract |proxyAdmin |modifier |permission owner |functions |
 |----------|----------|----------|----------|----------|
 |  [PermissionedPayloadsControllerProxyAdmin](https://etherscan.io/address/0x1c7b0090badf16edcbd11cd1d20ddc403ed43d17) |  - |  onlyOwner |  [Executor_lvl1](https://etherscan.io/address/0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A) |  changeProxyAdmin, upgrade, upgradeAndCall | |--------|--------|--------|--------|--------|
@@ -197,7 +197,7 @@
 |  [BGD](https://etherscan.io/address/0xb812d0944f8F581DfAA3a93Dda0d22EcEf51A9CF) |  2/3 |  0xb812d0944f8F581DfAA3a93Dda0d22EcEf51A9CF |  [0x0650302887619fa7727D8BD480Cda11A638B219B](https://etherscan.io/address/0x0650302887619fa7727D8BD480Cda11A638B219B), [0xf71fc92e2949ccF6A5Fd369a0b402ba80Bc61E02](https://etherscan.io/address/0xf71fc92e2949ccF6A5Fd369a0b402ba80Bc61E02), [0x5811d9FF80ff4B73A8F9bA42A6082FaB82E89Ea7](https://etherscan.io/address/0x5811d9FF80ff4B73A8F9bA42A6082FaB82E89Ea7) | |--------|--------|--------|--------|
 |  [Aave Governance Guardian Ethereum](https://etherscan.io/address/0xCe52ab41C40575B072A18C9700091Ccbe4A06710) |  5/9 |  0xCe52ab41C40575B072A18C9700091Ccbe4A06710 |  [0xDA5Ae43e179987a66B9831F92223567e1F38BE7D](https://etherscan.io/address/0xDA5Ae43e179987a66B9831F92223567e1F38BE7D), [0x1e3804357eD445251FfECbb6e40107bf03888885](https://etherscan.io/address/0x1e3804357eD445251FfECbb6e40107bf03888885), [0x4f96743057482a2E10253AFDacDA3fd9CF2C1DC9](https://etherscan.io/address/0x4f96743057482a2E10253AFDacDA3fd9CF2C1DC9), [0xebED04E9137AfeBFF6a1B97aC0adf61a544eFE29](https://etherscan.io/address/0xebED04E9137AfeBFF6a1B97aC0adf61a544eFE29), [0xbd4DCfA978c6D0d342cE36809AfFFa49d4B7f1F7](https://etherscan.io/address/0xbd4DCfA978c6D0d342cE36809AfFFa49d4B7f1F7), [0xA3103D0ED00d24795Faa2d641ACf6A320EeD7396](https://etherscan.io/address/0xA3103D0ED00d24795Faa2d641ACf6A320EeD7396), [0x936CD9654271083cCF93A975919Da0aB3Bc99EF3](https://etherscan.io/address/0x936CD9654271083cCF93A975919Da0aB3Bc99EF3), [0x0D2394C027602Dc4c3832Ffd849b5df45DBac0E9](https://etherscan.io/address/0x0D2394C027602Dc4c3832Ffd849b5df45DBac0E9), [0x4C30E33758216aD0d676419c21CB8D014C68099f](https://etherscan.io/address/0x4C30E33758216aD0d676419c21CB8D014C68099f) | |--------|--------|--------|--------|
 
-### Admins 
+### Admins
 | Role |Contract |
 |----------|----------|
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://etherscan.io/address/0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A) | |--------|--------|
@@ -207,14 +207,14 @@
 |  RISK_ADMIN |  [Core GHO Aave Steward](https://etherscan.io/address/0x98217A06721Ebf727f2C8d9aD7718ec28b7aAe34), [Manual AGRS](https://etherscan.io/address/0xFCE597866Ffaf617EFdcA1C1Ad50eBCB16B5171E), [Gho Core Direct Minter](https://etherscan.io/address/0x5513224daaEABCa31af5280727878d52097afA05), [EModeCategory_CoreAgent](https://etherscan.io/address/0x4F2858d4A4e4464b34Aa4a22C41B2Ef540a59BF4), [PendleDiscountRate_CoreAgent](https://etherscan.io/address/0x1B3bD355c43d2247946b8e0889d4b4e701bf430d), [RateStrategy_CoreAgent](https://etherscan.io/address/0xdA626E64f34f24e0236E0C9cD2F11ce4549a08c6) | |--------|--------|
 |  ASSET_LISTING_ADMIN |  [SvrOracleSteward](https://etherscan.io/address/0x8b493f416F5F7933cC146b1899c069F2361cad60) | |--------|--------|
 
-### Granular Guardian Admins 
+### Granular Guardian Admins
 | Role |Contract |
 |----------|----------|
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://etherscan.io/address/0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A) | |--------|--------|
 |  SOLVE_EMERGENCY_ROLE |  [Aave Governance Guardian Ethereum](https://etherscan.io/address/0xCe52ab41C40575B072A18C9700091Ccbe4A06710) | |--------|--------|
 |  RETRY_ROLE |  [BGD](https://etherscan.io/address/0xb812d0944f8F581DfAA3a93Dda0d22EcEf51A9CF) | |--------|--------|
 
-### Umbrella Admins 
+### Umbrella Admins
 | Role |Contract |
 |----------|----------|
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://etherscan.io/address/0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A) | |--------|--------|
@@ -223,13 +223,13 @@
 |  PAUSE_GUARDIAN_ROLE |  [Executor_lvl1](https://etherscan.io/address/0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A) | |--------|--------|
 |  REWARDS_ADMIN_ROLE |  [Executor_lvl1](https://etherscan.io/address/0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A), [PermissionedExecutor](https://etherscan.io/address/0x2759de67aD133C747C9f41d56F1b8A343cE679a1) | |--------|--------|
 
-### Collector Admins 
+### Collector Admins
 | Role |Contract |
 |----------|----------|
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://etherscan.io/address/0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A) | |--------|--------|
 |  FUNDS_ADMIN_ROLE |  [Executor_lvl1](https://etherscan.io/address/0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A), [ClinicSteward](https://etherscan.io/address/0xf00E2de0E78DFf055A92AD4719a179CE275b6Ef7), [Lido ClinicSteward](https://etherscan.io/address/0x7571F419F7Df2d0622C1A20154a0D4250B2265cC), [PoolExposureSteward](https://etherscan.io/address/0x22aC12a6937BBBC0a301AF9154d08EaD95673122), [ClinicStewardV2](https://etherscan.io/address/0x6A14eBe9A934c8EFE15C3811a999149472876b56), [ClinicStewardV2 AMM](https://etherscan.io/address/0xE1e62c3ee0c581F715fBb0e23CDA536Fc29eeB2c), [SwapSteward](https://etherscan.io/address/0xb7D402138Cb01BfE97d95181C849379d6AD14d19) | |--------|--------|
 
-### Clinic Steward Admins 
+### Clinic Steward Admins
 | Role |Contract |
 |----------|----------|
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://etherscan.io/address/0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A) | |--------|--------|

@@ -1,14 +1,14 @@
 import { generateRoles } from '../helpers/jsonParsers.js';
 import { getProxyAdmin } from '../helpers/proxyAdmin.js';
-import { getSafeOwners, getSafeThreshold } from '../helpers/guardian.js';
 import { stkToken } from '../abis/stkToken.js';
 import { abptABI } from '../abis/abptABI.js';
 import { bptABI } from '../abis/bptABI.js';
-import { Contracts, PermissionsJson } from '../helpers/types.js';
+import { AddressBook, Contracts, PermissionsJson } from '../helpers/types.js';
 import { Address, Client, getAddress, getContract } from 'viem';
+import { createOwnerResolver } from '../helpers/ownerResolver.js';
 
 export const resolveSafetyV2Modifiers = async (
-  addressBook: any,
+  addressBook: AddressBook,
   provider: Client,
   permissionsObject: PermissionsJson,
 ): Promise<Contracts> => {
@@ -19,6 +19,9 @@ export const resolveSafetyV2Modifiers = async (
   const obj: Contracts = {};
   const roles = generateRoles(permissionsObject);
 
+  // Create owner resolver with caching for this network
+  const ownerResolver = createOwnerResolver(provider);
+
   // stk aave token
   const stkAaveContract = getContract({ address: getAddress(addressBook.STK_AAVE), abi: stkToken, client: provider });
 
@@ -26,6 +29,11 @@ export const resolveSafetyV2Modifiers = async (
   const slashAdmin = await stkAaveContract.read.getAdmin([SLASH_ADMIN_ROLE]) as Address;
   const cooldDownAdmin = await stkAaveContract.read.getAdmin([COOLDOWN_ADMIN_ROLE]) as Address;
   const claimHelperAdmin = await stkAaveContract.read.getAdmin([CLAIM_HELPER_ROLE]) as Address;
+
+  const emissionManagerInfo = await ownerResolver.resolve(stkAaveEmissionManager);
+  const slashAdminInfo = await ownerResolver.resolve(slashAdmin);
+  const cooldownAdminInfo = await ownerResolver.resolve(cooldDownAdmin);
+  const claimHelperAdminInfo = await ownerResolver.resolve(claimHelperAdmin);
 
   obj['stkAave'] = {
     address: addressBook.STK_AAVE,
@@ -35,11 +43,8 @@ export const resolveSafetyV2Modifiers = async (
         addresses: [
           {
             address: stkAaveEmissionManager,
-            owners: await getSafeOwners(provider, stkAaveEmissionManager),
-            signersThreshold: await getSafeThreshold(
-              provider,
-              stkAaveEmissionManager,
-            ),
+            owners: emissionManagerInfo.owners,
+            signersThreshold: emissionManagerInfo.threshold,
           },
         ],
         functions: roles['stkAave']['onlyEmissionManager'],
@@ -49,8 +54,8 @@ export const resolveSafetyV2Modifiers = async (
         addresses: [
           {
             address: slashAdmin,
-            owners: await getSafeOwners(provider, slashAdmin),
-            signersThreshold: await getSafeThreshold(provider, slashAdmin),
+            owners: slashAdminInfo.owners,
+            signersThreshold: slashAdminInfo.threshold,
           },
         ],
         functions: roles['stkAave']['onlySlashingAdmin'],
@@ -60,8 +65,8 @@ export const resolveSafetyV2Modifiers = async (
         addresses: [
           {
             address: cooldDownAdmin,
-            owners: await getSafeOwners(provider, cooldDownAdmin),
-            signersThreshold: await getSafeThreshold(provider, cooldDownAdmin),
+            owners: cooldownAdminInfo.owners,
+            signersThreshold: cooldownAdminInfo.threshold,
           },
         ],
         functions: roles['stkAave']['onlyCooldownAdmin'],
@@ -71,11 +76,8 @@ export const resolveSafetyV2Modifiers = async (
         addresses: [
           {
             address: claimHelperAdmin,
-            owners: await getSafeOwners(provider, claimHelperAdmin),
-            signersThreshold: await getSafeThreshold(
-              provider,
-              claimHelperAdmin,
-            ),
+            owners: claimHelperAdminInfo.owners,
+            signersThreshold: claimHelperAdminInfo.threshold,
           },
         ],
         functions: roles['stkAave']['onlyClaimHelper'],
@@ -92,6 +94,11 @@ export const resolveSafetyV2Modifiers = async (
   const stkABPTcooldDownAdmin = await stkABPTContract.read.getAdmin([COOLDOWN_ADMIN_ROLE]) as Address;
   const stkABPTclaimHelperAdmin = await stkABPTContract.read.getAdmin([CLAIM_HELPER_ROLE]) as Address;
 
+  const stkABPTEmissionManagerInfo = await ownerResolver.resolve(stkABPTEmissionManager);
+  const stkABPTslashAdminInfo = await ownerResolver.resolve(stkABPTslashAdmin);
+  const stkABPTcooldownAdminInfo = await ownerResolver.resolve(stkABPTcooldDownAdmin);
+  const stkABPTclaimHelperAdminInfo = await ownerResolver.resolve(stkABPTclaimHelperAdmin);
+
   obj['stkABPT'] = {
     address: addressBook.STK_ABPT,
     modifiers: [
@@ -100,11 +107,8 @@ export const resolveSafetyV2Modifiers = async (
         addresses: [
           {
             address: stkABPTEmissionManager,
-            owners: await getSafeOwners(provider, stkABPTEmissionManager),
-            signersThreshold: await getSafeThreshold(
-              provider,
-              stkABPTEmissionManager,
-            ),
+            owners: stkABPTEmissionManagerInfo.owners,
+            signersThreshold: stkABPTEmissionManagerInfo.threshold,
           },
         ],
         functions: roles['stkABPT']['onlyEmissionManager'],
@@ -114,11 +118,8 @@ export const resolveSafetyV2Modifiers = async (
         addresses: [
           {
             address: stkABPTslashAdmin,
-            owners: await getSafeOwners(provider, stkABPTslashAdmin),
-            signersThreshold: await getSafeThreshold(
-              provider,
-              stkABPTslashAdmin,
-            ),
+            owners: stkABPTslashAdminInfo.owners,
+            signersThreshold: stkABPTslashAdminInfo.threshold,
           },
         ],
         functions: roles['stkAave']['onlySlashingAdmin'],
@@ -128,11 +129,8 @@ export const resolveSafetyV2Modifiers = async (
         addresses: [
           {
             address: stkABPTcooldDownAdmin,
-            owners: await getSafeOwners(provider, stkABPTcooldDownAdmin),
-            signersThreshold: await getSafeThreshold(
-              provider,
-              stkABPTcooldDownAdmin,
-            ),
+            owners: stkABPTcooldownAdminInfo.owners,
+            signersThreshold: stkABPTcooldownAdminInfo.threshold,
           },
         ],
         functions: roles['stkAave']['onlyCooldownAdmin'],
@@ -142,11 +140,8 @@ export const resolveSafetyV2Modifiers = async (
         addresses: [
           {
             address: stkABPTclaimHelperAdmin,
-            owners: await getSafeOwners(provider, stkABPTclaimHelperAdmin),
-            signersThreshold: await getSafeThreshold(
-              provider,
-              stkABPTclaimHelperAdmin,
-            ),
+            owners: stkABPTclaimHelperAdminInfo.owners,
+            signersThreshold: stkABPTclaimHelperAdminInfo.threshold,
           },
         ],
         functions: roles['stkAave']['onlyClaimHelper'],
@@ -157,6 +152,7 @@ export const resolveSafetyV2Modifiers = async (
   const abptContract = getContract({ address: abptAddress, abi: abptABI, client: provider });
   const bPool = await abptContract.read.bPool() as Address;
   const abptController = await abptContract.read.getController() as Address;
+  const abptControllerInfo = await ownerResolver.resolve(abptController);
 
   obj['ABPT'] = {
     address: abptAddress,
@@ -166,8 +162,8 @@ export const resolveSafetyV2Modifiers = async (
         addresses: [
           {
             address: abptController,
-            owners: await getSafeOwners(provider, abptController),
-            signersThreshold: await getSafeThreshold(provider, abptController),
+            owners: abptControllerInfo.owners,
+            signersThreshold: abptControllerInfo.threshold,
           },
         ],
         functions: roles['ABPT']['onlyOwner'],
@@ -177,6 +173,8 @@ export const resolveSafetyV2Modifiers = async (
 
   const bptContract = getContract({ address: bPool, abi: bptABI, client: provider });
   const bptController = await bptContract.read.getController() as Address;
+  const bptControllerInfo = await ownerResolver.resolve(bptController);
+
   obj['BPT'] = {
     address: bPool,
     modifiers: [
@@ -185,8 +183,8 @@ export const resolveSafetyV2Modifiers = async (
         addresses: [
           {
             address: bptController,
-            owners: await getSafeOwners(provider, bptController),
-            signersThreshold: await getSafeThreshold(provider, bptController),
+            owners: bptControllerInfo.owners,
+            signersThreshold: bptControllerInfo.threshold,
           },
         ],
         functions: roles['BPT']['onlyController'],

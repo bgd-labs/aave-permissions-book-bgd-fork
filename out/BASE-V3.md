@@ -81,7 +81,7 @@
 |  [ClinicSteward](https://basescan.org/address/0x1a79098C3149020ACdEfb3EE44AA1d9509305530) |  - |  onlyCleanUpRole |  [CleanUp Admin](https://basescan.org/address/0xdeadD8aB03075b7FBA81864202a2f59EE25B312b), [ACI Automation](https://basescan.org/address/0x3Cbded22F878aFC8d39dCD744d3Fe62086B76193) |  renewAllowance, batchRepayBadDebt, batchLiquidate, batchRepayBadDebt | |--------|--------|--------|--------|--------|
 |  [ClinicSteward](https://basescan.org/address/0x1a79098C3149020ACdEfb3EE44AA1d9509305530) |  - |  onlyAdmin |  [Executor_lvl1](https://basescan.org/address/0x9390B1735def18560c509E2d0bc090E9d6BA257a) |  setAvailableBudget | |--------|--------|--------|--------|--------|
 
-### Governance V3 Contracts 
+### Governance V3 Contracts
 | contract |proxyAdmin |modifier |permission owner |functions |
 |----------|----------|----------|----------|----------|
 |  [GranularGuardian](https://basescan.org/address/0xa1c6aF35E0205f42256382C05243C543FEDBf4bB) |  - |  onlyRetryGuardian |  [BGD](https://basescan.org/address/0x7FDA7C3528ad8f05e62148a700D456898b55f8d2) |  retryEnvelope, retryTransaction | |--------|--------|--------|--------|--------|
@@ -99,7 +99,7 @@
 |  [CrossChainController](https://basescan.org/address/0x529467C76f234F2bD359d7ecF7c660A2846b04e2) |  [ProxyAdmin](https://basescan.org/address/0xc85b1E333aecc99340b2320493Fe2d22b8734795) |  onlyApprovedSenders |   |  forwardMessage | |--------|--------|--------|--------|--------|
 |  [CrossChainController](https://basescan.org/address/0x529467C76f234F2bD359d7ecF7c660A2846b04e2) |  [ProxyAdmin](https://basescan.org/address/0xc85b1E333aecc99340b2320493Fe2d22b8734795) |  onlyApprovedBridges |  [Base native adapter](https://basescan.org/address/0x7120b1f8e5b73c0C0DC99C6e52Fe4937E7EA11e0) |  receiveCrossChainMessage | |--------|--------|--------|--------|--------|
 
-### Risk Agent Contracts 
+### Risk Agent Contracts
 | contract |proxyAdmin |modifier |permission owner |functions |
 |----------|----------|----------|----------|----------|
 |  [SupplyCapAgent](https://basescan.org/address/0x42ca9E62C9B61d01Bb222d6E69f095eE98e61cE8) |  - |  onlyAgentHub |  [AgentHub](https://basescan.org/address/0x115E662Fa3f0b83014eB3f6F86F3D94BeC5eB411) |  inject | |--------|--------|--------|--------|--------|
@@ -119,7 +119,7 @@
 |  [BGD](https://basescan.org/address/0x7FDA7C3528ad8f05e62148a700D456898b55f8d2) |  2/3 |  0x7FDA7C3528ad8f05e62148a700D456898b55f8d2 |  [0xf71fc92e2949ccF6A5Fd369a0b402ba80Bc61E02](https://basescan.org/address/0xf71fc92e2949ccF6A5Fd369a0b402ba80Bc61E02), [0x5811d9FF80ff4B73A8F9bA42A6082FaB82E89Ea7](https://basescan.org/address/0x5811d9FF80ff4B73A8F9bA42A6082FaB82E89Ea7), [0x0650302887619fa7727D8BD480Cda11A638B219B](https://basescan.org/address/0x0650302887619fa7727D8BD480Cda11A638B219B) | |--------|--------|--------|--------|
 |  [Aave Governance Guardian Base](https://basescan.org/address/0x360c0a69Ed2912351227a0b745f890CB2eBDbcFe) |  5/9 |  0x360c0a69Ed2912351227a0b745f890CB2eBDbcFe |  [0xDA5Ae43e179987a66B9831F92223567e1F38BE7D](https://basescan.org/address/0xDA5Ae43e179987a66B9831F92223567e1F38BE7D), [0x1e3804357eD445251FfECbb6e40107bf03888885](https://basescan.org/address/0x1e3804357eD445251FfECbb6e40107bf03888885), [0x4f96743057482a2E10253AFDacDA3fd9CF2C1DC9](https://basescan.org/address/0x4f96743057482a2E10253AFDacDA3fd9CF2C1DC9), [0xebED04E9137AfeBFF6a1B97aC0adf61a544eFE29](https://basescan.org/address/0xebED04E9137AfeBFF6a1B97aC0adf61a544eFE29), [0xbd4DCfA978c6D0d342cE36809AfFFa49d4B7f1F7](https://basescan.org/address/0xbd4DCfA978c6D0d342cE36809AfFFa49d4B7f1F7), [0xA3103D0ED00d24795Faa2d641ACf6A320EeD7396](https://basescan.org/address/0xA3103D0ED00d24795Faa2d641ACf6A320EeD7396), [0x936CD9654271083cCF93A975919Da0aB3Bc99EF3](https://basescan.org/address/0x936CD9654271083cCF93A975919Da0aB3Bc99EF3), [0x0D2394C027602Dc4c3832Ffd849b5df45DBac0E9](https://basescan.org/address/0x0D2394C027602Dc4c3832Ffd849b5df45DBac0E9), [0x4C30E33758216aD0d676419c21CB8D014C68099f](https://basescan.org/address/0x4C30E33758216aD0d676419c21CB8D014C68099f) | |--------|--------|--------|--------|
 
-### Admins 
+### Admins
 | Role |Contract |
 |----------|----------|
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://basescan.org/address/0x9390B1735def18560c509E2d0bc090E9d6BA257a) | |--------|--------|
@@ -129,20 +129,20 @@
 |  FLASH_BORROWER |  [0xab515542d621574f9b5212d50593cD0C07e641bD](https://basescan.org/address/0xab515542d621574f9b5212d50593cD0C07e641bD), [0xA672e882aCBB96486393D43E0efdab5EBEbDDC1d](https://basescan.org/address/0xA672e882aCBB96486393D43E0efdab5EBEbDDC1d), [0x15E2F06138aed58ca2A6AfB5A1333bBC5f728f80](https://basescan.org/address/0x15E2F06138aed58ca2A6AfB5A1333bBC5f728f80), [0xbA5F6A0D2AC21a3feC7a6C40FACd23407AA84663](https://basescan.org/address/0xbA5F6A0D2AC21a3feC7a6C40FACd23407AA84663), [0xC1E02884AF4A283cA25ab63C45360d220d69DA52](https://basescan.org/address/0xC1E02884AF4A283cA25ab63C45360d220d69DA52), [0x1c980456751AE40315Ff73CaaC0843Be643321Be](https://basescan.org/address/0x1c980456751AE40315Ff73CaaC0843Be643321Be), [0xeDE61eefa4850b459E3B09Fe6d8d371480D6fF00](https://basescan.org/address/0xeDE61eefa4850b459E3B09Fe6d8d371480D6fF00), [0x53a4716a8f7DBC9543ebf9cd711952033cC64d43](https://basescan.org/address/0x53a4716a8f7DBC9543ebf9cd711952033cC64d43), [0xd2f23773bF5e2d59F6bB925c2232F6e83f3f79e0](https://basescan.org/address/0xd2f23773bF5e2d59F6bB925c2232F6e83f3f79e0), [0x9e0501537723c71250307F5B1A8eE60e167D21C9](https://basescan.org/address/0x9e0501537723c71250307F5B1A8eE60e167D21C9), [0xCAF08BF08D0c87e2c74dd9EBEC9C776037bD7e8E](https://basescan.org/address/0xCAF08BF08D0c87e2c74dd9EBEC9C776037bD7e8E), [0x352423e2fA5D5c99343d371C9e3bC56C87723Cc7](https://basescan.org/address/0x352423e2fA5D5c99343d371C9e3bC56C87723Cc7) | |--------|--------|
 |  RISK_ADMIN |  [Base Gho Aave Steward](https://basescan.org/address/0xC5BcC58BE6172769ca1a78B8A45752E3C5059c39), [Manual AGRS](https://basescan.org/address/0x085E34722e04567Df9E6d2c32e82fd74f3342e79), [SupplyCapAgent](https://basescan.org/address/0x42ca9E62C9B61d01Bb222d6E69f095eE98e61cE8), [BorrowCapAgent](https://basescan.org/address/0x0ae2815b1f607EfEe34C15E63c72Cd6C99d1D6fa) | |--------|--------|
 
-### Granular Guardian Admins 
+### Granular Guardian Admins
 | Role |Contract |
 |----------|----------|
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://basescan.org/address/0x9390B1735def18560c509E2d0bc090E9d6BA257a) | |--------|--------|
 |  SOLVE_EMERGENCY_ROLE |  [Aave Governance Guardian Base](https://basescan.org/address/0x360c0a69Ed2912351227a0b745f890CB2eBDbcFe) | |--------|--------|
 |  RETRY_ROLE |  [BGD](https://basescan.org/address/0x7FDA7C3528ad8f05e62148a700D456898b55f8d2) | |--------|--------|
 
-### Collector Admins 
+### Collector Admins
 | Role |Contract |
 |----------|----------|
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://basescan.org/address/0x9390B1735def18560c509E2d0bc090E9d6BA257a) | |--------|--------|
 |  FUNDS_ADMIN_ROLE |  [Executor_lvl1](https://basescan.org/address/0x9390B1735def18560c509E2d0bc090E9d6BA257a), [ClinicSteward](https://basescan.org/address/0x1a79098C3149020ACdEfb3EE44AA1d9509305530), [PoolExposureSteward](https://basescan.org/address/0x4f1F3E32f20847a4c9F002882eB607aD750b6115) | |--------|--------|
 
-### Clinic Steward Admins 
+### Clinic Steward Admins
 | Role |Contract |
 |----------|----------|
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://basescan.org/address/0x9390B1735def18560c509E2d0bc090E9d6BA257a) | |--------|--------|

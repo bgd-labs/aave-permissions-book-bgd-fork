@@ -67,7 +67,7 @@
 |  [Collector](https://celoscan.io//address/0xC959439207dA5341B74aDcdAC59016aa9Be7E9E7) |  [CollectorProxyAdmin](https://celoscan.io//address/0x3Be917Ff374858325b69623FA44556a6ebEe7413) |  onlyAdminOrRecipient |  [CollectorProxyAdmin](https://celoscan.io//address/0x3Be917Ff374858325b69623FA44556a6ebEe7413), [Executor_lvl1](https://celoscan.io//address/0x1dF462e2712496373A347f8ad10802a5E95f053D) |  withdrawFromStream, cancelStream | |--------|--------|--------|--------|--------|
 |  [CollectorProxyAdmin](https://celoscan.io//address/0x3be917ff374858325b69623fa44556a6ebee7413) |  - |  onlyOwner |  [Executor_lvl1](https://celoscan.io//address/0x1dF462e2712496373A347f8ad10802a5E95f053D) |  changeProxyAdmin, upgrade, upgradeAndCall | |--------|--------|--------|--------|--------|
 
-### Governance V3 Contracts 
+### Governance V3 Contracts
 | contract |proxyAdmin |modifier |permission owner |functions |
 |----------|----------|----------|----------|----------|
 |  [GranularGuardian](https://celoscan.io//address/0xbE815420A63A413BB8D508d8022C0FF150Ea7C39) |  - |  onlyRetryGuardian |  [BGD](https://celoscan.io//address/0xfD3a6E65e470a7D7D730FFD5D36a9354E8F9F4Ea) |  retryEnvelope, retryTransaction | |--------|--------|--------|--------|--------|
@@ -96,7 +96,7 @@
 |  [BGD](https://celoscan.io//address/0xfD3a6E65e470a7D7D730FFD5D36a9354E8F9F4Ea) |  2/3 |  0xfD3a6E65e470a7D7D730FFD5D36a9354E8F9F4Ea |  [0x0650302887619fa7727D8BD480Cda11A638B219B](https://celoscan.io//address/0x0650302887619fa7727D8BD480Cda11A638B219B), [0xf71fc92e2949ccF6A5Fd369a0b402ba80Bc61E02](https://celoscan.io//address/0xf71fc92e2949ccF6A5Fd369a0b402ba80Bc61E02), [0x5811d9FF80ff4B73A8F9bA42A6082FaB82E89Ea7](https://celoscan.io//address/0x5811d9FF80ff4B73A8F9bA42A6082FaB82E89Ea7) | |--------|--------|--------|--------|
 |  [Aave Governance Guardian Celo](https://celoscan.io//address/0x056E4C4E80D1D14a637ccbD0412CDAAEc5B51F4E) |  5/9 |  0x056E4C4E80D1D14a637ccbD0412CDAAEc5B51F4E |  [0xDA5Ae43e179987a66B9831F92223567e1F38BE7D](https://celoscan.io//address/0xDA5Ae43e179987a66B9831F92223567e1F38BE7D), [0x1e3804357eD445251FfECbb6e40107bf03888885](https://celoscan.io//address/0x1e3804357eD445251FfECbb6e40107bf03888885), [0x4f96743057482a2E10253AFDacDA3fd9CF2C1DC9](https://celoscan.io//address/0x4f96743057482a2E10253AFDacDA3fd9CF2C1DC9), [0xebED04E9137AfeBFF6a1B97aC0adf61a544eFE29](https://celoscan.io//address/0xebED04E9137AfeBFF6a1B97aC0adf61a544eFE29), [0xbd4DCfA978c6D0d342cE36809AfFFa49d4B7f1F7](https://celoscan.io//address/0xbd4DCfA978c6D0d342cE36809AfFFa49d4B7f1F7), [0xA3103D0ED00d24795Faa2d641ACf6A320EeD7396](https://celoscan.io//address/0xA3103D0ED00d24795Faa2d641ACf6A320EeD7396), [0x936CD9654271083cCF93A975919Da0aB3Bc99EF3](https://celoscan.io//address/0x936CD9654271083cCF93A975919Da0aB3Bc99EF3), [0x0D2394C027602Dc4c3832Ffd849b5df45DBac0E9](https://celoscan.io//address/0x0D2394C027602Dc4c3832Ffd849b5df45DBac0E9), [0x4C30E33758216aD0d676419c21CB8D014C68099f](https://celoscan.io//address/0x4C30E33758216aD0d676419c21CB8D014C68099f) | |--------|--------|--------|--------|
 
-### Admins 
+### Admins
 | Role |Contract |
 |----------|----------|
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://celoscan.io//address/0x1dF462e2712496373A347f8ad10802a5E95f053D) | |--------|--------|
@@ -106,14 +106,14 @@
 |  FLASH_BORROWER |   | |--------|--------|
 |  RISK_ADMIN |  [Manual AGRS](https://celoscan.io//address/0xdb93e2712a8B36835078f8D28c70fCC95FD6d37c) | |--------|--------|
 
-### Granular Guardian Admins 
+### Granular Guardian Admins
 | Role |Contract |
 |----------|----------|
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://celoscan.io//address/0x1dF462e2712496373A347f8ad10802a5E95f053D) | |--------|--------|
 |  SOLVE_EMERGENCY_ROLE |  [Aave Governance Guardian Celo](https://celoscan.io//address/0x056E4C4E80D1D14a637ccbD0412CDAAEc5B51F4E) | |--------|--------|
 |  RETRY_ROLE |  [BGD](https://celoscan.io//address/0xfD3a6E65e470a7D7D730FFD5D36a9354E8F9F4Ea) | |--------|--------|
 
-### Collector Admins 
+### Collector Admins
 | Role |Contract |
 |----------|----------|
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://celoscan.io//address/0x1dF462e2712496373A347f8ad10802a5E95f053D) | |--------|--------|

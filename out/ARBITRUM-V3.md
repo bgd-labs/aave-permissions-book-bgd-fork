@@ -83,7 +83,7 @@
 |  [ClinicSteward](https://arbiscan.io/address/0x7B58055fC6bE4B23cF8c9287b7d3C4adBE919a9c) |  - |  onlyCleanUpRole |  [CleanUp Admin](https://arbiscan.io/address/0xdeadD8aB03075b7FBA81864202a2f59EE25B312b), [ACI Automation](https://arbiscan.io/address/0x3Cbded22F878aFC8d39dCD744d3Fe62086B76193) |  renewAllowance, batchRepayBadDebt, batchLiquidate, batchRepayBadDebt | |--------|--------|--------|--------|--------|
 |  [ClinicSteward](https://arbiscan.io/address/0x7B58055fC6bE4B23cF8c9287b7d3C4adBE919a9c) |  - |  onlyAdmin |  [Executor_lvl1](https://arbiscan.io/address/0xFF1137243698CaA18EE364Cc966CF0e02A4e6327) |  setAvailableBudget | |--------|--------|--------|--------|--------|
 
-### Governance V3 Contracts 
+### Governance V3 Contracts
 | contract |proxyAdmin |modifier |permission owner |functions |
 |----------|----------|----------|----------|----------|
 |  [GranularGuardian](https://arbiscan.io/address/0x4922093c476CfbCF903C7C4082d2D64bAE8A37cE) |  - |  onlyRetryGuardian |  [BGD](https://arbiscan.io/address/0x1Fcd437D8a9a6ea68da858b78b6cf10E8E0bF959) |  retryEnvelope, retryTransaction | |--------|--------|--------|--------|--------|
@@ -101,7 +101,7 @@
 |  [CrossChainController](https://arbiscan.io/address/0xCbFB78a3Eeaa611b826E37c80E4126c8787D29f0) |  [ProxyAdmin](https://arbiscan.io/address/0xD3cF979e676265e4f6379749DECe4708B9A22476) |  onlyApprovedSenders |   |  forwardMessage | |--------|--------|--------|--------|--------|
 |  [CrossChainController](https://arbiscan.io/address/0xCbFB78a3Eeaa611b826E37c80E4126c8787D29f0) |  [ProxyAdmin](https://arbiscan.io/address/0xD3cF979e676265e4f6379749DECe4708B9A22476) |  onlyApprovedBridges |  [Arbitrum native adapter](https://arbiscan.io/address/0xc8a2ADC4261c6b669CdFf69E717E77C9cFeB420d) |  receiveCrossChainMessage | |--------|--------|--------|--------|--------|
 
-### Risk Agent Contracts 
+### Risk Agent Contracts
 | contract |proxyAdmin |modifier |permission owner |functions |
 |----------|----------|----------|----------|----------|
 |  [SupplyCapAgent](https://arbiscan.io/address/0xeBe545478709d4388e36Bb706CF11e2f89898541) |  - |  onlyAgentHub |  [AgentHub](https://arbiscan.io/address/0xf4F2bc657abe96863dC1Ae17C9e9fFfc2B420e7B) |  inject | |--------|--------|--------|--------|--------|
@@ -122,7 +122,7 @@
 |  [BGD](https://arbiscan.io/address/0x1Fcd437D8a9a6ea68da858b78b6cf10E8E0bF959) |  2/3 |  0x1Fcd437D8a9a6ea68da858b78b6cf10E8E0bF959 |  [0xf71fc92e2949ccF6A5Fd369a0b402ba80Bc61E02](https://arbiscan.io/address/0xf71fc92e2949ccF6A5Fd369a0b402ba80Bc61E02), [0x5811d9FF80ff4B73A8F9bA42A6082FaB82E89Ea7](https://arbiscan.io/address/0x5811d9FF80ff4B73A8F9bA42A6082FaB82E89Ea7), [0x0650302887619fa7727D8BD480Cda11A638B219B](https://arbiscan.io/address/0x0650302887619fa7727D8BD480Cda11A638B219B) | |--------|--------|--------|--------|
 |  [Aave Governance Guardian Arbitrum](https://arbiscan.io/address/0x1A0581dd5C7C3DA4Ba1CDa7e0BcA7286afc4973b) |  5/9 |  0x1A0581dd5C7C3DA4Ba1CDa7e0BcA7286afc4973b |  [0xDA5Ae43e179987a66B9831F92223567e1F38BE7D](https://arbiscan.io/address/0xDA5Ae43e179987a66B9831F92223567e1F38BE7D), [0x1e3804357eD445251FfECbb6e40107bf03888885](https://arbiscan.io/address/0x1e3804357eD445251FfECbb6e40107bf03888885), [0x4f96743057482a2E10253AFDacDA3fd9CF2C1DC9](https://arbiscan.io/address/0x4f96743057482a2E10253AFDacDA3fd9CF2C1DC9), [0xebED04E9137AfeBFF6a1B97aC0adf61a544eFE29](https://arbiscan.io/address/0xebED04E9137AfeBFF6a1B97aC0adf61a544eFE29), [0xbd4DCfA978c6D0d342cE36809AfFFa49d4B7f1F7](https://arbiscan.io/address/0xbd4DCfA978c6D0d342cE36809AfFFa49d4B7f1F7), [0xA3103D0ED00d24795Faa2d641ACf6A320EeD7396](https://arbiscan.io/address/0xA3103D0ED00d24795Faa2d641ACf6A320EeD7396), [0x936CD9654271083cCF93A975919Da0aB3Bc99EF3](https://arbiscan.io/address/0x936CD9654271083cCF93A975919Da0aB3Bc99EF3), [0x0D2394C027602Dc4c3832Ffd849b5df45DBac0E9](https://arbiscan.io/address/0x0D2394C027602Dc4c3832Ffd849b5df45DBac0E9), [0x4C30E33758216aD0d676419c21CB8D014C68099f](https://arbiscan.io/address/0x4C30E33758216aD0d676419c21CB8D014C68099f) | |--------|--------|--------|--------|
 
-### Admins 
+### Admins
 | Role |Contract |
 |----------|----------|
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://arbiscan.io/address/0xFF1137243698CaA18EE364Cc966CF0e02A4e6327) | |--------|--------|
@@ -132,20 +132,20 @@
 |  RISK_ADMIN |  [Arbitrum Gho Aave Steward](https://arbiscan.io/address/0xd2D586f849620ef042FE3aF52eAa10e9b78bf7De), [Manual AGRS](https://arbiscan.io/address/0x365d47ceD3D7Eb6a9bdB3814aA23cc06B2D33Ef8), [SupplyCapAgent](https://arbiscan.io/address/0xeBe545478709d4388e36Bb706CF11e2f89898541), [BorrowCapAgent](https://arbiscan.io/address/0x8963Abfb008A668346B18d0BeE82b171F3b2Be24) | |--------|--------|
 |  FLASH_BORROWER |  [0x219ac6dA971dE6d943cffD1BD62abde71525d382](https://arbiscan.io/address/0x219ac6dA971dE6d943cffD1BD62abde71525d382), [0x1561EAF39c98d45C55C7dC605E627672F4406819](https://arbiscan.io/address/0x1561EAF39c98d45C55C7dC605E627672F4406819), [0x9E8e9D6b0D24216F59043db68BDda1620892f549](https://arbiscan.io/address/0x9E8e9D6b0D24216F59043db68BDda1620892f549), [0x49d9409111a6363d82C4371fFa43fAEA660C917B](https://arbiscan.io/address/0x49d9409111a6363d82C4371fFa43fAEA660C917B), [0x27D8FDb0251B48D8EdD1Ad7bEDf553cF99AbE7B0](https://arbiscan.io/address/0x27D8FDb0251B48D8EdD1Ad7bEDf553cF99AbE7B0), [0xe3254397f5D9C0B69917EBb49B49e103367B406f](https://arbiscan.io/address/0xe3254397f5D9C0B69917EBb49B49e103367B406f), [0xaD38255fEbd566809aE387d5bE66ECD287947cb9](https://arbiscan.io/address/0xaD38255fEbd566809aE387d5bE66ECD287947cb9), [0x40d30B13666c55B1F41eE11645B5ea3Ea2CA31f8](https://arbiscan.io/address/0x40d30B13666c55B1F41eE11645B5ea3Ea2CA31f8), [0x696f6d66C2da2AA4A400a4317EEC8da88f7A378c](https://arbiscan.io/address/0x696f6d66C2da2AA4A400a4317EEC8da88f7A378c), [0xF715724abba480D4D45f4cb52BEF5ce5E3513CCC](https://arbiscan.io/address/0xF715724abba480D4D45f4cb52BEF5ce5E3513CCC), [0xe9b5260D99d283ff887859C569bAF8aD1bd12AAc](https://arbiscan.io/address/0xe9b5260D99d283ff887859C569bAF8aD1bd12AAc), [0x43DA9b0aB53242c55A9Ff9c722FfC2a373D639c7](https://arbiscan.io/address/0x43DA9b0aB53242c55A9Ff9c722FfC2a373D639c7), [0x678569FC403EA2BA46B549a4D0E15E883D7cAdF5](https://arbiscan.io/address/0x678569FC403EA2BA46B549a4D0E15E883D7cAdF5), [0xc3198eb5102fB3335C0E911eF1DA4BC07e403Dd1](https://arbiscan.io/address/0xc3198eb5102fB3335C0E911eF1DA4BC07e403Dd1), [0xDDd6b1f34e12C0230ab23cbd4514560b24438514](https://arbiscan.io/address/0xDDd6b1f34e12C0230ab23cbd4514560b24438514), [0x352423e2fA5D5c99343d371C9e3bC56C87723Cc7](https://arbiscan.io/address/0x352423e2fA5D5c99343d371C9e3bC56C87723Cc7) | |--------|--------|
 
-### Granular Guardian Admins 
+### Granular Guardian Admins
 | Role |Contract |
 |----------|----------|
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://arbiscan.io/address/0xFF1137243698CaA18EE364Cc966CF0e02A4e6327) | |--------|--------|
 |  SOLVE_EMERGENCY_ROLE |  [Aave Governance Guardian Arbitrum](https://arbiscan.io/address/0x1A0581dd5C7C3DA4Ba1CDa7e0BcA7286afc4973b) | |--------|--------|
 |  RETRY_ROLE |  [BGD](https://arbiscan.io/address/0x1Fcd437D8a9a6ea68da858b78b6cf10E8E0bF959) | |--------|--------|
 
-### Collector Admins 
+### Collector Admins
 | Role |Contract |
 |----------|----------|
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://arbiscan.io/address/0xFF1137243698CaA18EE364Cc966CF0e02A4e6327) | |--------|--------|
 |  FUNDS_ADMIN_ROLE |  [Executor_lvl1](https://arbiscan.io/address/0xFF1137243698CaA18EE364Cc966CF0e02A4e6327), [ClinicSteward](https://arbiscan.io/address/0x7B58055fC6bE4B23cF8c9287b7d3C4adBE919a9c), [PoolExposureSteward](https://arbiscan.io/address/0xfB1D12D7C9c3Eb6b40fe0502801CdFCE816a0d18) | |--------|--------|
 
-### Clinic Steward Admins 
+### Clinic Steward Admins
 | Role |Contract |
 |----------|----------|
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://arbiscan.io/address/0xFF1137243698CaA18EE364Cc966CF0e02A4e6327) | |--------|--------|

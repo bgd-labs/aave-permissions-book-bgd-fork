@@ -1,106 +1,39 @@
-import { getLimit } from './limits.js';
-import { Client, Log } from 'viem';
-import { getEvents, getRpcClientFromUrl } from './rpc.js';
-import { Pools } from './configs.js';
-import { networkConfigs } from './configs.js';
+import { ParseEventLogsReturnType } from 'viem';
+import { crossChainControllerAbi } from '../abis/crossChainControllerAbi.js';
 
+// Properly typed log from the CrossChainController ABI
+type SenderUpdatedLog = ParseEventLogsReturnType<typeof crossChainControllerAbi, undefined, true, 'SenderUpdated'>[number];
 
+/**
+ * Processes SenderUpdated events to determine current approved senders.
+ *
+ * This is a pure function that takes event logs and returns the computed senders.
+ * It does NOT make any RPC calls.
+ *
+ * @param oldSenders - Previously known approved senders (from saved JSON)
+ * @param eventLogs - Array of SenderUpdated event logs
+ * @returns Updated list of approved senders
+ */
 export const getSenders = ({
   oldSenders,
   eventLogs,
 }: {
-  oldSenders: string[],
-  eventLogs: Log[],
-}) => {
-
+  oldSenders: string[];
+  eventLogs: SenderUpdatedLog[];
+}): string[] => {
   const senders = new Set<string>(oldSenders);
 
-  eventLogs.forEach((eventLog) => {
-    // @ts-ignore
-    const sender = eventLog.args.sender;
-    // @ts-ignore
-    const isApproved = eventLog.args.isApproved;
+  for (const eventLog of eventLogs) {
+    const { sender, isApproved } = eventLog.args;
 
-    // @ts-ignore
     if (eventLog.eventName === 'SenderUpdated') {
-      // console.log(`sender
-      //   sender : ${sender}
-      //   isApproved: ${isApproved}
-      // `);
-
       if (isApproved) {
         senders.add(sender);
       } else {
         senders.delete(sender);
       }
-
-    }
-  })
-
-  return Array.from(senders);
-};
-
-export const getCCCSendersAndAdapters = async (
-  client: Client,
-  oldSenders: string[],
-  fromBlock: number,
-  addressBook: any,
-  chainId: string,
-  pool: Pools,
-) => {
-  let limit = getLimit(chainId) ?? 0;
-
-  let events: Log[] = [];
-  let latestBlockNumber = 0;
-
-  if (addressBook.CROSS_CHAIN_CONTROLLER) {
-    if (pool === Pools.TENDERLY) {
-      const { logs: preTenderlyForkEvents, currentBlock: preTenderlyForkCurrentBlock } = await getEvents({
-        client,
-        fromBlock,
-        contract: addressBook.CROSS_CHAIN_CONTROLLER,
-        eventTypes: ['SenderUpdated'],
-        maxBlock: networkConfigs[Number(chainId)].pools[pool].tenderlyBlock!,
-        limit
-      });
-
-      const tenderlyProvider = getRpcClientFromUrl(
-        networkConfigs[Number(chainId)].pools[pool].tenderlyRpcUrl!,
-      );
-
-      const { logs: tenderlyForkEvents } = await getEvents({
-        client: tenderlyProvider,
-        fromBlock: networkConfigs[Number(chainId)].pools[pool].tenderlyBlock!,
-        contract: addressBook.CROSS_CHAIN_CONTROLLER,
-        eventTypes: ['SenderUpdated'],
-        limit: 999
-      });
-      events = [...preTenderlyForkEvents, ...tenderlyForkEvents];
-
-      latestBlockNumber = preTenderlyForkCurrentBlock;
-    } else {
-      const { logs: networkEvents, currentBlock: eventsCurrentBlock } = await getEvents({
-        client,
-        fromBlock,
-        contract: addressBook.CROSS_CHAIN_CONTROLLER,
-        eventTypes: ['SenderUpdated'],
-        limit
-      });
-      events = networkEvents;
-      latestBlockNumber = eventsCurrentBlock;
     }
   }
 
-
-  const senders = getSenders({
-    oldSenders,
-    eventLogs: events,
-  });
-
-  console.log(`chainId: ${client.chain?.id}, latestCCCBlockNumber: ${latestBlockNumber}`);
-
-  return {
-    senders,
-    latestCCCBlockNumber: latestBlockNumber,
-  };
+  return Array.from(senders);
 };

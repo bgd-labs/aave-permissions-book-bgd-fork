@@ -4,7 +4,7 @@ import { ChainId } from '@bgd-labs/toolbox';
 
 export const explorerAddressUrlComposer = (
   address: string,
-  chainId: typeof ChainId,
+  chainId: string | number,
 ): string | null => {
   if (isAddress(address)) {
     return `${networkConfigs[Number(chainId)].explorer}/address/${address}`;
@@ -15,7 +15,7 @@ export const explorerAddressUrlComposer = (
 
 export const explorerTxUrlComposer = (
   transaction: string,
-  chainId: typeof ChainId,
+  chainId: string | number,
 ): string => {
   return `${networkConfigs[Number(chainId)].explorer}/tx/${transaction}`;
 };

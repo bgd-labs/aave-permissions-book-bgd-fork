@@ -1,20 +1,23 @@
 import { generateRoles } from '../helpers/jsonParsers.js';
 import { getProxyAdmin } from '../helpers/proxyAdmin.js';
-import { getSafeOwners, getSafeThreshold } from '../helpers/guardian.js';
 import { onlyOwnerAbi } from '../abis/onlyOwnerAbi.js';
-import { Contracts, PermissionsJson } from '../helpers/types.js';
+import { AddressBook, Contracts, PermissionsJson } from '../helpers/types.js';
 import { MiscEthereum } from '@bgd-labs/aave-address-book';
 import { erABI } from '../abis/EcosystemReserve.js';
 import { Address, Client, getAddress, getContract } from 'viem';
+import { createOwnerResolver } from '../helpers/ownerResolver.js';
 
 export const resolveV2MiscModifiers = async (
-  addressBook: any,
+  addressBook: AddressBook,
   addresses: Record<string, string>,
   provider: Client,
   permissionsObject: PermissionsJson,
 ): Promise<Contracts> => {
   const obj: Contracts = {};
   const roles = generateRoles(permissionsObject);
+
+  // Create owner resolver with caching for this network
+  const ownerResolver = createOwnerResolver(provider);
 
   obj['LendToAaveMigrator'] = {
     address: addresses.LEND_TO_AAVE_MIGRATOR,
@@ -23,6 +26,7 @@ export const resolveV2MiscModifiers = async (
 
   const ecosystemReserveContract = getContract({ address: getAddress(MiscEthereum.ECOSYSTEM_RESERVE), abi: erABI, client: provider });
   const erFundsAdmin = await ecosystemReserveContract.read.getFundsAdmin() as Address;
+  const erFundsAdminInfo = await ownerResolver.resolve(erFundsAdmin);
 
   obj['EcosystemReserve'] = {
     address: MiscEthereum.ECOSYSTEM_RESERVE,
@@ -32,8 +36,8 @@ export const resolveV2MiscModifiers = async (
         addresses: [
           {
             address: erFundsAdmin,
-            owners: await getSafeOwners(provider, erFundsAdmin),
-            signersThreshold: await getSafeThreshold(provider, erFundsAdmin),
+            owners: erFundsAdminInfo.owners,
+            signersThreshold: erFundsAdminInfo.threshold,
           },
         ],
         functions: roles['EcosystemReserve']['onlyFundsAdmin'],
@@ -43,8 +47,8 @@ export const resolveV2MiscModifiers = async (
         addresses: [
           {
             address: erFundsAdmin,
-            owners: await getSafeOwners(provider, erFundsAdmin),
-            signersThreshold: await getSafeThreshold(provider, erFundsAdmin),
+            owners: erFundsAdminInfo.owners,
+            signersThreshold: erFundsAdminInfo.threshold,
           },
         ],
         functions: roles['EcosystemReserve']['onlyAdminOrRecipient'],
@@ -54,6 +58,7 @@ export const resolveV2MiscModifiers = async (
 
   const ecosystemReserveControllerContract = getContract({ address: getAddress(MiscEthereum.AAVE_ECOSYSTEM_RESERVE_CONTROLLER), abi: onlyOwnerAbi, client: provider });
   const erControllerOwner = await ecosystemReserveControllerContract.read.owner() as Address;
+  const erControllerOwnerInfo = await ownerResolver.resolve(erControllerOwner);
 
   obj['EcosystemReserveController'] = {
     address: MiscEthereum.AAVE_ECOSYSTEM_RESERVE_CONTROLLER,
@@ -63,11 +68,8 @@ export const resolveV2MiscModifiers = async (
         addresses: [
           {
             address: erControllerOwner,
-            owners: await getSafeOwners(provider, erControllerOwner),
-            signersThreshold: await getSafeThreshold(
-              provider,
-              erControllerOwner,
-            ),
+            owners: erControllerOwnerInfo.owners,
+            signersThreshold: erControllerOwnerInfo.threshold,
           },
         ],
         functions: roles['EcosystemReserveController']['onlyOwner'],

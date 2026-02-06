@@ -83,7 +83,7 @@
 |  [ClinicSteward](https://bscscan.com/address/0x9e842f55Fdbb8F332D7c7aCe2B67fa5e4CCAAc43) |  - |  onlyCleanUpRole |  [CleanUp Admin](https://bscscan.com/address/0xdeadD8aB03075b7FBA81864202a2f59EE25B312b), [ACI Automation](https://bscscan.com/address/0x3Cbded22F878aFC8d39dCD744d3Fe62086B76193) |  renewAllowance, batchRepayBadDebt, batchLiquidate, batchRepayBadDebt | |--------|--------|--------|--------|--------|
 |  [ClinicSteward](https://bscscan.com/address/0x9e842f55Fdbb8F332D7c7aCe2B67fa5e4CCAAc43) |  - |  onlyAdmin |  [Executor_lvl1](https://bscscan.com/address/0x9390B1735def18560c509E2d0bc090E9d6BA257a) |  setAvailableBudget | |--------|--------|--------|--------|--------|
 
-### Governance V3 Contracts 
+### Governance V3 Contracts
 | contract |proxyAdmin |modifier |permission owner |functions |
 |----------|----------|----------|----------|----------|
 |  [GranularGuardian](https://bscscan.com/address/0xe4FB5e3F506BE0095f38004f993D16fdA8224383) |  - |  onlyRetryGuardian |  [BGD](https://bscscan.com/address/0xE8C5ab722d0b1B7316Cc4034f2BE91A5B1d29964) |  retryEnvelope, retryTransaction | |--------|--------|--------|--------|--------|
@@ -104,7 +104,7 @@
 |  [CrossChainController](https://bscscan.com/address/0x9d33ee6543C9b2C8c183b8fb58fB089266cffA19) |  [ProxyAdmin](https://bscscan.com/address/0x39EBFfc7679c62Dfcc4A3E2c09Bcb0be255Ae63c) |  onlyApprovedBridges |  [CCIP adapter](https://bscscan.com/address/0xAE93BEa44dcbE52B625169588574d31e36fb3A67), [LayerZero adapter](https://bscscan.com/address/0xa5cc218513305221201f196760E9e64e9D49d98A), [Hyperlane adapter](https://bscscan.com/address/0x3F006299eC88985c18E6e885EeA29A49eC579882) |  receiveCrossChainMessage | |--------|--------|--------|--------|--------|
 |  [CrossChainController](https://bscscan.com/address/0x9d33ee6543C9b2C8c183b8fb58fB089266cffA19) |  [ProxyAdmin](https://bscscan.com/address/0x39EBFfc7679c62Dfcc4A3E2c09Bcb0be255Ae63c) |  onlyGuardian |  [BGD](https://bscscan.com/address/0xE8C5ab722d0b1B7316Cc4034f2BE91A5B1d29964) |  solveEmergency | |--------|--------|--------|--------|--------|
 
-### Risk Agent Contracts 
+### Risk Agent Contracts
 | contract |proxyAdmin |modifier |permission owner |functions |
 |----------|----------|----------|----------|----------|
 |  [SupplyCapAgent](https://bscscan.com/address/0x2cf0fA5b36F0f89a5EA18F835d1375974a7720B8) |  - |  onlyAgentHub |  [AgentHub](https://bscscan.com/address/0x115E662Fa3f0b83014eB3f6F86F3D94BeC5eB411) |  inject | |--------|--------|--------|--------|--------|
@@ -124,7 +124,7 @@
 |  [BGD](https://bscscan.com/address/0xE8C5ab722d0b1B7316Cc4034f2BE91A5B1d29964) |  2/3 |  0xE8C5ab722d0b1B7316Cc4034f2BE91A5B1d29964 |  [0xf71fc92e2949ccF6A5Fd369a0b402ba80Bc61E02](https://bscscan.com/address/0xf71fc92e2949ccF6A5Fd369a0b402ba80Bc61E02), [0x5811d9FF80ff4B73A8F9bA42A6082FaB82E89Ea7](https://bscscan.com/address/0x5811d9FF80ff4B73A8F9bA42A6082FaB82E89Ea7), [0x0650302887619fa7727D8BD480Cda11A638B219B](https://bscscan.com/address/0x0650302887619fa7727D8BD480Cda11A638B219B) | |--------|--------|--------|--------|
 |  [Aave Governance Guardian Binance](https://bscscan.com/address/0x1A0581dd5C7C3DA4Ba1CDa7e0BcA7286afc4973b) |  5/9 |  0x1A0581dd5C7C3DA4Ba1CDa7e0BcA7286afc4973b |  [0xDA5Ae43e179987a66B9831F92223567e1F38BE7D](https://bscscan.com/address/0xDA5Ae43e179987a66B9831F92223567e1F38BE7D), [0x1e3804357eD445251FfECbb6e40107bf03888885](https://bscscan.com/address/0x1e3804357eD445251FfECbb6e40107bf03888885), [0x4f96743057482a2E10253AFDacDA3fd9CF2C1DC9](https://bscscan.com/address/0x4f96743057482a2E10253AFDacDA3fd9CF2C1DC9), [0xebED04E9137AfeBFF6a1B97aC0adf61a544eFE29](https://bscscan.com/address/0xebED04E9137AfeBFF6a1B97aC0adf61a544eFE29), [0xbd4DCfA978c6D0d342cE36809AfFFa49d4B7f1F7](https://bscscan.com/address/0xbd4DCfA978c6D0d342cE36809AfFFa49d4B7f1F7), [0xA3103D0ED00d24795Faa2d641ACf6A320EeD7396](https://bscscan.com/address/0xA3103D0ED00d24795Faa2d641ACf6A320EeD7396), [0x936CD9654271083cCF93A975919Da0aB3Bc99EF3](https://bscscan.com/address/0x936CD9654271083cCF93A975919Da0aB3Bc99EF3), [0x0D2394C027602Dc4c3832Ffd849b5df45DBac0E9](https://bscscan.com/address/0x0D2394C027602Dc4c3832Ffd849b5df45DBac0E9), [0x4C30E33758216aD0d676419c21CB8D014C68099f](https://bscscan.com/address/0x4C30E33758216aD0d676419c21CB8D014C68099f) | |--------|--------|--------|--------|
 
-### Admins 
+### Admins
 | Role |Contract |
 |----------|----------|
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://bscscan.com/address/0x9390B1735def18560c509E2d0bc090E9d6BA257a) | |--------|--------|
@@ -134,20 +134,20 @@
 |  FLASH_BORROWER |  [0x14F8e5Fe35b2d0D67dBcE9329f1b5d09f60c06C3](https://bscscan.com/address/0x14F8e5Fe35b2d0D67dBcE9329f1b5d09f60c06C3) | |--------|--------|
 |  RISK_ADMIN |  [Manual AGRS](https://bscscan.com/address/0x87F4aDD5425f566F156af5074BaD2dFFCd20C594), [SupplyCapAgent](https://bscscan.com/address/0x2cf0fA5b36F0f89a5EA18F835d1375974a7720B8), [BorrowCapAgent](https://bscscan.com/address/0x970dDfF6c38B29D67DFe282306f7c0e1f5f31207) | |--------|--------|
 
-### Granular Guardian Admins 
+### Granular Guardian Admins
 | Role |Contract |
 |----------|----------|
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://bscscan.com/address/0x9390B1735def18560c509E2d0bc090E9d6BA257a) | |--------|--------|
 |  SOLVE_EMERGENCY_ROLE |  [Aave Governance Guardian Binance](https://bscscan.com/address/0x1A0581dd5C7C3DA4Ba1CDa7e0BcA7286afc4973b) | |--------|--------|
 |  RETRY_ROLE |  [BGD](https://bscscan.com/address/0xE8C5ab722d0b1B7316Cc4034f2BE91A5B1d29964) | |--------|--------|
 
-### Collector Admins 
+### Collector Admins
 | Role |Contract |
 |----------|----------|
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://bscscan.com/address/0x9390B1735def18560c509E2d0bc090E9d6BA257a) | |--------|--------|
 |  FUNDS_ADMIN_ROLE |  [Executor_lvl1](https://bscscan.com/address/0x9390B1735def18560c509E2d0bc090E9d6BA257a), [ClinicSteward](https://bscscan.com/address/0x9e842f55Fdbb8F332D7c7aCe2B67fa5e4CCAAc43), [PoolExposureSteward](https://bscscan.com/address/0x58AfE45eE7D7f2AE9c26827F33A6f319Feb68Df8) | |--------|--------|
 
-### Clinic Steward Admins 
+### Clinic Steward Admins
 | Role |Contract |
 |----------|----------|
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://bscscan.com/address/0x9390B1735def18560c509E2d0bc090E9d6BA257a) | |--------|--------|

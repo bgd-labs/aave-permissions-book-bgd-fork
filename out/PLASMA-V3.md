@@ -81,7 +81,7 @@
 |  [Collector](https://plasmascan.to//address/0x5E2d083417D12d4B0824E14Ecd48D26831F4Da7D) |  [CollectorProxyAdmin](https://plasmascan.to//address/0xD5dC085FfD52BbC19A934fCF67D56a998e0F9472) |  onlyAdminOrRecipient |  [CollectorProxyAdmin](https://plasmascan.to//address/0xD5dC085FfD52BbC19A934fCF67D56a998e0F9472), [Executor_lvl1](https://plasmascan.to//address/0x47aAdaAE1F05C978E6aBb7568d11B7F6e0FC4d6A) |  withdrawFromStream, cancelStream | |--------|--------|--------|--------|--------|
 |  [CollectorProxyAdmin](https://plasmascan.to//address/0xd5dc085ffd52bbc19a934fcf67d56a998e0f9472) |  - |  onlyOwner |  [Executor_lvl1](https://plasmascan.to//address/0x47aAdaAE1F05C978E6aBb7568d11B7F6e0FC4d6A) |  changeProxyAdmin, upgrade, upgradeAndCall | |--------|--------|--------|--------|--------|
 
-### Governance V3 Contracts 
+### Governance V3 Contracts
 | contract |proxyAdmin |modifier |permission owner |functions |
 |----------|----------|----------|----------|----------|
 |  [GranularGuardian](https://plasmascan.to//address/0x60665b4F4FF7073C5fed2656852dCa271DfE2684) |  - |  onlyRetryGuardian |  [BGD](https://plasmascan.to//address/0xdc62E0e65b2251Dc66404ca717FD32dcC365Be3A) |  retryEnvelope, retryTransaction | |--------|--------|--------|--------|--------|
@@ -103,7 +103,7 @@
 |  [CrossChainController](https://plasmascan.to//address/0x643441742f73e270e565619be6DE5f4D55E08cd6) |  [CrossChainControllerProxyAdmin](https://plasmascan.to//address/0x4B58BD6163c7020333b6e33a6E6495F308f420B9) |  onlyApprovedBridges |  [LayerZero adapter](https://plasmascan.to//address/0x99950E7C7eB320A8551916e8676a42b90b058d5D), [Hyperlane adapter](https://plasmascan.to//address/0x13Dc9eBb19bb1A14aa56215b443B2703A07ba2D5), [CCIP adapter](https://plasmascan.to//address/0x719e23D7B48Fc5AEa65Cff1bc58865C2b8d89A34) |  receiveCrossChainMessage | |--------|--------|--------|--------|--------|
 |  [CrossChainControllerProxyAdmin](https://plasmascan.to//address/0x4b58bd6163c7020333b6e33a6e6495f308f420b9) |  - |  onlyOwner |  [Executor_lvl1](https://plasmascan.to//address/0x47aAdaAE1F05C978E6aBb7568d11B7F6e0FC4d6A) |  changeProxyAdmin, upgrade, upgradeAndCall | |--------|--------|--------|--------|--------|
 
-### Risk Agent Contracts 
+### Risk Agent Contracts
 | contract |proxyAdmin |modifier |permission owner |functions |
 |----------|----------|----------|----------|----------|
 |  [EModeCategoryAgent](https://plasmascan.to//address/0x3999d49Bbad3A7375B0376BDF2bA4f2e3c9F5177) |  - |  onlyAgentHub |  [AgentHub](https://plasmascan.to//address/0x5F29ACbFB6de4282bB4DD2017930cDA730eD864D) |  inject | |--------|--------|--------|--------|--------|
@@ -122,7 +122,7 @@
 |  [BGD](https://plasmascan.to//address/0xdc62E0e65b2251Dc66404ca717FD32dcC365Be3A) |  2/3 |  0xdc62E0e65b2251Dc66404ca717FD32dcC365Be3A |  [0x0650302887619fa7727D8BD480Cda11A638B219B](https://plasmascan.to//address/0x0650302887619fa7727D8BD480Cda11A638B219B), [0xf71fc92e2949ccF6A5Fd369a0b402ba80Bc61E02](https://plasmascan.to//address/0xf71fc92e2949ccF6A5Fd369a0b402ba80Bc61E02), [0x5811d9FF80ff4B73A8F9bA42A6082FaB82E89Ea7](https://plasmascan.to//address/0x5811d9FF80ff4B73A8F9bA42A6082FaB82E89Ea7) | |--------|--------|--------|--------|
 |  [Aave Governance Guardian Plasma](https://plasmascan.to//address/0x19CE4363FEA478Aa04B9EA2937cc5A2cbcD44be6) |  5/9 |  0x19CE4363FEA478Aa04B9EA2937cc5A2cbcD44be6 |  [0xDA5Ae43e179987a66B9831F92223567e1F38BE7D](https://plasmascan.to//address/0xDA5Ae43e179987a66B9831F92223567e1F38BE7D), [0x1e3804357eD445251FfECbb6e40107bf03888885](https://plasmascan.to//address/0x1e3804357eD445251FfECbb6e40107bf03888885), [0x4f96743057482a2E10253AFDacDA3fd9CF2C1DC9](https://plasmascan.to//address/0x4f96743057482a2E10253AFDacDA3fd9CF2C1DC9), [0xebED04E9137AfeBFF6a1B97aC0adf61a544eFE29](https://plasmascan.to//address/0xebED04E9137AfeBFF6a1B97aC0adf61a544eFE29), [0xbd4DCfA978c6D0d342cE36809AfFFa49d4B7f1F7](https://plasmascan.to//address/0xbd4DCfA978c6D0d342cE36809AfFFa49d4B7f1F7), [0xA3103D0ED00d24795Faa2d641ACf6A320EeD7396](https://plasmascan.to//address/0xA3103D0ED00d24795Faa2d641ACf6A320EeD7396), [0x936CD9654271083cCF93A975919Da0aB3Bc99EF3](https://plasmascan.to//address/0x936CD9654271083cCF93A975919Da0aB3Bc99EF3), [0x0D2394C027602Dc4c3832Ffd849b5df45DBac0E9](https://plasmascan.to//address/0x0D2394C027602Dc4c3832Ffd849b5df45DBac0E9), [0x4C30E33758216aD0d676419c21CB8D014C68099f](https://plasmascan.to//address/0x4C30E33758216aD0d676419c21CB8D014C68099f) | |--------|--------|--------|--------|
 
-### Admins 
+### Admins
 | Role |Contract |
 |----------|----------|
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://plasmascan.to//address/0x47aAdaAE1F05C978E6aBb7568d11B7F6e0FC4d6A) | |--------|--------|
@@ -132,14 +132,14 @@
 |  FLASH_BORROWER |  [0x352423e2fA5D5c99343d371C9e3bC56C87723Cc7](https://plasmascan.to//address/0x352423e2fA5D5c99343d371C9e3bC56C87723Cc7) | |--------|--------|
 |  RISK_ADMIN |  [Manual AGRS](https://plasmascan.to//address/0x98F756B77D6Fde14E08bb064b248ec7512F9f8ba), [EModeCategoryAgent](https://plasmascan.to//address/0x3999d49Bbad3A7375B0376BDF2bA4f2e3c9F5177), [PendleDiscountRateAgent](https://plasmascan.to//address/0x4e8984D11A47Ff89CD67c7651eCaB6C00a74B4A9) | |--------|--------|
 
-### Granular Guardian Admins 
+### Granular Guardian Admins
 | Role |Contract |
 |----------|----------|
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://plasmascan.to//address/0x47aAdaAE1F05C978E6aBb7568d11B7F6e0FC4d6A) | |--------|--------|
 |  SOLVE_EMERGENCY_ROLE |  [Aave Governance Guardian Plasma](https://plasmascan.to//address/0x19CE4363FEA478Aa04B9EA2937cc5A2cbcD44be6) | |--------|--------|
 |  RETRY_ROLE |  [BGD](https://plasmascan.to//address/0xdc62E0e65b2251Dc66404ca717FD32dcC365Be3A) | |--------|--------|
 
-### Collector Admins 
+### Collector Admins
 | Role |Contract |
 |----------|----------|
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://plasmascan.to//address/0x47aAdaAE1F05C978E6aBb7568d11B7F6e0FC4d6A) | |--------|--------|

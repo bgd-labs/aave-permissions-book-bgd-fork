@@ -2,36 +2,39 @@
 ![Aave Permissions Book](./permissions_banner.jpg)
 # Aave Permissions Book
 
-Tool to index and visualise all the permissions on the whole Aave smart contracts ecosystem.
+Tool to index and visualize all permissions across the Aave smart contracts ecosystem.
 
-## Table of contents
-- [Description](#Description)
-- [Permissions](#Permissions)
-- [Usage](#Usage)
-- [License](#License)
+## Table of Contents
+- [Description](#description)
+- [Permissions](#permissions)
+- [Usage](#usage)
+- [License](#license)
 
 ## Description
 
-The Aave Protocol smart contracts require different permissions to execute its different methods. These permissions are also hold by different addresses, being other smart contracts, EOAs or multi-sigs.
-This repository contains and easy directory of tables showing which permissions are needed to execute the functions of the different contracts conforming the Aave Protocol, and the owners of said permissions.
+The Aave Protocol smart contracts use a system of roles, modifiers, and access control to gate who can execute which functions. These permissions are held by various addresses: other smart contracts, multi-sigs, governance, stewards, or EOAs.
 
+This repository indexes on-chain events to produce a comprehensive directory of tables showing:
+- Which permissions are needed to execute each function of every Aave contract.
+- Who holds those permissions (and the full ownership chain behind them).
+- Whether each contract is upgradeable, and who controls the upgrade.
 
 ## Permissions
 
-A [permissions document](./out) has been created for every pool of every network where the Aave Protocol has been deployed. 
-These documents contain tables with the following information:
-- **Contracts upgradeability**: Aave uses quite frequently upgradeable proxies, meaning that the logic of several smart contracts can change after deployment, it is not immutable. On this table we indicate for each smart contract if it is upgradeable or not, and who can do the upgrade.
-- **Actions type**: This table shows an aggregation of actions that can affect change on the Aave protocol and who can execute them.
-- **Contracts**: This table has information about the contracts of the Aave protocol.
-  - contract: Name of the contract.
-  - proxyAdmin: If the contract follows the Proxy Pattern, it will show the proxyAdmin address. The proxyAdmin has permissions to upgrade the implementation.
-  - modifier: Name of the gate method that controls who can call a function. There is an entry for every modifier that a contract has.
-  - permission owner: Name of the contract that holds the permission to call the modifier.
-  - functions: Name of the functions of the contract that are gated by the modifier.
-- **Guardians**: This table holds the list of addresses with permissions to call certain methods, excluding those of the Aave governance. Normally a Guardian is a multi-sig with permission to call some methods, following a mandate from the Aave governance.  
-- **Roles**: This table enumerates the different roles that a protocol can have, and the contracts who have that role. A role has permissions to call certain functions gated by modifiers.
+A [permissions document](./out) has been generated for every pool on every network where the Aave Protocol is deployed. Each document contains the following tables:
 
-### Permissions directory
+- **Contracts Upgradeability**: Indicates whether each smart contract uses an upgradeable proxy and, if so, who can perform the upgrade.
+- **Actions Type**: An aggregated view of the actions that can affect the Aave protocol, classified by who can execute them (governance, multisig, steward, or EOA).
+- **Contracts**: Detailed per-contract information:
+  - **contract**: Name of the contract.
+  - **proxyAdmin**: The proxy admin address (if the contract follows the Proxy Pattern), which has permission to upgrade the implementation.
+  - **modifier**: The access control gate that restricts who can call a function. There is an entry for every modifier on the contract.
+  - **permission owner**: The address that holds permission to pass through the modifier, along with its ownership chain.
+  - **functions**: The functions gated by that modifier.
+- **Guardians**: Multi-sig addresses with permissions to call certain emergency or operational methods, acting under a mandate from Aave Governance.
+- **Roles**: The different roles defined by each protocol component (e.g., POOL_ADMIN, EMERGENCY_ADMIN) and which addresses hold each role.
+
+### Permissions Directory
 | Network |System type |Tables |
 |----------|----------|----------|
 |  ETHEREUM |  V3 |  [Permissions](./out/ETHEREUM-V3.md#contracts) | |--------|--------|--------|
@@ -62,32 +65,11 @@ These documents contain tables with the following information:
 |  INK |  V3_WHITE_LABEL |  [Permissions](./out/INK-V3_WHITE_LABEL.md#contracts) | |--------|--------|--------|
 |  LINEA |  V3 |  [Permissions](./out/LINEA-V3.md#contracts) | |--------|--------|--------|
 |  SCROLL |  V3 |  [Permissions](./out/SCROLL-V3.md#contracts) | |--------|--------|--------|
-       
-    
+
+
 ## Usage
 
-To generate the permissions json, and the subsequent permissions tables:
-
-### Installation
-
-```
-  npm install
-  cp .env.example .env // this will copy the example .env to the actual .env
-```
-
-### Scripts
-
-To generate the permissions json, execute:
-```
-  npm run modifiers:generate
-```
-
-To generate the permissions tables, execute:
-```
-  npm run tables:create
-```
-
-
+For setup instructions, CLI options, how to add new networks and pools, and how to use Tenderly forks, see the [Usage Guide](./USAGE.md).
 
 ## License
 This repository is under [MIT License](./LICENSE)

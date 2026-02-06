@@ -67,7 +67,7 @@
 |  [Collector](https://sonicscan.org//address/0xc7B3cc5F5988613b0D620623C514EDFB32539720) |  [CollectorProxyAdmin](https://sonicscan.org//address/0xd1050fc8e4BEA27170a4dB11EAB7553BEb0e13B6) |  onlyAdminOrRecipient |  [CollectorProxyAdmin](https://sonicscan.org//address/0xd1050fc8e4BEA27170a4dB11EAB7553BEb0e13B6), [Executor_lvl1](https://sonicscan.org//address/0x47aAdaAE1F05C978E6aBb7568d11B7F6e0FC4d6A) |  withdrawFromStream, cancelStream | |--------|--------|--------|--------|--------|
 |  [CollectorProxyAdmin](https://sonicscan.org//address/0xd1050fc8e4bea27170a4db11eab7553beb0e13b6) |  - |  onlyOwner |  [Executor_lvl1](https://sonicscan.org//address/0x47aAdaAE1F05C978E6aBb7568d11B7F6e0FC4d6A) |  changeProxyAdmin, upgrade, upgradeAndCall | |--------|--------|--------|--------|--------|
 
-### Governance V3 Contracts 
+### Governance V3 Contracts
 | contract |proxyAdmin |modifier |permission owner |functions |
 |----------|----------|----------|----------|----------|
 |  [GranularGuardian](https://sonicscan.org//address/0xD8E6956718784B914740267b7A50B952fb516656) |  - |  onlyRetryGuardian |  [BGD](https://sonicscan.org//address/0xdc62E0e65b2251Dc66404ca717FD32dcC365Be3A) |  retryEnvelope, retryTransaction | |--------|--------|--------|--------|--------|
@@ -95,7 +95,7 @@
 |  [BGD](https://sonicscan.org//address/0xdc62E0e65b2251Dc66404ca717FD32dcC365Be3A) |  2/3 |  0xdc62E0e65b2251Dc66404ca717FD32dcC365Be3A |  [0x0650302887619fa7727D8BD480Cda11A638B219B](https://sonicscan.org//address/0x0650302887619fa7727D8BD480Cda11A638B219B), [0xf71fc92e2949ccF6A5Fd369a0b402ba80Bc61E02](https://sonicscan.org//address/0xf71fc92e2949ccF6A5Fd369a0b402ba80Bc61E02), [0x5811d9FF80ff4B73A8F9bA42A6082FaB82E89Ea7](https://sonicscan.org//address/0x5811d9FF80ff4B73A8F9bA42A6082FaB82E89Ea7) | |--------|--------|--------|--------|
 |  [Aave Governance Guardian Soneium](https://sonicscan.org//address/0x19CE4363FEA478Aa04B9EA2937cc5A2cbcD44be6) |  5/9 |  0x19CE4363FEA478Aa04B9EA2937cc5A2cbcD44be6 |  [0xDA5Ae43e179987a66B9831F92223567e1F38BE7D](https://sonicscan.org//address/0xDA5Ae43e179987a66B9831F92223567e1F38BE7D), [0x1e3804357eD445251FfECbb6e40107bf03888885](https://sonicscan.org//address/0x1e3804357eD445251FfECbb6e40107bf03888885), [0x4f96743057482a2E10253AFDacDA3fd9CF2C1DC9](https://sonicscan.org//address/0x4f96743057482a2E10253AFDacDA3fd9CF2C1DC9), [0xebED04E9137AfeBFF6a1B97aC0adf61a544eFE29](https://sonicscan.org//address/0xebED04E9137AfeBFF6a1B97aC0adf61a544eFE29), [0xbd4DCfA978c6D0d342cE36809AfFFa49d4B7f1F7](https://sonicscan.org//address/0xbd4DCfA978c6D0d342cE36809AfFFa49d4B7f1F7), [0xA3103D0ED00d24795Faa2d641ACf6A320EeD7396](https://sonicscan.org//address/0xA3103D0ED00d24795Faa2d641ACf6A320EeD7396), [0x936CD9654271083cCF93A975919Da0aB3Bc99EF3](https://sonicscan.org//address/0x936CD9654271083cCF93A975919Da0aB3Bc99EF3), [0x0D2394C027602Dc4c3832Ffd849b5df45DBac0E9](https://sonicscan.org//address/0x0D2394C027602Dc4c3832Ffd849b5df45DBac0E9), [0x4C30E33758216aD0d676419c21CB8D014C68099f](https://sonicscan.org//address/0x4C30E33758216aD0d676419c21CB8D014C68099f) | |--------|--------|--------|--------|
 
-### Admins 
+### Admins
 | Role |Contract |
 |----------|----------|
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://sonicscan.org//address/0x47aAdaAE1F05C978E6aBb7568d11B7F6e0FC4d6A) | |--------|--------|
@@ -105,14 +105,14 @@
 |  FLASH_BORROWER |   | |--------|--------|
 |  RISK_ADMIN |  [Manual AGRS](https://sonicscan.org//address/0xD9145b5F45Ad4519c7ACcD6E0A4A82e83bB8A6Dc) | |--------|--------|
 
-### Granular Guardian Admins 
+### Granular Guardian Admins
 | Role |Contract |
 |----------|----------|
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://sonicscan.org//address/0x47aAdaAE1F05C978E6aBb7568d11B7F6e0FC4d6A) | |--------|--------|
 |  SOLVE_EMERGENCY_ROLE |  [Aave Governance Guardian Soneium](https://sonicscan.org//address/0x19CE4363FEA478Aa04B9EA2937cc5A2cbcD44be6) | |--------|--------|
 |  RETRY_ROLE |  [BGD](https://sonicscan.org//address/0xdc62E0e65b2251Dc66404ca717FD32dcC365Be3A) | |--------|--------|
 
-### Collector Admins 
+### Collector Admins
 | Role |Contract |
 |----------|----------|
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://sonicscan.org//address/0x47aAdaAE1F05C978E6aBb7568d11B7F6e0FC4d6A) | |--------|--------|

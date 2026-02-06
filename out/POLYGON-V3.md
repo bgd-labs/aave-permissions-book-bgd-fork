@@ -91,7 +91,7 @@
 |  [ClinicSteward](https://polygonscan.com/address/0x476B3D5509f600cC377Ab86658b623337Fc6A717) |  - |  onlyCleanUpRole |  [CleanUp Admin](https://polygonscan.com/address/0xdeadD8aB03075b7FBA81864202a2f59EE25B312b), [ACI Automation](https://polygonscan.com/address/0x3Cbded22F878aFC8d39dCD744d3Fe62086B76193) |  renewAllowance, batchRepayBadDebt, batchLiquidate, batchRepayBadDebt | |--------|--------|--------|--------|--------|
 |  [ClinicSteward](https://polygonscan.com/address/0x476B3D5509f600cC377Ab86658b623337Fc6A717) |  - |  onlyAdmin |  [Executor_lvl1](https://polygonscan.com/address/0xDf7d0e6454DB638881302729F5ba99936EaAB233) |  setAvailableBudget | |--------|--------|--------|--------|--------|
 
-### Governance V3 Contracts 
+### Governance V3 Contracts
 | contract |proxyAdmin |modifier |permission owner |functions |
 |----------|----------|----------|----------|----------|
 |  [GranularGuardian](https://polygonscan.com/address/0x0D2CccD3dD420dC6DE2f24DB44aA22fADE290a02) |  - |  onlyRetryGuardian |  [BGD](https://polygonscan.com/address/0xbCEB4f363f2666E2E8E430806F37e97C405c130b) |  retryEnvelope, retryTransaction | |--------|--------|--------|--------|--------|
@@ -114,7 +114,7 @@
 |  [CrossChainController](https://polygonscan.com/address/0xF6B99959F0b5e79E1CC7062E12aF632CEb18eF0d) |  [ProxyAdmin](https://polygonscan.com/address/0xD3cF979e676265e4f6379749DECe4708B9A22476) |  onlyApprovedBridges |  [CCIP adapter](https://polygonscan.com/address/0xe79757D55a1600eF28D816a893E78E9FCDE2019E), [Polygon native adapter](https://polygonscan.com/address/0x853649f897383f89d8441346Cf26a9ed02720B02), [LayerZero adapter](https://polygonscan.com/address/0x7FAE7765abB4c8f778d57337bB720d0BC53057e3), [Hyperlane adapter](https://polygonscan.com/address/0x3e72665008dC237bdd91C04C10782Ed1987a4019) |  receiveCrossChainMessage | |--------|--------|--------|--------|--------|
 |  [CrossChainController](https://polygonscan.com/address/0xF6B99959F0b5e79E1CC7062E12aF632CEb18eF0d) |  [ProxyAdmin](https://polygonscan.com/address/0xD3cF979e676265e4f6379749DECe4708B9A22476) |  onlyGuardian |  [BGD](https://polygonscan.com/address/0xbCEB4f363f2666E2E8E430806F37e97C405c130b) |  solveEmergency | |--------|--------|--------|--------|--------|
 
-### Risk Agent Contracts 
+### Risk Agent Contracts
 | contract |proxyAdmin |modifier |permission owner |functions |
 |----------|----------|----------|----------|----------|
 |  [SupplyCapAgent](https://polygonscan.com/address/0xd99D0A740AF7B68f1CB635294C013552423666b1) |  - |  onlyAgentHub |  [AgentHub](https://polygonscan.com/address/0xd44342b1aC132353d3148Ea6ed330d1Ae6F0c664) |  inject | |--------|--------|--------|--------|--------|
@@ -135,7 +135,7 @@
 |  [BGD](https://polygonscan.com/address/0xbCEB4f363f2666E2E8E430806F37e97C405c130b) |  2/3 |  0xbCEB4f363f2666E2E8E430806F37e97C405c130b |  [0xf71fc92e2949ccF6A5Fd369a0b402ba80Bc61E02](https://polygonscan.com/address/0xf71fc92e2949ccF6A5Fd369a0b402ba80Bc61E02), [0x5811d9FF80ff4B73A8F9bA42A6082FaB82E89Ea7](https://polygonscan.com/address/0x5811d9FF80ff4B73A8F9bA42A6082FaB82E89Ea7), [0x0650302887619fa7727D8BD480Cda11A638B219B](https://polygonscan.com/address/0x0650302887619fa7727D8BD480Cda11A638B219B) | |--------|--------|--------|--------|
 |  [Aave Governance Guardian Polygon](https://polygonscan.com/address/0x1A0581dd5C7C3DA4Ba1CDa7e0BcA7286afc4973b) |  5/9 |  0x1A0581dd5C7C3DA4Ba1CDa7e0BcA7286afc4973b |  [0xDA5Ae43e179987a66B9831F92223567e1F38BE7D](https://polygonscan.com/address/0xDA5Ae43e179987a66B9831F92223567e1F38BE7D), [0x1e3804357eD445251FfECbb6e40107bf03888885](https://polygonscan.com/address/0x1e3804357eD445251FfECbb6e40107bf03888885), [0x4f96743057482a2E10253AFDacDA3fd9CF2C1DC9](https://polygonscan.com/address/0x4f96743057482a2E10253AFDacDA3fd9CF2C1DC9), [0xebED04E9137AfeBFF6a1B97aC0adf61a544eFE29](https://polygonscan.com/address/0xebED04E9137AfeBFF6a1B97aC0adf61a544eFE29), [0xbd4DCfA978c6D0d342cE36809AfFFa49d4B7f1F7](https://polygonscan.com/address/0xbd4DCfA978c6D0d342cE36809AfFFa49d4B7f1F7), [0xA3103D0ED00d24795Faa2d641ACf6A320EeD7396](https://polygonscan.com/address/0xA3103D0ED00d24795Faa2d641ACf6A320EeD7396), [0x936CD9654271083cCF93A975919Da0aB3Bc99EF3](https://polygonscan.com/address/0x936CD9654271083cCF93A975919Da0aB3Bc99EF3), [0x0D2394C027602Dc4c3832Ffd849b5df45DBac0E9](https://polygonscan.com/address/0x0D2394C027602Dc4c3832Ffd849b5df45DBac0E9), [0x4C30E33758216aD0d676419c21CB8D014C68099f](https://polygonscan.com/address/0x4C30E33758216aD0d676419c21CB8D014C68099f) | |--------|--------|--------|--------|
 
-### Admins 
+### Admins
 | Role |Contract |
 |----------|----------|
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://polygonscan.com/address/0xDf7d0e6454DB638881302729F5ba99936EaAB233) | |--------|--------|
@@ -145,20 +145,20 @@
 |  RISK_ADMIN |  [Manual AGRS](https://polygonscan.com/address/0x1e0A5985D58B45C38598e293189aa5228054629b), [SupplyCapAgent](https://polygonscan.com/address/0xd99D0A740AF7B68f1CB635294C013552423666b1), [BorrowCapAgent](https://polygonscan.com/address/0xA512909edCf6D9aE46b0414ce0aD724968448177) | |--------|--------|
 |  FLASH_BORROWER |  [0xb58Fd91558fa213D97Ac94C97F831c7289278084](https://polygonscan.com/address/0xb58Fd91558fa213D97Ac94C97F831c7289278084), [0xab515542d621574f9b5212d50593cD0C07e641bD](https://polygonscan.com/address/0xab515542d621574f9b5212d50593cD0C07e641bD), [0x86C3Dd18bAF4370495d9228b58fD959771285C55](https://polygonscan.com/address/0x86C3Dd18bAF4370495d9228b58fD959771285C55), [0xdB88AB5b485b38EDbEEf866314F9E49d095BCe39](https://polygonscan.com/address/0xdB88AB5b485b38EDbEEf866314F9E49d095BCe39), [0x79D2aeFE6A21b26B024d9341A51f6b7897852499](https://polygonscan.com/address/0x79D2aeFE6A21b26B024d9341A51f6b7897852499), [0x460b60565cb73845d56564384ab84BF84c13e47D](https://polygonscan.com/address/0x460b60565cb73845d56564384ab84BF84c13e47D), [0x352423e2fA5D5c99343d371C9e3bC56C87723Cc7](https://polygonscan.com/address/0x352423e2fA5D5c99343d371C9e3bC56C87723Cc7) | |--------|--------|
 
-### Granular Guardian Admins 
+### Granular Guardian Admins
 | Role |Contract |
 |----------|----------|
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://polygonscan.com/address/0xDf7d0e6454DB638881302729F5ba99936EaAB233) | |--------|--------|
 |  SOLVE_EMERGENCY_ROLE |  [Aave Governance Guardian Polygon](https://polygonscan.com/address/0x1A0581dd5C7C3DA4Ba1CDa7e0BcA7286afc4973b) | |--------|--------|
 |  RETRY_ROLE |  [BGD](https://polygonscan.com/address/0xbCEB4f363f2666E2E8E430806F37e97C405c130b) | |--------|--------|
 
-### Collector Admins 
+### Collector Admins
 | Role |Contract |
 |----------|----------|
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://polygonscan.com/address/0xDf7d0e6454DB638881302729F5ba99936EaAB233) | |--------|--------|
 |  FUNDS_ADMIN_ROLE |  [Executor_lvl1](https://polygonscan.com/address/0xDf7d0e6454DB638881302729F5ba99936EaAB233), [ClinicSteward](https://polygonscan.com/address/0x476B3D5509f600cC377Ab86658b623337Fc6A717), [PoolExposureSteward](https://polygonscan.com/address/0xE5b11ab4D36E58C9171e3DB98Ba17336606Cd6ef), [ClinicStewardV2](https://polygonscan.com/address/0xF93b565c96446afdf8C3D37E6B4781D5d5EDef1C) | |--------|--------|
 
-### Clinic Steward Admins 
+### Clinic Steward Admins
 | Role |Contract |
 |----------|----------|
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://polygonscan.com/address/0xDf7d0e6454DB638881302729F5ba99936EaAB233) | |--------|--------|
