@@ -119,6 +119,7 @@ export type Network = {
   addressesNames?: Record<string, string>;
 };
 
+export type NetworkConfig = Network;
 export type NetworkConfigs = Record<string, Network>;
 
 export type Function = {
