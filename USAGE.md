@@ -196,9 +196,11 @@ npm run tables:create -- -n <chainId>
 
 ## Adding a New Pool
 
-### Pool Types
+There are two scenarios: adding a **new instance** of an existing pool type (e.g., another V3 pool on a new network), or adding a **completely new pool type** with different contracts and access-control patterns.
 
-The system supports several pool types, each with its own builder function in `helpers/configs/poolBuilder.ts`:
+### Adding a Pool Instance (Existing Type)
+
+If your pool follows an existing pattern (V3, V2, GHO, etc.), use the corresponding builder function:
 
 | Builder | Pool Type | Description |
 |---------|-----------|-------------|
@@ -208,8 +210,6 @@ The system supports several pool types, each with its own builder function in `h
 | `createV2PoRPool` | - | V2 Proof of Reserve variant |
 | `createGhoPool` | GHO | GHO token and GSM modules |
 | `createSafetyPool` | SAFETY_MODULE | Aave Safety Module |
-
-### Steps
 
 1. **Add a pool key** to the `Pools` enum in `helpers/configs/constants.ts`:
 
@@ -239,13 +239,19 @@ pools: {
 },
 ```
 
-4. **Add pool processing logic** if needed. If the pool type follows an existing pattern (V3, V2, GHO, etc.), the existing switch-case in `modifiersCalculator.ts` will handle it. For a new pool type, you'll need to add a case to the pool dispatch chain.
+The existing dispatch chain in `modifiersCalculator.ts` will handle the pool automatically based on its configuration (presence of `aclBlock`, `ghoBlock`, etc.).
 
-5. **Add table generation logic** if the pool's contract aggregation strategy differs from existing pools. See `createTables.ts` for how pools are aggregated.
+### Adding a New Pool Type
 
-### Static Permissions Files
+If your pool has a different contract architecture, different access-control patterns, or different events than any existing pool type, you need to create a new pool type from scratch. This involves:
 
-Each pool type references a static permissions JSON file (e.g., `./statics/functionsPermissionsV3.json`) that defines which contract functions are gated by which modifiers. If your new pool has a different set of contracts or modifiers, you'll need to create a new static permissions file.
+1. Writing a static permissions JSON that maps your contracts' functions to their modifiers.
+2. Creating a permission resolver script that reads on-chain state to determine who holds each role.
+3. Optionally configuring the event indexer if your contracts use `RoleGranted`/`RoleRevoked` events.
+4. Adding dispatch logic in `modifiersCalculator.ts`.
+5. Handling table generation and contract aggregation.
+
+This is a more involved process. See the **[Adding Pool Types Guide](./ADDING_POOL_TYPES.md)** for a complete step-by-step walkthrough with code examples.
 
 ## Using Tenderly
 
