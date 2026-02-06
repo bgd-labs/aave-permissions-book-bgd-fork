@@ -8,18 +8,26 @@ import { crossChainControllerAbi } from "../abis/crossChainControllerAbi.js";
 const getHttpConfig = () => {
   return {
     timeout: 30_000,
-    // batch: {
-    //   batchSize: 50,
-    //   wait: 100,
-    // },
   } as const;
 };
+
+/**
+ * Creates a raw viem Client for a custom RPC URL (used for Tenderly forks).
+ */
 export const getRpcClientFromUrl = (url: string): Client => {
   return createClient({
     transport: http(url),
   });
 };
 
+/**
+ * Creates the default RPC client for a given chain.
+ * Uses @bgd-labs/toolbox's getClient which resolves the RPC URL from env vars
+ * (ALCHEMY_KEY, QUICKNODE_ENDPOINT_NAME, QUICKNODE_TOKEN).
+ *
+ * Avalanche uses a direct QuickNode URL because the toolbox's default
+ * Avalanche RPC configuration requires the C-Chain specific path.
+ */
 export const getRPCClient = (chainId: number): Client => {
   if (chainId === ChainId.avalanche) {
     if (env.QUICKNODE_ENDPOINT_NAME && env.QUICKNODE_TOKEN) {
@@ -42,12 +50,20 @@ export const getRPCClient = (chainId: number): Client => {
   });
 };
 
+/**
+ * Maps event type names to the ABI that defines them.
+ * RoleGranted/RoleRevoked come from the ACL Manager (used by all role-based contracts).
+ * SenderUpdated comes from the CrossChainController.
+ */
 const abiByEventType: Record<string, any> = {
   'RoleGranted': aclManagerAbi,
   'RoleRevoked': aclManagerAbi,
   'SenderUpdated': crossChainControllerAbi,
 };
 
+/**
+ * Extracts the ABI event definition for a given event name.
+ */
 const getEventTypeAbi = (event: string): AbiEvent => {
   const abi = abiByEventType[event];
   return getAbiItem({
@@ -56,6 +72,11 @@ const getEventTypeAbi = (event: string): AbiEvent => {
   }) as AbiEvent;
 };
 
+/**
+ * Fetches events from a single contract by paginating through block ranges.
+ * The `limit` parameter controls the block range per RPC call to avoid
+ * hitting provider limits (varies per chain, see helpers/limits.ts).
+ */
 export const getEvents = async ({
   client,
   fromBlock,

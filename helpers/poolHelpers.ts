@@ -50,6 +50,18 @@ export const isV3TenderlyPool = (poolKey: string): boolean => {
 
 // ============================================================================
 // Provider Resolution
+//
+// Two provider helpers exist because Tenderly pools have different scopes:
+//
+// getProviderForPool() - Uses isTenderlyPool() which matches ALL Tenderly pools
+//   (V2_TENDERLY, GHO_TENDERLY, GOV_V2_TENDERLY, SAFETY_MODULE_TENDERLY, etc.)
+//   Used for components that are pool-type-specific (V2 modifiers, GHO, ClinicSteward, etc.)
+//
+// getV3ProviderForPool() - Uses isV3TenderlyPool() which only matches V3 Tenderly pools
+//   (TENDERLY, LIDO_TENDERLY, ETHERFI_TENDERLY)
+//   Used for V3-specific operations (ACL, Collector, Governance) where only the V3
+//   Tenderly fork should use the Tenderly RPC. Non-V3 Tenderly pools (e.g.,
+//   GHO_TENDERLY) should use mainnet RPC for these V3 components.
 // ============================================================================
 
 interface PoolConfig {
@@ -58,13 +70,7 @@ interface PoolConfig {
 
 /**
  * Gets the appropriate RPC provider for a pool.
- * For Tenderly pools, returns a provider connected to the Tenderly RPC URL.
- * For regular pools, returns the default provider.
- *
- * @param poolKey - The pool key
- * @param pool - The pool configuration containing tenderlyRpcUrl
- * @param defaultProvider - The default provider for the network
- * @returns The appropriate RPC client for the pool
+ * Routes ALL Tenderly pool types to the Tenderly RPC.
  */
 export const getProviderForPool = (
   poolKey: string,
@@ -79,12 +85,8 @@ export const getProviderForPool = (
 
 /**
  * Gets the appropriate RPC provider for V3-specific operations.
- * Uses the stricter V3 Tenderly pool check.
- *
- * @param poolKey - The pool key
- * @param pool - The pool configuration containing tenderlyRpcUrl
- * @param defaultProvider - The default provider for the network
- * @returns The appropriate RPC client for the pool
+ * Only routes V3 Tenderly pools (TENDERLY, LIDO_TENDERLY, ETHERFI_TENDERLY)
+ * to the Tenderly RPC. Other Tenderly pool types use the default provider.
  */
 export const getV3ProviderForPool = (
   poolKey: string,

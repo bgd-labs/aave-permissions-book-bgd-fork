@@ -1,3 +1,15 @@
+/**
+ * File system operations for reading/writing permission snapshots.
+ *
+ * Data flow:
+ * 1. modifiersCalculator writes per-network JSON: out/permissions/{chainId}-permissions.json
+ * 2. createTables reads those JSON files to generate markdown tables
+ * 3. Metadata files track indexing progress: out/permissions/metadata/{chainId}-metadata.json
+ *
+ * Read functions return empty objects/arrays on failure (not undefined) so callers
+ * can safely destructure without null checks. This is intentional - a missing file
+ * simply means no prior state exists (first run, new network, etc.).
+ */
 import * as fs from 'fs';
 import { FullPermissions, PermissionsJson, Pool } from './types.js';
 import { NetworkMetadata, PoolMetadata } from './eventIndexer.js';
@@ -8,6 +20,10 @@ export const saveJson = (filePath: string, stringifiedJson: string) => {
   fs.writeFileSync(filePath, stringifiedJson);
 };
 
+/**
+ * Reads the aggregated permissions list (all networks).
+ * Returns empty object on first run when the file doesn't exist yet.
+ */
 export const getAllPermissionsJson = (): FullPermissions => {
   try {
     const file = fs.readFileSync('out/aavePermissionList.json');
@@ -17,6 +33,12 @@ export const getAllPermissionsJson = (): FullPermissions => {
   }
 };
 
+/**
+ * Reads the permissions JSON for a single network.
+ * Returns empty object on first run or if the network hasn't been processed yet.
+ * This is read frequently during processing - each pool reads it to get the
+ * current accumulated state and writes back after adding its own data.
+ */
 export const getPermissionsByNetwork = (network: string | number): Pool => {
   try {
     const file = fs.readFileSync(`out/permissions/${network}-permissions.json`);
@@ -26,6 +48,12 @@ export const getPermissionsByNetwork = (network: string | number): Pool => {
   }
 };
 
+/**
+ * Reads a static permissions JSON file (the predefined function-to-role mappings).
+ * These files define which roles are needed to call each contract function.
+ * Unlike the other read functions, this logs an error on failure since these
+ * files are expected to exist (they're committed to the repo).
+ */
 export const getStaticPermissionsJson = (path: string): PermissionsJson => {
   try {
     const file = fs.readFileSync(path);

@@ -1,7 +1,24 @@
+/**
+ * Decentralization analysis for Aave protocol contracts.
+ *
+ * Determines two things for each contract/action:
+ * 1. Upgradeability: whether a contract has a proxy admin (and who controls it)
+ * 2. Action executors: who can perform each action type (governance, multisig, steward, etc.)
+ *
+ * Ownership is resolved by walking the modifier chain recursively:
+ *   Contract -> modifier -> owner address -> is it governance? multisig? steward?
+ *
+ * For upgradeable contracts, the proxy admin's owner determines the controller.
+ * For non-upgradeable contracts, the contract's own onlyOwner modifier is checked.
+ *
+ * Configuration is externalized to statics/decentralizationConfig.json to allow
+ * easy updates without code changes (e.g., adding new governance-owned addresses).
+ */
 import { AddressInfo, ContractInfo, Contracts } from './types.js';
 import actionsConfigJson from '../statics/actionsConfig.json' assert { type: 'json' };
 
-// Type the actions config for proper indexing
+// actionsConfig maps action names to the contract functions that perform them.
+// Example: { "Listing": ["initReserve", "addPool"], "Pause": ["setReservePause"] }
 const actionsConfig = actionsConfigJson as Record<string, string[]>;
 import decentralizationConfig from '../statics/decentralizationConfig.json' assert { type: 'json' };
 
@@ -23,16 +40,24 @@ export enum Controller {
 // Configuration from statics/decentralizationConfig.json
 // ============================================================================
 
+// Addresses known to be governance-owned that can't be resolved by walking modifiers
+// (e.g., cross-chain executors whose ownership is on another chain)
 const KNOWN_GOV_OWNED_ADDRESSES = new Set(
   decentralizationConfig.knownGovernanceOwnedAddresses.map((item) =>
     item.address.toLowerCase(),
   ),
 );
 
+// Contracts where onlyRiskCouncil should not be treated as an admin modifier
+// (e.g., GhoStewardV2 where risk council is a functional role, not ownership)
 const RISK_COUNCIL_EXCEPTIONS = new Set(decentralizationConfig.riskCouncilExceptions);
+// Substrings that identify steward contracts (e.g., "steward", "agrs")
 const STEWARD_INDICATORS = decentralizationConfig.stewardIndicators;
+// Actions that are always governance-only regardless of modifier analysis
 const GOVERNANCE_ONLY_ACTIONS = new Set(decentralizationConfig.governanceOnlyActions);
+// Modifiers that indicate direct ownership (e.g., "onlyOwner")
 const STRICT_MODIFIERS = new Set(decentralizationConfig.strictModifiers);
+// Broader set of modifiers indicating admin control (strict + role-based like "onlyPoolAdmin")
 const ADMINISTERED_MODIFIERS = new Set(decentralizationConfig.administeredModifiers);
 
 // ============================================================================
@@ -78,8 +103,17 @@ interface OwnershipResult {
 }
 
 /**
- * Determines if an address is owned by governance.
- * Recursively checks the ownership chain through proxy admins and modifiers.
+ * Determines if an address is owned by governance by walking the ownership chain.
+ *
+ * The chain typically looks like:
+ *   Contract -> ProxyAdmin -> Executor -> PayloadsController -> Governance
+ *
+ * Recursion terminates when:
+ * - A multisig is found (has owners) -> not gov-owned
+ * - A circular reference is detected (executor <-> PayloadsController) -> gov-owned
+ * - No matching contract/modifier is found -> not gov-owned
+ *
+ * @param initialAddress - Used to detect circular references in the ownership chain
  */
 const isOwnedByGov = (
   address: string,

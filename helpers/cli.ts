@@ -78,7 +78,11 @@ export const getNetworksToProcess = (args: CliArgs): number[] => {
 
 /**
  * Gets the list of pools to process for a network based on CLI args.
- * Filters based on tenderly mode: regular pools OR tenderly pools, never both.
+ *
+ * Tenderly mode is exclusive: you process EITHER regular pools OR Tenderly
+ * pools, never both in the same run. This is because Tenderly pools overwrite
+ * their parent pool's output file, so running both would cause conflicts.
+ * Default (no --tenderly flag) processes only regular pools.
  */
 export const getPoolsToProcess = (network: number, args: CliArgs): string[] => {
   const allPools = Object.keys(networkConfigs[network].pools);
@@ -88,7 +92,7 @@ export const getPoolsToProcess = (network: number, args: CliArgs): string[] => {
     ? allPools.filter(p => args.pools.includes(p))
     : allPools;
 
-  // Filter by tenderly mode (exclusive)
+  // Filter by tenderly mode (exclusive: regular XOR tenderly)
   if (args.tenderly) {
     pools = pools.filter(p => isTenderlyPool(p));
   } else {

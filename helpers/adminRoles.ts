@@ -8,7 +8,14 @@ export const defaultRolesAdmin =
   '0x0000000000000000000000000000000000000000000000000000000000000000';
 
 /**
- * Initializes a map from role hash to role name.
+ * Initializes a map from role hash (bytes32) to human-readable role name.
+ *
+ * Most roles use keccak256(roleName) as the hash (standard AccessControl pattern).
+ * DEFAULT_ADMIN is always bytes32(0).
+ *
+ * The Collector contract is a special case: its FUNDS_ADMIN_ROLE uses a
+ * left-padded ASCII encoding (bytes32("FUNDS_ADMIN")) instead of keccak256.
+ * This is a legacy design from the original Aave V2 Collector implementation.
  */
 const initializeRoleCodeMap = (roleNames: string[], collector?: boolean): Map<string, string> => {
   const roleCodeMap = new Map<string, string>([
@@ -24,6 +31,7 @@ const initializeRoleCodeMap = (roleNames: string[], collector?: boolean): Map<st
   }
 
   if (collector) {
+    // bytes32("FUNDS_ADMIN") - not keccak256, but left-padded ASCII
     roleCodeMap.set(
       '0x46554e44535f41444d494e000000000000000000000000000000000000000000',
       'FUNDS_ADMIN_ROLE',

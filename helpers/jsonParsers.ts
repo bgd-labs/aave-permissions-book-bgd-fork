@@ -5,8 +5,22 @@ import {
   saveJson,
 } from './fileSystem.js';
 
+/**
+ * Inverted index: contract -> modifier -> functions[].
+ * Example: { "Pool": { "onlyPoolAdmin": ["setReserveActive", "setReservePaused"] } }
+ */
 export type MethodsByModifier = Record<string, Record<string, string[]>>;
 
+/**
+ * Transforms the static permissions JSON (function -> roles mapping) into an
+ * inverted index (contract -> modifier -> functions[]).
+ *
+ * Input shape:  [{ contract: "Pool", functions: [{ name: "setReserveActive", roles: ["onlyPoolAdmin"] }] }]
+ * Output shape: { "Pool": { "onlyPoolAdmin": ["setReserveActive"] } }
+ *
+ * This inverted form is used by permission resolvers to attach function lists
+ * to each modifier when building the ContractInfo output.
+ */
 export const generateRoles = (
   functionPermissions: PermissionsJson,
 ): MethodsByModifier => {
@@ -27,6 +41,10 @@ export const generateRoles = (
   return permissionsObj;
 };
 
+/**
+ * Creates a reverse lookup: address -> contract name.
+ * Used by table generation to display friendly names instead of raw addresses.
+ */
 export const generateContractsByAddress = (
   contracts: Contracts,
 ): Record<string, string> => {
@@ -129,14 +147,24 @@ export const findContractNameByAddress = (
   return undefined;
 };
 
+/**
+ * Initializes a Tenderly pool's state by copying its parent pool's permissions.
+ *
+ * Side effects:
+ * - Reads the network's permissions JSON from disk
+ * - Writes back with the destination pool's data replaced by the base pool's data
+ *
+ * This is the first step when processing a Tenderly pool. After copying,
+ * the event indexer will layer fork-specific changes (new roles, revocations)
+ * on top of this inherited state.
+ */
 export const overwriteBaseTenderlyPool = async (
   destinationPoolKey: string,
-  network: string,
+  network: string | number,
   basePoolKey: string,
 ) => {
   const permissions = { ...getPermissionsByNetwork(network) };
 
-  // copy base pool to destionation pool
   permissions[destinationPoolKey] = { ...permissions[basePoolKey] };
 
   saveJson(

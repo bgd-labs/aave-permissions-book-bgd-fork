@@ -1,3 +1,18 @@
+/**
+ * Generates markdown documentation from permission snapshots.
+ *
+ * Reads the JSON files produced by modifiersCalculator.ts and generates:
+ * - Per-pool markdown files with contract tables, role tables, and decentralization info
+ * - A root README.md with a directory of all pools
+ *
+ * Contract aggregation is pool-type-aware:
+ * - V3_WHITE_LABEL: isolated, uses only its own contracts and PPC governance
+ * - LIDO/ETHERFI: inherit V3's additional components (collector, governance, etc.)
+ *   but NOT V3's core pool contracts (they have their own)
+ * - Other pools: merge with all V3 data for comprehensive ownership checks
+ *
+ * Usage: npm run tables:generate [--network <chainId>] [--pool <poolKey>] [--tenderly]
+ */
 import {
   getPermissionsByNetwork,
   saveJson,
@@ -96,6 +111,7 @@ const buildGovPermissions = (
     } as Contracts;
   }
 
+  // V2_ARC has its own governance contracts on mainnet (separate from V3 governance)
   if (pool === Pools.V2_ARC) {
     return {
       ...networkPermits['V3'].govV3?.contracts,
@@ -189,7 +205,9 @@ export const generateTableAddress = (
 
   const checkSummedAddress = getAddress(address);
 
-  // Handle cross-chain address resolution
+  // Cross-chain addresses (e.g., a governance executor on mainnet referenced
+  // from a sidechain pool) need to be resolved against the remote chain's contracts.
+  // Display name is suffixed with the network name: "PayloadsController(Ethereum)"
   if (chainId) {
     const newContractsByAddress = generateContractsByAddress({
       ...getPermissionsByNetwork(chainId)['V3'].govV3?.contracts,
@@ -270,19 +288,21 @@ export const generateTable = (network: string, pool: string): string => {
 
   const poolGuardians: PoolGuardians = {};
   let poolPermitsByContract = networkPermits[pool];
+  // Merge collector and clinicSteward contracts into the main contracts object
+  // so they appear in the primary permissions table. Other components (umbrella,
+  // ppc, agentHub) are rendered as separate dedicated tables below.
   poolPermitsByContract.contracts = {
     ...networkPermits[pool].contracts,
     ...getPermissionsByNetwork(network)[pool].collector?.contracts,
     ...getPermissionsByNetwork(network)[pool].clinicSteward?.contracts,
-    // ...getPermissionsByNetwork(network)[pool].agentHub?.contracts,
-    // ...getPermissionsByNetwork(network)[pool].umbrella?.contracts,
-    // ...getPermissionsByNetwork(network)[pool].ppc?.contracts,
   }
 
   if (!poolPermitsByContract?.contracts) {
     return readmeDirectoryTable;
   }
 
+  // LIDO/ETHERFI pools share V3's PoolExposureSteward since it manages
+  // cross-pool exposure limits. Include it in their permissions table.
   if (pool === Pools.LIDO || pool === Pools.ETHERFI || pool === Pools.LIDO_TENDERLY || pool === Pools.ETHERFI_TENDERLY) {
     poolPermitsByContract.contracts = {
       ...poolPermitsByContract.contracts,
@@ -339,7 +359,9 @@ export const generateTable = (network: string, pool: string): string => {
       decentralizationHeaderTitles.length,
     );
   }
-  // hardcode aave a/v/s tokens
+  // a/v/s tokens (aTokens, variableDebtTokens, stableDebtTokens) are upgradeable
+  // via the PoolConfigurator but are not tracked as individual contracts.
+  // Their upgradeability is controlled by governance (or PPC for white-label pools).
   if (pool.includes('V3') || pool.includes('V2') || pool.includes('LIDO') || pool.includes('ETHERFI')) {
     decentralizationTableBody += getTableBody([
       `Aave a/v/s tokens`,
@@ -525,6 +547,9 @@ export const generateTable = (network: string, pool: string): string => {
   // GSM Admins tables
   readmeByNetwork += generateGsmRolesTables(poolPermitsByContract.gsmRoles, tableCtx);
 
+  // Tenderly pools write their output using the parent pool's name so the
+  // markdown file overwrites the base pool's file (e.g., TENDERLY -> V3.md).
+  // This is intentional: Tenderly results are the "what-if" version of the base pool.
   let poolName = pool;
   if (networkConfigs[network].pools[pool].tenderlyBasePool) {
     poolName = networkConfigs[network].pools[pool].tenderlyBasePool;
