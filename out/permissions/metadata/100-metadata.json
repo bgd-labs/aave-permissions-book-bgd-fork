@@ -48,5 +48,15 @@
         "firstIndexedAt": 35008853
       }
     }
+  },
+  "GHO": {
+    "latestBlockNumber": 44593954,
+    "indexedContracts": {
+      "GHO_TOKEN": {
+        "address": "0xfc421aD3C883Bf9E7C4f42dE845C4e4405799e73",
+        "deploymentBlock": 39729042,
+        "firstIndexedAt": 39729042
+      }
+    }
   }
 }

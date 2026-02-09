@@ -39,6 +39,7 @@ export const getRPCClient = (chainId: number): Client => {
     }
   }
 
+
   return getClient(chainId, {
     httpConfig: getHttpConfig(),
     clientConfig: {
@@ -76,44 +77,6 @@ const getEventTypeAbi = (event: string): AbiEvent => {
   }) as AbiEvent;
 };
 
-/**
- * Fetches events from a single contract by paginating through block ranges.
- * The `limit` parameter controls the block range per RPC call to avoid
- * hitting provider limits (varies per chain, see helpers/limits.ts).
- */
-export const getEvents = async ({
-  client,
-  fromBlock,
-  contract,
-  eventTypes,
-  limit,
-  maxBlock,
-}: {
-  client: Client,
-  fromBlock: number,
-  contract: string,
-  eventTypes: string[],
-  limit: number,
-  maxBlock?: number,
-}) => {
-  const currentBlock = maxBlock ?? Number(await getBlockNumber(client));
-  const eventsAbis = eventTypes.map(getEventTypeAbi);
-
-  const logs: Log[] = [];
-  for (let startBlock = fromBlock; startBlock < currentBlock; startBlock += limit) {
-    const intervalLogs = await getLogsRecursive({
-      client,
-      address: getAddress(contract),
-      fromBlock: BigInt(startBlock),
-      toBlock: BigInt(Math.min(startBlock + limit, currentBlock)),
-      events: eventsAbis
-    })
-    console.log(`chainId: ${client.chain?.id}, startBlock: ${startBlock}, toBlock: ${currentBlock}, maxBlock: ${maxBlock ?? 'null'}, limit: ${limit}, | event: ${eventTypes.join(', ')}, intervalLogs: ${intervalLogs.length}`);
-    logs.push(...intervalLogs);
-  }
-
-  return { logs, currentBlock: Number(currentBlock) };
-}
 
 /**
  * Fetches events from multiple contracts in a single pass.
@@ -140,7 +103,7 @@ export const getEventsMultiContract = async ({
 }): Promise<{ logsByContract: Map<string, Log[]>, currentBlock: number }> => {
   const currentBlock = maxBlock ?? Number(await getBlockNumber(client));
   const eventsAbis = eventTypes.map(getEventTypeAbi);
-
+  
   // Initialize map with empty arrays for each contract
   const logsByContract = new Map<string, Log[]>();
   for (const contract of contracts) {

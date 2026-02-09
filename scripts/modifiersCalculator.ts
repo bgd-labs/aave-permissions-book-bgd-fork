@@ -15,6 +15,7 @@
  *
  * Usage: npm run modifiers:generate [--network <chainId>] [--pool <poolKey>] [--tenderly]
  */
+import 'dotenv/config';
 import {
   clinicStewardRoleNames,
   collectorRoleNames,
@@ -154,7 +155,7 @@ const generateNetworkPermissions = async (network: number, poolsToProcess: strin
         ghoBlock: pool.ghoBlock,
         gsmBlocks: pool.gsmBlocks,
       });
-
+      
       if (contractConfigs.length > 0) {
         // For Tenderly pools: use PARENT pool's metadata to start mainnet indexing
         // from parent's latestBlockNumber (after copying parent's state)
@@ -248,7 +249,6 @@ const generateNetworkPermissions = async (network: number, poolsToProcess: strin
       );
     } else if (poolKey === Pools.GHO || poolKey === Pools.GHO_TENDERLY) {
       fullJson = await applyTenderlyBasePool(poolKey, network, pool.tenderlyBasePool, fullJson);
-
       if (pool.ghoBlock) {
         logTableGeneration(network, poolKey, undefined, indexedLatestBlock || pool.ghoBlock);
         if (Object.keys(pool.addressBook).length > 0) {
@@ -276,7 +276,7 @@ const generateNetworkPermissions = async (network: number, poolsToProcess: strin
                 role: gsmRoles,
               };
             }
-
+      
             // GHO permission resolution needs the V3 pool's ACL roles to check
             // if GHO facilitators/bucket managers are also V3 pool admins
             const poolRoles = getPermissionsByNetwork(network)['V3']?.roles?.role || {} as Record<string, string[]>;
@@ -567,7 +567,12 @@ async function main() {
 
   // allSettled ensures all networks complete even if some fail (e.g., RPC errors).
   // Each network writes its own output file independently.
-  await Promise.allSettled(permissions);
+  const results = await Promise.allSettled(permissions);
+  for (const result of results) {
+    if (result.status === 'rejected') {
+      console.error('Network failed:', result.reason);
+    }
+  }
   logger.finished();
 }
 

@@ -4,10 +4,12 @@ import {
   MiscInkWhitelabel,
   GovernanceV3Ink,
   MiscInk,
+  GhoInk
 } from '@bgd-labs/aave-address-book';
 import { Pools } from '../constants.js';
 import { NetworkConfig } from '../../types.js';
-import { createV3Pool } from '../poolBuilder.js';
+import { createGhoPool,
+createV3Pool } from '../poolBuilder.js';
 import { mergeAddressNames } from '../addresses/index.js';
 
 // ============================================================================
@@ -43,6 +45,19 @@ const v3Pool = createV3Pool({
   },
 });
 
+
+// ============================================================================
+// GHO Pool
+// ============================================================================
+const ghoPool = createGhoPool({
+  ghoBlock: 21969030,
+  addressBook: { ...MiscInk, ...GhoInk },
+  gsmBlocks: {
+  },
+  addresses: {
+  },
+});
+
 // ============================================================================
 // Network Config Export
 // ============================================================================
@@ -59,5 +74,6 @@ export const inkConfig: NetworkConfig = {
   pools: {
     [Pools.V3_WHITE_LABEL]: v3WhiteLabelPool,
     [Pools.V3]: v3Pool,
+    [Pools.GHO]: ghoPool,
   },
 };

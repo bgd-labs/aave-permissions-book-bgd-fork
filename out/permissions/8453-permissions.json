@@ -2180,7 +2180,117 @@
     }
   },
   "GHO": {
-    "contracts": {},
+    "contracts": {
+      "GHO": {
+        "address": "0x6Bb7a212910682DCFdbd5BCBb3e28FB4E8da10Ee",
+        "modifiers": [
+          {
+            "modifier": "onlyFacilitator",
+            "addresses": [
+              {
+                "address": "0x98217A06721Ebf727f2C8d9aD7718ec28b7aAe34",
+                "owners": []
+              }
+            ],
+            "functions": [
+              "mint",
+              "burn"
+            ]
+          },
+          {
+            "modifier": "onlyFacilitatorManager",
+            "addresses": [
+              {
+                "address": "0x9390B1735def18560c509E2d0bc090E9d6BA257a",
+                "owners": [],
+                "signersThreshold": 0
+              }
+            ],
+            "functions": [
+              "addFacilitator",
+              "removeFacilitator"
+            ]
+          },
+          {
+            "modifier": "onlyBucketManager",
+            "addresses": [
+              {
+                "address": "0x9390B1735def18560c509E2d0bc090E9d6BA257a",
+                "owners": [],
+                "signersThreshold": 0
+              },
+              {
+                "address": "0x3c47237479e7569653eF9beC4a7Cd2ee3F78b396",
+                "owners": [],
+                "signersThreshold": 0
+              }
+            ],
+            "functions": [
+              "setFacilitatorBucketCapacity"
+            ]
+          }
+        ],
+        "proxyAdmin": "0x882c95f502384515e82607074668d19dacb42a09"
+      },
+      "GHO ProxyAdmin": {
+        "address": "0x882c95f502384515e82607074668d19dacb42a09",
+        "modifiers": [
+          {
+            "modifier": "onlyOwner",
+            "addresses": [
+              {
+                "address": "0x9390B1735def18560c509E2d0bc090E9d6BA257a",
+                "owners": [],
+                "signersThreshold": 0
+              }
+            ],
+            "functions": [
+              "changeProxyAdmin",
+              "upgrade",
+              "upgradeAndCall"
+            ]
+          }
+        ]
+      },
+      "GhoAaveSteward": {
+        "address": "0xC5BcC58BE6172769ca1a78B8A45752E3C5059c39",
+        "modifiers": [
+          {
+            "modifier": "onlyOwner",
+            "addresses": [
+              {
+                "address": "0x9390B1735def18560c509E2d0bc090E9d6BA257a",
+                "owners": [],
+                "signersThreshold": 0
+              }
+            ],
+            "functions": [
+              "setBorrowRateConfig"
+            ]
+          },
+          {
+            "modifier": "onlyRiskCouncil",
+            "addresses": [
+              {
+                "address": "0x8513e6F37dBc52De87b166980Fa3F50639694B60",
+                "owners": [
+                  "0xCAC616Fffb687cBDDD250b2aE6F672449462985C",
+                  "0x329c54289Ff5D6B7b7daE13592C6B1EDA1543eD4",
+                  "0xb647055A9915bF9c8021a684E175A353525b9890",
+                  "0x5d49dBcdd300aECc2C311cFB56593E71c445d60d"
+                ],
+                "signersThreshold": 3
+              }
+            ],
+            "functions": [
+              "updateGhoBorrowRate",
+              "updateGhoBorrowCap",
+              "updateGhoSupplyCap"
+            ]
+          }
+        ]
+      }
+    },
     "roles": {
       "role": {
         "DEFAULT_ADMIN": [
@@ -2193,8 +2303,7 @@
           "0x9390B1735def18560c509E2d0bc090E9d6BA257a",
           "0x3c47237479e7569653eF9beC4a7Cd2ee3F78b396"
         ]
-      },
-      "latestBlockNumber": 33593264
+      }
     },
     "gsmRoles": {},
     "govV3": {
@@ -2202,6 +2311,8 @@
     },
     "collector": {},
     "clinicSteward": {},
-    "umbrella": {}
+    "umbrella": {},
+    "ppc": {},
+    "agentHub": {}
   }
 }

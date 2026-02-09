@@ -2408,5 +2408,103 @@
         }
       }
     }
+  },
+  "GHO": {
+    "contracts": {
+      "GHO": {
+        "address": "0xb77E872A68C62CfC0dFb02C067Ecc3DA23B4bbf3",
+        "modifiers": [
+          {
+            "modifier": "onlyFacilitator",
+            "addresses": [
+              {
+                "address": "0x360d8aa8F6b09B7BC57aF34db2Eb84dD87bf4d12",
+                "owners": []
+              }
+            ],
+            "functions": [
+              "mint",
+              "burn"
+            ]
+          },
+          {
+            "modifier": "onlyFacilitatorManager",
+            "addresses": [
+              {
+                "address": "0x47aAdaAE1F05C978E6aBb7568d11B7F6e0FC4d6A",
+                "owners": [],
+                "signersThreshold": 0
+              }
+            ],
+            "functions": [
+              "addFacilitator",
+              "removeFacilitator"
+            ]
+          },
+          {
+            "modifier": "onlyBucketManager",
+            "addresses": [
+              {
+                "address": "0x47aAdaAE1F05C978E6aBb7568d11B7F6e0FC4d6A",
+                "owners": [],
+                "signersThreshold": 0
+              },
+              {
+                "address": "0x2Ce400703dAcc37b7edFA99D228b8E70a4d3831B",
+                "owners": [],
+                "signersThreshold": 0
+              }
+            ],
+            "functions": [
+              "setFacilitatorBucketCapacity"
+            ]
+          }
+        ],
+        "proxyAdmin": "0x24c7badd8f85197ffb2c7e1e0c52e86010721f4c"
+      },
+      "GHO ProxyAdmin": {
+        "address": "0x24c7badd8f85197ffb2c7e1e0c52e86010721f4c",
+        "modifiers": [
+          {
+            "modifier": "onlyOwner",
+            "addresses": [
+              {
+                "address": "0x47aAdaAE1F05C978E6aBb7568d11B7F6e0FC4d6A",
+                "owners": [],
+                "signersThreshold": 0
+              }
+            ],
+            "functions": [
+              "changeProxyAdmin",
+              "upgrade",
+              "upgradeAndCall"
+            ]
+          }
+        ]
+      }
+    },
+    "roles": {
+      "role": {
+        "DEFAULT_ADMIN": [
+          "0x47aAdaAE1F05C978E6aBb7568d11B7F6e0FC4d6A"
+        ],
+        "FACILITATOR_MANAGER_ROLE": [
+          "0x47aAdaAE1F05C978E6aBb7568d11B7F6e0FC4d6A"
+        ],
+        "BUCKET_MANAGER_ROLE": [
+          "0x47aAdaAE1F05C978E6aBb7568d11B7F6e0FC4d6A",
+          "0x2Ce400703dAcc37b7edFA99D228b8E70a4d3831B"
+        ]
+      }
+    },
+    "gsmRoles": {},
+    "govV3": {
+      "ggRoles": {}
+    },
+    "collector": {},
+    "clinicSteward": {},
+    "umbrella": {},
+    "ppc": {},
+    "agentHub": {}
   }
 }
