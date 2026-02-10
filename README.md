@@ -48,6 +48,7 @@ A [permissions document](./out) has been generated for every pool on every netwo
 |  OPTIMISM |  V3 |  [Permissions](./out/OPTIMISM-V3.md#contracts) | |--------|--------|--------|
 |  BINANCE |  V3 |  [Permissions](./out/BINANCE-V3.md#contracts) | |--------|--------|--------|
 |  GNOSIS |  V3 |  [Permissions](./out/GNOSIS-V3.md#contracts) | |--------|--------|--------|
+|  GNOSIS |  GHO |  [Permissions](./out/GNOSIS-GHO.md#contracts) | |--------|--------|--------|
 |  POLYGON |  V3 |  [Permissions](./out/POLYGON-V3.md#contracts) | |--------|--------|--------|
 |  POLYGON |  V2 |  [Permissions](./out/POLYGON-V2.md#contracts) | |--------|--------|--------|
 |  SONIC |  V3 |  [Permissions](./out/SONIC-V3.md#contracts) | |--------|--------|--------|
@@ -56,13 +57,17 @@ A [permissions document](./out) has been generated for every pool on every netwo
 |  SONEIUM |  V3 |  [Permissions](./out/SONEIUM-V3.md#contracts) | |--------|--------|--------|
 |  MEGAETH |  V3 |  [Permissions](./out/MEGAETH-V3.md#contracts) | |--------|--------|--------|
 |  MANTLE |  V3 |  [Permissions](./out/MANTLE-V3.md#contracts) | |--------|--------|--------|
+|  MANTLE |  GHO |  [Permissions](./out/MANTLE-GHO.md#contracts) | |--------|--------|--------|
 |  BASE |  V3 |  [Permissions](./out/BASE-V3.md#contracts) | |--------|--------|--------|
+|  BASE |  GHO |  [Permissions](./out/BASE-GHO.md#contracts) | |--------|--------|--------|
 |  PLASMA |  V3 |  [Permissions](./out/PLASMA-V3.md#contracts) | |--------|--------|--------|
+|  PLASMA |  GHO |  [Permissions](./out/PLASMA-GHO.md#contracts) | |--------|--------|--------|
 |  ARBITRUM |  V3 |  [Permissions](./out/ARBITRUM-V3.md#contracts) | |--------|--------|--------|
 |  CELO |  V3 |  [Permissions](./out/CELO-V3.md#contracts) | |--------|--------|--------|
 |  AVALANCHE |  V3 |  [Permissions](./out/AVALANCHE-V3.md#contracts) | |--------|--------|--------|
 |  AVALANCHE |  V2 |  [Permissions](./out/AVALANCHE-V2.md#contracts) | |--------|--------|--------|
 |  INK |  V3_WHITE_LABEL |  [Permissions](./out/INK-V3_WHITE_LABEL.md#contracts) | |--------|--------|--------|
+|  INK |  GHO |  [Permissions](./out/INK-GHO.md#contracts) | |--------|--------|--------|
 |  LINEA |  V3 |  [Permissions](./out/LINEA-V3.md#contracts) | |--------|--------|--------|
 |  SCROLL |  V3 |  [Permissions](./out/SCROLL-V3.md#contracts) | |--------|--------|--------|
 
