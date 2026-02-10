@@ -903,5 +903,103 @@
     "agentHub": {
       "contracts": {}
     }
+  },
+  "GHO": {
+    "contracts": {
+      "GHO": {
+        "address": "0xfc421aD3C883Bf9E7C4f42dE845C4e4405799e73",
+        "modifiers": [
+          {
+            "modifier": "onlyFacilitator",
+            "addresses": [
+              {
+                "address": "0xDe6539018B095353A40753Dc54C91C68c9487D4E",
+                "owners": []
+              }
+            ],
+            "functions": [
+              "mint",
+              "burn"
+            ]
+          },
+          {
+            "modifier": "onlyFacilitatorManager",
+            "addresses": [
+              {
+                "address": "0x47aAdaAE1F05C978E6aBb7568d11B7F6e0FC4d6A",
+                "owners": [],
+                "signersThreshold": 0
+              }
+            ],
+            "functions": [
+              "addFacilitator",
+              "removeFacilitator"
+            ]
+          },
+          {
+            "modifier": "onlyBucketManager",
+            "addresses": [
+              {
+                "address": "0x47aAdaAE1F05C978E6aBb7568d11B7F6e0FC4d6A",
+                "owners": [],
+                "signersThreshold": 0
+              },
+              {
+                "address": "0xA5Ba213867E175A182a5dd6A9193C6158738105A",
+                "owners": [],
+                "signersThreshold": 0
+              }
+            ],
+            "functions": [
+              "setFacilitatorBucketCapacity"
+            ]
+          }
+        ],
+        "proxyAdmin": "0x06ba20fb633cbf38b7acfdc243829fb5f897e19c"
+      },
+      "GHO ProxyAdmin": {
+        "address": "0x06ba20fb633cbf38b7acfdc243829fb5f897e19c",
+        "modifiers": [
+          {
+            "modifier": "onlyOwner",
+            "addresses": [
+              {
+                "address": "0x47aAdaAE1F05C978E6aBb7568d11B7F6e0FC4d6A",
+                "owners": [],
+                "signersThreshold": 0
+              }
+            ],
+            "functions": [
+              "changeProxyAdmin",
+              "upgrade",
+              "upgradeAndCall"
+            ]
+          }
+        ]
+      }
+    },
+    "roles": {
+      "role": {
+        "DEFAULT_ADMIN": [
+          "0x47aAdaAE1F05C978E6aBb7568d11B7F6e0FC4d6A"
+        ],
+        "FACILITATOR_MANAGER_ROLE": [
+          "0x47aAdaAE1F05C978E6aBb7568d11B7F6e0FC4d6A"
+        ],
+        "BUCKET_MANAGER_ROLE": [
+          "0x47aAdaAE1F05C978E6aBb7568d11B7F6e0FC4d6A",
+          "0xA5Ba213867E175A182a5dd6A9193C6158738105A"
+        ]
+      }
+    },
+    "gsmRoles": {},
+    "govV3": {
+      "ggRoles": {}
+    },
+    "collector": {},
+    "clinicSteward": {},
+    "umbrella": {},
+    "ppc": {},
+    "agentHub": {}
   }
 }
