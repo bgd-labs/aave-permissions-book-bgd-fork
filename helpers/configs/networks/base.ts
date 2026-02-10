@@ -6,7 +6,7 @@ import {
 } from '@bgd-labs/aave-address-book';
 import { Pools } from '../constants.js';
 import { NetworkConfig } from '../../types.js';
-import { createV3Pool, createTenderlyPool } from '../poolBuilder.js';
+import { createV3Pool, createTenderlyPool, createGhoPool } from '../poolBuilder.js';
 import { mergeAddressNames } from '../addresses/index.js';
 
 // ============================================================================
@@ -22,6 +22,18 @@ const v3Pool = createV3Pool({
   governanceAddressBook: GovernanceV3Base,
   addresses: {
     '0x7b62461a3570c6AC8a9f8330421576e417B71EE7': 'CBaseAdapter',
+  },
+});
+
+// ============================================================================
+// GHO Pool
+// ============================================================================
+const ghoPool = createGhoPool({
+  ghoBlock: 24786494,
+  addressBook: { ...AaveV3Base, ...MiscBase, ...GhoBase },
+  gsmBlocks: {
+  },
+  addresses: {
   },
 });
 
@@ -42,9 +54,12 @@ export const baseConfig: NetworkConfig = {
     '0xA9F30e6ED4098e9439B2ac8aEA2d3fc26BcEbb45': 'Bridge Executor',
     '0xC5BcC58BE6172769ca1a78B8A45752E3C5059c39': 'Base Gho Aave Steward',
     '0x1B7e7b282Dff5661704E32838CAE4677FEB4C1F2': 'BGD Steward Injector Guardian',
+    '0x98217A06721Ebf727f2C8d9aD7718ec28b7aAe34': 'Gho Direct Minter',
+    '0x3c47237479e7569653eF9beC4a7Cd2ee3F78b396': 'Gho Bucket Steward',
   }),
   pools: {
     [Pools.V3]: v3Pool,
+    [Pools.GHO]: ghoPool,
     [Pools.TENDERLY]: createTenderlyPool(v3Pool, Pools.V3, {
       tenderlyBlock: 40406343,
       tenderlyRpcUrl:

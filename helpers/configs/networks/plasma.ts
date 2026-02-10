@@ -2,10 +2,12 @@ import {
   AaveV3Plasma,
   GovernanceV3Plasma,
   MiscPlasma,
+  GhoPlasma
 } from '@bgd-labs/aave-address-book';
 import { Pools } from '../constants.js';
 import { NetworkConfig } from '../../types.js';
-import { createV3Pool, createTenderlyPool } from '../poolBuilder.js';
+import { createGhoPool,
+createV3Pool, createTenderlyPool } from '../poolBuilder.js';
 import { mergeAddressNames } from '../addresses/index.js';
 
 // ============================================================================
@@ -26,6 +28,19 @@ const v3Pool = createV3Pool({
   },
 });
 
+
+// ============================================================================
+// GHO Pool
+// ============================================================================
+const ghoPool = createGhoPool({
+  ghoBlock: 1385857,
+  addressBook: { ...AaveV3Plasma, ...MiscPlasma, ...GhoPlasma },
+  gsmBlocks: {
+  },
+  addresses: {
+  },
+});
+
 // ============================================================================
 // Network Config Export
 // ============================================================================
@@ -40,9 +55,13 @@ export const plasmaConfig: NetworkConfig = {
     '0x19CE4363FEA478Aa04B9EA2937cc5A2cbcD44be6': 'Aave Governance Guardian Plasma',
     '0xE71C189C7D8862EfDa0D9E031157199D2F3B4893': 'Risk Council',
     '0x1cF16B4e76D4919bD939e12C650b8F6eb9e02916': 'BGD Injector Guardian',
+    '0x360d8aa8F6b09B7BC57aF34db2Eb84dD87bf4d12': 'Gho Direct Minter',
+    // '': 'Gho Risk Council',
+    '0x2Ce400703dAcc37b7edFA99D228b8E70a4d3831B': 'Gho Bucket Steward',
   }),
   pools: {
     [Pools.V3]: v3Pool,
+    [Pools.GHO]: ghoPool,
     [Pools.TENDERLY]: createTenderlyPool(v3Pool, Pools.V3, {
       tenderlyBlock: 10671654,
       tenderlyRpcUrl:

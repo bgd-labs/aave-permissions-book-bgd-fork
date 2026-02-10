@@ -761,5 +761,141 @@
     "agentHub": {
       "contracts": {}
     }
+  },
+  "GHO": {
+    "contracts": {
+      "GHO": {
+        "address": "0xfc421aD3C883Bf9E7C4f42dE845C4e4405799e73",
+        "modifiers": [
+          {
+            "modifier": "onlyFacilitator",
+            "addresses": [
+              {
+                "address": "0xDe6539018B095353A40753Dc54C91C68c9487D4E",
+                "owners": []
+              }
+            ],
+            "functions": [
+              "mint",
+              "burn"
+            ]
+          },
+          {
+            "modifier": "onlyFacilitatorManager",
+            "addresses": [
+              {
+                "address": "0x70884634D0098782592111A2A6B8d223be31CB7b",
+                "owners": [],
+                "signersThreshold": 0
+              }
+            ],
+            "functions": [
+              "addFacilitator",
+              "removeFacilitator"
+            ]
+          },
+          {
+            "modifier": "onlyBucketManager",
+            "addresses": [
+              {
+                "address": "0x70884634D0098782592111A2A6B8d223be31CB7b",
+                "owners": [],
+                "signersThreshold": 0
+              },
+              {
+                "address": "0x2Ce400703dAcc37b7edFA99D228b8E70a4d3831B",
+                "owners": [],
+                "signersThreshold": 0
+              }
+            ],
+            "functions": [
+              "setFacilitatorBucketCapacity"
+            ]
+          }
+        ],
+        "proxyAdmin": "0x06ba20fb633cbf38b7acfdc243829fb5f897e19c"
+      },
+      "GHO ProxyAdmin": {
+        "address": "0x06ba20fb633cbf38b7acfdc243829fb5f897e19c",
+        "modifiers": [
+          {
+            "modifier": "onlyOwner",
+            "addresses": [
+              {
+                "address": "0x70884634D0098782592111A2A6B8d223be31CB7b",
+                "owners": [],
+                "signersThreshold": 0
+              }
+            ],
+            "functions": [
+              "changeProxyAdmin",
+              "upgrade",
+              "upgradeAndCall"
+            ]
+          }
+        ]
+      },
+      "GhoAaveSteward": {
+        "address": "0xA5Ba213867E175A182a5dd6A9193C6158738105A",
+        "modifiers": [
+          {
+            "modifier": "onlyOwner",
+            "addresses": [
+              {
+                "address": "0x70884634D0098782592111A2A6B8d223be31CB7b",
+                "owners": [],
+                "signersThreshold": 0
+              }
+            ],
+            "functions": [
+              "setBorrowRateConfig"
+            ]
+          },
+          {
+            "modifier": "onlyRiskCouncil",
+            "addresses": [
+              {
+                "address": "0x8513e6F37dBc52De87b166980Fa3F50639694B60",
+                "owners": [
+                  "0x329c54289Ff5D6B7b7daE13592C6B1EDA1543eD4",
+                  "0xb647055A9915bF9c8021a684E175A353525b9890",
+                  "0xCAC616Fffb687cBDDD250b2aE6F672449462985C",
+                  "0x5d49dBcdd300aECc2C311cFB56593E71c445d60d"
+                ],
+                "signersThreshold": 3
+              }
+            ],
+            "functions": [
+              "updateGhoBorrowRate",
+              "updateGhoBorrowCap",
+              "updateGhoSupplyCap"
+            ]
+          }
+        ]
+      }
+    },
+    "roles": {
+      "role": {
+        "DEFAULT_ADMIN": [
+          "0x70884634D0098782592111A2A6B8d223be31CB7b"
+        ],
+        "FACILITATOR_MANAGER_ROLE": [
+          "0x70884634D0098782592111A2A6B8d223be31CB7b"
+        ],
+        "BUCKET_MANAGER_ROLE": [
+          "0x70884634D0098782592111A2A6B8d223be31CB7b",
+          "0x2Ce400703dAcc37b7edFA99D228b8E70a4d3831B"
+        ]
+      }
+    },
+    "gsmRoles": {},
+    "govV3": {
+      "ggRoles": {}
+    },
+    "collector": {},
+    "clinicSteward": {},
+    "umbrella": {},
+    "ppc": {},
+    "agentHub": {}
   }
 }

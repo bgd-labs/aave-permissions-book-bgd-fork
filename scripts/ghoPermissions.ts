@@ -7,7 +7,6 @@ import {
 import { generateRoles } from '../helpers/jsonParsers.js';
 import { ghoABI } from '../abis/ghoABI.js';
 import { IOwnable_ABI, IWithGuardian_ABI } from '@bgd-labs/aave-address-book/abis';
-import { MiscEthereum } from '@bgd-labs/aave-address-book';
 import { ghoStewardV2 } from '../abis/ghoStewardV2.js';
 import { Address, Client, getAddress, getContract } from 'viem';
 import { getProxyAdmin } from '../helpers/proxyAdmin.js';
@@ -20,6 +19,7 @@ import {
   resolveOwnableContract,
   resolveRiskCouncilContract,
 } from '../helpers/contractResolvers.js';
+import { ChainId } from '@bgd-labs/toolbox';
 
 export const resolveGHOModifiers = async (
   addressBook: AddressBook,
@@ -29,13 +29,14 @@ export const resolveGHOModifiers = async (
   gsmAdminRoles: Record<string, Roles>,
   addresses: Record<string, string>,
   poolRoles: Record<string, string[]>,
+  chainId: number,
 ): Promise<Contracts> => {
   const obj: Contracts = {};
   const roles = generateRoles(permissionsObject);
 
   // Create owner resolver with caching for this network
   const ownerResolver = createOwnerResolver(provider);
-
+  
   // Resolve all role owners (with caching to avoid redundant RPC calls)
   const owners = await resolveAllRoleOwners(adminRoles, ownerResolver);
   const poolOwners = await resolveAllRoleOwners(poolRoles, ownerResolver);
@@ -74,6 +75,33 @@ export const resolveGHOModifiers = async (
       },
     ],
   };
+
+  if (chainId !== ChainId.mainnet) {
+    const ghoProxyAdmin = await getProxyAdmin(addressBook.GHO_TOKEN as string, provider);
+    
+    obj['GHO'].proxyAdmin = ghoProxyAdmin;
+
+    const ghoProxyAdminContract = getContract({ address: getAddress(ghoProxyAdmin), abi: IOwnable_ABI, client: provider });
+    const ghoProxyAdminOwner = await ghoProxyAdminContract.read.owner() as Address;
+    const ghoProxyAdminOwnerInfo = await ownerResolver.resolve(ghoProxyAdminOwner);
+
+    obj['GHO ProxyAdmin'] = {
+      address: ghoProxyAdmin,
+      modifiers: [
+        {
+          modifier: 'onlyOwner',
+          addresses: [
+            {
+              address: ghoProxyAdminOwner,
+              owners: ghoProxyAdminOwnerInfo.owners,
+              signersThreshold: ghoProxyAdminOwnerInfo.threshold,
+            },
+          ],
+          functions: roles['ProxyAdmin']['onlyOwner'],
+        },
+      ],
+    };
+  }
 
   // GSM contracts
   for (const key of Object.keys(gsmAdminRoles)) {
@@ -138,18 +166,20 @@ export const resolveGHOModifiers = async (
     obj['GSMRegistry'] = gsmRegistryResult;
   }
 
-  // GhoStewardV2
-  const ghoStewardResult = await resolveRiskCouncilContract(
-    'GhoStewardV2',
-    'GhoStewardV2',
-    '0x8F2411a538381aae2b464499005F0211e867d84f',
-    provider,
-    ownerResolver,
-    roles,
-    ghoStewardV2,
-  );
-  if (ghoStewardResult) {
-    obj['GhoStewardV2'] = ghoStewardResult;
+  // GhoStewardV2 (mainnet only - hardcoded address)
+  if (addressBook.GHO_GSM_STEWARD) {
+    const ghoStewardResult = await resolveRiskCouncilContract(
+      'GhoStewardV2',
+      'GhoStewardV2',
+      '0x8F2411a538381aae2b464499005F0211e867d84f',
+      provider,
+      ownerResolver,
+      roles,
+      ghoStewardV2,
+    );
+    if (ghoStewardResult) {
+      obj['GhoStewardV2'] = ghoStewardResult;
+    }
   }
 
   // Facilitator contracts (owner + guardian pattern)
@@ -205,7 +235,7 @@ export const resolveGHOModifiers = async (
       };
 
       // Skip aave proxy admin (already handled elsewhere)
-      if (getAddress(proxyAdmin) !== getAddress(MiscEthereum.PROXY_ADMIN)) {
+      if (addressBook.PROXY_ADMIN && getAddress(proxyAdmin) !== getAddress(addressBook.PROXY_ADMIN as string)) {
         const proxyAdminContract = getContract({ address: getAddress(proxyAdmin), abi: IOwnable_ABI, client: provider });
         const proxyAdminOwner = await proxyAdminContract.read.owner() as Address;
         const proxyAdminOwnerInfo = await ownerResolver.resolve(proxyAdminOwner);

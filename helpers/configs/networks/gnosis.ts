@@ -2,10 +2,12 @@ import {
   AaveV3Gnosis,
   GovernanceV3Gnosis,
   MiscGnosis,
+  GhoGnosis,
 } from '@bgd-labs/aave-address-book';
 import { Pools } from '../constants.js';
 import { NetworkConfig } from '../../types.js';
-import { createV3Pool, createTenderlyPool } from '../poolBuilder.js';
+import { createGhoPool,
+createV3Pool, createTenderlyPool } from '../poolBuilder.js';
 import { mergeAddressNames } from '../addresses/index.js';
 
 // ============================================================================
@@ -27,6 +29,18 @@ const v3Pool = createV3Pool({
 });
 
 // ============================================================================
+// GHO Pool
+// ============================================================================
+const ghoPool = createGhoPool({
+  ghoBlock: 39729042,
+  addressBook: { ...AaveV3Gnosis, ...MiscGnosis, ...GhoGnosis },
+  gsmBlocks: {
+  },
+  addresses: {
+  },
+});
+
+// ============================================================================
 // Network Config Export
 // ============================================================================
 export const gnosisConfig: NetworkConfig = {
@@ -41,9 +55,13 @@ export const gnosisConfig: NetworkConfig = {
     '0xCb45E82419baeBCC9bA8b1e5c7858e48A3B26Ea6': 'Aave Protocol Guardian Gnosis',
     '0x6e637e1E48025E51315d50ab96d5b3be1971A715': 'Gnosis Gho Aave Steward',
     '0x4bBBcfF03E94B2B661c5cA9c3BD34f6504591764': 'BGD Steward Injector Guardian',
+    '0xDe6539018B095353A40753Dc54C91C68c9487D4E': 'Gho Direct Minter',
+    '0x8513e6F37dBc52De87b166980Fa3F50639694B60': 'Gho Risk Council',
+    '0x6Bb7a212910682DCFdbd5BCBb3e28FB4E8da10Ee': 'Gho Bucket Steward',
   }),
   pools: {
     [Pools.V3]: v3Pool,
+    [Pools.GHO]: ghoPool,
     [Pools.TENDERLY]: createTenderlyPool(v3Pool, Pools.V3, {
       tenderlyBlock: 44006822,
       tenderlyRpcUrl:
