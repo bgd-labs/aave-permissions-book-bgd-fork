@@ -1,0 +1,27 @@
+{
+  "V3": {
+    "latestBlockNumber": 7939283,
+    "indexedContracts": {
+      "ACL_MANAGER": {
+        "address": "0x390D369C3878F2C5205CFb6Ec7154FfA65491c3D",
+        "deploymentBlock": 5516650,
+        "firstIndexedAt": 5516650
+      },
+      "COLLECTOR": {
+        "address": "0x7E195b3fc91fDd51A9CD5070cC044602212Ac983",
+        "deploymentBlock": 5516650,
+        "firstIndexedAt": 5516650
+      },
+      "CROSS_CHAIN_CONTROLLER": {
+        "address": "0x5EE63ACb37AeCDc7e23ACA283098f8ffD9677BBe",
+        "deploymentBlock": 5516650,
+        "firstIndexedAt": 5516650
+      },
+      "GRANULAR_GUARDIAN": {
+        "address": "0x8Fa22D09b13486A40cd6b04398b948AA8bD5853A",
+        "deploymentBlock": 5516650,
+        "firstIndexedAt": 5516650
+      }
+    }
+  }
+}
