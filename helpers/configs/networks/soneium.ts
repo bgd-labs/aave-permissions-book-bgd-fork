@@ -32,7 +32,7 @@ const v3Pool = createV3Pool({
 export const soneiumConfig: NetworkConfig = {
   name: 'Soneium',
   rpcUrl: process.env.RPC_SONEIUM,
-  explorer: 'https://sonicscan.org/',
+  explorer: 'https://soneium.blockscout.com/',
   addressesNames: mergeAddressNames({
     '0xEf323B194caD8e02D9E5D8F07B34f625f1c088f1': 'Aave Protocol Guardian Soneium',
     '0xdc62E0e65b2251Dc66404ca717FD32dcC365Be3A': 'BGD',
