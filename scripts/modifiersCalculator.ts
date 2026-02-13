@@ -288,6 +288,7 @@ const generateNetworkPermissions = async (network: number, poolsToProcess: strin
               gsmAdmins,
               pool.addresses || {},
               poolRoles,
+              network,
             );
           }
         }
