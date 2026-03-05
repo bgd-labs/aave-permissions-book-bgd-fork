@@ -126,6 +126,11 @@
                 "address": "0x4e8984D11A47Ff89CD67c7651eCaB6C00a74B4A9",
                 "owners": [],
                 "signersThreshold": 0
+              },
+              {
+                "address": "0xA5Ba213867E175A182a5dd6A9193C6158738105A",
+                "owners": [],
+                "signersThreshold": 0
               }
             ],
             "functions": [
@@ -167,6 +172,11 @@
               },
               {
                 "address": "0x4e8984D11A47Ff89CD67c7651eCaB6C00a74B4A9",
+                "owners": [],
+                "signersThreshold": 0
+              },
+              {
+                "address": "0xA5Ba213867E175A182a5dd6A9193C6158738105A",
                 "owners": [],
                 "signersThreshold": 0
               },
@@ -554,7 +564,8 @@
         "RISK_ADMIN": [
           "0x98F756B77D6Fde14E08bb064b248ec7512F9f8ba",
           "0x3999d49Bbad3A7375B0376BDF2bA4f2e3c9F5177",
-          "0x4e8984D11A47Ff89CD67c7651eCaB6C00a74B4A9"
+          "0x4e8984D11A47Ff89CD67c7651eCaB6C00a74B4A9",
+          "0xA5Ba213867E175A182a5dd6A9193C6158738105A"
         ]
       }
     },

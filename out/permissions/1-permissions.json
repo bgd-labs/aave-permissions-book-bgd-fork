@@ -9316,11 +9316,11 @@
                 "owners": []
               },
               {
-                "address": "0x535b2f7C20B9C83d70e519cf9991578eF9816B7B",
+                "address": "0x2bd010Ab5393AB51b601B99C4B33ba148d9466e9",
                 "owners": []
               },
               {
-                "address": "0xFeeb6FE430B7523fEF2a38327241eE7153779535",
+                "address": "0xE9ac5231fAecb633dA0Fe85Fcb2785b8363427d2",
                 "owners": []
               },
               {
@@ -9384,18 +9384,7 @@
           },
           {
             "modifier": "onlySwapFreezer",
-            "addresses": [
-              {
-                "address": "0x29F8c924B7aB50649c9597B8811d08f9Ef0310c3",
-                "owners": [],
-                "signersThreshold": 0
-              },
-              {
-                "address": "0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A",
-                "owners": [],
-                "signersThreshold": 0
-              }
-            ],
+            "addresses": [],
             "functions": [
               "setSwapFreeze"
             ]
@@ -9413,11 +9402,6 @@
             "addresses": [
               {
                 "address": "0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A",
-                "owners": [],
-                "signersThreshold": 0
-              },
-              {
-                "address": "0xD1E856a947CdF56b4f000ee29d34F5808E0A6848",
                 "owners": [],
                 "signersThreshold": 0
               }
@@ -9463,18 +9447,7 @@
           },
           {
             "modifier": "onlySwapFreezer",
-            "addresses": [
-              {
-                "address": "0x6439DA186BD3d37fE7Fd36036543b403e9FAbaE7",
-                "owners": [],
-                "signersThreshold": 0
-              },
-              {
-                "address": "0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A",
-                "owners": [],
-                "signersThreshold": 0
-              }
-            ],
+            "addresses": [],
             "functions": [
               "setSwapFreeze"
             ]
@@ -9492,11 +9465,6 @@
             "addresses": [
               {
                 "address": "0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A",
-                "owners": [],
-                "signersThreshold": 0
-              },
-              {
-                "address": "0xD1E856a947CdF56b4f000ee29d34F5808E0A6848",
                 "owners": [],
                 "signersThreshold": 0
               }
@@ -9842,13 +9810,9 @@
             "0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A"
           ],
           "CONFIGURATOR_ROLE": [
-            "0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A",
-            "0xD1E856a947CdF56b4f000ee29d34F5808E0A6848"
-          ],
-          "SWAP_FREEZER_ROLE": [
-            "0x29F8c924B7aB50649c9597B8811d08f9Ef0310c3",
             "0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A"
           ],
+          "SWAP_FREEZER_ROLE": [],
           "DEFAULT_ADMIN_ROLE": [],
           "TOKEN_RESCUER_ROLE": [],
           "LIQUIDATOR_ROLE": []
@@ -9860,13 +9824,9 @@
             "0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A"
           ],
           "CONFIGURATOR_ROLE": [
-            "0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A",
-            "0xD1E856a947CdF56b4f000ee29d34F5808E0A6848"
-          ],
-          "SWAP_FREEZER_ROLE": [
-            "0x6439DA186BD3d37fE7Fd36036543b403e9FAbaE7",
             "0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A"
           ],
+          "SWAP_FREEZER_ROLE": [],
           "DEFAULT_ADMIN_ROLE": [],
           "TOKEN_RESCUER_ROLE": [],
           "LIQUIDATOR_ROLE": []
