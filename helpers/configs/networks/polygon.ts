@@ -6,7 +6,7 @@ import {
 } from '@aave-dao/aave-address-book';
 import { Pools } from '../constants.js';
 import { NetworkConfig } from '../../types.js';
-import { createV3Pool, createV2PoRPool, createTenderlyPool } from '../poolBuilder.js';
+import { createV3Pool, createV2PoRPool } from '../poolBuilder.js';
 import { mergeAddressNames } from '../addresses/index.js';
 
 // ============================================================================
@@ -56,10 +56,5 @@ export const polygonConfig: NetworkConfig = {
   pools: {
     [Pools.V3]: v3Pool,
     [Pools.V2]: v2Pool,
-    [Pools.TENDERLY]: createTenderlyPool(v3Pool, Pools.V3, {
-      tenderlyBlock: 81241271,
-      tenderlyRpcUrl:
-        'https://virtual.polygon.eu.rpc.tenderly.co/a36f16fa-fe15-46d6-9e07-e83e78c40ac6',
-    }),
   },
 };

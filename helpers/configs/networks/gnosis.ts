@@ -6,8 +6,7 @@ import {
 } from '@aave-dao/aave-address-book';
 import { Pools } from '../constants.js';
 import { NetworkConfig } from '../../types.js';
-import { createGhoPool,
-createV3Pool, createTenderlyPool } from '../poolBuilder.js';
+import { createGhoPool, createV3Pool } from '../poolBuilder.js';
 import { mergeAddressNames } from '../addresses/index.js';
 
 // ============================================================================
@@ -62,10 +61,5 @@ export const gnosisConfig: NetworkConfig = {
   pools: {
     [Pools.V3]: v3Pool,
     [Pools.GHO]: ghoPool,
-    [Pools.TENDERLY]: createTenderlyPool(v3Pool, Pools.V3, {
-      tenderlyBlock: 44006822,
-      tenderlyRpcUrl:
-        'https://virtual.gnosis.eu.rpc.tenderly.co/d74ddb46-4550-4e2f-8934-0263fbaabcbb',
-    }),
   },
 };

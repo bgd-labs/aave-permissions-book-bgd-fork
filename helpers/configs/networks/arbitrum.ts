@@ -6,7 +6,7 @@ import {
 } from '@aave-dao/aave-address-book';
 import { Pools } from '../constants.js';
 import { NetworkConfig } from '../../types.js';
-import { createV3Pool, createTenderlyPool } from '../poolBuilder.js';
+import { createV3Pool } from '../poolBuilder.js';
 import { mergeAddressNames } from '../addresses/index.js';
 
 // ============================================================================
@@ -44,10 +44,5 @@ export const arbitrumConfig: NetworkConfig = {
   }),
   pools: {
     [Pools.V3]: v3Pool,
-    [Pools.TENDERLY]: createTenderlyPool(v3Pool, Pools.V3, {
-      tenderlyBlock: 418099902,
-      tenderlyRpcUrl:
-        'https://virtual.arbitrum.eu.rpc.tenderly.co/fd1bbcd0-7f09-4993-896f-205fafa0805c',
-    }),
   },
 };

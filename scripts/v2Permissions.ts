@@ -259,7 +259,7 @@ export const resolveV2Modifiers = async (
   };
 
   // extra contracts for arc
-  if (pool === Pools.V2_ARC || pool === Pools.V2_ARC_TENDERLY) {
+  if (pool === Pools.V2_ARC) {
     const arcTimelock = getContract({ address: getAddress(poolAdmin), abi: arcTimelockAbi, client: provider });
     const governanceExecutor =
       await arcTimelock.read.getEthereumGovernanceExecutor() as Address;
@@ -318,7 +318,7 @@ export const resolveV2Modifiers = async (
     };
   }
 
-  if (pool !== Pools.V2_ARC && pool !== Pools.V2_ARC_TENDERLY) {
+  if (pool !== Pools.V2_ARC) {
     const wethGatewayContract = getContract({ address: getAddress(addressBook.WETH_GATEWAY), abi: onlyOwnerAbi, client: provider });
     const wethGatewayOwner = await wethGatewayContract.read.owner() as Address;
     const wethGatewayOwnerInfo = await ownerResolver.resolve(wethGatewayOwner);
@@ -343,9 +343,7 @@ export const resolveV2Modifiers = async (
 
   if (
     pool !== Pools.V2_AMM &&
-    pool !== Pools.V2_ARC &&
-    pool !== Pools.V2_AMM_TENDERLY &&
-    pool !== Pools.V2_ARC_TENDERLY
+    pool !== Pools.V2_ARC
   ) {
     const paraswapLiquiditySwapContract = getContract({ address: getAddress(addressBook.SWAP_COLLATERAL_ADAPTER), abi: onlyOwnerAbi, client: provider });
     const liquiditySwapOwner = await paraswapLiquiditySwapContract.read.owner() as Address;
@@ -390,7 +388,7 @@ export const resolveV2Modifiers = async (
     };
   }
 
-  if (pool !== Pools.V2_ARC && pool !== Pools.V2_ARC_TENDERLY) {
+  if (pool !== Pools.V2_ARC) {
     const addressesRegistryContract = getContract({ address: getAddress(addressBook.POOL_ADDRESSES_PROVIDER_REGISTRY), abi: onlyOwnerAbi, client: provider });
     const addressRegistryOwner = await addressesRegistryContract.read.owner() as Address;
     const addressRegistryOwnerInfo = await ownerResolver.resolve(addressRegistryOwner);

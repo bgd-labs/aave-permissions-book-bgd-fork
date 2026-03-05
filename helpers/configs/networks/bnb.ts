@@ -5,7 +5,7 @@ import {
 } from '@aave-dao/aave-address-book';
 import { Pools } from '../constants.js';
 import { NetworkConfig } from '../../types.js';
-import { createV3Pool, createTenderlyPool } from '../poolBuilder.js';
+import { createV3Pool } from '../poolBuilder.js';
 import { mergeAddressNames } from '../addresses/index.js';
 
 // ============================================================================
@@ -42,10 +42,5 @@ export const bnbConfig: NetworkConfig = {
   }),
   pools: {
     [Pools.V3]: v3Pool,
-    [Pools.TENDERLY]: createTenderlyPool(v3Pool, Pools.V3, {
-      tenderlyBlock: 74133283,
-      tenderlyRpcUrl:
-        'https://virtual.binance.eu.rpc.tenderly.co/1a97adbf-9e3c-488a-83e4-e3082a99c4a3',
-    }),
   },
 };

@@ -18,7 +18,6 @@ import {
   createV2AmmPool,
   createGhoPool,
   createSafetyPool,
-  createTenderlyPool,
 } from '../poolBuilder.js';
 import { mergeAddressNames } from '../addresses/index.js';
 
@@ -163,21 +162,11 @@ export const mainnetConfig: NetworkConfig = {
   pools: {
     [Pools.V3]: v3Pool,
     [Pools.LIDO]: lidoPool,
-    [Pools.LIDO_TENDERLY]: createTenderlyPool(lidoPool, Pools.LIDO, {
-      tenderlyBlock: 24167154,
-      tenderlyRpcUrl:
-        'https://virtual.mainnet.eu.rpc.tenderly.co/17759365-976e-4b05-bc7a-04eb23d585e6',
-    }),
     [Pools.ETHERFI]: etherFiPool,
     [Pools.GHO]: ghoPool,
     [Pools.V2]: v2Pool,
     [Pools.V2_AMM]: v2AmmPool,
     [Pools.SAFETY_MODULE]: safetyPool,
     [Pools.V2_MISC]: v2MiscPool,
-    [Pools.TENDERLY]: createTenderlyPool(v3Pool, Pools.V3, {
-      tenderlyBlock: 24167154,
-      tenderlyRpcUrl:
-        'https://virtual.mainnet.eu.rpc.tenderly.co/17759365-976e-4b05-bc7a-04eb23d585e6',
-    }),
   },
 };

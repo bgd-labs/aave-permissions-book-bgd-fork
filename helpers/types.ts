@@ -90,10 +90,6 @@ export type PoolConfigs = {
   granularGuardianBlock?: number;
   governanceAddressBook?: AddressBook;
 
-  tenderlyBlock?: number;
-  tenderlyRpcUrl?: string;
-  tenderlyBasePool?: string;
-
   ghoBlock?: number;
 
   addresses?: Record<string, string>;

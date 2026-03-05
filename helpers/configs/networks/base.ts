@@ -6,7 +6,7 @@ import {
 } from '@aave-dao/aave-address-book';
 import { Pools } from '../constants.js';
 import { NetworkConfig } from '../../types.js';
-import { createV3Pool, createTenderlyPool, createGhoPool } from '../poolBuilder.js';
+import { createV3Pool, createGhoPool } from '../poolBuilder.js';
 import { mergeAddressNames } from '../addresses/index.js';
 
 // ============================================================================
@@ -60,10 +60,5 @@ export const baseConfig: NetworkConfig = {
   pools: {
     [Pools.V3]: v3Pool,
     [Pools.GHO]: ghoPool,
-    [Pools.TENDERLY]: createTenderlyPool(v3Pool, Pools.V3, {
-      tenderlyBlock: 40406343,
-      tenderlyRpcUrl:
-        'https://virtual.base.eu.rpc.tenderly.co/9bdf5ebd-aff6-42d9-bbc0-24fa68413e13',
-    }),
   },
 };

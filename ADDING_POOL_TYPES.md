@@ -119,13 +119,12 @@ const roles = generateRoles(permissionsJson);
 
 ## Step 2: Add the Pool Enum Key
 
-In `helpers/configs/constants.ts`, add your pool type (and its Tenderly variant if applicable):
+In `helpers/configs/constants.ts`, add your pool type:
 
 ```typescript
 export enum Pools {
   // ... existing pools
   MY_POOL = 'MY_POOL',
-  MY_POOL_TENDERLY = 'MY_POOL_TENDERLY',
 }
 ```
 
@@ -422,13 +421,11 @@ The dispatch chain in `modifiersCalculator.ts` uses if/else-if to route pool typ
 
 ```typescript
 // Add your pool type check BEFORE the V3 and V2 catch-all branches
-} else if (poolKey === Pools.MY_POOL || poolKey === Pools.MY_POOL_TENDERLY) {
-  fullJson = await applyTenderlyBasePool(poolKey, network, pool.tenderlyBasePool, fullJson);
-
+} else if (poolKey === Pools.MY_POOL) {
   logTableGeneration(network, poolKey, undefined, indexedLatestBlock || pool.myContractBlock);
 
   if (Object.keys(pool.addressBook).length > 0) {
-    const poolProvider = getProviderForPool(poolKey, pool, provider);
+    const poolProvider = getProviderForPool(provider, forkRpcUrl);
 
     // If using event-indexed roles:
     const myEvents = indexedEvents['MY_CONTRACT'] || [];
@@ -463,7 +460,6 @@ if (
   poolKey !== Pools.GOV_V2 &&
   // ... existing exclusions ...
   poolKey !== Pools.MY_POOL &&           // Add
-  poolKey !== Pools.MY_POOL_TENDERLY &&  // Add
   !pool.aclBlock &&
   !pool.crossChainControllerBlock
 ) {
@@ -553,7 +549,7 @@ Similarly, `buildGovV3Contracts()` controls which governance contracts appear. B
 
 ### Output file naming
 
-If your pool is a Tenderly variant, the table output intentionally overwrites the parent pool's file (see [Using Tenderly](./USAGE.md#using-tenderly)). The file naming logic in `createTables.ts` handles this via the `isTenderlyPool()` check.
+Output tables are written to `out/<networkName>-<poolKey>.md`. When using fork mode, the output overwrites the same pool's file so you can review changes via `git diff` (see [Using Fork Mode](./USAGE.md#using-fork-mode)).
 
 ## Step 9: Add ABIs (if needed)
 

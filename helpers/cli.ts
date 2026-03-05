@@ -1,23 +1,24 @@
 import { networkConfigs } from './configs.js';
-import { isTenderlyPool } from './poolHelpers.js';
 
 export interface CliArgs {
   networks: number[];
   pools: string[];
-  tenderly: boolean;
+  fork: boolean;
+  payload?: string;
 }
 
 /**
- * Parses CLI arguments for network, pool, and tenderly filtering.
+ * Parses CLI arguments for network, pool, and fork filtering.
  *
  * Supports:
  *   --network <chainId>  or  -n <chainId>  (repeatable)
  *   --pool <poolKey>     or  -p <poolKey>  (repeatable)
- *   --tenderly           or  -t            (flag)
+ *   --fork               or  -f            (flag)
+ *   --payload <address>                    (requires --fork)
  */
 export const parseCliArgs = (): CliArgs => {
   const args = process.argv.slice(2);
-  const result: CliArgs = { networks: [], pools: [], tenderly: false };
+  const result: CliArgs = { networks: [], pools: [], fork: false };
 
   for (let i = 0; i < args.length; i++) {
     const arg = args[i];
@@ -29,8 +30,27 @@ export const parseCliArgs = (): CliArgs => {
     } else if ((arg === '--pool' || arg === '-p') && nextArg && !nextArg.startsWith('-')) {
       result.pools.push(nextArg.toUpperCase());
       i++;
-    } else if (arg === '--tenderly' || arg === '-t') {
-      result.tenderly = true;
+    } else if (arg === '--fork' || arg === '-f') {
+      result.fork = true;
+    } else if (arg === '--payload' && nextArg && !nextArg.startsWith('-')) {
+      result.payload = nextArg;
+      i++;
+    }
+  }
+
+  // Validate fork mode requires payload and network+pool
+  if (result.fork) {
+    if (!result.payload) {
+      console.error('--fork requires --payload <address>');
+      process.exit(1);
+    }
+    if (result.networks.length === 0) {
+      console.error('--fork requires --network to be specified');
+      process.exit(1);
+    }
+    if (result.pools.length === 0) {
+      console.error('--fork requires --pool to be specified');
+      process.exit(1);
     }
   }
 
@@ -78,35 +98,22 @@ export const getNetworksToProcess = (args: CliArgs): number[] => {
 
 /**
  * Gets the list of pools to process for a network based on CLI args.
- *
- * Tenderly mode is exclusive: you process EITHER regular pools OR Tenderly
- * pools, never both in the same run. This is because Tenderly pools overwrite
- * their parent pool's output file, so running both would cause conflicts.
- * Default (no --tenderly flag) processes only regular pools.
  */
 export const getPoolsToProcess = (network: number, args: CliArgs): string[] => {
   const allPools = Object.keys(networkConfigs[network].pools);
 
-  // Filter by explicit pool selection if provided
-  let pools = args.pools.length > 0
-    ? allPools.filter(p => args.pools.includes(p))
-    : allPools;
-
-  // Filter by tenderly mode (exclusive: regular XOR tenderly)
-  if (args.tenderly) {
-    pools = pools.filter(p => isTenderlyPool(p));
-  } else {
-    pools = pools.filter(p => !isTenderlyPool(p));
+  if (args.pools.length > 0) {
+    return allPools.filter(p => args.pools.includes(p));
   }
 
-  return pools;
+  return allPools;
 };
 
 /**
  * Logs the current execution configuration.
  */
 export const logExecutionConfig = (args: CliArgs): void => {
-  const mode = args.tenderly ? 'TENDERLY' : 'REGULAR';
+  const mode = args.fork ? 'FORK' : 'REGULAR';
   const networks = args.networks.length > 0
     ? args.networks.join(', ')
     : 'ALL';
@@ -118,7 +125,7 @@ export const logExecutionConfig = (args: CliArgs): void => {
 ========================================
   Mode: ${mode}
   Networks: ${networks}
-  Pools: ${pools}
+  Pools: ${pools}${args.payload ? `\n  Payload: ${args.payload}` : ''}
 ========================================
 `);
 };
