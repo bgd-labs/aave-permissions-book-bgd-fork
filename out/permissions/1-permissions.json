@@ -561,6 +561,11 @@
                 "address": "0xdA626E64f34f24e0236E0C9cD2F11ce4549a08c6",
                 "owners": [],
                 "signersThreshold": 0
+              },
+              {
+                "address": "0xCc18Be380838956aad41FD22466085eD66aaBB46",
+                "owners": [],
+                "signersThreshold": 0
               }
             ],
             "functions": [
@@ -617,6 +622,11 @@
               },
               {
                 "address": "0xdA626E64f34f24e0236E0C9cD2F11ce4549a08c6",
+                "owners": [],
+                "signersThreshold": 0
+              },
+              {
+                "address": "0xCc18Be380838956aad41FD22466085eD66aaBB46",
                 "owners": [],
                 "signersThreshold": 0
               },
@@ -1372,7 +1382,8 @@
           "0x5513224daaEABCa31af5280727878d52097afA05",
           "0x4F2858d4A4e4464b34Aa4a22C41B2Ef540a59BF4",
           "0x1B3bD355c43d2247946b8e0889d4b4e701bf430d",
-          "0xdA626E64f34f24e0236E0C9cD2F11ce4549a08c6"
+          "0xdA626E64f34f24e0236E0C9cD2F11ce4549a08c6",
+          "0xCc18Be380838956aad41FD22466085eD66aaBB46"
         ],
         "ASSET_LISTING_ADMIN": [
           "0x8b493f416F5F7933cC146b1899c069F2361cad60"
@@ -2622,6 +2633,24 @@
         },
         "RateStrategy_CoreAgent": {
           "address": "0xdA626E64f34f24e0236E0C9cD2F11ce4549a08c6",
+          "modifiers": [
+            {
+              "modifier": "onlyAgentHub",
+              "addresses": [
+                {
+                  "address": "0x95E3015c67EF62B866cC28ca5A9AB5017A55e336",
+                  "owners": [],
+                  "signersThreshold": 0
+                }
+              ],
+              "functions": [
+                "inject"
+              ]
+            }
+          ]
+        },
+        "CapoPriceCap_CoreAgent": {
+          "address": "0xCc18Be380838956aad41FD22466085eD66aaBB46",
           "modifiers": [
             {
               "modifier": "onlyAgentHub",
