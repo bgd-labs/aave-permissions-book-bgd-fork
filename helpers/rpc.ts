@@ -1,4 +1,4 @@
-import { ChainId, getClient, getLogsRecursive } from "@bgd-labs/toolbox";
+import { ChainId, getClient, getLogsRecursive, getRPCUrl } from "@bgd-labs/toolbox";
 import { env } from "process";
 import { Abi, AbiEvent, Client, http, getAbiItem, getAddress, Log, createClient, createPublicClient } from "viem";
 import { aclManagerAbi } from "../abis/aclManager.js";
@@ -17,6 +17,28 @@ const getHttpConfig = () => {
 export const getRpcClientFromUrl = (url: string): Client => {
   return createClient({
     transport: http(url),
+  });
+};
+
+/**
+ * Resolves the RPC URL string for a given chain, using the same provider
+ * resolution logic as getRPCClient. Used by fork mode to get the URL for Anvil.
+ */
+export const getForkRpcUrl = (chainId: number): string | undefined => {
+  if (chainId === ChainId.avalanche) {
+    if (env.QUICKNODE_ENDPOINT_NAME && env.QUICKNODE_TOKEN) {
+      return `https://${env.QUICKNODE_ENDPOINT_NAME}.avalanche-mainnet.quiknode.pro/${env.QUICKNODE_TOKEN}/ext/bc/C/rpc`;
+    }
+  } else if (chainId === ChainId.megaeth) {
+    if (env.RPC_MEGAETH) {
+      return env.RPC_MEGAETH;
+    }
+  }
+
+  return getRPCUrl(chainId as any, {
+    alchemyKey: env.ALCHEMY_KEY,
+    quicknodeEndpointName: env.QUICKNODE_ENDPOINT_NAME,
+    quicknodeToken: env.QUICKNODE_TOKEN,
   });
 };
 

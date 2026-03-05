@@ -6,10 +6,10 @@ import {
   publicActions,
   walletActions,
   getContract,
-  parseEther,
-  encodeAbiParameters,
+  encodePacked,
   type Address,
 } from 'viem';
+import { getSolidityStorageSlotUint } from '@bgd-labs/toolbox';
 import { PayloadsController_ABI } from '../abis/payloadsController.js';
 
 // ============================================================================
@@ -162,10 +162,18 @@ export async function executePayloadOnFork(
     );
   }
 
+  // Helper to send a tx and verify it succeeded
+  const sendTx = async (txHash: `0x${string}`, label: string) => {
+    const receipt = await client.waitForTransactionReceipt({ hash: txHash });
+    if (receipt.status === 'reverted') {
+      throw new Error(`${label} transaction reverted (tx: ${txHash})`);
+    }
+  };
+
   // Step 1: Create payload if not registered
   if (state === PayloadState.None) {
     console.log(`Payload not registered, creating...`);
-    await client.writeContract({
+    const hash = await client.writeContract({
       chain: null,
       account: defaultAccount,
       address: pcAddress,
@@ -182,6 +190,7 @@ export async function executePayloadOnFork(
         }],
       ],
     });
+    await sendTx(hash, 'createPayload');
 
     const payloadsCount = await payloadsController.read.getPayloadsCount() as number;
     id = payloadsCount - 1;
@@ -189,49 +198,50 @@ export async function executePayloadOnFork(
     console.log(`Payload created with id: ${id}`);
   }
 
-  // Step 2: Queue via receiveCrossChainMessage if Created
+  // Step 2: Queue via storage override if Created
+  // The PayloadsController's receiveCrossChainMessage has auth checks that are
+  // difficult to satisfy on a fork. Instead, directly set the payload's storage
+  // slot to Queued state with timestamps that make it immediately executable.
+  // This mirrors @bgd-labs/toolbox's makePayloadExecutableOnTestClient approach.
   if (state === PayloadState.Created) {
-    console.log(`Payload ${id} is Created, queueing...`);
-    const ccc = await payloadsController.read.CROSS_CHAIN_CONTROLLER() as Address;
-    const originator = await payloadsController.read.MESSAGE_ORIGINATOR() as Address;
-    const originChainId = await payloadsController.read.ORIGIN_CHAIN_ID() as bigint;
+    console.log(`Payload ${id} is Created, setting to Queued via storage override...`);
 
-    // Read the payload's access level from the contract if it was already registered
-    if (payloadId !== -1) {
-      const payload = await payloadsController.read.getPayloadById([id]) as { maximumAccessLevelRequired: number };
-      accessLevel = Number(payload.maximumAccessLevelRequired);
-    }
+    const payload = await payloadsController.read.getPayloadById([id]) as {
+      creator: Address;
+      maximumAccessLevelRequired: number;
+      createdAt: number;
+      delay: number;
+    };
 
-    await client.impersonateAccount({ address: ccc });
-    await client.setBalance({ address: ccc, value: parseEther('10') });
+    const currentBlock = await client.getBlock();
+    const queuedAt = Number(currentBlock.timestamp) - Number(payload.delay) - 1 - 240;
 
-    const message = encodeAbiParameters(
-      [{ type: 'uint40' }, { type: 'uint8' }, { type: 'uint40' }],
-      [id, accessLevel, 0],
+    // Payload storage layout (slot 3 + payloadId): packed as
+    // [queuedAt:uint40][createdAt:uint40][state:uint8][maxAccessLevel:uint8][creator:address]
+    const slot = getSolidityStorageSlotUint(3n, BigInt(id));
+    const value = encodePacked(
+      ['uint40', 'uint40', 'uint8', 'uint8', 'address'],
+      [queuedAt, payload.createdAt, PayloadState.Queued, payload.maximumAccessLevelRequired, payload.creator],
     );
 
-    await client.writeContract({
-      chain: null,
-      account: ccc,
+    await client.setStorageAt({
       address: pcAddress,
-      abi: PayloadsController_ABI,
-      functionName: 'receiveCrossChainMessage',
-      args: [originator, originChainId, message],
+      index: slot,
+      value,
     });
 
-    await client.stopImpersonatingAccount({ address: ccc });
     state = PayloadState.Queued;
-    console.log(`Payload ${id} queued`);
+    console.log(`Payload ${id} queued (storage override)`);
   }
 
-  // Step 3: Advance time past execution delay if Queued
+  // Step 3: Execute if Queued
   if (state === PayloadState.Queued) {
-    console.log(`Payload ${id} is Queued, advancing time and executing...`);
-    await client.increaseTime({ seconds: 86400 + 7200 });
+    console.log(`Payload ${id} is Queued, executing...`);
+
+    // Mine a block to ensure timestamp is past the delay
     await client.mine({ blocks: 1 });
 
-    // Step 4: Execute
-    await client.writeContract({
+    const execHash = await client.writeContract({
       chain: null,
       account: defaultAccount,
       address: pcAddress,
@@ -239,6 +249,7 @@ export async function executePayloadOnFork(
       functionName: 'executePayload',
       args: [id],
     });
+    await sendTx(execHash, 'executePayload');
   }
 
   // Step 5: Validate execution succeeded
