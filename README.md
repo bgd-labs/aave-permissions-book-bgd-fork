@@ -74,7 +74,7 @@ A [permissions document](./out) has been generated for every pool on every netwo
 
 ## Usage
 
-For setup instructions, CLI options, how to add new networks and pools, and how to use Tenderly forks, see the [Usage Guide](./USAGE.md).
+For setup instructions, CLI options, how to add new networks and pools, and how to use Anvil forks, see the [Usage Guide](./USAGE.md).
 
 ## License
 This repository is under [MIT License](./LICENSE)

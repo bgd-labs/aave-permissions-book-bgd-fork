@@ -6,8 +6,7 @@ import {
 } from '@aave-dao/aave-address-book';
 import { Pools } from '../constants.js';
 import { NetworkConfig } from '../../types.js';
-import { createGhoPool,
-createV3Pool, createTenderlyPool } from '../poolBuilder.js';
+import { createGhoPool, createV3Pool } from '../poolBuilder.js';
 import { mergeAddressNames } from '../addresses/index.js';
 
 // ============================================================================
@@ -62,10 +61,5 @@ export const plasmaConfig: NetworkConfig = {
   pools: {
     [Pools.V3]: v3Pool,
     [Pools.GHO]: ghoPool,
-    [Pools.TENDERLY]: createTenderlyPool(v3Pool, Pools.V3, {
-      tenderlyBlock: 10671654,
-      tenderlyRpcUrl:
-        'https://virtual.plasma.eu.rpc.tenderly.co/7e890d40-1ab0-4575-9d6d-092588721c24',
-    }),
   },
 };

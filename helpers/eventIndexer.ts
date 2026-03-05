@@ -1,7 +1,7 @@
 import { Client, Log } from 'viem';
 import { getEventsMultiContract, getRpcClientFromUrl } from './rpc.js';
 import { getLimit } from './limits.js';
-import { getTenderlyConfig, isTenderlyPool } from './poolHelpers.js';
+import { executePayloadOnFork } from './anvil.js';
 
 // ============================================================================
 // Types
@@ -53,6 +53,14 @@ export interface IndexingResult {
   latestBlockNumber: number;
   /** Updated metadata for this pool */
   poolMetadata: PoolMetadata;
+}
+
+/**
+ * Fork payload configuration for executing a payload on the Anvil fork.
+ */
+export interface ForkPayloadConfig {
+  payloadAddress: string;
+  payloadsControllerAddress: string;
 }
 
 // ============================================================================
@@ -109,7 +117,8 @@ const resolveEffectiveFromBlocks = (
  * 2. Groups contracts by fromBlock for efficient batching
  * 3. Fetches events for each group in a single RPC call
  * 4. Distributes events to their respective contracts
- * 5. Returns events grouped by contract ID and updated metadata
+ * 5. If fork mode: executes payload on Anvil and fetches fork events
+ * 6. Returns events grouped by contract ID and updated metadata
  */
 export const indexPoolEvents = async ({
   client,
@@ -117,15 +126,18 @@ export const indexPoolEvents = async ({
   poolKey,
   contracts,
   poolMetadata,
+  forkRpcUrl,
+  forkPayload,
 }: {
   client: Client;
-  chainId: string;
+  chainId: string | number;
   poolKey: string;
   contracts: ContractEventConfig[];
   poolMetadata: PoolMetadata | undefined;
+  forkRpcUrl?: string;
+  forkPayload?: ForkPayloadConfig;
 }): Promise<IndexingResult> => {
-  const limit = getLimit(chainId);
-  const tenderlyConfig = getTenderlyConfig(chainId, poolKey);
+  const limit = getLimit(String(chainId));
 
   // Filter out contracts with no address
   const validContracts = contracts.filter((c) => c.address);
@@ -152,72 +164,54 @@ export const indexPoolEvents = async ({
 
   let latestBlockNumber = poolMetadata?.latestBlockNumber ?? 0;
 
-  // Handle Tenderly pools:
-  // 1. Parent pool's state was copied (via overwriteBaseTenderlyPool) - gives mainnet state at parent's latestBlockNumber
-  // 2. Index mainnet from parent's latestBlockNumber to current - updates to latest mainnet state
-  // 3. Index Tenderly fork events from tenderlyBlock onwards - adds fork-specific changes
-  if (isTenderlyPool(poolKey) && tenderlyConfig) {
-    // Step 2: Index mainnet events from where parent left off to current block
-    for (const [fromBlock, contractGroup] of byFromBlock) {
-      const addresses = contractGroup.map((c) => c.address);
-      const eventTypes = [...new Set(contractGroup.flatMap((c) => c.eventTypes))];
+  // Step 1: Always fetch mainnet events first
+  for (const [fromBlock, contractGroup] of byFromBlock) {
+    const addresses = contractGroup.map((c) => c.address);
+    const eventTypes = [...new Set(contractGroup.flatMap((c) => c.eventTypes))];
 
-      const { logsByContract, currentBlock } = await getEventsMultiContract({
-        client,
-        fromBlock,
-        contracts: addresses,
-        eventTypes,
-        limit,
-      });
+    const { logsByContract, currentBlock } = await getEventsMultiContract({
+      client,
+      fromBlock,
+      contracts: addresses,
+      eventTypes,
+      limit,
+    });
 
-      // Distribute mainnet logs to their respective contracts by ID
-      for (const contract of contractGroup) {
-        const logs = logsByContract.get(contract.address.toLowerCase()) ?? [];
-        eventsByContract[contract.id].push(...logs);
-      }
-
-      latestBlockNumber = Math.max(latestBlockNumber, currentBlock);
+    // Distribute logs to their respective contracts by ID
+    for (const contract of contractGroup) {
+      const logs = logsByContract.get(contract.address.toLowerCase()) ?? [];
+      eventsByContract[contract.id].push(...logs);
     }
 
-    // Step 3: Fetch events from the Tenderly fork
-    const tenderlyProvider = getRpcClientFromUrl(tenderlyConfig.tenderlyRpcUrl);
+    latestBlockNumber = Math.max(latestBlockNumber, currentBlock);
+  }
+
+  // Step 2: If fork mode, execute payload and fetch fork events
+  if (forkRpcUrl && forkPayload) {
+    // Execute the payload on the Anvil fork
+    await executePayloadOnFork(
+      forkRpcUrl,
+      forkPayload.payloadsControllerAddress,
+      forkPayload.payloadAddress,
+    );
+
+    // Fetch events from the fork starting from latestBlockNumber
+    const forkProvider = getRpcClientFromUrl(forkRpcUrl);
     const allAddresses = validContracts.map((c) => c.address);
     const allEventTypes = [...new Set(validContracts.flatMap((c) => c.eventTypes))];
 
-    const { logsByContract: tenderlyLogs } = await getEventsMultiContract({
-      client: tenderlyProvider,
-      fromBlock: tenderlyConfig.tenderlyBlock,
+    const { logsByContract: forkLogs } = await getEventsMultiContract({
+      client: forkProvider,
+      fromBlock: latestBlockNumber,
       contracts: allAddresses,
       eventTypes: allEventTypes,
       limit: 999,
     });
 
-    // Distribute Tenderly logs
+    // Distribute fork logs (don't update latestBlockNumber — fork blocks are ephemeral)
     for (const contract of validContracts) {
-      const logs = tenderlyLogs.get(contract.address.toLowerCase()) ?? [];
+      const logs = forkLogs.get(contract.address.toLowerCase()) ?? [];
       eventsByContract[contract.id].push(...logs);
-    }
-  } else {
-    // Regular pool: fetch all events
-    for (const [fromBlock, contractGroup] of byFromBlock) {
-      const addresses = contractGroup.map((c) => c.address);
-      const eventTypes = [...new Set(contractGroup.flatMap((c) => c.eventTypes))];
-
-      const { logsByContract, currentBlock } = await getEventsMultiContract({
-        client,
-        fromBlock,
-        contracts: addresses,
-        eventTypes,
-        limit,
-      });
-
-      // Distribute logs to their respective contracts by ID
-      for (const contract of contractGroup) {
-        const logs = logsByContract.get(contract.address.toLowerCase()) ?? [];
-        eventsByContract[contract.id].push(...logs);
-      }
-
-      latestBlockNumber = Math.max(latestBlockNumber, currentBlock);
     }
   }
 

@@ -26,9 +26,7 @@ import { megaethConfig } from './megaeth.js';
  * @notice object that contains the configuration for each pool and network pairing.
  * depending on the arguments you add to the pools configurations it will generate different tables.
  * @dev if you want to have a specific name for a specific address yo should put it into the addressesNames object
- * @dev If you want to generate the tenderly table uncomment / add a thenderly pool object, with the blocknumber from which it will start. for the previous
- * blocknumbers it will copy the original pool you specify. this will override the original table so that the differences can more easly be seen. (do not merge tenderly
- * tables into main branch)
+ * @dev To simulate a governance payload, use --fork --payload <address> --network <chainId> --pool <poolKey>
  */
 export const networkConfigs: NetworkConfigs = {
   [ChainId.mainnet]: mainnetConfig,

@@ -6,7 +6,7 @@ import {
 } from '@aave-dao/aave-address-book';
 import { Pools } from '../constants.js';
 import { NetworkConfig } from '../../types.js';
-import { createV3Pool, createV2PoRPool, createTenderlyPool } from '../poolBuilder.js';
+import { createV3Pool, createV2PoRPool } from '../poolBuilder.js';
 import { mergeAddressNames } from '../addresses/index.js';
 
 // ============================================================================
@@ -59,10 +59,5 @@ export const avalancheConfig: NetworkConfig = {
   pools: {
     [Pools.V3]: v3Pool,
     [Pools.V2]: v2Pool,
-    [Pools.TENDERLY]: createTenderlyPool(v3Pool, Pools.V3, {
-      tenderlyBlock: 75099073,
-      tenderlyRpcUrl:
-        'https://virtual.avalanche.eu.rpc.tenderly.co/b8bfec00-ecb9-4cb5-8d8d-4b235b72d283',
-    }),
   },
 };

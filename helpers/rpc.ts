@@ -12,7 +12,7 @@ const getHttpConfig = () => {
 };
 
 /**
- * Creates a raw viem Client for a custom RPC URL (used for Tenderly forks).
+ * Creates a raw viem Client for a custom RPC URL (used for Anvil forks).
  */
 export const getRpcClientFromUrl = (url: string): Client => {
   return createClient({

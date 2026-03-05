@@ -10,10 +10,10 @@
  * Additional components (Collector, ClinicSteward, Umbrella, etc.) run independently
  * after the main pool type processing - they attach to any pool that has the required config.
  *
- * Tenderly pools are simulated forks of mainnet pools. They inherit the parent pool's
- * permissions state via `applyTenderlyBasePool`, then layer fork-specific changes on top.
+ * Fork mode (--fork --payload <address>): Starts an Anvil fork, executes the payload,
+ * and indexes the fork events to show what the payload would change.
  *
- * Usage: npm run modifiers:generate [--network <chainId>] [--pool <poolKey>] [--tenderly]
+ * Usage: npm run modifiers:generate [--network <chainId>] [--pool <poolKey>] [--fork --payload <address>]
  */
 import 'dotenv/config';
 import {
@@ -33,6 +33,7 @@ import {
   getNetworksToProcess,
   getPoolsToProcess,
   logExecutionConfig,
+  CliArgs,
 } from '../helpers/cli.js';
 import {
   getPermissionsByNetwork,
@@ -51,7 +52,6 @@ import { resolveV2MiscModifiers } from './v2MiscPermissions.js';
 import { getSenders } from '../helpers/crossChainControllerLogs.js';
 import { resolveGovV3Modifiers } from './govV3Permissions.js';
 import { resolveGHOModifiers } from './ghoPermissions.js';
-import { overwriteBaseTenderlyPool } from '../helpers/jsonParsers.js';
 import { resolveCollectorModifiers } from './collectorPermissions.js';
 import { resolveClinicStewardModifiers } from './clinicStewardPermissions.js';
 import { resolveUmbrellaModifiers } from './umbrellaPermissions.js';
@@ -59,8 +59,6 @@ import { getRPCClient } from '../helpers/rpc.js';
 import { resolvePpcModifiers } from './ppcPermissions.js';
 import { resolveAgentHubModifiers } from './agentHubPermissions.js';
 import {
-  isTenderlyPool,
-  isV3TenderlyPool,
   getProviderForPool,
   getV3ProviderForPool,
   logTableGeneration,
@@ -68,32 +66,44 @@ import {
 import {
   indexPoolEvents,
   buildPoolContractConfigs,
+  ForkPayloadConfig,
 } from '../helpers/eventIndexer.js';
 import { logger } from '../helpers/logger.js';
+import { checkAnvilInstalled, startAnvilFork, AnvilFork } from '../helpers/anvil.js';
 
-/**
- * Applies Tenderly base pool state by copying the parent pool's permissions
- * and returning the refreshed permissions JSON.
- * Returns the current fullJson unchanged if no tenderlyBasePool is configured.
- */
-const applyTenderlyBasePool = async (
-  poolKey: string,
-  network: number | string,
-  tenderlyBasePool: string | undefined,
-  currentJson: Record<string, any>,
-): Promise<Record<string, any>> => {
-  if (!tenderlyBasePool) return currentJson;
-  await overwriteBaseTenderlyPool(poolKey, network, tenderlyBasePool);
-  return getPermissionsByNetwork(String(network));
-};
-
-const generateNetworkPermissions = async (network: number, poolsToProcess: string[]) => {
+const generateNetworkPermissions = async (
+  network: number,
+  poolsToProcess: string[],
+  args: CliArgs,
+  forkRpcUrl?: string,
+) => {
   // get current permissions
   let fullJson = getPermissionsByNetwork(String(network));
   // generate permissions
   let provider = getRPCClient(network)
 
   const pools = networkConfigs[network].pools;
+
+  // Build fork payload config if in fork mode
+  let forkPayload: ForkPayloadConfig | undefined;
+  if (args.fork && args.payload) {
+    // Find the PayloadsController address from the governance address book
+    // The first pool with a governanceAddressBook has the PAYLOADS_CONTROLLER
+    for (const poolKey of poolsToProcess) {
+      const pool = pools[poolKey];
+      if (pool.governanceAddressBook?.PAYLOADS_CONTROLLER) {
+        forkPayload = {
+          payloadAddress: args.payload,
+          payloadsControllerAddress: pool.governanceAddressBook.PAYLOADS_CONTROLLER as string,
+        };
+        break;
+      }
+    }
+    if (!forkPayload) {
+      throw new Error('Could not find PAYLOADS_CONTROLLER in any pool\'s governanceAddressBook');
+    }
+  }
+
   for (let i = 0; i < poolsToProcess.length; i++) {
     const poolKey = poolsToProcess[i];
     const pool = pools[poolKey];
@@ -112,11 +122,9 @@ const generateNetworkPermissions = async (network: number, poolsToProcess: strin
 
     // =========================================================================
     // UNIFIED EVENT INDEXING
-    // For pools that need event-based role tracking, we fetch all events once
-    // For Tenderly pools:
-    // 1. Copy parent pool's state (mainnet at parent's latestBlockNumber)
-    // 2. Index mainnet from parent's latestBlockNumber to current block
-    // 3. Index Tenderly fork events from tenderlyBlock onwards
+    // For pools that need event-based role tracking, we fetch all events once.
+    // In fork mode, the payload is executed on the Anvil fork and fork events
+    // are fetched after mainnet events.
     // =========================================================================
     const needsEventIndexing =
       pool.aclBlock ||
@@ -132,14 +140,6 @@ const generateNetworkPermissions = async (network: number, poolsToProcess: strin
     let indexedLatestBlock = 0;
 
     if (needsEventIndexing) {
-      // For Tenderly pools:
-      // 1. Copy parent pool's current state (mainnet state at parent's latestBlockNumber)
-      // 2. Index mainnet from parent's latestBlockNumber to current (via parent metadata)
-      // 3. Index Tenderly fork events from tenderlyBlock onwards
-      if (isTenderlyPool(poolKey)) {
-        fullJson = await applyTenderlyBasePool(poolKey, network, pool.tenderlyBasePool, fullJson);
-      }
-
       // Build contract configs for unified indexing
       const contractConfigs = buildPoolContractConfigs({
         addressBook: pool.addressBook,
@@ -155,30 +155,26 @@ const generateNetworkPermissions = async (network: number, poolsToProcess: strin
         ghoBlock: pool.ghoBlock,
         gsmBlocks: pool.gsmBlocks,
       });
-      
+
       if (contractConfigs.length > 0) {
-        // For Tenderly pools: use PARENT pool's metadata to start mainnet indexing
-        // from parent's latestBlockNumber (after copying parent's state)
-        // For regular pools: use own metadata for incremental indexing
-        const metadataSourcePool = isTenderlyPool(poolKey) && pool.tenderlyBasePool
-          ? pool.tenderlyBasePool
-          : poolKey;
-        const existingMetadata = getPoolMetadata(network, metadataSourcePool);
+        const existingMetadata = getPoolMetadata(network, poolKey);
 
         // Index all events in one call
+        // In fork mode, this also executes the payload and fetches fork events
         const indexResult = await indexPoolEvents({
           client: provider,
           chainId: network,
           poolKey,
           contracts: contractConfigs,
           poolMetadata: existingMetadata,
+          forkRpcUrl,
+          forkPayload,
         });
 
         indexedEvents = indexResult.eventsByContract;
         indexedLatestBlock = indexResult.latestBlockNumber;
 
-        // Save updated metadata to the CURRENT pool (not the parent)
-        // This tracks the mainnet block we've indexed up to
+        // Save updated metadata (latestBlockNumber only reflects mainnet blocks)
         updatePoolMetadata(network, poolKey, indexResult.poolMetadata);
 
         logTableGeneration(network, poolKey, 'Events indexed', indexedLatestBlock);
@@ -188,67 +184,55 @@ const generateNetworkPermissions = async (network: number, poolsToProcess: strin
     // =========================================================================
     // POOL TYPE PROCESSING
     // Each pool type has a distinct contract architecture and different
-    // permission resolution logic. The order matters: specific pool types
-    // (GOV_V2, SAFETY_MODULE, V2_MISC, GHO) are matched first, then
-    // V3 pools are identified by having an aclBlock. The first branch
-    // catches V2 pools (V2, V2_AMM, V2_ARC, LIDO, ETHERFI) by exclusion.
+    // permission resolution logic.
     // =========================================================================
+
+    // Resolve provider: in fork mode, state queries go to the fork
+    const poolProvider = getProviderForPool(provider, forkRpcUrl);
+    const v3PoolProvider = getV3ProviderForPool(provider, forkRpcUrl);
 
     if (
       poolKey !== Pools.GOV_V2 &&
-      poolKey !== Pools.GOV_V2_TENDERLY &&
       poolKey !== Pools.SAFETY_MODULE &&
-      poolKey !== Pools.SAFETY_MODULE_TENDERLY &&
-      poolKey !== Pools.V2_MISC_TENDERLY &&
       poolKey !== Pools.V2_MISC &&
-      poolKey !== Pools.TENDERLY &&
-      poolKey !== Pools.GHO_TENDERLY &&
       poolKey !== Pools.GHO &&
       !pool.aclBlock &&
       !pool.crossChainControllerBlock
     ) {
       logTableGeneration(network, poolKey);
-      fullJson = await applyTenderlyBasePool(poolKey, network, pool.tenderlyBasePool, fullJson);
       if (Object.keys(pool.addressBook).length > 0) {
         poolPermissions = await resolveV2Modifiers(
           pool.addressBook,
-          getProviderForPool(poolKey, pool, provider),
+          poolProvider,
           permissionsJson,
           Pools[poolKey as keyof typeof Pools],
           network,
         );
       }
-    } else if (poolKey === Pools.GOV_V2 || poolKey === Pools.GOV_V2_TENDERLY) {
+    } else if (poolKey === Pools.GOV_V2) {
       logTableGeneration(network, poolKey);
 
       poolPermissions = await resolveGovV2Modifiers(
         pool.addressBook,
-        getProviderForPool(poolKey, pool, provider),
+        poolProvider,
         permissionsJson,
       );
-    } else if (
-      poolKey === Pools.SAFETY_MODULE ||
-      poolKey === Pools.SAFETY_MODULE_TENDERLY
-    ) {
+    } else if (poolKey === Pools.SAFETY_MODULE) {
       logTableGeneration(network, poolKey);
       poolPermissions = await resolveSafetyV2Modifiers(
         pool.addressBook,
-        getProviderForPool(poolKey, pool, provider),
+        poolProvider,
         permissionsJson,
       );
-    } else if (
-      poolKey === Pools.V2_MISC ||
-      poolKey === Pools.V2_MISC_TENDERLY
-    ) {
+    } else if (poolKey === Pools.V2_MISC) {
       logTableGeneration(network, poolKey);
       poolPermissions = await resolveV2MiscModifiers(
         pool.addressBook,
         pool.addresses || {},
-        getProviderForPool(poolKey, pool, provider),
+        poolProvider,
         permissionsJson,
       );
-    } else if (poolKey === Pools.GHO || poolKey === Pools.GHO_TENDERLY) {
-      fullJson = await applyTenderlyBasePool(poolKey, network, pool.tenderlyBasePool, fullJson);
+    } else if (poolKey === Pools.GHO) {
       if (pool.ghoBlock) {
         logTableGeneration(network, poolKey, undefined, indexedLatestBlock || pool.ghoBlock);
         if (Object.keys(pool.addressBook).length > 0) {
@@ -276,13 +260,13 @@ const generateNetworkPermissions = async (network: number, poolsToProcess: strin
                 role: gsmRoles,
               };
             }
-      
+
             // GHO permission resolution needs the V3 pool's ACL roles to check
             // if GHO facilitators/bucket managers are also V3 pool admins
             const poolRoles = getPermissionsByNetwork(network)['V3']?.roles?.role || {} as Record<string, string[]>;
             poolPermissions = await resolveGHOModifiers(
               pool.addressBook,
-              getProviderForPool(poolKey, pool, provider),
+              poolProvider,
               permissionsJson,
               admins.role,
               gsmAdmins,
@@ -294,13 +278,9 @@ const generateNetworkPermissions = async (network: number, poolsToProcess: strin
         }
       }
     } else if (pool.aclBlock) {
-      fullJson = await applyTenderlyBasePool(poolKey, network, pool.tenderlyBasePool, fullJson);
-
       logTableGeneration(network, poolKey, undefined, indexedLatestBlock || pool.aclBlock);
 
       if (Object.keys(pool.addressBook).length > 0) {
-        const poolProvider = getV3ProviderForPool(poolKey, pool, provider);
-
         // Process ACL_MANAGER roles from indexed events
         const aclEvents = indexedEvents['ACL_MANAGER'] || [];
         const aclRoles = getRoleAdmins({
@@ -314,7 +294,7 @@ const generateNetworkPermissions = async (network: number, poolsToProcess: strin
 
         poolPermissions = await resolveV3Modifiers(
           pool.addressBook,
-          poolProvider,
+          v3PoolProvider,
           permissionsJson,
           Pools[poolKey as keyof typeof Pools],
           Number(network),
@@ -327,17 +307,10 @@ const generateNetworkPermissions = async (network: number, poolsToProcess: strin
 
     // =========================================================================
     // ADDITIONAL COMPONENTS (Collector, ClinicSteward, Umbrella, etc.)
-    // These run independently of the pool type dispatch above. Any pool
-    // that has the required config (e.g. collectorBlock + COLLECTOR address)
-    // will have the component processed, regardless of whether it's V2/V3/GHO.
     // =========================================================================
 
     if (pool.collectorBlock && pool.addressBook.COLLECTOR) {
-      fullJson = await applyTenderlyBasePool(poolKey, network, pool.tenderlyBasePool, fullJson);
-
       logTableGeneration(network, poolKey, 'Collector', indexedLatestBlock || pool.collectorBlock);
-
-      const poolProvider = getV3ProviderForPool(poolKey, pool, provider);
 
       // Process COLLECTOR roles from indexed events
       const collectorEvents = indexedEvents['COLLECTOR'] || [];
@@ -353,7 +326,7 @@ const generateNetworkPermissions = async (network: number, poolsToProcess: strin
 
       const collectorPermissions = await resolveCollectorModifiers(
         pool.addressBook,
-        poolProvider,
+        v3PoolProvider,
         permissionsJson,
         Number(network),
         cAdmins.role,
@@ -363,11 +336,7 @@ const generateNetworkPermissions = async (network: number, poolsToProcess: strin
     }
 
     if (pool.clinicStewardBlock && pool.addressBook.CLINIC_STEWARD) {
-      fullJson = await applyTenderlyBasePool(poolKey, network, pool.tenderlyBasePool, fullJson);
-
       logTableGeneration(network, poolKey, 'Clinic Steward', indexedLatestBlock || pool.clinicStewardBlock);
-
-      const poolProvider = getProviderForPool(poolKey, pool, provider);
 
       // Process CLINIC_STEWARD roles from indexed events
       const clinicEvents = indexedEvents['CLINIC_STEWARD'] || [];
@@ -394,7 +363,6 @@ const generateNetworkPermissions = async (network: number, poolsToProcess: strin
     if (pool.ppcPermissionsJson && pool.ppcAddressBook) {
       logTableGeneration(network, poolKey, 'Permissioned Payloads Controller');
 
-      const poolProvider = getProviderForPool(poolKey, pool, provider);
       const ppcPermissions = await resolvePpcModifiers(
         pool.ppcAddressBook,
         poolProvider,
@@ -407,8 +375,6 @@ const generateNetworkPermissions = async (network: number, poolsToProcess: strin
 
     if (pool.umbrellaBlock && pool.umbrellaAddressBook && pool.umbrellaIncentivesBlock) {
       logTableGeneration(network, poolKey, `Umbrella`, indexedLatestBlock || pool.umbrellaBlock);
-
-      const poolProvider = getProviderForPool(poolKey, pool, provider);
 
       // Process UMBRELLA roles from indexed events
       const umbrellaEvents = indexedEvents['UMBRELLA'] || [];
@@ -446,11 +412,8 @@ const generateNetworkPermissions = async (network: number, poolsToProcess: strin
     }
 
     if (pool.functionsPermissionsAgentHubJson) {
-      fullJson = await applyTenderlyBasePool(poolKey, network, pool.tenderlyBasePool, fullJson);
-
       logTableGeneration(network, poolKey, 'Agent Hub');
 
-      const poolProvider = getProviderForPool(poolKey, pool, provider);
       const { agentHubPermissions } = await resolveAgentHubModifiers(
         pool.addressBook,
         poolProvider,
@@ -494,14 +457,12 @@ const generateNetworkPermissions = async (network: number, poolsToProcess: strin
         pool.crossChainPermissionsJson,
       );
 
-      const poolProvider = getV3ProviderForPool(poolKey, pool, provider);
       govV3.contracts = await resolveGovV3Modifiers(
         pool.governanceAddressBook,
-        poolProvider,
+        v3PoolProvider,
         permissionsGovV3Json,
         Number(network),
         senders,
-        isV3TenderlyPool(poolKey),
         govV3.ggRoles.role || {},
         pool.addresses,
       );
@@ -510,8 +471,6 @@ const generateNetworkPermissions = async (network: number, poolsToProcess: strin
     }
 
     // Merge this pool's results into the network-wide JSON.
-    // If the file was empty (first pool), initialize the structure.
-    // Each pool's data is keyed by its poolKey (e.g., 'V3', 'GHO', 'V2').
     if (Object.keys(fullJson).length === 0) {
       fullJson = {
         [poolKey]: {
@@ -527,7 +486,6 @@ const generateNetworkPermissions = async (network: number, poolsToProcess: strin
         },
       };
     } else {
-      // if (!fullJson[network][poolKey]) {
       fullJson[poolKey] = {
         contracts: poolPermissions,
         roles: admins,
@@ -557,23 +515,52 @@ async function main() {
 
   const networks = getNetworksToProcess(args);
 
-  const permissions = networks.map((network) => {
-    const pools = getPoolsToProcess(network, args);
-    if (pools.length === 0) {
-      logger.info(`Skipping network ${network}: no matching pools`);
-      return Promise.resolve();
-    }
-    return generateNetworkPermissions(network, pools);
-  });
+  // Start Anvil fork if in fork mode
+  let anvilFork: AnvilFork | undefined;
+  if (args.fork) {
+    await checkAnvilInstalled();
 
-  // allSettled ensures all networks complete even if some fail (e.g., RPC errors).
-  // Each network writes its own output file independently.
-  const results = await Promise.allSettled(permissions);
-  for (const result of results) {
-    if (result.status === 'rejected') {
-      console.error('Network failed:', result.reason);
+    const network = networks[0]; // Fork mode requires exactly one network
+    const rpcUrl = networkConfigs[network].rpcUrl;
+    if (!rpcUrl) {
+      throw new Error(`No RPC URL configured for network ${network}`);
+    }
+
+    // Get the latest block number from the chain to fork at
+    const provider = getRPCClient(network);
+    const latestBlock = await provider.request({ method: 'eth_blockNumber' }) as string;
+    const forkBlockNumber = parseInt(latestBlock, 16);
+
+    console.log(`Starting Anvil fork at block ${forkBlockNumber}...`);
+    anvilFork = await startAnvilFork(rpcUrl, forkBlockNumber);
+    console.log(`Anvil fork running at ${anvilFork.rpcUrl}`);
+  }
+
+  try {
+    const permissions = networks.map((network) => {
+      const pools = getPoolsToProcess(network, args);
+      if (pools.length === 0) {
+        logger.info(`Skipping network ${network}: no matching pools`);
+        return Promise.resolve();
+      }
+      return generateNetworkPermissions(network, pools, args, anvilFork?.rpcUrl);
+    });
+
+    // allSettled ensures all networks complete even if some fail (e.g., RPC errors).
+    const results = await Promise.allSettled(permissions);
+    for (const result of results) {
+      if (result.status === 'rejected') {
+        console.error('Network failed:', result.reason);
+      }
+    }
+  } finally {
+    // Always stop Anvil when done
+    if (anvilFork) {
+      console.log('Stopping Anvil fork...');
+      await anvilFork.stop();
     }
   }
+
   logger.finished();
 }
 

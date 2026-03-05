@@ -6,9 +6,7 @@
   "type": "module",
   "scripts": {
     "modifiers:generate": "tsx scripts/modifiersCalculator.ts",
-    "modifiers:tenderly": "tsx scripts/modifiersCalculator.ts --tenderly",
-    "tables:create": "tsx scripts/createTables.ts",
-    "tables:tenderly": "tsx scripts/createTables.ts --tenderly"
+    "tables:create": "tsx scripts/createTables.ts"
   },
   "repository": {
     "type": "git",

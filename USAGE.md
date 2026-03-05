@@ -1,6 +1,6 @@
 # Usage Guide
 
-This document explains how the Aave Permissions Book works, and how to extend it with new networks, pools, and Tenderly forks.
+This document explains how the Aave Permissions Book works, and how to extend it with new networks, pools, and fork mode.
 
 ## Table of Contents
 
@@ -10,7 +10,7 @@ This document explains how the Aave Permissions Book works, and how to extend it
 - [How It Works](#how-it-works)
 - [Adding a New Network](#adding-a-new-network)
 - [Adding a New Pool](#adding-a-new-pool)
-- [Using Tenderly](#using-tenderly)
+- [Using Fork Mode](#using-fork-mode)
 - [Project Structure](#project-structure)
 
 ## Overview
@@ -21,7 +21,7 @@ The Aave Permissions Book is a two-phase pipeline:
 
 2. **Phase 2 — Table Generation** (`tables:create`): Reads the JSON snapshots and generates human-readable Markdown tables under `out/`, showing contract upgradeability, action types, role assignments, guardians, and function-level permissions.
 
-Both phases support CLI filtering by network, pool, and Tenderly mode.
+Both phases support CLI filtering by network, pool, and fork mode.
 
 ## Setup
 
@@ -53,9 +53,8 @@ npm run modifiers:generate -- -n 1 -p V3
 # Multiple networks
 npm run modifiers:generate -- -n 1 -n 137
 
-# Tenderly mode (see "Using Tenderly" section)
-npm run modifiers:tenderly
-npm run modifiers:tenderly -- -n 1 -p TENDERLY
+# Fork mode (see "Using Fork Mode" section)
+npm run modifiers:generate -- -n 1 -p V3 --fork --payload 0xYourPayloadAddress
 ```
 
 ### Generate Markdown Tables
@@ -66,9 +65,6 @@ npm run tables:create
 
 # Specific network and pool
 npm run tables:create -- -n 1 -p V3
-
-# Tenderly mode
-npm run tables:tenderly
 ```
 
 ### CLI Options
@@ -77,7 +73,8 @@ npm run tables:tenderly
 |------|-------|-------------|
 | `--network <chainId>` | `-n` | Filter by network chain ID (repeatable) |
 | `--pool <poolKey>` | `-p` | Filter by pool key (repeatable, requires `--network`) |
-| `--tenderly` | `-t` | Process Tenderly pools instead of regular pools |
+| `--fork` | `-f` | Enable fork mode (requires `--payload`, `--network`, and `--pool`) |
+| `--payload <address>` | | Payload address to execute on the fork |
 
 ## How It Works
 
@@ -253,44 +250,39 @@ If your pool has a different contract architecture, different access-control pat
 
 This is a more involved process. See the **[Adding Pool Types Guide](./ADDING_POOL_TYPES.md)** for a complete step-by-step walkthrough with code examples.
 
-## Using Tenderly
+## Using Fork Mode
 
-Tenderly support allows you to index permissions from a [Tenderly Virtual TestNet](https://docs.tenderly.co/virtual-testnets) (fork), showing what the permissions would look like after a proposed governance action is executed.
+Fork mode uses [Anvil](https://book.getfoundry.sh/reference/anvil/) (from Foundry) to create a local fork of the blockchain, execute a governance payload on it, and then index the resulting permission changes. This lets you see what permissions would change if a proposed governance action were executed.
 
-### How Tenderly Works
+### Prerequisites
 
-1. **Fork creation**: Create a Tenderly Virtual TestNet fork from a specific block. Execute the proposed governance actions on the fork.
+Install Foundry (which includes Anvil):
 
-2. **Configuration**: Add a Tenderly pool to the network config:
-
-```typescript
-import { createTenderlyPool } from '../poolBuilder.js';
-
-pools: {
-  [Pools.V3]: v3Pool,
-  [Pools.TENDERLY]: createTenderlyPool(v3Pool, Pools.V3, {
-    // Block number from which the fork starts
-    tenderlyBlock: 21000000,
-    // Tenderly Virtual TestNet RPC URL
-    tenderlyRpcUrl: 'https://virtual.mainnet.eu.rpc.tenderly.co/<fork-id>',
-  }),
-},
+```bash
+curl -L https://foundry.paradigm.xyz | bash && foundryup
 ```
 
-3. **Execution**: When running with `--tenderly`, the indexer:
-   - Copies the parent pool's current permission state as a baseline.
-   - Indexes events from the `tenderlyBlock` onward using the Tenderly RPC.
-   - Layers fork-specific changes (new roles, revocations) on top of the inherited state.
+### How Fork Mode Works
 
-### Table Substitution
+1. **Anvil fork**: The tool starts a local Anvil fork from the latest block of the target network.
+2. **Payload execution**: The governance payload is executed on the fork. The tool handles all payload states automatically:
+   - **Not registered**: Creates the payload, queues it via cross-chain message simulation, advances time, and executes it.
+   - **Created**: Queues, advances time, and executes.
+   - **Queued**: Advances time and executes.
+   - **Executed**: Throws an error (fork is not needed).
+   - **Cancelled / Expired**: Throws an error (payload cannot be executed).
+3. **Permission indexing**: Events are indexed from mainnet first (up to the fork block), then from the fork (post-execution). The fork events are layered on top.
+4. **State queries**: All contract state reads (owner, guardian, roles, etc.) are made against the fork, reflecting the post-execution state.
 
-**Important**: Tenderly tables intentionally **overwrite** their parent pool's output file. For example, `TENDERLY` (which inherits from `V3`) will write to the same file as `V3`.
+### Output Overwrite Behavior
 
-This is by design: the goal is to produce a git diff that clearly shows what permissions would change if the governance proposal were executed. You can then inspect the diff between the `main` branch (current permissions) and the Tenderly branch (proposed permissions).
+**Important**: Fork mode intentionally **overwrites** the target pool's output files. For example, running fork mode on `V3` will overwrite the existing `ETHEREUM-V3.md` table.
 
-**Because of this substitution behavior:**
-- Tenderly mode is exclusive: `--tenderly` processes **only** Tenderly pools, and the default mode (no `--tenderly` flag) processes **only** regular pools. They never run together.
-- **Do not merge Tenderly results into the main branch.** Tenderly runs should be done on a separate branch for review purposes only.
+This is by design: the goal is to produce a `git diff` that clearly shows what permissions would change if the governance proposal were executed.
+
+**Because of this overwrite behavior:**
+- **Do not merge fork mode results into the main branch.** Fork runs should be done on a separate branch for review purposes only.
+- Fork mode results are ephemeral — they only represent the state after a specific payload execution.
 
 ### Typical Workflow
 
@@ -299,31 +291,16 @@ This is by design: the goal is to produce a git diff that clearly shows what per
 git checkout -b review/proposal-name
 
 # 2. Ensure the base permissions are up to date
-npm run modifiers:generate -- -n 1
-npm run tables:create -- -n 1
+npm run modifiers:generate -- -n 1 -p V3
+npm run tables:create -- -n 1 -p V3
 
-# 3. Configure the Tenderly fork in the network config (see above)
+# 3. Run fork mode with the payload address
+npm run modifiers:generate -- -n 1 -p V3 --fork --payload 0xYourPayloadAddress
+npm run tables:create -- -n 1 -p V3
 
-# 4. Generate Tenderly permissions and tables
-npm run modifiers:tenderly -- -n 1
-npm run tables:tenderly -- -n 1
-
-# 5. Review the diff
+# 4. Review the diff
 git diff
 ```
-
-### Tenderly Pool Naming Convention
-
-Tenderly pool keys follow the pattern `<BASE_POOL>_TENDERLY`:
-
-| Tenderly Pool | Base Pool | Description |
-|---------------|-----------|-------------|
-| `TENDERLY` | `V3` | V3 main pool fork |
-| `LIDO_TENDERLY` | `LIDO` | Lido pool fork |
-| `ETHERFI_TENDERLY` | `ETHERFI` | EtherFi pool fork |
-| `GHO_TENDERLY` | `GHO` | GHO pool fork |
-| `V2_TENDERLY` | `V2` | V2 pool fork |
-| `SAFETY_MODULE_TENDERLY` | `SAFETY_MODULE` | Safety Module fork |
 
 ## Project Structure
 
@@ -349,7 +326,7 @@ Tenderly pool keys follow the pattern `<BASE_POOL>_TENDERLY`:
 │   ├── fileSystem.ts            # File I/O for permission snapshots
 │   ├── tableGenerator.ts        # Markdown table rendering
 │   ├── decentralization.ts      # Ownership chain classification
-│   ├── poolHelpers.ts           # Tenderly detection, provider resolution
+│   ├── poolHelpers.ts           # Provider resolution for fork/regular mode
 │   ├── cli.ts                   # CLI argument parsing
 │   └── logger.ts                # Structured logging
 ├── statics/                     # Static permissions JSON files

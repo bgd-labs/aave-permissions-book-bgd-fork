@@ -17,7 +17,6 @@ export const resolveGovV3Modifiers = async (
   permissionsObject: PermissionsJson,
   chainId: typeof ChainId | number,
   senders: string[],
-  tenderly: boolean,
   ggAdminRoles: Record<string, string[]>,
   addressNames?: Record<string, string>,
 ) => {

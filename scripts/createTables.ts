@@ -11,7 +11,7 @@
  *   but NOT V3's core pool contracts (they have their own)
  * - Other pools: merge with all V3 data for comprehensive ownership checks
  *
- * Usage: npm run tables:generate [--network <chainId>] [--pool <poolKey>] [--tenderly]
+ * Usage: npm run tables:generate [--network <chainId>] [--pool <poolKey>]
  */
 import {
   getPermissionsByNetwork,
@@ -67,8 +67,7 @@ const buildPoolInfoContracts = (
 ): Contracts => {
   const networkPermits = getPermissionsByNetwork(network);
   const isWhiteLabel = pool === Pools.V3_WHITE_LABEL;
-  const isLidoOrEtherfi = pool === Pools.LIDO || pool === Pools.ETHERFI ||
-    pool === Pools.LIDO_TENDERLY || pool === Pools.ETHERFI_TENDERLY;
+  const isLidoOrEtherfi = pool === Pools.LIDO || pool === Pools.ETHERFI;
 
   if (isWhiteLabel) {
     // V3_WHITE_LABEL uses only its own pool data
@@ -196,7 +195,7 @@ export const generateTableAddress = (
   poolGuardians: PoolGuardians,
   network: string,
   pool: string,
-  tenderlyBasePool?: string,
+  _unused?: string,
   chainId?: string,
 ): string => {
   if (!address) {
@@ -253,7 +252,6 @@ export const generateTableAddress = (
       checkSummedAddress,
       network,
       pool,
-      tenderlyBasePool,
     );
     if (foundContractName) {
       return foundContractName;
@@ -303,7 +301,7 @@ export const generateTable = (network: string, pool: string): string => {
 
   // LIDO/ETHERFI pools share V3's PoolExposureSteward since it manages
   // cross-pool exposure limits. Include it in their permissions table.
-  if (pool === Pools.LIDO || pool === Pools.ETHERFI || pool === Pools.LIDO_TENDERLY || pool === Pools.ETHERFI_TENDERLY) {
+  if (pool === Pools.LIDO || pool === Pools.ETHERFI) {
     poolPermitsByContract.contracts = {
       ...poolPermitsByContract.contracts,
       PoolExposureSteward: getPermissionsByNetwork(network)['V3'].contracts['PoolExposureSteward'],
@@ -316,7 +314,7 @@ export const generateTable = (network: string, pool: string): string => {
   let contractsByAddress: Record<string, string> = {};
 
   // add gov contracts to contractsByAddresses
-  if (pool !== Pools.GOV_V2 && pool !== Pools.GOV_V2_TENDERLY) {
+  if (pool !== Pools.GOV_V2) {
     contractsByAddress = generateContractsByAddress({
       ...mainnetPermissions[Pools.GOV_V2].contracts,
     });
@@ -328,9 +326,6 @@ export const generateTable = (network: string, pool: string): string => {
     ...contractsByAddress,
     ...generateContractsByAddress(poolPermitsByContract?.contracts || {}),
   };
-
-  // Get tenderlyBasePool from pool config if available
-  const tenderlyBasePool = networkConfigs[network].pools[pool]?.tenderlyBasePool;
 
   let decentralizationTable = `### Contracts upgradeability\n`;
   const decentralizationHeaderTitles = ['contract', 'upgradeable by'];
@@ -439,7 +434,6 @@ export const generateTable = (network: string, pool: string): string => {
   const tableCtx: TableContext = {
     network,
     pool,
-    tenderlyBasePool,
     addressesNames,
     contractsByAddress,
     poolGuardians,
@@ -547,14 +541,7 @@ export const generateTable = (network: string, pool: string): string => {
   // GSM Admins tables
   readmeByNetwork += generateGsmRolesTables(poolPermitsByContract.gsmRoles, tableCtx);
 
-  // Tenderly pools write their output using the parent pool's name so the
-  // markdown file overwrites the base pool's file (e.g., TENDERLY -> V3.md).
-  // This is intentional: Tenderly results are the "what-if" version of the base pool.
-  let poolName = pool;
-  if (networkConfigs[network].pools[pool].tenderlyBasePool) {
-    poolName = networkConfigs[network].pools[pool].tenderlyBasePool;
-  }
-  saveJson(`./out/${networkName}-${poolName}.md`, readmeByNetwork);
+  saveJson(`./out/${networkName}-${pool}.md`, readmeByNetwork);
 
   return readmeDirectoryTable;
 };
@@ -577,8 +564,8 @@ export const generateAllTables = (args: CliArgs) => {
     }
   }
 
-  // Only update README when running all networks in regular mode
-  if (args.networks.length === 0 && !args.tenderly) {
+  // Only update README when running all networks
+  if (args.networks.length === 0) {
     saveJson('./README.md', getPrincipalReadme(readmeDirectoryTable));
   }
 };

@@ -1,4 +1,3 @@
-import { Pools } from '../configs.js';
 import { AddressBook, PoolConfigs } from '../types.js';
 
 // ============================================================================
@@ -42,14 +41,6 @@ export interface GhoPoolConfig {
   ghoBlock: number;
   gsmBlocks?: Record<string, number>;
   addresses?: Record<string, string>;
-}
-
-/**
- * Tenderly-specific overrides.
- */
-export interface TenderlyOverrides {
-  tenderlyBlock: number;
-  tenderlyRpcUrl: string;
 }
 
 // ============================================================================
@@ -112,17 +103,3 @@ export const createSafetyPool = (addressBook: AddressBook): PoolConfigs => ({
   addressBook,
 });
 
-/**
- * Creates a Tenderly pool that inherits from a base pool.
- * Only adds the tenderly-specific fields, avoiding duplication.
- */
-export const createTenderlyPool = (
-  basePool: PoolConfigs,
-  basePoolKey: Pools,
-  overrides: TenderlyOverrides,
-): PoolConfigs => ({
-  ...basePool,
-  tenderlyBasePool: basePoolKey,
-  tenderlyBlock: overrides.tenderlyBlock,
-  tenderlyRpcUrl: overrides.tenderlyRpcUrl,
-});

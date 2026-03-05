@@ -5,7 +5,7 @@ import {
 } from '@aave-dao/aave-address-book';
 import { Pools } from '../constants.js';
 import { NetworkConfig } from '../../types.js';
-import { createV3Pool, createTenderlyPool } from '../poolBuilder.js';
+import { createV3Pool } from '../poolBuilder.js';
 import { mergeAddressNames } from '../addresses/index.js';
 
 // ============================================================================
@@ -45,10 +45,5 @@ export const lineaConfig: NetworkConfig = {
   }),
   pools: {
     [Pools.V3]: v3Pool,
-    [Pools.TENDERLY]: createTenderlyPool(v3Pool, Pools.V3, {
-      tenderlyBlock: 27445993,
-      tenderlyRpcUrl:
-        'https://virtual.linea.eu.rpc.tenderly.co/429f3112-eb0e-418c-bd6a-30fdbbc881d3',
-    }),
   },
 };

@@ -1,8 +1,6 @@
 import { Contracts, ContractInfo, PermissionsJson, PoolInfo } from './types.js';
 import {
-  getAllPermissionsJson,
   getPermissionsByNetwork,
-  saveJson,
 } from './fileSystem.js';
 
 /**
@@ -89,27 +87,23 @@ export const extractPoolContracts = (poolData: PoolInfo | undefined): Contracts 
  * Lazy lookup for contract name by address.
  * Searches across pools with priority:
  * 1. Current pool's sections (highest priority)
- * 2. Parent pool (if Tenderly)
- * 3. V3 pool (if current pool is not V3)
- * 4. GHO contracts (for mainnet, lowest priority)
+ * 2. V3 pool (if current pool is not V3)
+ * 3. GHO contracts (for mainnet, lowest priority)
  *
  * @param address - The address to look up (will be normalized to lowercase)
  * @param network - The network chain ID
  * @param pool - The current pool being processed
- * @param tenderlyBasePool - The parent pool if this is a Tenderly pool
  * @returns The contract name if found, undefined otherwise
  */
 export const findContractNameByAddress = (
   address: string,
   network: string,
   pool: string,
-  tenderlyBasePool?: string,
 ): string | undefined => {
   const networkPermits = getPermissionsByNetwork(network);
   const normalizedAddress = address.toLowerCase();
   const isV3Pool = pool === 'V3';
   const isWhiteLabelPool = pool === 'V3_WHITE_LABEL';
-  const isTenderly = pool.toLowerCase().includes('tenderly');
 
   // Helper to search in a pool's contracts
   const findInPool = (poolData: PoolInfo | undefined): string | undefined => {
@@ -126,19 +120,13 @@ export const findContractNameByAddress = (
   let found = findInPool(networkPermits[pool]);
   if (found) return found;
 
-  // 2. Search parent pool (if Tenderly)
-  if (isTenderly && tenderlyBasePool) {
-    found = findInPool(networkPermits[tenderlyBasePool]);
-    if (found) return found;
-  }
-
-  // 3. Search V3 pool (if current pool is not V3 or V3_WHITE_LABEL)
+  // 2. Search V3 pool (if current pool is not V3 or V3_WHITE_LABEL)
   if (!isV3Pool && !isWhiteLabelPool) {
     found = findInPool(networkPermits['V3']);
     if (found) return found;
   }
 
-  // 4. Search GHO contracts (only for mainnet)
+  // 3. Search GHO contracts (only for mainnet)
   if (network === '1') {
     found = findInPool(networkPermits['GHO']);
     if (found) return found;
@@ -147,29 +135,3 @@ export const findContractNameByAddress = (
   return undefined;
 };
 
-/**
- * Initializes a Tenderly pool's state by copying its parent pool's permissions.
- *
- * Side effects:
- * - Reads the network's permissions JSON from disk
- * - Writes back with the destination pool's data replaced by the base pool's data
- *
- * This is the first step when processing a Tenderly pool. After copying,
- * the event indexer will layer fork-specific changes (new roles, revocations)
- * on top of this inherited state.
- */
-export const overwriteBaseTenderlyPool = async (
-  destinationPoolKey: string,
-  network: string | number,
-  basePoolKey: string,
-) => {
-  const permissions = { ...getPermissionsByNetwork(network) };
-
-  permissions[destinationPoolKey] = { ...permissions[basePoolKey] };
-
-  saveJson(
-    `./out/permissions/${network}-permissions.json`,
-    JSON.stringify(permissions, null, 2),
-  );
-  console.log(`Copied ${basePoolKey} to ${destinationPoolKey}`);
-};

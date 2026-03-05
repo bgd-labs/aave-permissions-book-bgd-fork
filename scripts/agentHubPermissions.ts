@@ -47,7 +47,7 @@ export const resolveAgentHubModifiers = async (
         validationModules.add(rangeValidatorModule);
 
         const isPrime = agentName.toLowerCase().includes('prime');
-        const isLido = poolName === 'LIDO' || poolName === 'LIDO_TENDERLY';
+        const isLido = poolName === 'LIDO';
         const shouldSkip = isPrime !== isLido; // Skip if prime XOR lido (one true, one false)
         if (shouldSkip) {
           continue;
