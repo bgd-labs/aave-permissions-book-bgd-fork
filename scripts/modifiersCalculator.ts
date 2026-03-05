@@ -55,7 +55,7 @@ import { resolveGHOModifiers } from './ghoPermissions.js';
 import { resolveCollectorModifiers } from './collectorPermissions.js';
 import { resolveClinicStewardModifiers } from './clinicStewardPermissions.js';
 import { resolveUmbrellaModifiers } from './umbrellaPermissions.js';
-import { getRPCClient } from '../helpers/rpc.js';
+import { getRPCClient, getForkRpcUrl } from '../helpers/rpc.js';
 import { resolvePpcModifiers } from './ppcPermissions.js';
 import { resolveAgentHubModifiers } from './agentHubPermissions.js';
 import {
@@ -521,9 +521,9 @@ async function main() {
     await checkAnvilInstalled();
 
     const network = networks[0]; // Fork mode requires exactly one network
-    const rpcUrl = networkConfigs[network].rpcUrl;
+    const rpcUrl = getForkRpcUrl(network) ?? networkConfigs[network].rpcUrl;
     if (!rpcUrl) {
-      throw new Error(`No RPC URL configured for network ${network}`);
+      throw new Error(`No RPC URL configured for network ${network}. Set ALCHEMY_KEY, QUICKNODE_ENDPOINT_NAME/QUICKNODE_TOKEN, or RPC_<NETWORK> in .env`);
     }
 
     // Get the latest block number from the chain to fork at
