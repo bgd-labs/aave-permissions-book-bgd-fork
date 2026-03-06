@@ -523,6 +523,26 @@
           ],
           "proxyAdmin": "0xcd9d8e4b607c492a2363bc44b02794ada6533c57"
         },
+        "PayloadsControllerProxyAdmin": {
+          "address": "0xcd9d8e4b607c492a2363bc44b02794ada6533c57",
+          "modifiers": [
+            {
+              "modifier": "onlyOwner",
+              "addresses": [
+                {
+                  "address": "0xE2E8Badc5d50f8a6188577B89f50701cDE2D4e19",
+                  "owners": [],
+                  "signersThreshold": 0
+                }
+              ],
+              "functions": [
+                "changeProxyAdmin",
+                "upgrade",
+                "upgradeAndCall"
+              ]
+            }
+          ]
+        },
         "Executor_lvl1": {
           "address": "0xE2E8Badc5d50f8a6188577B89f50701cDE2D4e19",
           "modifiers": [
@@ -636,6 +656,26 @@
             }
           ],
           "proxyAdmin": "0x74a75d024033bff99c196b4ae772df1e28df5b96"
+        },
+        "CrossChainControllerProxyAdmin": {
+          "address": "0x74a75d024033bff99c196b4ae772df1e28df5b96",
+          "modifiers": [
+            {
+              "modifier": "onlyOwner",
+              "addresses": [
+                {
+                  "address": "0xE2E8Badc5d50f8a6188577B89f50701cDE2D4e19",
+                  "owners": [],
+                  "signersThreshold": 0
+                }
+              ],
+              "functions": [
+                "changeProxyAdmin",
+                "upgrade",
+                "upgradeAndCall"
+              ]
+            }
+          ]
         }
       },
       "senders": []
