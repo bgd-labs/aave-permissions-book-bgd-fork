@@ -29,10 +29,10 @@ const v3Pool = createV3Pool({
 export const xLayerConfig: NetworkConfig = {
   name: 'XLayer',
   rpcUrl: process.env.RPC_XLAYER,
-  explorer: 'https://xlayerscan.com/',
+  explorer: 'https://www.oklink.com/x-layer/',
   addressesNames: mergeAddressNames({
     '0x734c3fF8DE95c3745770df69053A31FDC92F2526': 'BGD',
-    '': 'Risk Council',
+    '0xa43F8eDf0a0aE07e951bca11162625e77e7609A1': 'Risk Council',
     '0xeB55A63bf9993d80c86D47f819B5eC958c7C127B': 'Aave Governance Guardian XLayer',
     '0xD0D1CcB0391aADF1EaD96814ce7ab4008Ebdb336': 'Aave Protocol Guardian XLayer',
   }),
