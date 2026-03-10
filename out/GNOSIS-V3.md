@@ -47,7 +47,7 @@
 |  adminsConfiguration |  Governance | |--------|--------|
 |  protocolUpgradeablity |  Governance | |--------|--------|
 |  adiConfigurations |  Governance | |--------|--------|
-|  retryAndInvalidateMessages |  Governance,Multi-sig | |--------|--------|
+|  retryAndInvalidateMessages |  Multi-sig,Governance | |--------|--------|
 |  updateRiskParameters |  Steward | |--------|--------|
 
 ### Contracts
@@ -86,9 +86,9 @@
 ### Governance V3 Contracts
 | contract |proxyAdmin |modifier |permission owner |functions |
 |----------|----------|----------|----------|----------|
-|  [GranularGuardian](https://gnosisscan.io//address/0x4A9F571E3C1f2F13567bb59e38988e74d7d72602) |  - |  onlyRetryGuardian |   |  retryEnvelope, retryTransaction | |--------|--------|--------|--------|--------|
-|  [GranularGuardian](https://gnosisscan.io//address/0x4A9F571E3C1f2F13567bb59e38988e74d7d72602) |  - |  onlyEmergencyGuardian |   |  solveEmergency | |--------|--------|--------|--------|--------|
-|  [GranularGuardian](https://gnosisscan.io//address/0x4A9F571E3C1f2F13567bb59e38988e74d7d72602) |  - |  onlyDefaultAdmin |   |  updateGuardian | |--------|--------|--------|--------|--------|
+|  [GranularGuardian](https://gnosisscan.io//address/0x4A9F571E3C1f2F13567bb59e38988e74d7d72602) |  - |  onlyRetryGuardian |  [BGD](https://gnosisscan.io//address/0xcb8a3E864D12190eD2b03cbA0833b15f2c314Ed8) |  retryEnvelope, retryTransaction | |--------|--------|--------|--------|--------|
+|  [GranularGuardian](https://gnosisscan.io//address/0x4A9F571E3C1f2F13567bb59e38988e74d7d72602) |  - |  onlyEmergencyGuardian |  [Aave Governance Guardian Gnosis](https://gnosisscan.io//address/0x1A0581dd5C7C3DA4Ba1CDa7e0BcA7286afc4973b) |  solveEmergency | |--------|--------|--------|--------|--------|
+|  [GranularGuardian](https://gnosisscan.io//address/0x4A9F571E3C1f2F13567bb59e38988e74d7d72602) |  - |  onlyDefaultAdmin |  [Executor_lvl1](https://gnosisscan.io//address/0x1dF462e2712496373A347f8ad10802a5E95f053D) |  updateGuardian | |--------|--------|--------|--------|--------|
 |  [PayloadsController](https://gnosisscan.io//address/0x9A1F491B86D09fC1484b5fab10041B189B60756b) |  [ProxyAdmin](https://gnosisscan.io//address/0xe892E40C92c2E4D281Be59b2E6300F271d824E75) |  onlyOwner |  [Executor_lvl1](https://gnosisscan.io//address/0x1dF462e2712496373A347f8ad10802a5E95f053D) |  updateExecutors | |--------|--------|--------|--------|--------|
 |  [PayloadsController](https://gnosisscan.io//address/0x9A1F491B86D09fC1484b5fab10041B189B60756b) |  [ProxyAdmin](https://gnosisscan.io//address/0xe892E40C92c2E4D281Be59b2E6300F271d824E75) |  onlyGuardian |  [Aave Governance Guardian Gnosis](https://gnosisscan.io//address/0x1A0581dd5C7C3DA4Ba1CDa7e0BcA7286afc4973b) |  cancelPayload | |--------|--------|--------|--------|--------|
 |  [PayloadsController](https://gnosisscan.io//address/0x9A1F491B86D09fC1484b5fab10041B189B60756b) |  [ProxyAdmin](https://gnosisscan.io//address/0xe892E40C92c2E4D281Be59b2E6300F271d824E75) |  onlyOwnerOrGuardian |  [Aave Governance Guardian Gnosis](https://gnosisscan.io//address/0x1A0581dd5C7C3DA4Ba1CDa7e0BcA7286afc4973b), [Executor_lvl1](https://gnosisscan.io//address/0x1dF462e2712496373A347f8ad10802a5E95f053D) |  updateGuardian | |--------|--------|--------|--------|--------|
@@ -122,8 +122,8 @@
 |  [Finance Risk Council](https://gnosisscan.io//address/0x22740deBa78d5a0c24C58C740e3715ec29de1bFa) |  3/4 |  0x22740deBa78d5a0c24C58C740e3715ec29de1bFa |  [0xCAC616Fffb687cBDDD250b2aE6F672449462985C](https://gnosisscan.io//address/0xCAC616Fffb687cBDDD250b2aE6F672449462985C), [0x329c54289Ff5D6B7b7daE13592C6B1EDA1543eD4](https://gnosisscan.io//address/0x329c54289Ff5D6B7b7daE13592C6B1EDA1543eD4), [0xb647055A9915bF9c8021a684E175A353525b9890](https://gnosisscan.io//address/0xb647055A9915bF9c8021a684E175A353525b9890), [0x5d49dBcdd300aECc2C311cFB56593E71c445d60d](https://gnosisscan.io//address/0x5d49dBcdd300aECc2C311cFB56593E71c445d60d) | |--------|--------|--------|--------|
 |  [Risk Council](https://gnosisscan.io//address/0xF221B08dD10e0C68D74F035764931Baa3b030481) |  2/2 |  0xF221B08dD10e0C68D74F035764931Baa3b030481 |  [0xc2cf0387f2a83A7F5C6675F4CDe7F367ea1B989a](https://gnosisscan.io//address/0xc2cf0387f2a83A7F5C6675F4CDe7F367ea1B989a), [0x5d49dBcdd300aECc2C311cFB56593E71c445d60d](https://gnosisscan.io//address/0x5d49dBcdd300aECc2C311cFB56593E71c445d60d) | |--------|--------|--------|--------|
 |  [CleanUp Admin](https://gnosisscan.io//address/0xdeadD8aB03075b7FBA81864202a2f59EE25B312b) |  2/3 |  0xdeadD8aB03075b7FBA81864202a2f59EE25B312b |  [0x818C277dBE886b934e60aa047250A73529E26A99](https://gnosisscan.io//address/0x818C277dBE886b934e60aa047250A73529E26A99), [0x329c54289Ff5D6B7b7daE13592C6B1EDA1543eD4](https://gnosisscan.io//address/0x329c54289Ff5D6B7b7daE13592C6B1EDA1543eD4), [0xb647055A9915bF9c8021a684E175A353525b9890](https://gnosisscan.io//address/0xb647055A9915bF9c8021a684E175A353525b9890) | |--------|--------|--------|--------|
-|  [Aave Governance Guardian Gnosis](https://gnosisscan.io//address/0x1A0581dd5C7C3DA4Ba1CDa7e0BcA7286afc4973b) |  5/9 |  0x1A0581dd5C7C3DA4Ba1CDa7e0BcA7286afc4973b |  [0xDA5Ae43e179987a66B9831F92223567e1F38BE7D](https://gnosisscan.io//address/0xDA5Ae43e179987a66B9831F92223567e1F38BE7D), [0x1e3804357eD445251FfECbb6e40107bf03888885](https://gnosisscan.io//address/0x1e3804357eD445251FfECbb6e40107bf03888885), [0x4f96743057482a2E10253AFDacDA3fd9CF2C1DC9](https://gnosisscan.io//address/0x4f96743057482a2E10253AFDacDA3fd9CF2C1DC9), [0xebED04E9137AfeBFF6a1B97aC0adf61a544eFE29](https://gnosisscan.io//address/0xebED04E9137AfeBFF6a1B97aC0adf61a544eFE29), [0xbd4DCfA978c6D0d342cE36809AfFFa49d4B7f1F7](https://gnosisscan.io//address/0xbd4DCfA978c6D0d342cE36809AfFFa49d4B7f1F7), [0xA3103D0ED00d24795Faa2d641ACf6A320EeD7396](https://gnosisscan.io//address/0xA3103D0ED00d24795Faa2d641ACf6A320EeD7396), [0x936CD9654271083cCF93A975919Da0aB3Bc99EF3](https://gnosisscan.io//address/0x936CD9654271083cCF93A975919Da0aB3Bc99EF3), [0x0D2394C027602Dc4c3832Ffd849b5df45DBac0E9](https://gnosisscan.io//address/0x0D2394C027602Dc4c3832Ffd849b5df45DBac0E9), [0x4C30E33758216aD0d676419c21CB8D014C68099f](https://gnosisscan.io//address/0x4C30E33758216aD0d676419c21CB8D014C68099f) | |--------|--------|--------|--------|
 |  [BGD](https://gnosisscan.io//address/0xcb8a3E864D12190eD2b03cbA0833b15f2c314Ed8) |  2/3 |  0xcb8a3E864D12190eD2b03cbA0833b15f2c314Ed8 |  [0xf71fc92e2949ccF6A5Fd369a0b402ba80Bc61E02](https://gnosisscan.io//address/0xf71fc92e2949ccF6A5Fd369a0b402ba80Bc61E02), [0x5811d9FF80ff4B73A8F9bA42A6082FaB82E89Ea7](https://gnosisscan.io//address/0x5811d9FF80ff4B73A8F9bA42A6082FaB82E89Ea7), [0x0650302887619fa7727D8BD480Cda11A638B219B](https://gnosisscan.io//address/0x0650302887619fa7727D8BD480Cda11A638B219B) | |--------|--------|--------|--------|
+|  [Aave Governance Guardian Gnosis](https://gnosisscan.io//address/0x1A0581dd5C7C3DA4Ba1CDa7e0BcA7286afc4973b) |  5/9 |  0x1A0581dd5C7C3DA4Ba1CDa7e0BcA7286afc4973b |  [0xDA5Ae43e179987a66B9831F92223567e1F38BE7D](https://gnosisscan.io//address/0xDA5Ae43e179987a66B9831F92223567e1F38BE7D), [0x1e3804357eD445251FfECbb6e40107bf03888885](https://gnosisscan.io//address/0x1e3804357eD445251FfECbb6e40107bf03888885), [0x4f96743057482a2E10253AFDacDA3fd9CF2C1DC9](https://gnosisscan.io//address/0x4f96743057482a2E10253AFDacDA3fd9CF2C1DC9), [0xebED04E9137AfeBFF6a1B97aC0adf61a544eFE29](https://gnosisscan.io//address/0xebED04E9137AfeBFF6a1B97aC0adf61a544eFE29), [0xbd4DCfA978c6D0d342cE36809AfFFa49d4B7f1F7](https://gnosisscan.io//address/0xbd4DCfA978c6D0d342cE36809AfFFa49d4B7f1F7), [0xA3103D0ED00d24795Faa2d641ACf6A320EeD7396](https://gnosisscan.io//address/0xA3103D0ED00d24795Faa2d641ACf6A320EeD7396), [0x936CD9654271083cCF93A975919Da0aB3Bc99EF3](https://gnosisscan.io//address/0x936CD9654271083cCF93A975919Da0aB3Bc99EF3), [0x0D2394C027602Dc4c3832Ffd849b5df45DBac0E9](https://gnosisscan.io//address/0x0D2394C027602Dc4c3832Ffd849b5df45DBac0E9), [0x4C30E33758216aD0d676419c21CB8D014C68099f](https://gnosisscan.io//address/0x4C30E33758216aD0d676419c21CB8D014C68099f) | |--------|--------|--------|--------|
 
 ### Admins
 | Role |Contract |
@@ -138,9 +138,9 @@
 ### Granular Guardian Admins
 | Role |Contract |
 |----------|----------|
-|  DEFAULT_ADMIN |   | |--------|--------|
-|  RETRY_ROLE |   | |--------|--------|
-|  SOLVE_EMERGENCY_ROLE |   | |--------|--------|
+|  DEFAULT_ADMIN |  [Executor_lvl1](https://gnosisscan.io//address/0x1dF462e2712496373A347f8ad10802a5E95f053D) | |--------|--------|
+|  RETRY_ROLE |  [BGD](https://gnosisscan.io//address/0xcb8a3E864D12190eD2b03cbA0833b15f2c314Ed8) | |--------|--------|
+|  SOLVE_EMERGENCY_ROLE |  [Aave Governance Guardian Gnosis](https://gnosisscan.io//address/0x1A0581dd5C7C3DA4Ba1CDa7e0BcA7286afc4973b) | |--------|--------|
 
 ### Collector Admins
 | Role |Contract |
