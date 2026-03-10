@@ -53,8 +53,11 @@ npm run modifiers:generate -- -n 1 -p V3
 # Multiple networks
 npm run modifiers:generate -- -n 1 -n 137
 
-# Fork mode (see "Using Fork Mode" section)
+# Fork mode with payload (see "Using Fork Mode" section)
 npm run modifiers:generate -- -n 1 -p V3 --fork --payload 0xYourPayloadAddress
+
+# Fork mode with raw calldata (see "Using Fork Mode" section)
+npm run modifiers:generate -- -n 1 -p V3 --fork --calldata 0xCalldata --caller 0xCallerAddress --target 0xTargetAddress
 ```
 
 ### Generate Markdown Tables
@@ -73,8 +76,11 @@ npm run tables:create -- -n 1 -p V3
 |------|-------|-------------|
 | `--network <chainId>` | `-n` | Filter by network chain ID (repeatable) |
 | `--pool <poolKey>` | `-p` | Filter by pool key (repeatable, requires `--network`) |
-| `--fork` | `-f` | Enable fork mode (requires `--payload`, `--network`, and `--pool`) |
-| `--payload <address>` | | Payload address to execute on the fork |
+| `--fork` | `-f` | Enable fork mode (requires `--network`, `--pool`, and either `--payload` or `--calldata`) |
+| `--payload <address>` | | Payload address to execute on the fork (mutually exclusive with `--calldata`) |
+| `--calldata <hex>` | | Raw calldata to execute on the fork (mutually exclusive with `--payload`) |
+| `--caller <address>` | | Address to impersonate as the transaction sender (requires `--calldata`) |
+| `--target <address>` | | Target contract address for the calldata (requires `--calldata`) |
 
 ## How It Works
 
@@ -252,7 +258,11 @@ This is a more involved process. See the **[Adding Pool Types Guide](./ADDING_PO
 
 ## Using Fork Mode
 
-Fork mode uses [Anvil](https://book.getfoundry.sh/reference/anvil/) (from Foundry) to create a local fork of the blockchain, execute a governance payload on it, and then index the resulting permission changes. This lets you see what permissions would change if a proposed governance action were executed.
+Fork mode uses [Anvil](https://book.getfoundry.sh/reference/anvil/) (from Foundry) to create a local fork of the blockchain, execute an action on it, and then index the resulting permission changes. This lets you see what permissions would change if the action were executed.
+
+There are two fork execution modes:
+- **Payload mode** (`--payload`): Executes an Aave governance payload through the PayloadsController.
+- **Calldata mode** (`--calldata`): Executes raw calldata by impersonating a caller address. Useful for simulating multisig transactions, direct contract calls, or any action that doesn't go through the Aave governance payload flow.
 
 ### Prerequisites
 
@@ -265,12 +275,14 @@ curl -L https://foundry.paradigm.xyz | bash && foundryup
 ### How Fork Mode Works
 
 1. **Anvil fork**: The tool starts a local Anvil fork from the latest block of the target network.
-2. **Payload execution**: The governance payload is executed on the fork. The tool handles all payload states automatically:
-   - **Not registered**: Creates the payload, queues it via cross-chain message simulation, advances time, and executes it.
-   - **Created**: Queues, advances time, and executes.
-   - **Queued**: Advances time and executes.
-   - **Executed**: Throws an error (fork is not needed).
-   - **Cancelled / Expired**: Throws an error (payload cannot be executed).
+2. **Action execution**: Depending on the mode:
+   - **Payload mode** (`--payload`): The governance payload is executed on the fork. The tool handles all payload states automatically:
+     - **Not registered**: Creates the payload, queues it via cross-chain message simulation, advances time, and executes it.
+     - **Created**: Queues, advances time, and executes.
+     - **Queued**: Advances time and executes.
+     - **Executed**: Throws an error (fork is not needed).
+     - **Cancelled / Expired**: Throws an error (payload cannot be executed).
+   - **Calldata mode** (`--calldata`): The caller address is impersonated using Anvil's `impersonateAccount`, funded with native token for gas, and the calldata is sent to the target contract. This works with any address, including multisigs (e.g., Gnosis Safe).
 3. **Permission indexing**: Events are indexed from mainnet first (up to the fork block), then from the fork (post-execution). The fork events are layered on top.
 4. **State queries**: All contract state reads (owner, guardian, roles, etc.) are made against the fork, reflecting the post-execution state.
 
@@ -286,6 +298,8 @@ This is by design: the goal is to produce a `git diff` that clearly shows what p
 
 ### Typical Workflow
 
+#### With a governance payload
+
 ```bash
 # 1. Create a branch for the review
 git checkout -b review/proposal-name
@@ -296,6 +310,27 @@ npm run tables:create -- -n 1 -p V3
 
 # 3. Run fork mode with the payload address
 npm run modifiers:generate -- -n 1 -p V3 --fork --payload 0xYourPayloadAddress
+npm run tables:create -- -n 1 -p V3
+
+# 4. Review the diff
+git diff
+```
+
+#### With raw calldata (e.g., multisig transaction)
+
+```bash
+# 1. Create a branch for the review
+git checkout -b review/multisig-action-name
+
+# 2. Ensure the base permissions are up to date
+npm run modifiers:generate -- -n 1 -p V3
+npm run tables:create -- -n 1 -p V3
+
+# 3. Run fork mode with calldata, caller (e.g., a multisig), and target contract
+npm run modifiers:generate -- -n 1 -p V3 --fork \
+  --calldata 0xabcdef... \
+  --caller 0xMultisigAddress \
+  --target 0xTargetContract
 npm run tables:create -- -n 1 -p V3
 
 # 4. Review the diff
@@ -327,6 +362,7 @@ git diff
 │   ├── tableGenerator.ts        # Markdown table rendering
 │   ├── decentralization.ts      # Ownership chain classification
 │   ├── poolHelpers.ts           # Provider resolution for fork/regular mode
+│   ├── anvil.ts                  # Anvil fork management, payload and calldata execution
 │   ├── cli.ts                   # CLI argument parsing
 │   └── logger.ts                # Structured logging
 ├── statics/                     # Static permissions JSON files
