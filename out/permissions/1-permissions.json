@@ -3952,6 +3952,11 @@
                 "address": "0x52E652182b22C41d0202bB8D834982F43B12Cd21",
                 "owners": [],
                 "signersThreshold": 0
+              },
+              {
+                "address": "0xCc18Be380838956aad41FD22466085eD66aaBB46",
+                "owners": [],
+                "signersThreshold": 0
               }
             ],
             "functions": [
@@ -3998,6 +4003,11 @@
               },
               {
                 "address": "0x52E652182b22C41d0202bB8D834982F43B12Cd21",
+                "owners": [],
+                "signersThreshold": 0
+              },
+              {
+                "address": "0xCc18Be380838956aad41FD22466085eD66aaBB46",
                 "owners": [],
                 "signersThreshold": 0
               },
@@ -4485,7 +4495,8 @@
           "0x2cE01c87Fec1b71A9041c52CaED46Fc5f4807285",
           "0x5C905d62B22e4DAa4967E517C4a047Ff6026C731",
           "0x7e6a6B115D31d4A837E3C737c49Cf6Fafe6112C3",
-          "0x52E652182b22C41d0202bB8D834982F43B12Cd21"
+          "0x52E652182b22C41d0202bB8D834982F43B12Cd21",
+          "0xCc18Be380838956aad41FD22466085eD66aaBB46"
         ]
       }
     },
@@ -5475,6 +5486,24 @@
         },
         "RateStrategy_CoreAgent": {
           "address": "0xdA626E64f34f24e0236E0C9cD2F11ce4549a08c6",
+          "modifiers": [
+            {
+              "modifier": "onlyAgentHub",
+              "addresses": [
+                {
+                  "address": "0x95E3015c67EF62B866cC28ca5A9AB5017A55e336",
+                  "owners": [],
+                  "signersThreshold": 0
+                }
+              ],
+              "functions": [
+                "inject"
+              ]
+            }
+          ]
+        },
+        "CapoPriceCap_CoreAgent": {
+          "address": "0xCc18Be380838956aad41FD22466085eD66aaBB46",
           "modifiers": [
             {
               "modifier": "onlyAgentHub",
