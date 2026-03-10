@@ -67,6 +67,7 @@ import {
   indexPoolEvents,
   buildPoolContractConfigs,
   ForkPayloadConfig,
+  ForkCalldataConfig,
 } from '../helpers/eventIndexer.js';
 import { logger } from '../helpers/logger.js';
 import { checkAnvilInstalled, startAnvilFork, AnvilFork } from '../helpers/anvil.js';
@@ -84,8 +85,9 @@ const generateNetworkPermissions = async (
 
   const pools = networkConfigs[network].pools;
 
-  // Build fork payload config if in fork mode
+  // Build fork payload or calldata config if in fork mode
   let forkPayload: ForkPayloadConfig | undefined;
+  let forkCalldata: ForkCalldataConfig | undefined;
   if (args.fork && args.payload) {
     // Find the PayloadsController address from the governance address book
     // The first pool with a governanceAddressBook has the PAYLOADS_CONTROLLER
@@ -102,6 +104,12 @@ const generateNetworkPermissions = async (
     if (!forkPayload) {
       throw new Error('Could not find PAYLOADS_CONTROLLER in any pool\'s governanceAddressBook');
     }
+  } else if (args.fork && args.calldata && args.caller && args.target) {
+    forkCalldata = {
+      caller: args.caller,
+      target: args.target,
+      calldata: args.calldata,
+    };
   }
 
   for (let i = 0; i < poolsToProcess.length; i++) {
@@ -169,6 +177,7 @@ const generateNetworkPermissions = async (
           poolMetadata: existingMetadata,
           forkRpcUrl,
           forkPayload,
+          forkCalldata,
         });
 
         indexedEvents = indexResult.eventsByContract;

@@ -264,6 +264,59 @@ export async function executePayloadOnFork(
 }
 
 /**
+ * Executes raw calldata on a running Anvil fork by impersonating the caller.
+ *
+ * This is an alternative to executePayloadOnFork for cases where we have
+ * calldata to execute directly (e.g., a multisig transaction) rather than
+ * an Aave payload to go through PayloadsController.
+ */
+export async function executeCalldataOnFork(
+  anvilRpcUrl: string,
+  caller: string,
+  target: string,
+  calldata: string,
+): Promise<void> {
+  const client = createTestClient({
+    mode: 'anvil',
+    transport: http(anvilRpcUrl),
+  })
+    .extend(publicActions)
+    .extend(walletActions);
+
+  const callerAddress = caller as Address;
+  const targetAddress = target as Address;
+
+  // Impersonate the caller (works for EOAs and contracts like multisigs)
+  await client.impersonateAccount({ address: callerAddress });
+
+  // Set native token balance on the caller so it can pay for gas
+  await client.setBalance({
+    address: callerAddress,
+    value: 1000000000000000000n, // 1 native token
+  });
+
+  console.log(`Executing calldata on fork: caller=${caller}, target=${target}`);
+
+  try {
+    const hash = await client.sendTransaction({
+      chain: null,
+      account: callerAddress,
+      to: targetAddress,
+      data: calldata as `0x${string}`,
+    });
+
+    const receipt = await client.waitForTransactionReceipt({ hash });
+    if (receipt.status === 'reverted') {
+      throw new Error(`Calldata execution reverted (tx: ${hash})`);
+    }
+
+    console.log(`Calldata executed successfully (tx: ${hash})`);
+  } finally {
+    await client.stopImpersonatingAccount({ address: callerAddress });
+  }
+}
+
+/**
  * Searches existing payloads in the PayloadsController for one that contains
  * the given payload address as a target action.
  *

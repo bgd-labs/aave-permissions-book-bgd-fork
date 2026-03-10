@@ -1,7 +1,7 @@
 import { Client, Log } from 'viem';
 import { getEventsMultiContract, getRpcClientFromUrl } from './rpc.js';
 import { getLimit } from './limits.js';
-import { executePayloadOnFork } from './anvil.js';
+import { executePayloadOnFork, executeCalldataOnFork } from './anvil.js';
 
 // ============================================================================
 // Types
@@ -61,6 +61,15 @@ export interface IndexingResult {
 export interface ForkPayloadConfig {
   payloadAddress: string;
   payloadsControllerAddress: string;
+}
+
+/**
+ * Fork calldata configuration for executing raw calldata on the Anvil fork.
+ */
+export interface ForkCalldataConfig {
+  caller: string;
+  target: string;
+  calldata: string;
 }
 
 // ============================================================================
@@ -128,6 +137,7 @@ export const indexPoolEvents = async ({
   poolMetadata,
   forkRpcUrl,
   forkPayload,
+  forkCalldata,
 }: {
   client: Client;
   chainId: string | number;
@@ -136,6 +146,7 @@ export const indexPoolEvents = async ({
   poolMetadata: PoolMetadata | undefined;
   forkRpcUrl?: string;
   forkPayload?: ForkPayloadConfig;
+  forkCalldata?: ForkCalldataConfig;
 }): Promise<IndexingResult> => {
   const limit = getLimit(String(chainId));
 
@@ -186,14 +197,23 @@ export const indexPoolEvents = async ({
     latestBlockNumber = Math.max(latestBlockNumber, currentBlock);
   }
 
-  // Step 2: If fork mode, execute payload and fetch fork events
-  if (forkRpcUrl && forkPayload) {
-    // Execute the payload on the Anvil fork
-    await executePayloadOnFork(
-      forkRpcUrl,
-      forkPayload.payloadsControllerAddress,
-      forkPayload.payloadAddress,
-    );
+  // Step 2: If fork mode, execute payload or calldata and fetch fork events
+  if (forkRpcUrl && (forkPayload || forkCalldata)) {
+    // Execute the payload or calldata on the Anvil fork
+    if (forkPayload) {
+      await executePayloadOnFork(
+        forkRpcUrl,
+        forkPayload.payloadsControllerAddress,
+        forkPayload.payloadAddress,
+      );
+    } else if (forkCalldata) {
+      await executeCalldataOnFork(
+        forkRpcUrl,
+        forkCalldata.caller,
+        forkCalldata.target,
+        forkCalldata.calldata,
+      );
+    }
 
     // Fetch events from the fork starting from latestBlockNumber
     const forkProvider = getRpcClientFromUrl(forkRpcUrl);
