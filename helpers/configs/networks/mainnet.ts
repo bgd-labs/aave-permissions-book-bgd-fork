@@ -158,6 +158,10 @@ export const mainnetConfig: NetworkConfig = {
     '0xE1e62c3ee0c581F715fBb0e23CDA536Fc29eeB2c': 'ClinicStewardV2 AMM',
     '0xff37939808EcF199A2D599ef91D699Fb13dab7F7': 'BGD Injector Guardian',
     '0xb7D402138Cb01BfE97d95181C849379d6AD14d19': 'SwapSteward',
+    '0x6e51936e0ED4256f9dA4794B536B619c88Ff0047': 'USDC Chainlink Oracle Swap Freezer',
+    '0x733AB16005c39d07FD3D9d1A350AA6768D10125b': 'USDT Chainlink Oracle Swap Freezer',
+    '0x2bd010Ab5393AB51b601B99C4B33ba148d9466e9': 'Gho direct facilitator plasma',
+    '0xE9ac5231fAecb633dA0Fe85Fcb2785b8363427d2': 'Gho direct facilitator mainnet',
   }),
   pools: {
     [Pools.V3]: v3Pool,
