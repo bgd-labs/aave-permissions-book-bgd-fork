@@ -77,8 +77,8 @@ const ghoPool = createGhoPool({
   ghoBlock: 17698470,
   addressBook: { ...AaveV3Ethereum, ...MiscEthereum, ...GhoEthereum },
   gsmBlocks: {
-    GSM_USDC: 19037420,
-    GSM_USDT: 19037420,
+    GSM_USDC: 23678520,
+    GSM_USDT: 23678520,
   },
   addresses: {
     '0x5513224daaEABCa31af5280727878d52097afA05': 'Gho Core Direct Minter',

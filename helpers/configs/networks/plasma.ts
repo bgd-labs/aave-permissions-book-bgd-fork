@@ -35,6 +35,7 @@ const ghoPool = createGhoPool({
   ghoBlock: 1385857,
   addressBook: { ...AaveV3Plasma, ...MiscPlasma, ...GhoPlasma },
   gsmBlocks: {
+    GSM_USDT: 4757522,
   },
   addresses: {
   },

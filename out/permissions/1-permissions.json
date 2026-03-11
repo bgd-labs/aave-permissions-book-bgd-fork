@@ -9430,8 +9430,8 @@
         ]
       },
       "GSM_USDC": {
-        "address": "0xFeeb6FE430B7523fEF2a38327241eE7153779535",
-        "proxyAdmin": "0x87f9ff2246ac5756a099c9d10802980fb75cce2b",
+        "address": "0x3A3868898305f04beC7FEa77BecFf04C13444112",
+        "proxyAdmin": "0x51bbc06d0032f8fea31f4f7a39e369c5e282cc21",
         "modifiers": [
           {
             "modifier": "onlyRescuer",
@@ -9442,7 +9442,18 @@
           },
           {
             "modifier": "onlySwapFreezer",
-            "addresses": [],
+            "addresses": [
+              {
+                "address": "0x6e51936e0ED4256f9dA4794B536B619c88Ff0047",
+                "owners": [],
+                "signersThreshold": 0
+              },
+              {
+                "address": "0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A",
+                "owners": [],
+                "signersThreshold": 0
+              }
+            ],
             "functions": [
               "setSwapFreeze"
             ]
@@ -9462,6 +9473,11 @@
                 "address": "0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A",
                 "owners": [],
                 "signersThreshold": 0
+              },
+              {
+                "address": "0xD1E856a947CdF56b4f000ee29d34F5808E0A6848",
+                "owners": [],
+                "signersThreshold": 0
               }
             ],
             "functions": [
@@ -9473,7 +9489,7 @@
         ]
       },
       "GSM_USDC-proxyAdmin": {
-        "address": "0x87f9ff2246ac5756a099c9d10802980fb75cce2b",
+        "address": "0x51bbc06d0032f8fea31f4f7a39e369c5e282cc21",
         "modifiers": [
           {
             "modifier": "onlyOwner",
@@ -9493,8 +9509,8 @@
         ]
       },
       "GSM_USDT": {
-        "address": "0x535b2f7C20B9C83d70e519cf9991578eF9816B7B",
-        "proxyAdmin": "0x20004c21e23c44adfdd118392c914a31a488f64d",
+        "address": "0x882285E62656b9623AF136Ce3078c6BdCc33F5E3",
+        "proxyAdmin": "0xafca3761fb08e5d67b0ec0e26059a0d6976d91f3",
         "modifiers": [
           {
             "modifier": "onlyRescuer",
@@ -9505,7 +9521,18 @@
           },
           {
             "modifier": "onlySwapFreezer",
-            "addresses": [],
+            "addresses": [
+              {
+                "address": "0x733AB16005c39d07FD3D9d1A350AA6768D10125b",
+                "owners": [],
+                "signersThreshold": 0
+              },
+              {
+                "address": "0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A",
+                "owners": [],
+                "signersThreshold": 0
+              }
+            ],
             "functions": [
               "setSwapFreeze"
             ]
@@ -9525,6 +9552,11 @@
                 "address": "0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A",
                 "owners": [],
                 "signersThreshold": 0
+              },
+              {
+                "address": "0xD1E856a947CdF56b4f000ee29d34F5808E0A6848",
+                "owners": [],
+                "signersThreshold": 0
               }
             ],
             "functions": [
@@ -9536,7 +9568,7 @@
         ]
       },
       "GSM_USDT-proxyAdmin": {
-        "address": "0x20004c21e23c44adfdd118392c914a31a488f64d",
+        "address": "0xafca3761fb08e5d67b0ec0e26059a0d6976d91f3",
         "modifiers": [
           {
             "modifier": "onlyOwner",
@@ -9868,9 +9900,13 @@
             "0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A"
           ],
           "CONFIGURATOR_ROLE": [
+            "0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A",
+            "0xD1E856a947CdF56b4f000ee29d34F5808E0A6848"
+          ],
+          "SWAP_FREEZER_ROLE": [
+            "0x6e51936e0ED4256f9dA4794B536B619c88Ff0047",
             "0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A"
           ],
-          "SWAP_FREEZER_ROLE": [],
           "DEFAULT_ADMIN_ROLE": [],
           "TOKEN_RESCUER_ROLE": [],
           "LIQUIDATOR_ROLE": []
@@ -9882,9 +9918,13 @@
             "0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A"
           ],
           "CONFIGURATOR_ROLE": [
+            "0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A",
+            "0xD1E856a947CdF56b4f000ee29d34F5808E0A6848"
+          ],
+          "SWAP_FREEZER_ROLE": [
+            "0x733AB16005c39d07FD3D9d1A350AA6768D10125b",
             "0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A"
           ],
-          "SWAP_FREEZER_ROLE": [],
           "DEFAULT_ADMIN_ROLE": [],
           "TOKEN_RESCUER_ROLE": [],
           "LIQUIDATOR_ROLE": []
