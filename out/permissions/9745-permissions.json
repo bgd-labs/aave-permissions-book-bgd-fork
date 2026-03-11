@@ -2416,6 +2416,125 @@
             ]
           }
         ]
+      },
+      "GSM_USDT": {
+        "address": "0xd06114F714beCD6f373e5cE94E07278eF46eBF37",
+        "proxyAdmin": "0xf0c9f6dc58bd273a0b7bab4419fe3be164b78a16",
+        "modifiers": [
+          {
+            "modifier": "onlyRescuer",
+            "addresses": [],
+            "functions": [
+              "rescueTokens"
+            ]
+          },
+          {
+            "modifier": "onlySwapFreezer",
+            "addresses": [],
+            "functions": [
+              "setSwapFreeze"
+            ]
+          },
+          {
+            "modifier": "onlyLiquidator",
+            "addresses": [],
+            "functions": [
+              "seize",
+              "burnAfterSeize"
+            ]
+          },
+          {
+            "modifier": "onlyConfigurator",
+            "addresses": [],
+            "functions": [
+              "updateFeeStrategy",
+              "updateExposureCap",
+              "updateGhoTreasury"
+            ]
+          }
+        ]
+      },
+      "GSM_USDT-proxyAdmin": {
+        "address": "0xf0c9f6dc58bd273a0b7bab4419fe3be164b78a16",
+        "modifiers": [
+          {
+            "modifier": "onlyOwner",
+            "addresses": [
+              {
+                "address": "0x47aAdaAE1F05C978E6aBb7568d11B7F6e0FC4d6A",
+                "owners": [],
+                "signersThreshold": 0
+              }
+            ],
+            "functions": [
+              "changeProxyAdmin",
+              "upgrade",
+              "upgradeAndCall"
+            ]
+          }
+        ]
+      },
+      "GhoGSMSteward": {
+        "address": "0x86992b2E2385E478dd2eeBfaE06369636e0a64E8",
+        "modifiers": [
+          {
+            "modifier": "onlyRiskCouncil",
+            "addresses": [
+              {
+                "address": "0x8513e6F37dBc52De87b166980Fa3F50639694B60",
+                "owners": [
+                  "0x329c54289Ff5D6B7b7daE13592C6B1EDA1543eD4",
+                  "0xb647055A9915bF9c8021a684E175A353525b9890",
+                  "0xbA037E4746ff58c55dc8F27a328C428F258DDACb",
+                  "0x5d49dBcdd300aECc2C311cFB56593E71c445d60d"
+                ],
+                "signersThreshold": 3
+              }
+            ],
+            "functions": [
+              "updateGsmBuySellFees",
+              "updateGsmExposureCap"
+            ]
+          }
+        ]
+      },
+      "GhoAaveSteward": {
+        "address": "0xA5Ba213867E175A182a5dd6A9193C6158738105A",
+        "modifiers": [
+          {
+            "modifier": "onlyOwner",
+            "addresses": [
+              {
+                "address": "0x47aAdaAE1F05C978E6aBb7568d11B7F6e0FC4d6A",
+                "owners": [],
+                "signersThreshold": 0
+              }
+            ],
+            "functions": [
+              "setBorrowRateConfig"
+            ]
+          },
+          {
+            "modifier": "onlyRiskCouncil",
+            "addresses": [
+              {
+                "address": "0x8513e6F37dBc52De87b166980Fa3F50639694B60",
+                "owners": [
+                  "0x329c54289Ff5D6B7b7daE13592C6B1EDA1543eD4",
+                  "0xb647055A9915bF9c8021a684E175A353525b9890",
+                  "0xbA037E4746ff58c55dc8F27a328C428F258DDACb",
+                  "0x5d49dBcdd300aECc2C311cFB56593E71c445d60d"
+                ],
+                "signersThreshold": 3
+              }
+            ],
+            "functions": [
+              "updateGhoBorrowRate",
+              "updateGhoBorrowCap",
+              "updateGhoSupplyCap"
+            ]
+          }
+        ]
       }
     },
     "roles": {
@@ -2432,7 +2551,17 @@
         ]
       }
     },
-    "gsmRoles": {},
+    "gsmRoles": {
+      "GSM_USDT": {
+        "role": {
+          "DEFAULT_ADMIN_ROLE": [],
+          "CONFIGURATOR_ROLE": [],
+          "TOKEN_RESCUER_ROLE": [],
+          "SWAP_FREEZER_ROLE": [],
+          "LIQUIDATOR_ROLE": []
+        }
+      }
+    },
     "govV3": {
       "ggRoles": {}
     },

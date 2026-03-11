@@ -24,38 +24,18 @@
       }
     }
   },
-  "TENDERLY": {
-    "latestBlockNumber": 10671654,
-    "indexedContracts": {
-      "ACL_MANAGER": {
-        "address": "0xa860355F0ccFdC823F7332ac108317b2a1509C06",
-        "deploymentBlock": 489190,
-        "firstIndexedAt": 489190
-      },
-      "COLLECTOR": {
-        "address": "0x5E2d083417D12d4B0824E14Ecd48D26831F4Da7D",
-        "deploymentBlock": 489190,
-        "firstIndexedAt": 489190
-      },
-      "CROSS_CHAIN_CONTROLLER": {
-        "address": "0x643441742f73e270e565619be6DE5f4D55E08cd6",
-        "deploymentBlock": 697270,
-        "firstIndexedAt": 697270
-      },
-      "GRANULAR_GUARDIAN": {
-        "address": "0x60665b4F4FF7073C5fed2656852dCa271DfE2684",
-        "deploymentBlock": 698830,
-        "firstIndexedAt": 698830
-      }
-    }
-  },
   "GHO": {
-    "latestBlockNumber": 16259952,
+    "latestBlockNumber": 16314095,
     "indexedContracts": {
       "GHO_TOKEN": {
         "address": "0xb77E872A68C62CfC0dFb02C067Ecc3DA23B4bbf3",
         "deploymentBlock": 1385857,
         "firstIndexedAt": 1385857
+      },
+      "GSM_USDT": {
+        "address": "0xd06114F714beCD6f373e5cE94E07278eF46eBF37",
+        "deploymentBlock": 4757522,
+        "firstIndexedAt": 4757522
       }
     }
   }
