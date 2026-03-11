@@ -245,5 +245,22 @@
         ]
       }
     ]
+  },
+  {
+    "contract": "GhoGSMSteward",
+    "functions": [
+      {
+        "name": "updateGsmBuySellFees",
+        "roles": [
+          "onlyRiskCouncil"
+        ]
+      },
+      {
+        "name": "updateGsmExposureCap",
+        "roles": [
+          "onlyRiskCouncil"
+        ]
+      }
+    ]
   }
 ]
