@@ -77,7 +77,6 @@
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://etherscan.io/address/0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A) | |--------|--------|
 |  CONFIGURATOR_ROLE |  [Executor_lvl1](https://etherscan.io/address/0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A), [Gho Gsm Steward](https://etherscan.io/address/0xD1E856a947CdF56b4f000ee29d34F5808E0A6848) | |--------|--------|
 |  SWAP_FREEZER_ROLE |  [USDC Chainlink Oracle Swap Freezer](https://etherscan.io/address/0x6e51936e0ED4256f9dA4794B536B619c88Ff0047), [Executor_lvl1](https://etherscan.io/address/0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A) | |--------|--------|
-|  DEFAULT_ADMIN_ROLE |   | |--------|--------|
 |  TOKEN_RESCUER_ROLE |   | |--------|--------|
 |  LIQUIDATOR_ROLE |   | |--------|--------|
 
@@ -87,7 +86,6 @@
 |  DEFAULT_ADMIN |  [Executor_lvl1](https://etherscan.io/address/0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A) | |--------|--------|
 |  CONFIGURATOR_ROLE |  [Executor_lvl1](https://etherscan.io/address/0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A), [Gho Gsm Steward](https://etherscan.io/address/0xD1E856a947CdF56b4f000ee29d34F5808E0A6848) | |--------|--------|
 |  SWAP_FREEZER_ROLE |  [USDT Chainlink Oracle Swap Freezer](https://etherscan.io/address/0x733AB16005c39d07FD3D9d1A350AA6768D10125b), [Executor_lvl1](https://etherscan.io/address/0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A) | |--------|--------|
-|  DEFAULT_ADMIN_ROLE |   | |--------|--------|
 |  TOKEN_RESCUER_ROLE |   | |--------|--------|
 |  LIQUIDATOR_ROLE |   | |--------|--------|
 

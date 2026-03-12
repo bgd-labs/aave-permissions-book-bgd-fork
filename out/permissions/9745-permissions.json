@@ -2430,7 +2430,18 @@
           },
           {
             "modifier": "onlySwapFreezer",
-            "addresses": [],
+            "addresses": [
+              {
+                "address": "0xa9afaE6A53E90f9E4CE0717162DF5Bc3d9aBe7B2",
+                "owners": [],
+                "signersThreshold": 0
+              },
+              {
+                "address": "0x47aAdaAE1F05C978E6aBb7568d11B7F6e0FC4d6A",
+                "owners": [],
+                "signersThreshold": 0
+              }
+            ],
             "functions": [
               "setSwapFreeze"
             ]
@@ -2445,7 +2456,18 @@
           },
           {
             "modifier": "onlyConfigurator",
-            "addresses": [],
+            "addresses": [
+              {
+                "address": "0x47aAdaAE1F05C978E6aBb7568d11B7F6e0FC4d6A",
+                "owners": [],
+                "signersThreshold": 0
+              },
+              {
+                "address": "0x86992b2E2385E478dd2eeBfaE06369636e0a64E8",
+                "owners": [],
+                "signersThreshold": 0
+              }
+            ],
             "functions": [
               "updateFeeStrategy",
               "updateExposureCap",
@@ -2554,10 +2576,18 @@
     "gsmRoles": {
       "GSM_USDT": {
         "role": {
-          "DEFAULT_ADMIN_ROLE": [],
-          "CONFIGURATOR_ROLE": [],
+          "DEFAULT_ADMIN": [
+            "0x47aAdaAE1F05C978E6aBb7568d11B7F6e0FC4d6A"
+          ],
+          "CONFIGURATOR_ROLE": [
+            "0x47aAdaAE1F05C978E6aBb7568d11B7F6e0FC4d6A",
+            "0x86992b2E2385E478dd2eeBfaE06369636e0a64E8"
+          ],
+          "SWAP_FREEZER_ROLE": [
+            "0xa9afaE6A53E90f9E4CE0717162DF5Bc3d9aBe7B2",
+            "0x47aAdaAE1F05C978E6aBb7568d11B7F6e0FC4d6A"
+          ],
           "TOKEN_RESCUER_ROLE": [],
-          "SWAP_FREEZER_ROLE": [],
           "LIQUIDATOR_ROLE": []
         }
       }

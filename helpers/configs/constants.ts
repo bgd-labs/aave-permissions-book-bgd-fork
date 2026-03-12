@@ -38,7 +38,7 @@ export const clinicStewardRoleNames = [
 ];
 
 export const ghoGSMRoleNames = [
-  'DEFAULT_ADMIN_ROLE',
+  'DEFAULT_ADMIN',
   'CONFIGURATOR_ROLE',
   'TOKEN_RESCUER_ROLE',
   'SWAP_FREEZER_ROLE',
