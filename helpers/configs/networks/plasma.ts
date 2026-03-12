@@ -35,7 +35,7 @@ const ghoPool = createGhoPool({
   ghoBlock: 1385857,
   addressBook: { ...AaveV3Plasma, ...MiscPlasma, ...GhoPlasma },
   gsmBlocks: {
-    GSM_USDT: 4757522,
+    GSM_USDT: 4757510,
   },
   addresses: {
   },
@@ -58,6 +58,7 @@ export const plasmaConfig: NetworkConfig = {
     '0x360d8aa8F6b09B7BC57aF34db2Eb84dD87bf4d12': 'Gho Direct Minter',
     '0x8513e6F37dBc52De87b166980Fa3F50639694B60': 'Gho Risk Council',
     '0x2Ce400703dAcc37b7edFA99D228b8E70a4d3831B': 'Gho Bucket Steward',
+    '0xa9afaE6A53E90f9E4CE0717162DF5Bc3d9aBe7B2': 'Gho Chainlink Oracle Swap Freezer' 
   }),
   pools: {
     [Pools.V3]: v3Pool,

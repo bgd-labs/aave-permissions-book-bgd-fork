@@ -9931,7 +9931,6 @@
             "0x6e51936e0ED4256f9dA4794B536B619c88Ff0047",
             "0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A"
           ],
-          "DEFAULT_ADMIN_ROLE": [],
           "TOKEN_RESCUER_ROLE": [],
           "LIQUIDATOR_ROLE": []
         }
@@ -9949,7 +9948,6 @@
             "0x733AB16005c39d07FD3D9d1A350AA6768D10125b",
             "0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A"
           ],
-          "DEFAULT_ADMIN_ROLE": [],
           "TOKEN_RESCUER_ROLE": [],
           "LIQUIDATOR_ROLE": []
         }
