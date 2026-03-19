@@ -2,10 +2,12 @@ import {
   AaveV3XLayer,
   GovernanceV3XLayer,
   MiscXLayer,
+  // GhoXLayer,
 } from '@aave-dao/aave-address-book';
 import { Pools } from '../constants.js';
 import { NetworkConfig } from '../../types.js';
-import { createV3Pool } from '../poolBuilder.js';
+import { createGhoPool,
+createV3Pool } from '../poolBuilder.js';
 import { mergeAddressNames } from '../addresses/index.js';
 
 // ============================================================================
@@ -22,6 +24,19 @@ const v3Pool = createV3Pool({
   },
 });
 
+
+// ============================================================================
+// GHO Pool
+// ============================================================================
+// const ghoPool = createGhoPool({
+//   ghoBlock: 50885770,
+//   addressBook: { ...AaveV3XLayer, ...MiscXLayer, ...GhoXLayer },
+//   gsmBlocks: {
+//   },
+//   addresses: {
+//   },
+// });
+
 // ============================================================================
 // Network Config Export
 // ============================================================================
@@ -37,5 +52,6 @@ export const xLayerConfig: NetworkConfig = {
   }),
   pools: {
     [Pools.V3]: v3Pool,
+    // [Pools.GHO]: ghoPool,
   },
 };
