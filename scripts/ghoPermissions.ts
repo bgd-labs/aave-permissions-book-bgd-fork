@@ -169,18 +169,43 @@ export const resolveGHOModifiers = async (
 
   // GhoStewardV2 (mainnet only - hardcoded address)
   if (addressBook.GHO_GSM_STEWARD) {
-    const ghoStewardResult = await resolveRiskCouncilContract(
-      'GhoStewardV2',
-      'GhoStewardV2',
-      '0x8F2411a538381aae2b464499005F0211e867d84f',
-      provider,
-      ownerResolver,
-      roles,
-      ghoStewardV2,
-    );
-    if (ghoStewardResult) {
-      obj['GhoStewardV2'] = ghoStewardResult;
-    }
+    if (chainId === ChainId.mainnet) {
+      const ghoStewardResult = await resolveRiskCouncilContract(
+        'GhoStewardV2',
+        'GhoStewardV2',
+        '0x8F2411a538381aae2b464499005F0211e867d84f',
+        provider,
+        ownerResolver,
+        roles,
+        ghoStewardV2,
+      );
+      if (ghoStewardResult) {
+        obj['GhoStewardV2'] = ghoStewardResult;
+      }
+    } 
+    const ghoStewardContract = getContract({
+      address: getAddress(addressBook.GHO_GSM_STEWARD),
+      abi: ghoStewardV2,
+      client: provider,
+    });
+    const riskCouncil = (await ghoStewardContract.read.RISK_COUNCIL()) as Address;
+    const riskCouncilInfo = await ownerResolver.resolve(riskCouncil);
+    obj['GhoGSMSteward'] = {
+      address: addressBook.GHO_GSM_STEWARD,
+      modifiers: [
+        {
+          modifier: 'onlyRiskCouncil',
+          addresses: [
+            {
+              address: riskCouncil,
+              owners: riskCouncilInfo.owners,
+              signersThreshold: riskCouncilInfo.threshold,
+            }
+          ],
+          functions: roles['GhoGSMSteward']['onlyRiskCouncil'],
+        }
+      ],
+    };
   }
 
   // Facilitator contracts (owner + guardian pattern)

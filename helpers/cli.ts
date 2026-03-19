@@ -5,6 +5,9 @@ export interface CliArgs {
   pools: string[];
   fork: boolean;
   payload?: string;
+  calldata?: string;
+  caller?: string;
+  target?: string;
 }
 
 /**
@@ -15,6 +18,9 @@ export interface CliArgs {
  *   --pool <poolKey>     or  -p <poolKey>  (repeatable)
  *   --fork               or  -f            (flag)
  *   --payload <address>                    (requires --fork)
+ *   --calldata <hex>                       (requires --fork, mutually exclusive with --payload)
+ *   --caller <address>                     (requires --calldata)
+ *   --target <address>                     (requires --calldata)
  */
 export const parseCliArgs = (): CliArgs => {
   const args = process.argv.slice(2);
@@ -35,14 +41,37 @@ export const parseCliArgs = (): CliArgs => {
     } else if (arg === '--payload' && nextArg && !nextArg.startsWith('-')) {
       result.payload = nextArg;
       i++;
+    } else if (arg === '--calldata' && nextArg && !nextArg.startsWith('-')) {
+      result.calldata = nextArg;
+      i++;
+    } else if (arg === '--caller' && nextArg && !nextArg.startsWith('-')) {
+      result.caller = nextArg;
+      i++;
+    } else if (arg === '--target' && nextArg && !nextArg.startsWith('-')) {
+      result.target = nextArg;
+      i++;
     }
   }
 
-  // Validate fork mode requires payload and network+pool
+  // Validate fork mode requires (payload) or (calldata+caller+target), plus network+pool
   if (result.fork) {
-    if (!result.payload) {
-      console.error('--fork requires --payload <address>');
+    if (result.payload && result.calldata) {
+      console.error('--payload and --calldata are mutually exclusive');
       process.exit(1);
+    }
+    if (!result.payload && !result.calldata) {
+      console.error('--fork requires either --payload <address> or --calldata <hex> --caller <address> --target <address>');
+      process.exit(1);
+    }
+    if (result.calldata) {
+      if (!result.caller) {
+        console.error('--calldata requires --caller <address>');
+        process.exit(1);
+      }
+      if (!result.target) {
+        console.error('--calldata requires --target <address>');
+        process.exit(1);
+      }
     }
     if (result.networks.length === 0) {
       console.error('--fork requires --network to be specified');
@@ -121,11 +150,17 @@ export const logExecutionConfig = (args: CliArgs): void => {
     ? args.pools.join(', ')
     : 'ALL';
 
+  const forkDetail = args.payload
+    ? `\n  Payload: ${args.payload}`
+    : args.calldata
+      ? `\n  Calldata: ${args.calldata}\n  Caller: ${args.caller}\n  Target: ${args.target}`
+      : '';
+
   console.log(`
 ========================================
   Mode: ${mode}
   Networks: ${networks}
-  Pools: ${pools}${args.payload ? `\n  Payload: ${args.payload}` : ''}
+  Pools: ${pools}${forkDetail}
 ========================================
 `);
 };
