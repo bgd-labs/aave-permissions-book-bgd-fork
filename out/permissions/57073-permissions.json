@@ -431,6 +431,19 @@
                   "address": "0x1dF462e2712496373A347f8ad10802a5E95f053D",
                   "owners": [],
                   "signersThreshold": 0
+                },
+                {
+                  "address": "0x82d7d57C22F56d5f7dE062CbcA9783001f885302",
+                  "owners": [
+                    "0x08111735E84817A8728E46f8297205AfCD25d234",
+                    "0x3858f8dA2df01097af16BDCF9D43d395F7d92aE7",
+                    "0x985E4c7E8132F89eF8bC5bd79F2cF3960E1f9C8a",
+                    "0x1a8F70af805C0c3D77bEa4dbfB6175c79B6D72D0",
+                    "0x56A0f31BB43Bcc938dbDa07381221DA9075a4D53",
+                    "0xE9CD92079Ee565a9557c500448F37A091FB50205",
+                    "0xfa3f1c37969b75F215C2828f9372C757a2411dcb"
+                  ],
+                  "signersThreshold": 3
                 }
               ],
               "functions": [
@@ -452,6 +465,19 @@
                   "address": "0x1dF462e2712496373A347f8ad10802a5E95f053D",
                   "owners": [],
                   "signersThreshold": 0
+                },
+                {
+                  "address": "0x82d7d57C22F56d5f7dE062CbcA9783001f885302",
+                  "owners": [
+                    "0x08111735E84817A8728E46f8297205AfCD25d234",
+                    "0x3858f8dA2df01097af16BDCF9D43d395F7d92aE7",
+                    "0x985E4c7E8132F89eF8bC5bd79F2cF3960E1f9C8a",
+                    "0x1a8F70af805C0c3D77bEa4dbfB6175c79B6D72D0",
+                    "0x56A0f31BB43Bcc938dbDa07381221DA9075a4D53",
+                    "0xE9CD92079Ee565a9557c500448F37A091FB50205",
+                    "0xfa3f1c37969b75F215C2828f9372C757a2411dcb"
+                  ],
+                  "signersThreshold": 3
                 }
               ],
               "functions": [
@@ -489,7 +515,8 @@
             "0x1dF462e2712496373A347f8ad10802a5E95f053D"
           ],
           "FUNDS_ADMIN_ROLE": [
-            "0x1dF462e2712496373A347f8ad10802a5E95f053D"
+            "0x1dF462e2712496373A347f8ad10802a5E95f053D",
+            "0x82d7d57C22F56d5f7dE062CbcA9783001f885302"
           ]
         }
       }
