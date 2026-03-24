@@ -1,3 +1,4 @@
+import { Address } from 'viem';
 import { Pools } from './configs.js';
 
 /**
@@ -65,6 +66,8 @@ export type AgentHub = {
   contracts: Contracts;
 };
 
+export type EmissionAdminsByToken = Record<string, { symbol: string; emissionAdmin: string }>;
+
 export type PoolInfo = {
   roles?: Roles;
   gsmRoles?: Record<string, Roles>;
@@ -106,6 +109,8 @@ export type PoolConfigs = {
   ppcAddressBook?: AddressBook;
 
   functionsPermissionsAgentHubJson?: string;
+
+  emissionManagerBlock?: number;
 };
 export type Network = {
   name: string;
@@ -128,3 +133,9 @@ export type PermissionsJson = {
   proxyAdmin?: boolean;
   functions: Function[];
 }[];
+
+export type AggregatedReserveData = {
+  aTokenAddress: Address;
+  variableDebtTokenAddress: Address;
+  underlyingAsset: Address;
+};
