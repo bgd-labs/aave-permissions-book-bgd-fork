@@ -1,4 +1,4 @@
-import { Pools } from './configs.js';
+import { Address } from 'viem';import { Pools } from './configs.js';
 
 /**
  * Generic AddressBook type for pool/governance address books.
@@ -128,3 +128,9 @@ export type PermissionsJson = {
   proxyAdmin?: boolean;
   functions: Function[];
 }[];
+
+export type AggregatedReserveData = {
+  aTokenAddress: Address;
+  variableDebtTokenAddress: Address;
+  underlyingAsset: Address;
+};
