@@ -41,12 +41,14 @@ import {
   getStaticPermissionsJson,
   saveJson,
   updatePoolMetadata,
+  getEmissionAdminsByPool,
+  saveEmissionAdminsByPool,
 } from '../helpers/fileSystem.js';
 import { getRoleAdmins } from '../helpers/adminRoles.js';
 import { resolveV2Modifiers } from './v2Permissions.js';
 import { resolveV3Modifiers } from './v3Permissions.js';
 import { resolveGovV2Modifiers } from './governancePermissions.js';
-import { AgentHub, ClinicSteward, Collector, Contracts, GovV3, Ppc, Roles, Umbrella } from '../helpers/types.js';
+import { AgentHub, ClinicSteward, Collector, Contracts, EmissionAdminsByToken, GovV3, Ppc, Roles, Umbrella } from '../helpers/types.js';
 import { resolveSafetyV2Modifiers } from './safetyPermissions.js';
 import { resolveV2MiscModifiers } from './v2MiscPermissions.js';
 import { getSenders } from '../helpers/crossChainControllerLogs.js';
@@ -55,7 +57,8 @@ import { resolveGHOModifiers } from './ghoPermissions.js';
 import { resolveCollectorModifiers } from './collectorPermissions.js';
 import { resolveClinicStewardModifiers } from './clinicStewardPermissions.js';
 import { resolveUmbrellaModifiers } from './umbrellaPermissions.js';
-import { getRPCClient, getForkRpcUrl } from '../helpers/rpc.js';
+import { getRPCClient, getForkRpcUrl, getEventsMultiContract } from '../helpers/rpc.js';
+import { getLimit } from '../helpers/limits.js';
 import { resolvePpcModifiers } from './ppcPermissions.js';
 import { resolveAgentHubModifiers } from './agentHubPermissions.js';
 import {
@@ -71,6 +74,10 @@ import {
 } from '../helpers/eventIndexer.js';
 import { logger } from '../helpers/logger.js';
 import { checkAnvilInstalled, startAnvilFork, AnvilFork } from '../helpers/anvil.js';
+import {
+  getEmissionAdminsFromScratch,
+  updateEmissionAdmins,
+} from './emissionAdminPermissions.js';
 
 const generateNetworkPermissions = async (
   network: number,
@@ -127,6 +134,7 @@ const generateNetworkPermissions = async (
     let ppc = {} as Ppc;
     govV3.ggRoles = {} as Roles;
     let agentHub = {} as AgentHub;
+    let emissionAdmins = {} as EmissionAdminsByToken;
 
     // =========================================================================
     // UNIFIED EVENT INDEXING
@@ -199,6 +207,70 @@ const generateNetworkPermissions = async (
     // Resolve provider: in fork mode, state queries go to the fork
     const poolProvider = getProviderForPool(provider, forkRpcUrl);
     const v3PoolProvider = getV3ProviderForPool(provider, forkRpcUrl);
+
+    // =========================================================================
+    // EMISSION ADMINS (must run before V3 pool processing so resolveV3Modifiers
+    // can include emission admin addresses in the EmissionManager modifier)
+    //
+    // Not part of unified event indexing because on first run we use direct
+    // RPC calls (getEmissionAdmin per token) instead of scanning historical
+    // events. Only subsequent runs use incremental event fetching.
+    // =========================================================================
+
+    if (pool.emissionManagerBlock && pool.addressBook.EMISSION_MANAGER) {
+      const existingEmissionAdmins = getEmissionAdminsByPool(network, poolKey);
+      const hasExistingData = Object.keys(existingEmissionAdmins).length > 0;
+
+      if (!hasExistingData) {
+        // First run: fetch all emission admins from scratch via direct RPC calls
+        logTableGeneration(network, poolKey, 'Emission Admins (from scratch)');
+        emissionAdmins = await getEmissionAdminsFromScratch(pool.addressBook, poolProvider);
+
+        // Save metadata so next run uses incremental indexing from current block
+        const currentBlock = indexedLatestBlock || Number(await provider.request({ method: 'eth_blockNumber' }));
+        updatePoolMetadata(network, `${poolKey}_EMISSION`, {
+          latestBlockNumber: currentBlock,
+          indexedContracts: {
+            EMISSION_MANAGER: {
+              address: pool.addressBook.EMISSION_MANAGER as string,
+              deploymentBlock: pool.emissionManagerBlock,
+              firstIndexedAt: currentBlock,
+            },
+          },
+        });
+      } else {
+        // Incremental: fetch EmissionAdminUpdated events since last indexed block
+        const emissionMetadata = getPoolMetadata(network, `${poolKey}_EMISSION`);
+        const fromBlock = emissionMetadata?.latestBlockNumber ?? indexedLatestBlock;
+        logTableGeneration(network, poolKey, 'Emission Admins (incremental)', fromBlock);
+
+        const { logsByContract, currentBlock } = await getEventsMultiContract({
+          client: provider,
+          fromBlock,
+          contracts: [pool.addressBook.EMISSION_MANAGER as string],
+          eventTypes: ['EmissionAdminUpdated'],
+          limit: getLimit(String(network)),
+        });
+
+        const emissionEvents = logsByContract.get((pool.addressBook.EMISSION_MANAGER as string).toLowerCase()) || [];
+        emissionAdmins = await updateEmissionAdmins(existingEmissionAdmins, emissionEvents, poolProvider);
+
+        // Save emission-specific metadata with the latest block
+        updatePoolMetadata(network, `${poolKey}_EMISSION`, {
+          latestBlockNumber: currentBlock,
+          indexedContracts: {
+            EMISSION_MANAGER: {
+              address: pool.addressBook.EMISSION_MANAGER as string,
+              deploymentBlock: pool.emissionManagerBlock,
+              firstIndexedAt: fromBlock,
+            },
+          },
+        });
+      }
+
+      // Save emission admins data
+      saveEmissionAdminsByPool(network, poolKey, emissionAdmins);
+    }
 
     if (
       poolKey !== Pools.GOV_V2 &&
@@ -308,6 +380,7 @@ const generateNetworkPermissions = async (
           Pools[poolKey as keyof typeof Pools],
           Number(network),
           admins.role,
+          emissionAdmins,
         );
       }
     } else {

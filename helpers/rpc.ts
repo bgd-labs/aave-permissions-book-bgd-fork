@@ -4,6 +4,7 @@ import { Abi, AbiEvent, Client, http, getAbiItem, getAddress, Log, createClient,
 import { aclManagerAbi } from "../abis/aclManager.js";
 import { getBlockNumber } from "viem/actions";
 import { crossChainControllerAbi } from "../abis/crossChainControllerAbi.js";
+import { EMISSION_MANAGER_ABI } from "../abis/emissionManager.js";
 
 const getHttpConfig = () => {
   return {
@@ -86,6 +87,7 @@ const abiByEventType: Record<string, any> = {
   'RoleGranted': aclManagerAbi,
   'RoleRevoked': aclManagerAbi,
   'SenderUpdated': crossChainControllerAbi,
+  'EmissionAdminUpdated': EMISSION_MANAGER_ABI,
 };
 
 /**

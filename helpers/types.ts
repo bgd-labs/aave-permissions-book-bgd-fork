@@ -1,4 +1,5 @@
-import { Address } from 'viem';import { Pools } from './configs.js';
+import { Address } from 'viem';
+import { Pools } from './configs.js';
 
 /**
  * Generic AddressBook type for pool/governance address books.
@@ -65,6 +66,8 @@ export type AgentHub = {
   contracts: Contracts;
 };
 
+export type EmissionAdminsByToken = Record<string, { symbol: string; emissionAdmin: string }>;
+
 export type PoolInfo = {
   roles?: Roles;
   gsmRoles?: Record<string, Roles>;
@@ -106,6 +109,8 @@ export type PoolConfigs = {
   ppcAddressBook?: AddressBook;
 
   functionsPermissionsAgentHubJson?: string;
+
+  emissionManagerBlock?: number;
 };
 export type Network = {
   name: string;
