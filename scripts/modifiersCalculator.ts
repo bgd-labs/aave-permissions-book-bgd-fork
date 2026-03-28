@@ -238,6 +238,14 @@ const generateNetworkPermissions = async (
             },
           },
         });
+      } else if (forkRpcUrl) {
+        // Fork mode with existing data: re-read emission admins from the fork state.
+        // The fork has already executed the payload, so reading state directly
+        // gives us the post-execution emission admins (including any new ones).
+        // Event-based incremental fetching doesn't work reliably on forks because
+        // the fork's block numbers may be behind mainnet's current block.
+        logTableGeneration(network, poolKey, 'Emission Admins (fork re-read)');
+        emissionAdmins = await getEmissionAdminsFromScratch(pool.addressBook, poolProvider);
       } else {
         // Incremental: fetch EmissionAdminUpdated events since last indexed block
         const emissionMetadata = getPoolMetadata(network, `${poolKey}_EMISSION`);
