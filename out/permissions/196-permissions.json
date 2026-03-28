@@ -355,6 +355,17 @@
               "renounceOwnership",
               "transferOwnership"
             ]
+          },
+          {
+            "modifier": "onlyEmissionAdmin",
+            "addresses": [],
+            "functions": [
+              "configureAssets",
+              "setTransferStrategy",
+              "setRewardOracle",
+              "setDistributionEnd",
+              "setEmissionPerSecond"
+            ]
           }
         ]
       },
