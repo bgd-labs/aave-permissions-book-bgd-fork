@@ -275,6 +275,11 @@ export const ROLE_EVENT_TYPES = ['RoleGranted', 'RoleRevoked'];
 export const CCC_EVENT_TYPES = ['SenderUpdated'];
 
 /**
+ * Event types for EmissionManager
+ */
+export const EMISSION_ADMIN_EVENT_TYPES = ['EmissionAdminUpdated'];
+
+/**
  * Pool configuration for building contract configs.
  */
 interface PoolConfig {
@@ -289,6 +294,8 @@ interface PoolConfig {
   umbrellaIncentivesBlock?: number;
   crossChainControllerBlock?: number;
   granularGuardianBlock?: number;
+  // Emission Manager
+  emissionManagerBlock?: number;
   // GHO blocks
   ghoBlock?: number;
   gsmBlocks?: Record<string, number>;

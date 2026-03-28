@@ -18,6 +18,7 @@ const v3Pool = createV3Pool({
   collectorBlock: 54023245,
   crossChainControllerBlock: 43479400,
   granularGuardianBlock: 43481310,
+  emissionManagerBlock: 42872540,
   addressBook: { ...AaveV3XLayer, ...MiscXLayer },
   governanceAddressBook: { ...GovernanceV3XLayer, ...MiscXLayer, TRANSPARENT_PROXY_FACTORY: '0xEB0682d148e874553008730f0686ea89db7DA412' },
   addresses: {

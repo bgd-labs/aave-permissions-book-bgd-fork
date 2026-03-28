@@ -22,6 +22,7 @@ export interface V3PoolConfig {
   ppcAddressBook?: AddressBook;
   functionsPermissionsAgentHubJson?: string;
   addresses?: Record<string, string>;
+  emissionManagerBlock?: number;
 }
 
 /**
