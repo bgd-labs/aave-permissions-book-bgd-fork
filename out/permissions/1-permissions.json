@@ -513,11 +513,6 @@
                 "address": "0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A",
                 "owners": [],
                 "signersThreshold": 0
-              },
-              {
-                "address": "0x8b493f416F5F7933cC146b1899c069F2361cad60",
-                "owners": [],
-                "signersThreshold": 0
               }
             ],
             "functions": [
@@ -689,11 +684,6 @@
             "addresses": [
               {
                 "address": "0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A",
-                "owners": [],
-                "signersThreshold": 0
-              },
-              {
-                "address": "0x8b493f416F5F7933cC146b1899c069F2361cad60",
                 "owners": [],
                 "signersThreshold": 0
               }
@@ -1450,9 +1440,7 @@
           "0xdA626E64f34f24e0236E0C9cD2F11ce4549a08c6",
           "0xCc18Be380838956aad41FD22466085eD66aaBB46"
         ],
-        "ASSET_LISTING_ADMIN": [
-          "0x8b493f416F5F7933cC146b1899c069F2361cad60"
-        ]
+        "ASSET_LISTING_ADMIN": []
       }
     },
     "gsmRoles": {},
@@ -3983,11 +3971,6 @@
                 "address": "0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A",
                 "owners": [],
                 "signersThreshold": 0
-              },
-              {
-                "address": "0x84f2C90f2D66E700baA4CF3cbF66bE7D8f21Bd87",
-                "owners": [],
-                "signersThreshold": 0
               }
             ],
             "functions": [
@@ -4139,11 +4122,6 @@
             "addresses": [
               {
                 "address": "0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A",
-                "owners": [],
-                "signersThreshold": 0
-              },
-              {
-                "address": "0x84f2C90f2D66E700baA4CF3cbF66bE7D8f21Bd87",
                 "owners": [],
                 "signersThreshold": 0
               }
@@ -4582,9 +4560,7 @@
         "EMERGENCY_ADMIN": [
           "0x2CFe3ec4d5a6811f4B8067F0DE7e47DfA938Aa30"
         ],
-        "ASSET_LISTING_ADMIN": [
-          "0x84f2C90f2D66E700baA4CF3cbF66bE7D8f21Bd87"
-        ],
+        "ASSET_LISTING_ADMIN": [],
         "FLASH_BORROWER": [
           "0x49d9409111a6363d82C4371fFa43fAEA660C917B",
           "0x45c00508C14601fd1C1e296eB3C0e3eEEdCa45D0",
