@@ -58,6 +58,21 @@
                 "address": "0xE2E8Badc5d50f8a6188577B89f50701cDE2D4e19",
                 "owners": [],
                 "signersThreshold": 0
+              },
+              {
+                "address": "0xD0D1CcB0391aADF1EaD96814ce7ab4008Ebdb336",
+                "owners": [
+                  "0x5d49dBcdd300aECc2C311cFB56593E71c445d60d",
+                  "0xbA037E4746ff58c55dc8F27a328C428F258DDACb",
+                  "0x818C277dBE886b934e60aa047250A73529E26A99",
+                  "0x4f96743057482a2E10253AFDacDA3fd9CF2C1DC9",
+                  "0xb647055A9915bF9c8021a684E175A353525b9890",
+                  "0x57ab7ee15cE5ECacB1aB84EE42D5A9d0d8112922",
+                  "0xC5bE5c0134857B4b96F45AA6f6B77DB96Ac1487e",
+                  "0xd4af2E86a27F8F77B0556E081F97B215C9cA8f2E",
+                  "0xf71fc92e2949ccF6A5Fd369a0b402ba80Bc61E02"
+                ],
+                "signersThreshold": 5
               }
             ],
             "functions": [
@@ -77,6 +92,21 @@
                 "address": "0xE2E8Badc5d50f8a6188577B89f50701cDE2D4e19",
                 "owners": [],
                 "signersThreshold": 0
+              },
+              {
+                "address": "0xD0D1CcB0391aADF1EaD96814ce7ab4008Ebdb336",
+                "owners": [
+                  "0x5d49dBcdd300aECc2C311cFB56593E71c445d60d",
+                  "0xbA037E4746ff58c55dc8F27a328C428F258DDACb",
+                  "0x818C277dBE886b934e60aa047250A73529E26A99",
+                  "0x4f96743057482a2E10253AFDacDA3fd9CF2C1DC9",
+                  "0xb647055A9915bF9c8021a684E175A353525b9890",
+                  "0x57ab7ee15cE5ECacB1aB84EE42D5A9d0d8112922",
+                  "0xC5bE5c0134857B4b96F45AA6f6B77DB96Ac1487e",
+                  "0xd4af2E86a27F8F77B0556E081F97B215C9cA8f2E",
+                  "0xf71fc92e2949ccF6A5Fd369a0b402ba80Bc61E02"
+                ],
+                "signersThreshold": 5
               }
             ],
             "functions": [
@@ -98,6 +128,21 @@
                 "address": "0xE2E8Badc5d50f8a6188577B89f50701cDE2D4e19",
                 "owners": [],
                 "signersThreshold": 0
+              },
+              {
+                "address": "0xD0D1CcB0391aADF1EaD96814ce7ab4008Ebdb336",
+                "owners": [
+                  "0x5d49dBcdd300aECc2C311cFB56593E71c445d60d",
+                  "0xbA037E4746ff58c55dc8F27a328C428F258DDACb",
+                  "0x818C277dBE886b934e60aa047250A73529E26A99",
+                  "0x4f96743057482a2E10253AFDacDA3fd9CF2C1DC9",
+                  "0xb647055A9915bF9c8021a684E175A353525b9890",
+                  "0x57ab7ee15cE5ECacB1aB84EE42D5A9d0d8112922",
+                  "0xC5bE5c0134857B4b96F45AA6f6B77DB96Ac1487e",
+                  "0xd4af2E86a27F8F77B0556E081F97B215C9cA8f2E",
+                  "0xf71fc92e2949ccF6A5Fd369a0b402ba80Bc61E02"
+                ],
+                "signersThreshold": 5
               }
             ],
             "functions": [
@@ -109,6 +154,26 @@
             "addresses": [
               {
                 "address": "0xE2E8Badc5d50f8a6188577B89f50701cDE2D4e19",
+                "owners": [],
+                "signersThreshold": 0
+              },
+              {
+                "address": "0xD0D1CcB0391aADF1EaD96814ce7ab4008Ebdb336",
+                "owners": [
+                  "0x5d49dBcdd300aECc2C311cFB56593E71c445d60d",
+                  "0xbA037E4746ff58c55dc8F27a328C428F258DDACb",
+                  "0x818C277dBE886b934e60aa047250A73529E26A99",
+                  "0x4f96743057482a2E10253AFDacDA3fd9CF2C1DC9",
+                  "0xb647055A9915bF9c8021a684E175A353525b9890",
+                  "0x57ab7ee15cE5ECacB1aB84EE42D5A9d0d8112922",
+                  "0xC5bE5c0134857B4b96F45AA6f6B77DB96Ac1487e",
+                  "0xd4af2E86a27F8F77B0556E081F97B215C9cA8f2E",
+                  "0xf71fc92e2949ccF6A5Fd369a0b402ba80Bc61E02"
+                ],
+                "signersThreshold": 5
+              },
+              {
+                "address": "0xb5970A521073ADE4836dD4A24854Eb387a67c5C8",
                 "owners": [],
                 "signersThreshold": 0
               }
@@ -154,6 +219,11 @@
                   "0xf71fc92e2949ccF6A5Fd369a0b402ba80Bc61E02"
                 ],
                 "signersThreshold": 5
+              },
+              {
+                "address": "0xb5970A521073ADE4836dD4A24854Eb387a67c5C8",
+                "owners": [],
+                "signersThreshold": 0
               }
             ],
             "functions": [
@@ -201,6 +271,21 @@
                 "address": "0xE2E8Badc5d50f8a6188577B89f50701cDE2D4e19",
                 "owners": [],
                 "signersThreshold": 0
+              },
+              {
+                "address": "0xD0D1CcB0391aADF1EaD96814ce7ab4008Ebdb336",
+                "owners": [
+                  "0x5d49dBcdd300aECc2C311cFB56593E71c445d60d",
+                  "0xbA037E4746ff58c55dc8F27a328C428F258DDACb",
+                  "0x818C277dBE886b934e60aa047250A73529E26A99",
+                  "0x4f96743057482a2E10253AFDacDA3fd9CF2C1DC9",
+                  "0xb647055A9915bF9c8021a684E175A353525b9890",
+                  "0x57ab7ee15cE5ECacB1aB84EE42D5A9d0d8112922",
+                  "0xC5bE5c0134857B4b96F45AA6f6B77DB96Ac1487e",
+                  "0xd4af2E86a27F8F77B0556E081F97B215C9cA8f2E",
+                  "0xf71fc92e2949ccF6A5Fd369a0b402ba80Bc61E02"
+                ],
+                "signersThreshold": 5
               }
             ],
             "functions": [
@@ -269,6 +354,27 @@
               "setRewardsController",
               "renounceOwnership",
               "transferOwnership"
+            ]
+          },
+          {
+            "modifier": "onlyEmissionAdmin",
+            "addresses": [
+              {
+                "address": "0xac140648435d03f784879cd789130F22Ef588Fcd",
+                "owners": [
+                  "0x206b3C563258Dd88dd98e5Ff8e2AF975DE16a416",
+                  "0x57ab7ee15cE5ECacB1aB84EE42D5A9d0d8112922",
+                  "0x329c54289Ff5D6B7b7daE13592C6B1EDA1543eD4"
+                ],
+                "signersThreshold": 2
+              }
+            ],
+            "functions": [
+              "configureAssets",
+              "setTransferStrategy",
+              "setRewardOracle",
+              "setDistributionEnd",
+              "setEmissionPerSecond"
             ]
           }
         ]
@@ -356,14 +462,17 @@
           "0xE2E8Badc5d50f8a6188577B89f50701cDE2D4e19"
         ],
         "POOL_ADMIN": [
-          "0xE2E8Badc5d50f8a6188577B89f50701cDE2D4e19"
+          "0xE2E8Badc5d50f8a6188577B89f50701cDE2D4e19",
+          "0xD0D1CcB0391aADF1EaD96814ce7ab4008Ebdb336"
         ],
         "EMERGENCY_ADMIN": [
           "0xD0D1CcB0391aADF1EaD96814ce7ab4008Ebdb336"
         ],
         "ASSET_LISTING_ADMIN": [],
         "FLASH_BORROWER": [],
-        "RISK_ADMIN": []
+        "RISK_ADMIN": [
+          "0xb5970A521073ADE4836dD4A24854Eb387a67c5C8"
+        ]
       }
     },
     "gsmRoles": {},
