@@ -30,7 +30,7 @@
     }
   },
   "V2": {
-    "latestBlockNumber": 82047870,
+    "latestBlockNumber": 82133891,
     "indexedContracts": {
       "COLLECTOR": {
         "address": "0x5ba7fd868c40c16f7aDfAe6CF87121E13FC2F7a0",
@@ -60,12 +60,12 @@
     }
   },
   "V3_EMISSION": {
-    "latestBlockNumber": 82047854,
+    "latestBlockNumber": 82133888,
     "indexedContracts": {
       "EMISSION_MANAGER": {
         "address": "0x048f2228D7Bf6776f99aB50cB1b1eaB4D1d4cA73",
         "deploymentBlock": 11970456,
-        "firstIndexedAt": 81963495
+        "firstIndexedAt": 82047854
       }
     }
   }
