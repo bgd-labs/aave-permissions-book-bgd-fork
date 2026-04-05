@@ -96,9 +96,11 @@ const generateNetworkPermissions = async (
   let forkPayload: ForkPayloadConfig | undefined;
   let forkCalldata: ForkCalldataConfig | undefined;
   if (args.fork && args.payload) {
-    // Find the PayloadsController address from the governance address book
-    // The first pool with a governanceAddressBook has the PAYLOADS_CONTROLLER
-    for (const poolKey of poolsToProcess) {
+    // Find the PayloadsController address from the governance address book.
+    // First check the requested pools, then fall back to all pools on the network
+    // (e.g. Lido pool shares the PayloadsController with the V3 pool).
+    const poolSearchOrder = [...poolsToProcess, ...Object.keys(pools).filter(k => !poolsToProcess.includes(k))];
+    for (const poolKey of poolSearchOrder) {
       const pool = pools[poolKey];
       if (pool.governanceAddressBook?.PAYLOADS_CONTROLLER) {
         forkPayload = {

@@ -6,6 +6,8 @@ import { getBlockNumber } from "viem/actions";
 import { crossChainControllerAbi } from "../abis/crossChainControllerAbi.js";
 import { EMISSION_MANAGER_ABI } from "../abis/emissionManager.js";
 
+const alchemyKey = env.ALCHEMY_KEY ?? env.ALCHEMY_API_KEY;
+
 const getHttpConfig = () => {
   return {
     timeout: 30_000,
@@ -37,7 +39,7 @@ export const getForkRpcUrl = (chainId: number): string | undefined => {
   }
 
   return getRPCUrl(chainId as any, {
-    alchemyKey: env.ALCHEMY_KEY,
+    alchemyKey: alchemyKey,
     quicknodeEndpointName: env.QUICKNODE_ENDPOINT_NAME,
     quicknodeToken: env.QUICKNODE_TOKEN,
   });
@@ -71,7 +73,7 @@ export const getRPCClient = (chainId: number): Client => {
       },
     },
     providerConfig: {
-      alchemyKey: env.ALCHEMY_KEY,
+      alchemyKey: alchemyKey,
       quicknodeEndpointName: env.QUICKNODE_ENDPOINT_NAME,
       quicknodeToken: env.QUICKNODE_TOKEN,
     }
