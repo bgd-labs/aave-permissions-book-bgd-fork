@@ -50,7 +50,7 @@
     }
   },
   "GHO": {
-    "latestBlockNumber": 44368467,
+    "latestBlockNumber": 44378857,
     "indexedContracts": {
       "GHO_TOKEN": {
         "address": "0x6Bb7a212910682DCFdbd5BCBb3e28FB4E8da10Ee",
@@ -60,12 +60,12 @@
     }
   },
   "V3_EMISSION": {
-    "latestBlockNumber": 44368465,
+    "latestBlockNumber": 44378855,
     "indexedContracts": {
       "EMISSION_MANAGER": {
         "address": "0x6533A273F3aC84Df91DCD654D6EBAbA73687e246",
         "deploymentBlock": 2357130,
-        "firstIndexedAt": 44325339
+        "firstIndexedAt": 44378277
       }
     }
   }
