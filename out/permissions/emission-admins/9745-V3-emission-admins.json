@@ -178,5 +178,29 @@
   "0xb77E872A68C62CfC0dFb02C067Ecc3DA23B4bbf3": {
     "symbol": "GHO",
     "emissionAdmin": "0xac140648435d03f784879cd789130F22Ef588Fcd"
+  },
+  "0x23B17d3944742ACe3d0C71586FcB320d1e4a1Ed2": {
+    "symbol": "PT-USDe-18JUN2026",
+    "emissionAdmin": "0xac140648435d03f784879cd789130F22Ef588Fcd"
+  },
+  "0xDEdFF537fCBa1169E673F78EE23D109885741016": {
+    "symbol": "aPlaPT_USDe_18JUN2026",
+    "emissionAdmin": "0xac140648435d03f784879cd789130F22Ef588Fcd"
+  },
+  "0xf49f425D575f1505430BeEa036e0a318B08EB03c": {
+    "symbol": "variableDebtPlaPT_USDe_18JUN2026",
+    "emissionAdmin": "0xac140648435d03f784879cd789130F22Ef588Fcd"
+  },
+  "0x30559E3d35e33AB69399a3fe9F383d32bd3c016E": {
+    "symbol": "PT-sUSDE-18JUN2026",
+    "emissionAdmin": "0xac140648435d03f784879cd789130F22Ef588Fcd"
+  },
+  "0x68ab954Dc705c66506d499963dD1fbB8aFa23d7d": {
+    "symbol": "aPlaPT_sUSDE_18JUN2026",
+    "emissionAdmin": "0xac140648435d03f784879cd789130F22Ef588Fcd"
+  },
+  "0xD51aDd2Ca67b8b4541EB4c1a5EaFbAEB3d3b2dF7": {
+    "symbol": "variableDebtPlaPT_sUSDE_18JUN2026",
+    "emissionAdmin": "0xac140648435d03f784879cd789130F22Ef588Fcd"
   }
 }
