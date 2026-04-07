@@ -241,13 +241,38 @@ const generateNetworkPermissions = async (
           },
         });
       } else if (forkRpcUrl) {
-        // Fork mode with existing data: re-read emission admins from the fork state.
-        // The fork has already executed the payload, so reading state directly
-        // gives us the post-execution emission admins (including any new ones).
-        // Event-based incremental fetching doesn't work reliably on forks because
-        // the fork's block numbers may be behind mainnet's current block.
+        // Fork mode with existing data: first bring mainnet state up to date
+        // (incremental), then re-read from the fork to capture only payload changes.
+        // Without this two-step approach, any mainnet emission admin changes between
+        // the last index and the fork block would incorrectly appear as payload diffs.
+        const emissionMetadata = getPoolMetadata(network, `${poolKey}_EMISSION`);
+        const fromBlock = emissionMetadata?.latestBlockNumber ?? indexedLatestBlock;
+        logTableGeneration(network, poolKey, 'Emission Admins (mainnet incremental)', fromBlock);
+
+        const { logsByContract: mainnetEmissionLogs } = await getEventsMultiContract({
+          client: provider,
+          fromBlock,
+          contracts: [pool.addressBook.EMISSION_MANAGER as string],
+          eventTypes: ['EmissionAdminUpdated'],
+          limit: getLimit(String(network)),
+        });
+
+        const mainnetEvents = mainnetEmissionLogs.get((pool.addressBook.EMISSION_MANAGER as string).toLowerCase()) || [];
+        const mainnetUpdated = await updateEmissionAdmins(existingEmissionAdmins, mainnetEvents, provider);
+
+        // Now re-read from fork to get post-payload state
         logTableGeneration(network, poolKey, 'Emission Admins (fork re-read)');
-        emissionAdmins = await getEmissionAdminsFromScratch(pool.addressBook, poolProvider);
+        const forkState = await getEmissionAdminsFromScratch(pool.addressBook, poolProvider);
+
+        // Start from mainnet-updated state, overlay only tokens that the payload changed
+        emissionAdmins = { ...mainnetUpdated };
+        for (const [token, forkAdmin] of Object.entries(forkState)) {
+          const mainnetAdmin = mainnetUpdated[token];
+          // If the fork state differs from mainnet state, the payload changed it
+          if (!mainnetAdmin || mainnetAdmin.admin !== forkAdmin.admin) {
+            emissionAdmins[token] = forkAdmin;
+          }
+        }
       } else {
         // Incremental: fetch EmissionAdminUpdated events since last indexed block
         const emissionMetadata = getPoolMetadata(network, `${poolKey}_EMISSION`);
