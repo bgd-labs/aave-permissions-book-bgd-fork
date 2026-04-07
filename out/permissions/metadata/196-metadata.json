@@ -1,6 +1,6 @@
 {
   "V3": {
-    "latestBlockNumber": 56757236,
+    "latestBlockNumber": 56776864,
     "indexedContracts": {
       "ACL_MANAGER": {
         "address": "0xc8f2720Fa7D857576d82e6aEca8EdC4869E9190e",
@@ -25,17 +25,17 @@
     }
   },
   "V3_EMISSION": {
-    "latestBlockNumber": 56757236,
+    "latestBlockNumber": 56776864,
     "indexedContracts": {
       "EMISSION_MANAGER": {
         "address": "0x8b78174D19d40Ce5dC1d12309F95088756c5BEc4",
         "deploymentBlock": 42872540,
-        "firstIndexedAt": 56670986
+        "firstIndexedAt": 56757236
       }
     }
   },
   "GHO": {
-    "latestBlockNumber": 56757243,
+    "latestBlockNumber": 56776864,
     "indexedContracts": {
       "GHO_TOKEN": {
         "address": "0xDe6539018B095353A40753Dc54C91C68c9487D4E",
