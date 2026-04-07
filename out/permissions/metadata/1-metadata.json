@@ -40,7 +40,7 @@
     }
   },
   "V2": {
-    "latestBlockNumber": 24810261,
+    "latestBlockNumber": 24824601,
     "indexedContracts": {
       "COLLECTOR": {
         "address": "0x464C71f6c2F760DdA6093dCB91C24c39e5d6e18c",
@@ -50,7 +50,7 @@
     }
   },
   "V2_AMM": {
-    "latestBlockNumber": 24810261,
+    "latestBlockNumber": 24824601,
     "indexedContracts": {
       "COLLECTOR": {
         "address": "0x464C71f6c2F760DdA6093dCB91C24c39e5d6e18c",
@@ -95,7 +95,7 @@
     }
   },
   "GHO": {
-    "latestBlockNumber": 24810261,
+    "latestBlockNumber": 24824600,
     "indexedContracts": {
       "ACL_MANAGER": {
         "address": "0xc2aaCf6553D20d1e9d78E365AAba8032af9c85b0",
@@ -120,32 +120,32 @@
     }
   },
   "V3_EMISSION": {
-    "latestBlockNumber": 24810260,
+    "latestBlockNumber": 24824599,
     "indexedContracts": {
       "EMISSION_MANAGER": {
         "address": "0x223d844fc4B006D67c0cDbd39371A9F73f69d974",
         "deploymentBlock": 16291117,
-        "firstIndexedAt": 24802963
+        "firstIndexedAt": 24817439
       }
     }
   },
   "LIDO_EMISSION": {
-    "latestBlockNumber": 24810260,
+    "latestBlockNumber": 24824600,
     "indexedContracts": {
       "EMISSION_MANAGER": {
         "address": "0x223d844fc4B006D67c0cDbd39371A9F73f69d974",
         "deploymentBlock": 20262410,
-        "firstIndexedAt": 24802964
+        "firstIndexedAt": 24817439
       }
     }
   },
   "ETHERFI_EMISSION": {
-    "latestBlockNumber": 24810260,
+    "latestBlockNumber": 24824600,
     "indexedContracts": {
       "EMISSION_MANAGER": {
         "address": "0x223d844fc4B006D67c0cDbd39371A9F73f69d974",
         "deploymentBlock": 20625515,
-        "firstIndexedAt": 24802964
+        "firstIndexedAt": 24817439
       }
     }
   }

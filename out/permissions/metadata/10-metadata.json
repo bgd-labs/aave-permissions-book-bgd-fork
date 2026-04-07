@@ -50,12 +50,12 @@
     }
   },
   "V3_EMISSION": {
-    "latestBlockNumber": 149877393,
+    "latestBlockNumber": 149963747,
     "indexedContracts": {
       "EMISSION_MANAGER": {
         "address": "0x048f2228D7Bf6776f99aB50cB1b1eaB4D1d4cA73",
         "deploymentBlock": 4365546,
-        "firstIndexedAt": 149833505
+        "firstIndexedAt": 149920622
       }
     }
   }
