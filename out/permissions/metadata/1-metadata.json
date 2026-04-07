@@ -60,7 +60,7 @@
     }
   },
   "LIDO": {
-    "latestBlockNumber": 24826232,
+    "latestBlockNumber": 24826312,
     "indexedContracts": {
       "ACL_MANAGER": {
         "address": "0x013E2C7567b6231e865BB9273F8c7656103611c0",
@@ -80,7 +80,7 @@
     }
   },
   "ETHERFI": {
-    "latestBlockNumber": 24826232,
+    "latestBlockNumber": 24826312,
     "indexedContracts": {
       "ACL_MANAGER": {
         "address": "0x3cE8E2eb6501d4705477643E96881B1bef6A2DB3",
@@ -130,22 +130,22 @@
     }
   },
   "LIDO_EMISSION": {
-    "latestBlockNumber": 24826232,
+    "latestBlockNumber": 24826312,
     "indexedContracts": {
       "EMISSION_MANAGER": {
         "address": "0x223d844fc4B006D67c0cDbd39371A9F73f69d974",
         "deploymentBlock": 20262410,
-        "firstIndexedAt": 24824600
+        "firstIndexedAt": 24826312
       }
     }
   },
   "ETHERFI_EMISSION": {
-    "latestBlockNumber": 24826232,
+    "latestBlockNumber": 24826312,
     "indexedContracts": {
       "EMISSION_MANAGER": {
         "address": "0x223d844fc4B006D67c0cDbd39371A9F73f69d974",
         "deploymentBlock": 20625515,
-        "firstIndexedAt": 24824600
+        "firstIndexedAt": 24826312
       }
     }
   }
