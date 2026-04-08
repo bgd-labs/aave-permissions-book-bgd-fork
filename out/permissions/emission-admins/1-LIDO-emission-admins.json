@@ -106,5 +106,17 @@
   "0xD11c452fc99cF405034ee446803b6F6c1F6d5ED8": {
     "symbol": "tETH",
     "emissionAdmin": "0xac140648435d03f784879cd789130F22Ef588Fcd"
+  },
+  "0x619D75E3b790eBC21c289f2805Bb7177A7D732E2": {
+    "symbol": "PT-srUSDe-25JUN2026",
+    "emissionAdmin": "0xac140648435d03f784879cd789130F22Ef588Fcd"
+  },
+  "0xA78Eba24D89e70A03ddB7AC195A15E53315aA5b4": {
+    "symbol": "aEthPT_srUSDe_25JUN2026",
+    "emissionAdmin": "0xac140648435d03f784879cd789130F22Ef588Fcd"
+  },
+  "0x9Ba896531F878Ed5f0A4F73E82d63bA7b424F910": {
+    "symbol": "variableDebtEthPT_srUSDe_25JUN2026",
+    "emissionAdmin": "0xac140648435d03f784879cd789130F22Ef588Fcd"
   }
 }

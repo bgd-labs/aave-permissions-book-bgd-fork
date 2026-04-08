@@ -116,5 +116,5 @@
 ### Emission Admins
 | admin |tokens count |tokens |
 |----------|----------|----------|
-|  [ACI Safe](https://etherscan.io/address/0xac140648435d03f784879cd789130F22Ef588Fcd) |  1 |  [PYUSD](https://etherscan.io/address/0x6c3ea9036406852006290770BEdFcAbA0e23A0e8) | |--------|--------|--------|
+|  [ACI Safe](https://etherscan.io/address/0xac140648435d03f784879cd789130F22Ef588Fcd) |  4 |  [aEthPT_srUSDe_25JUN2026](https://etherscan.io/address/0xA78Eba24D89e70A03ddB7AC195A15E53315aA5b4), [PT-srUSDe-25JUN2026](https://etherscan.io/address/0x619D75E3b790eBC21c289f2805Bb7177A7D732E2), [PYUSD](https://etherscan.io/address/0x6c3ea9036406852006290770BEdFcAbA0e23A0e8), [variableDebtEthPT_srUSDe_25JUN2026](https://etherscan.io/address/0x9Ba896531F878Ed5f0A4F73E82d63bA7b424F910) | |--------|--------|--------|
 
